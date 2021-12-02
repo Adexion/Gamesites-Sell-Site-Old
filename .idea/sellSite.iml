@@ -144,7 +144,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/xpaw/php-source-query-class" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/xpaw/php-minecraft-query" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/myclabs/php-enum" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/twig/intl-extra" />
+      <excludeFolder url="file://$MODULE_DIR$/public/bundles" />
+      <excludeFolder url="file://$MODULE_DIR$/var" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

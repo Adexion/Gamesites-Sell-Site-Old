@@ -20,7 +20,7 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
     private QueryService $queryService;
     private ConfigurationRepository $configurationRepository;
     private RankService $rankService;
-    private Request $request;
+    private ?Request $request;
 
     public function __construct(
         AdditionalRepository $additionalRepository,
@@ -44,7 +44,7 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
             ->setServerName('A Minecraft Server');
 
         return
-            $additional->toArray() + [
+            (array)$additional + [
                 'serverInfo' => $this->queryService->getInfo(),
                 'logo' => $configuration->getLogo(),
                 'serverName' => $configuration->getServerName(),
