@@ -1,0 +1,37 @@
+{% extends 'client/base.html.twig' %}
+
+{% block body %}
+    <main class="bg2">
+        <div class="container">
+            <h1 class="text-white">{{ 'Choose payment option' | trans }}</h1>
+            <h4 class="text1">
+                <a href="{{ path('shop', {_locale: app.request.locale}) }}" target="_self">
+                    {{ 'Back to the product list' | trans }}
+                </a>
+            </h4>
+            <div class="row mt-5">
+                <div class="col-lg-7">
+                    <h1 class="text5 mb-3">{{ 'Payment form' | trans }}</h1>
+                    {{ form_start(form, {method: 'POST', action: path('payment', {_locale: app.request.locale, id: item.id})}) }}
+                        {{ form_row(form.email) }}
+                        {{ form_row(form.username) }}
+                        {{ form_row(form.payment) }}
+
+                        <button type="submit" class="btn-shop">{{ 'Buy now' | trans }}</button>
+                    {{ form_end(form) }}
+                    <br>
+                </div>
+                <div class="col-lg-5 pay-1">
+                    <h1 class="text3">{{ item.name }}</h1>
+                    <div class="text1" id="pay1">
+                        <p><b>{{ item.name }} {{ 'have an below commands' | trans }}:</b></p>
+                        {% for command in item.command %}
+                            <p>{{ item.command }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+{% endblock %}

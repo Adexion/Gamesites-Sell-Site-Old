@@ -1,0 +1,23 @@
+{% if guildItem is not empty %}
+    <div class="container mb-5">
+        {{ descriptionFour | raw }}
+        <div class="row d-flex justify-content-lg-between">
+            <div class="col-lg-4 mb-2 guild-dragon"></div>
+            <div class="col-lg-6 mb-2">
+                <div class="mb-60px d-none d-lg-block"></div>
+                <div class="col-xl-12 items">
+                    <div class="container">
+                        {% for item in guildItem %}
+                            <div class="row">
+                                <div class="col-auto guild-item anime mb-2">
+                                    <img alt="{{ item.name }} x{{ item.count }}" class="guild-item-image"
+                                         src="/assets/images/{{ item.image }}" data-bs-toggle="tooltip" data-bs-placement="top" title="x{{ item.count }}">
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

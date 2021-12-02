@@ -1,0 +1,58 @@
+<div class="container" id="rank">
+    {% if playerRank is not empty or guildRank is not empty%}
+    <div class="row mb-5">
+        <div class="col-lg-7">
+            {{ descriptionThree | raw }}
+        </div>
+        {% if playerRank is not empty %}
+            <div class="col-lg-5 text-end">
+                <form method="get">
+                    <div class="form-group">
+                        <input class="form-search" type="search" placeholder="{{ 'Enter a player name' | trans }}" aria-label="Search" size="40" name="name">
+                        <button class="form-search text-center text-decoration-none" type="submit"><i class="fa fa-search"></i> {{ 'Search player' | trans }}</button>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+    {% endif %}
+    <div class="row mb-5 flex justify-content-lg-between">
+        {% if playerRank is not empty %}
+            <div class="col-lg-5 mb-2">
+                <h6 class="text5 mb-2">{% trans %}Best players{% endtrans %}</h6>
+                <div class="col-lg-12 mb-3 ranking anime">
+                    {% for player in playerRank %}
+                        <div class="row">
+                            <div class="col-9">
+                                <button class="btn-ranking" disabled>{{ loop.index }}.</button>
+                                <img src="https://crafthead.net/cube/{{ player.name }}" height="48px" width="48px" alt="{{ "Cube of" | trans }} {{ player.name }}">
+                                <span class="text8">{{ player.name }}</span>
+                            </div>
+                            <div class="col-3 text7 text-end">
+                                <p>{{ player.point }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        {% if guildRank is not empty %}
+            <div class="col-lg-5 mb-2">
+                <h6 class="text5 mb-2">{% trans %}Best guilds{% endtrans %}</h6>
+                <div class="col-lg-12 mb-3 ranking anime">
+                    {% for guild in guildRank %}
+                        <div class="row">
+                            <div class="col-9">
+                                <button class="btn-ranking" disabled>{{ loop.index }}.</button>
+                                <span class="text8">{{ guild.name }}</span>
+                            </div>
+                            <div class="col-3 text7 text-end">
+                                <p>{{ player.point }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-dark nav-styled">
+    <div class="container">
+        <a class="navbar-brand" href="/"><img src="{{ logo }}" width="90" height="90" alt="logo"></a>
+        {% if serverInfo | length == 0 %}
+            <a class="navbar-brand d-none d-lg-block"><i class="fa fa-circle offline fa-sm ml-1" id="status-offline"> </i><b>&nbsp;0/0</b></a>
+        {% else %}
+            <a class="navbar-brand d-none d-lg-block"><i class="fa fa-circle online fa-sm ml-1" id="status-online"> </i><b>&nbsp;{{ serverInfo.Players }}/{{ serverInfo.MaxPlayers }}</b></a>
+        {% endif %}
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav">
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item ms-lg-5">
+                    <a class="nav-link active" href="{{ path('index', {_locale: app.request.locale}) }}"><i class="fas fa-home"></i> {% trans %}Main{% endtrans %}</a>
+                </li>
+                {% if playerRank is not empty or guildRank is not empty %}
+                <li class="nav-item ms-lg-5">
+                    <a class="nav-link" href="{{ path('index', {_locale: app.request.locale}) }}#rank"><i class="fas fa-users"></i> {% trans %}Rank{% endtrans %}</a>
+                </li>
+                {% endif %}
+                <li class="nav-item ms-lg-5">
+                    <a class="nav-link" href="{{ path('rule', {_locale: app.request.locale}) }}"><i class="fas fa-ruler"></i> {% trans %}Rules{% endtrans %}</a>
+                </li>
+                <li class="nav-item ms-lg-5">
+                    <a href="{{ path('shop', {_locale: app.request.locale}) }}">
+                        <button type="button" class="btn-shop"><i class="fas fa-cart"></i>{% trans %}Item Shop{% endtrans %}</button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
