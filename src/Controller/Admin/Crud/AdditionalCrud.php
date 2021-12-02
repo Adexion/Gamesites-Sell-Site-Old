@@ -40,6 +40,7 @@ class AdditionalCrud extends AbstractCrudController
             TextField::new('yt'),
             TextField::new('instagram'),
             TextField::new('tiktok'),
+            TextField::new('trailer')
         ];
     }
 }
