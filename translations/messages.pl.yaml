@@ -16,7 +16,7 @@ Cube of: Główka gracza
 Realize voucher: Zrealizuj voucher
 Shop information: Korzystając ze sklepu dokładasz się do rachunków za serwer. Dziękujemy!
 Shop rules: Przejdź do regulaminu korzystania z usługi
-have an below commands: ma dostęp do poniższych komend
+By purchasing this item you get: Kupując ten przedmiot otrzymujesz dostęp do
 Choose payment option: Wybierz formę płatnosci
 Back to the product list: Powrót na listę produktów
 Payment form: Formularz płatności
@@ -36,7 +36,7 @@ GUILD: GILDIE
 Items for: Przedmioty na
 
 #Admin Panel
-Guild Item: Przegiomty do gildii
+Guild Item: Przedmioty do gildii
 Rule: Regulamin
 Name: Nazwa
 Count: Ilość
@@ -46,7 +46,7 @@ Content: Zawartość strony
 Item: Przedmiot
 History: Historia płatności
 Settings: Ustawienia
-Additional: Texty i linki
+Additional: Teksty i linki
 Configuration: Konfiguracja
 Users: Użytkownicy PA
 Password: Hasło
