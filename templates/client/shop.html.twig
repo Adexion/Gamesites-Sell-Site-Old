@@ -13,7 +13,7 @@
                     <button type="button" class="btn-shop anime">{{ 'Realize voucher' | trans }}</button>
                 </h4>
             </div>
-            {% if items is not empty %}
+            {% if items is empty %}
                 <div class="alert alert-info" role="alert">
                     <i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{ 'No informations' | trans | raw }}
                 </div>
