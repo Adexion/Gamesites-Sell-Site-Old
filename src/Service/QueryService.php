@@ -26,14 +26,14 @@ class QueryService
         error_reporting(E_ALL ^ E_WARNING);
         try {
             $this->queryAll = new SourceQuery();
-            $this->queryAll->connect($config->getRConIp() ?? '', $config->getRConPort() ?? 0);
+            $this->queryAll->connect($config->getRConIp() ?? '', $config->getRConPort() ?? 0, 1);
             $this->queryAll->setRConPassword($config->getRConPassword());
         } catch (SocketException $exception) {
         }
 
         try {
             $this->queryMinecraft = new MinecraftQuery();
-            $this->queryMinecraft->connect($config->getMinecraftQueryIp(), $config->getMinecraftQueryPort());
+            $this->queryMinecraft->connect($config->getMinecraftQueryIp(), $config->getMinecraftQueryPort(), 1);
         } catch (MinecraftQueryException $exception) {
         }
     }
