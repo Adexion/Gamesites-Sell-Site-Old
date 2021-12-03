@@ -2,10 +2,12 @@
 
 {% block body %}
     {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class="alert-danger alert position-fixed vw-100">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    {{ form_start(form) }}
+    <div class="d-flex flex-column justify-content-center align-items-center vh-100">
+        {{ form_start(form) }}
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-    {{ form_end(form) }}
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
