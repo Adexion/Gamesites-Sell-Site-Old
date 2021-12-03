@@ -23,6 +23,7 @@
         "@fortawesome/fontawesome-free": "^5.15.4",
         "bootstrap": "^5.1.3",
         "ckeditor": "^4.12.1",
+        "compression-webpack-plugin": "^9.0.1",
         "yarn": "^1.22.17"
     }
 }
