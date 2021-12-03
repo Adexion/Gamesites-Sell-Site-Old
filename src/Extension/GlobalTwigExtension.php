@@ -2,6 +2,7 @@
 
 namespace App\Extension;
 
+use App\Entity\Additional;
 use App\Entity\Configuration;
 use App\Enum\RankEnum;
 use App\Repository\AdditionalRepository;
@@ -38,13 +39,13 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
 
     public function getGlobals(): array
     {
-        $additional = $this->additionalRepository->findOneBy([]) ?? new stdClass();
+        $additional = $this->additionalRepository->findOneBy([]) ?? (new Additional());
         $configuration = $this->configurationRepository->findOneBy([]) ?? (new Configuration())
             ->setLogo('/assets/images/minecraft.png')
             ->setServerName('A Minecraft Server');
 
         return
-            (array)$additional + [
+            $additional->toArray() + [
                 'serverInfo' => $this->queryService->getInfo(),
                 'logo' => $configuration->getLogo(),
                 'serverName' => $configuration->getServerName(),

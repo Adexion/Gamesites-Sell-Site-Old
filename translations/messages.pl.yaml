@@ -29,3 +29,46 @@ Go to payment now: Przejdź od razu do płatności
 Please wiat: Proszę czekać
 Redirect: W ciągu 3 sekund zostaniesz przekierowany na stronę płatności
 Buy now: Kup teraz
+Join to us: Dołącz do nas
+Here are the items you need to create a guild: Oto przedmioty jakie potrzebujesz aby utworzyć gildię
+To be able to play with his friends as one band: by grać ze swoimi przyjaciółmi jako jeden zespół.
+GUILD: GILDIE
+Items for: Przedmioty na
+
+#Admin Panel
+Guild Item: Przegiomty do gildii
+Rule: Regulamin
+Name: Nazwa
+Count: Ilość
+Image: Obrazek
+Dashboard: Strona głowna PA
+Content: Zawartość strony
+Item: Przedmiot
+History: Historia płatności
+Settings: Ustawienia
+Additional: Texty i linki
+Configuration: Konfiguracja
+Users: Użytkownicy PA
+Password: Hasło
+Database: Baza danych
+Directory: Tablea w bazie danych
+Point: Punkty
+Type: Typ
+Description: Opis
+Price: Cena
+Command: Komendy
+Short Description: Krótki opis
+Secret: Sekret
+Is Active: Czy używany
+Code: Kod
+Times: Ilość użyć
+Expired: wygasa
+-1 unlimited, 0 is off, 1+ is specific use number: -1 nielimitowana ilość, 0 wyłączone, 1 lub wiecej to dozwolona ilość użyć
+Payment Id: Id Płatności
+Date: Data
+Main Text: Głowny tekst na stronie
+Main Description: Pomniejszy tekst na stronie
+Trailer Text: Tekst obok prezentacji serwera
+Trailer: Prezentacja
+Server name: Nazwa serwera
+Caution! Deleting this entity will be required to change the image!: Uwaga! by zmienić obrazek wyamagane jest usunięcie i ponowne utworzenie produktu

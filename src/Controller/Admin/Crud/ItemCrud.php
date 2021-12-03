@@ -10,6 +10,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use phpDocumentor\Reflection\Type;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class ItemCrud extends AbstractCrudController
 {
@@ -31,7 +33,8 @@ class ItemCrud extends AbstractCrudController
             MoneyField::new('price')
                 ->setCurrency('PLN')
                 ->setNumDecimals(2)
-                ->setStoredAsCents(false),
+                ->setStoredAsCents(false)
+                ->setCustomOption('html5', true),
             CollectionField::new('command')
                 ->allowAdd(true)
                 ->allowDelete(true),

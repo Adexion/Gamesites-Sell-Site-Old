@@ -20,22 +20,17 @@ class Additional
     /**
      * @ORM\Column(type="text")
      */
-    private $descriptionOne;
+    private $mainText;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $descriptionTwo;
+    private $mainDescription;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $descriptionThree;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $descriptionFour;
+    private $trailerText;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -77,50 +72,38 @@ class Additional
         return $this->id;
     }
 
-    public function getDescriptionOne(): ?string
+    public function getMainText(): ?string
     {
-        return $this->descriptionOne;
+        return $this->mainText;
     }
 
-    public function setDescriptionOne(string $descriptionOne): self
+    public function setMainText(string $mainText): self
     {
-        $this->descriptionOne = $descriptionOne;
+        $this->mainText = $mainText;
 
         return $this;
     }
 
-    public function getDescriptionTwo(): ?string
+    public function getMainDescription(): ?string
     {
-        return $this->descriptionTwo;
+        return $this->mainDescription;
     }
 
-    public function setDescriptionTwo(string $descriptionTwo): self
+    public function setMainDescription(string $mainDescription): self
     {
-        $this->descriptionTwo = $descriptionTwo;
+        $this->mainDescription = $mainDescription;
 
         return $this;
     }
 
-    public function getDescriptionThree(): ?string
+    public function getTrailerText(): ?string
     {
-        return $this->descriptionThree;
+        return $this->trailerText;
     }
 
-    public function setDescriptionThree(string $descriptionThree): self
+    public function setTrailerText(string $trailerText): self
     {
-        $this->descriptionThree = $descriptionThree;
-
-        return $this;
-    }
-
-    public function getDescriptionFour(): ?string
-    {
-        return $this->descriptionFour;
-    }
-
-    public function setDescriptionFour(string $descriptionFour): self
-    {
-        $this->descriptionFour = $descriptionFour;
+        $this->trailerText = $trailerText;
 
         return $this;
     }
@@ -201,10 +184,9 @@ class Additional
     {
         return [
             'id' => $this->getId(),
-            'descriptionOne' => $this->getDescriptionOne(),
-            'descriptionTwo' => $this->getDescriptionTwo(),
-            'descriptionThree' => $this->getDescriptionThree(),
-            'descriptionFour' => $this->getDescriptionFour(),
+            'mainText' => $this->getMainText(),
+            'mainDescription' => $this->getMainDescription(),
+            'trailerText' => $this->getTrailerText(),
             'trailer' => $this->getTrailer(),
             'discord' => $this->getDiscord(),
             'ts3' => $this->getTs3(),

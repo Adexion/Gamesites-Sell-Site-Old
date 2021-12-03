@@ -1,20 +1,22 @@
 {% if guildItem is not empty %}
     <div class="container mb-5">
-        {{ descriptionFour | raw }}
+        <h1 class="text1 mb-3"><i class="fas fa-trophy text4 mr-3" aria-hidden="true"></i> {{ "Items for" | trans }}<span class="text3">{{ "GUILD" | trans }}</span></h1>
+        <h5 class="text1 mb-3">{{ "Here are the items you need to create a guild" | trans }}<br>{{ "To be able to play with his friends as one band" | trans }}</h5>
         <div class="row d-flex justify-content-lg-between">
             <div class="col-lg-4 mb-2 guild-dragon"></div>
             <div class="col-lg-6 mb-2">
                 <div class="mb-60px d-none d-lg-block"></div>
                 <div class="col-xl-12 items">
                     <div class="container">
-                        {% for item in guildItem %}
-                            <div class="row">
-                                <div class="col-auto guild-item anime mb-2">
+                        <div class="d-flex flex-wrap">
+                            {% for item in guildItem %}
+                                <div class="col-auto m-2 guild-item anime mb-2">
                                     <img alt="{{ item.name }} x{{ item.count }}" class="guild-item-image"
-                                         src="/assets/images/{{ item.image }}" data-bs-toggle="tooltip" data-bs-placement="top" title="x{{ item.count }}">
+                                         src="/assets/images/{{ item.image }}" data-bs-toggle="tooltip"
+                                         data-bs-placement="top" title="x{{ item.count }}">
                                 </div>
-                            </div>
-                        {% endfor %}
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -39,19 +39,19 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
 
         yield MenuItem::section('Content');
-        yield MenuItem::linkToCrud('Rules', 'fa fa-ruler', Rule::class);
+        yield MenuItem::linkToCrud('Rule', 'fa fa-book', Rule::class);
         yield MenuItem::linkToCrud('Rank', 'fas fa-users', Rank::class);
 
-        yield MenuItem::section('ItemShop');
+        yield MenuItem::section('Item Shop');
         yield MenuItem::linkToCrud('Item', 'fas fa-shopping-cart', Item::class);
         yield MenuItem::linkToCrud('Payment', 'fas fa-money-bill', Payment::class);
         yield MenuItem::linkToCrud('Voucher', 'fas fa-receipt', Voucher::class);
         yield MenuItem::linkToCrud('History', 'fa fa-history', ItemHistory::class);
 
-        yield MenuItem::section('Config');
-        yield MenuItem::linkToCrud('GuildItem', 'fas fa-sitemap', GuildItem::class);
+        yield MenuItem::section('Settings');
+        yield MenuItem::linkToCrud('Guild Item', 'fas fa-sitemap', GuildItem::class);
         yield MenuItem::linkToCrud('Additional', 'fa fa-plus', Additional::class);
-        yield MenuItem::linkToCrud('Configuration', 'fa fa-ruler', Configuration::class);
+        yield MenuItem::linkToCrud('Configuration', 'fas fa-cog', Configuration::class);
 
         yield MenuItem::section('');
         yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);

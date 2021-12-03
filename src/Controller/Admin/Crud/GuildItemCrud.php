@@ -22,6 +22,13 @@ class GuildItemCrud extends AbstractCrudController
         return GuildItem::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInSingular("Guild Item")
+            ->setEntityLabelInPlural("Guild Item");
+    }
+
     public function configureFields(string $pageName): iterable
     {
         return [

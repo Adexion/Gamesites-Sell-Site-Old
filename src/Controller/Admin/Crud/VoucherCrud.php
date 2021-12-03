@@ -25,12 +25,11 @@ class VoucherCrud extends AbstractCrudController
             NumberField::new('times')
                 ->setFormTypeOption('attr', ['value' => 1])
                 ->setNumDecimals(0)
-                ->setHelp('-1 unlimited, 0 is of, 1+ is specific use number'),
+                ->setHelp('-1 unlimited, 0 is off, 1+ is specific use number'),
             EntityField::new('item')
                 ->setClass(Item::class, 'name'),
             DateField::new('date', 'Expired')
                 ->renderAsNativeWidget(true)
-                ->setHelp('Max working time')
         ];
     }
 }

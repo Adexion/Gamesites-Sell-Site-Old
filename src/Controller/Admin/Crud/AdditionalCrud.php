@@ -7,6 +7,7 @@ use App\Entity\Additional;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class AdditionalCrud extends AbstractCrudController
@@ -30,10 +31,9 @@ class AdditionalCrud extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            CKEditorField::create('descriptionOne', $pageName),
-            CKEditorField::create('descriptionTwo', $pageName),
-            CKEditorField::create('descriptionThree', $pageName),
-            CKEditorField::create('descriptionFour', $pageName),
+            TextareaField::new('mainText'),
+            TextareaField::new('mainDescription'),
+            TextareaField::new('trailerText'),
             TextField::new('discord'),
             TextField::new('ts3'),
             TextField::new('facebook'),

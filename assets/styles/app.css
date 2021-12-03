@@ -28,7 +28,7 @@ header {
 .bg {
     margin-top: -116px;
     padding-top: 116px;
-    background-image: url("/assets/images/bg.png");
+    background-image: url("/assets/images/bg.webp");
     background-repeat: no-repeat;
     background-size: cover;
     height: auto;
@@ -37,7 +37,7 @@ header {
 }
 
 .bg2 {
-    background-image: url("/assets/images/bg2.png");
+    background-image: url("/assets/images/bg2.webp");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top;
@@ -187,7 +187,7 @@ a:active {
 }
 
 .guild-dragon {
-    background-image: url("/assets/images/dragon.png");
+    background-image: url("/assets/images/dragon.webp");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 350px;
