@@ -1,11 +1,13 @@
 {% extends 'client/base.html.twig' %}
 
 {% block body %}
-    <div class="container bg2">
-        <h1 class="text-white">Regulamin serwisu</h1>
-        <br>
-        <div class="text-white">
-            {{ rule | raw }}
+    <div class="flex-shrink-0 bg2">
+        <div class="container">
+            <h1 class="text-white">Regulamin serwisu</h1>
+            <br>
+            <div class="text-white">
+                {{ rule | raw }}
+            </div>
         </div>
     </div>
 {% endblock %}
