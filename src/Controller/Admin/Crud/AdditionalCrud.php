@@ -34,13 +34,20 @@ class AdditionalCrud extends AbstractCrudController
             TextareaField::new('mainText'),
             TextareaField::new('mainDescription'),
             TextareaField::new('trailerText'),
-            TextField::new('discord'),
-            TextField::new('ts3'),
-            TextField::new('facebook'),
-            TextField::new('yt'),
-            TextField::new('instagram'),
-            TextField::new('tiktok'),
+            TextField::new('discord')
+                ->hideOnIndex(),
+            TextField::new('ts3')
+                ->hideOnIndex(),
+            TextField::new('facebook')
+                ->hideOnIndex(),
+            TextField::new('yt')
+                ->hideOnIndex(),
+            TextField::new('instagram')
+                ->hideOnIndex(),
+            TextField::new('tiktok')
+                ->hideOnIndex(),
             TextField::new('trailer')
+                ->hideOnIndex(),
         ];
     }
 }
