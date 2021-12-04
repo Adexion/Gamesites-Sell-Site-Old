@@ -2,9 +2,7 @@
 
 namespace App\Controller\Admin\Crud;
 
-use App\Controller\Admin\Field\EntityField;
 use App\Entity\Configuration;
-use App\Entity\Server;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
@@ -49,9 +47,6 @@ class ConfigurationCrud extends AbstractCrudController
                 ->hideWhenUpdating(),
             TextField::new('minecraftQueryIp'),
             NumberField::new('minecraftQueryPort'),
-            EntityField::new('defaultServer')
-                ->setClass(Server::class, 'serverName')
-                ->setHelp('First create server')
         ];
     }
 }

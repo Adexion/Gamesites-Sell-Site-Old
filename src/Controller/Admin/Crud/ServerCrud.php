@@ -3,6 +3,7 @@
 namespace App\Controller\Admin\Crud;
 
 use App\Entity\Server;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -20,6 +21,7 @@ class ServerCrud extends AbstractCrudController
             TextField::new('RConIp'),
             NumberField::new('RConPort'),
             TextField::new('RConPassword'),
+            BooleanField::new('isDefault')
         ];
     }
 }

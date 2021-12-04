@@ -37,6 +37,11 @@ class Server
      */
     private $serverName;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default" : false})
+     */
+    private $isDefault;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class Server
     public function setServerName(string $serverName): self
     {
         $this->serverName = $serverName;
+
+        return $this;
+    }
+
+    public function getIsDefault(): ?bool
+    {
+        return $this->isDefault;
+    }
+
+    public function setIsDefault(?bool $isDefault): self
+    {
+        $this->isDefault = $isDefault;
 
         return $this;
     }

@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Configuration;
 use App\Entity\Server;
 use App\Repository\ConfigurationRepository;
+use App\Repository\ServerRepository;
 use xPaw\MinecraftQuery;
 use xPaw\MinecraftQueryException;
 use xPaw\SourceQuery\Exception\AuthenticationException;
@@ -15,78 +16,79 @@ use xPaw\SourceQuery\SourceQuery;
 
 class QueryService
 {
-    private MinecraftQuery $queryMinecraft;
-    private SourceQuery $sourceQuery;
+    private ServerRepository $serverRepository;
+    private ConfigurationRepository $configurationRepository;
 
-    /** @throws InvalidPacketException|AuthenticationException|InvalidArgumentException */
-    public function __construct(ConfigurationRepository $repository)
+    public function __construct(ConfigurationRepository $configurationRepository, ServerRepository $serverRepository)
     {
-        $config = $repository->findOneBy([]) ?? new Configuration();
-        $server = $config->getDefaultServer() ?? new Server();
-
-        error_reporting(E_ALL ^ E_WARNING);
-        try {
-            $this->sourceQuery = new SourceQuery();
-            $this->sourceQuery->connect($server->getRConIp() ?? '', $server->getRConPort() ?? 0, 1);
-            $this->sourceQuery->setRConPassword($server->getRConPassword());
-        } catch (SocketException $exception) {
-        }
-
-        try {
-            $this->queryMinecraft = new MinecraftQuery();
-            $this->queryMinecraft->connect($config->getMinecraftQueryIp(), $config->getMinecraftQueryPort(), 1);
-        } catch (MinecraftQueryException $exception) {
-        }
+        $this->serverRepository = $serverRepository;
+        $this->configurationRepository = $configurationRepository;
     }
 
     /** @throws InvalidPacketException|AuthenticationException|InvalidArgumentException|SocketException */
     public function execute($command, Server $server): ?string
     {
-        $query = new SourceQuery();
-
-        error_reporting(E_ALL ^ E_WARNING);
-        try {
-            $query->connect($server->getRConIp() ?? '', $server->getRConPort() ?? 0, 1);
-            $query->setRConPassword($server->getRConPassword());
-        } catch (SocketException $exception) {}
-
-        return $query->rcon($command);
+        return $this->getRConConnect($server)->rcon($command);
     }
 
+    /** @throws AuthenticationException|InvalidArgumentException */
     public function getPlayerList(): ?array
     {
         try {
             try {
-                return $this->sourceQuery->GetPlayers();
+                return $this->getRConConnect()->GetPlayers();
             } catch (InvalidPacketException $e) {
-                return $this->queryMinecraft->GetPlayers() ?: [];
+                return $this->getMinecraftQuery()->GetPlayers() ?: [];
             }
         } catch (SocketException $ignored) {
             return [];
         }
     }
 
-
+    /** @throws AuthenticationException|InvalidArgumentException */
     public function getInfo(): ?array
     {
         try {
             try {
-                return $this->sourceQuery->GetInfo();
+                return $this->getRConConnect()->GetInfo();
             } catch (InvalidPacketException $e) {
-                return $this->queryMinecraft->GetInfo() ?: [];
+                return $this->getMinecraftQuery()->GetInfo() ?: [];
             }
         } catch (SocketException $ignored) {
             return [];
         }
     }
 
+    /** @throws AuthenticationException|InvalidArgumentException */
     public function isPlayerLoggedIn(string $username): bool
     {
         return array_search($username, $this->getPlayerList()) !== false;
     }
 
-    public function disconnect()
+    /** @throws InvalidPacketException|AuthenticationException|InvalidArgumentException */
+    private function getRConConnect(Server $server = null): SourceQuery
     {
-        $this->sourceQuery->disconnect();
+        $server = $server ?? $this->serverRepository->findOneBy(['isDefault' => true]) ?? new Server();
+        $sourceQuery = new SourceQuery();
+
+        error_reporting(E_ALL ^ E_WARNING);
+        try {
+            $sourceQuery->connect($server->getRConIp() ?? '', $server->getRConPort() ?? 0, 1);
+            $sourceQuery->setRConPassword($server->getRConPassword());
+        } catch (SocketException $exception) {}
+
+        return $sourceQuery;
+    }
+
+    private function getMinecraftQuery(): MinecraftQuery
+    {
+        $config = $this->configurationRepository->findOneBy([]) ?? new Configuration();
+
+        $queryMinecraft = new MinecraftQuery();
+        try {
+            $queryMinecraft->connect($config->getMinecraftQueryIp(), $config->getMinecraftQueryPort(), 1);
+        } catch (MinecraftQueryException $exception) {}
+
+        return $queryMinecraft;
     }
 }

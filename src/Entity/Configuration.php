@@ -42,12 +42,6 @@ class Configuration
      */
     private $ip;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Server::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $defaultServer;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -109,18 +103,6 @@ class Configuration
     public function setIp(string $ip): self
     {
         $this->ip = $ip;
-
-        return $this;
-    }
-
-    public function getDefaultServer(): ?Server
-    {
-        return $this->defaultServer;
-    }
-
-    public function setDefaultServer(Server $defaultServer): self
-    {
-        $this->defaultServer = $defaultServer;
 
         return $this;
     }
