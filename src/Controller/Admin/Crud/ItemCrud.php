@@ -3,7 +3,9 @@
 namespace App\Controller\Admin\Crud;
 
 use App\Controller\Admin\Field\CKEditorField;
+use App\Controller\Admin\Field\EntityField;
 use App\Entity\Item;
+use App\Entity\Server;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
@@ -51,6 +53,9 @@ class ItemCrud extends AbstractCrudController
                 ->allowAdd(true)
                 ->allowDelete(true),
             TextareaField::new('shortDescription'),
+            EntityField::new('server')
+                ->setClass(Server::class, 'serverName')
+                ->setHelp('First create server')
         ];
     }
 }

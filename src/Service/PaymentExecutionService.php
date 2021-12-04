@@ -8,6 +8,7 @@ use App\Repository\ItemHistoryRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use xPaw\SourceQuery\Exception\AuthenticationException;
+use xPaw\SourceQuery\Exception\InvalidArgumentException;
 use xPaw\SourceQuery\Exception\InvalidPacketException;
 use xPaw\SourceQuery\Exception\SocketException;
 
@@ -22,7 +23,7 @@ class PaymentExecutionService
         $this->service = $service;
     }
 
-    /** @throws AuthenticationException|InvalidPacketException|ORMException|OptimisticLockException|SocketException */
+    /** @throws AuthenticationException|InvalidPacketException|ORMException|OptimisticLockException|SocketException|InvalidArgumentException */
     public function execute(array $payment): int
     {
         /** @var ?ItemHistory $history */
@@ -46,7 +47,7 @@ class PaymentExecutionService
         }
 
         foreach ($history->getItem()->getCommand() as $command) {
-            $this->service->execute($command);
+            $this->service->execute($command, $history->getItem()->getServer());
         }
 
         $history->setStatus(PaymentStatusEnum::REALIZED);

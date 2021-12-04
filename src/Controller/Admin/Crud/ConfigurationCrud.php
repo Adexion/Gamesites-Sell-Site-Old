@@ -2,7 +2,9 @@
 
 namespace App\Controller\Admin\Crud;
 
+use App\Controller\Admin\Field\EntityField;
 use App\Entity\Configuration;
+use App\Entity\Server;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
@@ -40,15 +42,16 @@ class ConfigurationCrud extends AbstractCrudController
     {
         return [
             TextField::new('serverName'),
+            TextField::new('ip'),
             ImageField::new('logo')
                 ->setUploadDir($this->getParameter('uploadPath'))
                 ->setBasePath($this->getParameter('basePath'))
                 ->hideWhenUpdating(),
             TextField::new('minecraftQueryIp'),
             NumberField::new('minecraftQueryPort'),
-            TextField::new('RConIp'),
-            NumberField::new('RConPort'),
-            TextField::new('RConPassword'),
+            EntityField::new('defaultServer')
+                ->setClass(Server::class, 'serverName')
+                ->setHelp('First create server')
         ];
     }
 }

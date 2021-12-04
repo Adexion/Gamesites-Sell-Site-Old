@@ -10,6 +10,7 @@ use App\Entity\ItemHistory;
 use App\Entity\Payment;
 use App\Entity\Rank;
 use App\Entity\Rule;
+use App\Entity\Server;
 use App\Entity\User;
 use App\Entity\Voucher;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -28,6 +29,14 @@ class DashboardController extends AbstractDashboardController
         return $this->render('admin/dashboard.html.twig');
     }
 
+    /**
+     * @Route("/admin/changes", name="changes")
+     */
+    public function changes(): Response
+    {
+        return $this->render('admin/changes.html.twig');
+    }
+
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
@@ -36,7 +45,8 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linktoDashboard('Dashboard', 'fa fa-terminal');
+        yield MenuItem::linkToRoute('Changelog', 'fas fa-forward', 'changes');
 
         yield MenuItem::section('Content');
         yield MenuItem::linkToCrud('Rule', 'fa fa-book', Rule::class);
@@ -49,6 +59,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('History', 'fa fa-history', ItemHistory::class);
 
         yield MenuItem::section('Settings');
+        yield MenuItem::linkToCrud('Server', 'fas fa-server', Server::class);
         yield MenuItem::linkToCrud('Guild Item', 'fas fa-sitemap', GuildItem::class);
         yield MenuItem::linkToCrud('Additional', 'fa fa-plus', Additional::class);
         yield MenuItem::linkToCrud('Configuration', 'fas fa-cog', Configuration::class);

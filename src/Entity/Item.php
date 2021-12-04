@@ -47,6 +47,11 @@ class Item
      */
     private $shortDescription;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Server::class)
+     */
+    private $server;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +125,18 @@ class Item
     public function setShortDescription(string $shortDescription): self
     {
         $this->shortDescription = $shortDescription;
+
+        return $this;
+    }
+
+    public function getServer(): ?Server
+    {
+        return $this->server;
+    }
+
+    public function setServer(?Server $server): self
+    {
+        $this->server = $server;
 
         return $this;
     }

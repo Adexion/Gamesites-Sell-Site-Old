@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Validator\Constraints\Email;
 
 class UserCrud extends AbstractCrudController
 {
@@ -44,7 +45,12 @@ class UserCrud extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            EmailField::new('email'),
+            EmailField::new('email')
+                ->setFormTypeOption('constraint', [
+                    new Email([
+                        'mode' => Email::VALIDATION_MODE_STRICT
+                    ])
+                ]),
             ArrayField::new('roles')
                 ->setDisabled(true)
                 ->setValue(['ROLE_ADMIN']),

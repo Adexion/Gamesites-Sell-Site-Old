@@ -41,7 +41,6 @@ final class EntityField implements FieldInterface
                 if (isset($this->filteredBy) && call_user_func([$entity, 'get' . ucfirst($this->filteredBy)]) == $this->filteredValue){
                     return null;
                 }
-
                 return call_user_func([$entity, 'get' . ucfirst($choiceLabel)]);
             });
 

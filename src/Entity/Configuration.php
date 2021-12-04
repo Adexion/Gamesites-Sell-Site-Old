@@ -38,19 +38,15 @@ class Configuration
     private $minecraftQueryPort;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=16)
      */
-    private $RConIp;
+    private $ip;
 
     /**
-     * @ORM\Column(type="smallint", length=255)
+     * @ORM\OneToOne(targetEntity=Server::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $RConPort;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $RConPassword;
+    private $defaultServer;
 
     public function getId(): ?int
     {
@@ -105,38 +101,26 @@ class Configuration
         return $this;
     }
 
-    public function getRConIp(): ?string
+    public function getIp(): ?string
     {
-        return $this->RConIp;
+        return $this->ip;
     }
 
-    public function setRConIp(?string $RConIp): self
+    public function setIp(string $ip): self
     {
-        $this->RConIp = $RConIp;
+        $this->ip = $ip;
 
         return $this;
     }
 
-    public function getRConPort(): ?int
+    public function getDefaultServer(): ?Server
     {
-        return $this->RConPort;
+        return $this->defaultServer;
     }
 
-    public function setRConPort(?int $RConPort): self
+    public function setDefaultServer(Server $defaultServer): self
     {
-        $this->RConPort = $RConPort;
-
-        return $this;
-    }
-
-    public function getRConPassword(): ?string
-    {
-        return $this->RConPassword;
-    }
-
-    public function setRConPassword(?string $RConPassword): self
-    {
-        $this->RConPassword = $RConPassword;
+        $this->defaultServer = $defaultServer;
 
         return $this;
     }
