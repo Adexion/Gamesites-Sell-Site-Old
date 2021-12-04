@@ -46,7 +46,7 @@ class VoucherExecutionService
 
         foreach ($voucher->getItem()->getCommand() as $command) {
             try {
-                $this->service->execute($command, $voucher->getItem()->getServer());
+                $this->service->execute($command, $voucher->getItem()->getServer(), $data['username']);
             } catch (SocketException $ignored) {
                 return 'There was a problem connecting to the server. Please contact your administrator.';
             }

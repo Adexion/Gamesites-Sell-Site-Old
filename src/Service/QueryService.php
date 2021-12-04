@@ -27,9 +27,9 @@ class QueryService
     }
 
     /** @throws InvalidPacketException|AuthenticationException|InvalidArgumentException|SocketException */
-    public function execute($command, Server $server): ?string
+    public function execute($command, Server $server, string $username): ?string
     {
-        return $this->getRConConnect($server)->rcon($command);
+        return $this->getRConConnect($server)->rcon(str_replace('%player%', $username, $command));
     }
 
     public function getPlayerList(): ?array
@@ -73,12 +73,12 @@ class QueryService
         try {
             $sourceQuery->connect($server->getRConIp() ?? '', $server->getRConPort() ?? 0, 1);
             $sourceQuery->setRConPassword($server->getRConPassword());
-        } catch (SocketException $e) {
-        }
+        } catch (SocketException $e) {}
 
         return $sourceQuery;
     }
 
+    /** @throws MinecraftQueryException */
     private function getMinecraftQuery(): MinecraftQuery
     {
         $config = $this->configurationRepository->findOneBy([]) ?? new Configuration();

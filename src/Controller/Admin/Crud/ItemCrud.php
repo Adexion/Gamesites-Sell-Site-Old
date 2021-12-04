@@ -51,7 +51,8 @@ class ItemCrud extends AbstractCrudController
                 ->setFormTypeOption('html5', true),
             CollectionField::new('command')
                 ->allowAdd(true)
-                ->allowDelete(true),
+                ->allowDelete(true)
+                ->setHelp("be replaced to player nick"),
             TextareaField::new('shortDescription'),
             EntityField::new('server')
                 ->setClass(Server::class, 'serverName')

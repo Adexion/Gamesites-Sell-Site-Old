@@ -7,7 +7,7 @@ Item Shop: Sklep serwera
 Best players: Najlepsi gracze
 Best guilds: Najlepsze gildie
 LINKS: LINKI
-Contact: Kontak
+Contact: Kontakt
 Customer protection program: Program ochrony kupujących
 Search: Szukaj
 Search player: Wyszukaj gracza
@@ -92,3 +92,4 @@ This payment is not accepted. If it is not right pleas contact with your adminis
 You are not connected to the server. If it is not right pleas contact with your administrator.: Nie ma cię na serwerze! Jeżeli to błąd skontaktuj się z administratorem.
 Have fun with new bought pack!: Miłej zabawy z twoim nowym pakietem!
 Is Default: Czy domyślny?
+'be replaced to player nick': '%player% - zostanie zamienione na nick gracza'

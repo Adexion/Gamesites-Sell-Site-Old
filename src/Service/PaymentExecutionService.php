@@ -47,7 +47,7 @@ class PaymentExecutionService
         }
 
         foreach ($history->getItem()->getCommand() as $command) {
-            $this->service->execute($command, $history->getItem()->getServer());
+            $this->service->execute($command, $history->getItem()->getServer(), $history->getUsername());
         }
 
         $history->setStatus(PaymentStatusEnum::REALIZED);
