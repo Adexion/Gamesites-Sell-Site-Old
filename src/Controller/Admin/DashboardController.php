@@ -13,11 +13,18 @@ use App\Entity\Rule;
 use App\Entity\Server;
 use App\Entity\User;
 use App\Entity\Voucher;
+use App\Form\RConType;
+use App\Repository\ServerRepository;
+use App\Service\QueryService;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use xPaw\SourceQuery\Exception\SocketException;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -30,11 +37,43 @@ class DashboardController extends AbstractDashboardController
     }
 
     /**
+     * @Route("/admin/console", name="console")
+     */
+    public function console(Request $request, QueryService $service): Response
+    {
+        $form = $this->createForm(RConType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Server $server */
+            $server = $form->getData()['server'];
+            try {
+                $response = $service->execute($form->getData()['command'], $server);
+                $code = Response::HTTP_OK;
+            } catch (SocketException $e) {
+                $response = $e->getMessage();
+                $code = $e->getCode();
+            }
+        }
+
+        return $this->render('admin/console.html.twig', [
+            'form' => $form->createView(),
+            'response' => $response ?? '',
+            'code' => Response::HTTP_FOUND
+        ]);
+    }
+
+    /**
      * @Route("/admin/changes", name="changes")
      */
     public function changes(): Response
     {
         return $this->render('admin/changes.html.twig');
+    }
+
+    public function configureAssets(): Assets
+    {
+        return parent::configureAssets()
+            ->addWebpackEncoreEntry('console');
     }
 
     public function configureDashboard(): Dashboard
@@ -45,8 +84,11 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linktoDashboard('Dashboard', 'fa fa-terminal');
-        yield MenuItem::linkToRoute('Changelog', 'fas fa-forward', 'changes');
+        yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
+
+        yield MenuItem::section('Main');
+        yield MenuItem::linkToRoute('Console', 'fa fa-terminal', 'console');
+        yield MenuItem::linkToRoute('Changelog', 'fab fa-readme', 'changes');
 
         yield MenuItem::section('Content');
         yield MenuItem::linkToCrud('Rule', 'fa fa-book', Rule::class);

@@ -5,6 +5,7 @@ namespace App\Controller\Client;
 use App\Entity\Item;
 use App\Form\ItemType;
 use App\Form\PaymentType;
+use App\Form\VoucherType;
 use App\Repository\ItemRepository;
 use App\Service\PaymentRequestBuilder;
 use Doctrine\ORM\OptimisticLockException;
@@ -20,8 +21,11 @@ class ItemController extends AbstractController
     /** @Route (name="shop", path="/shop") */
     public function shop(ItemRepository $repository): Response
     {
+        $form = $this->createForm(VoucherType::class);
+
         return $this->render('client/shop.html.twig', [
             'items' => $repository->findAll(),
+            'voucherForm' => $form->createView()
         ]);
     }
 

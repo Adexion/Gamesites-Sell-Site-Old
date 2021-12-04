@@ -9,6 +9,7 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 Encore
     .setOutputPath('public/build/')
     .setPublicPath('/build')
+    .addStyleEntry('console', './assets/styles/console.css')
     .addEntry('app', './assets/app.js')
     .addEntry('ea-app', './assets/ea-app.js')
     .enableStimulusBridge('./assets/controllers.json')

@@ -24,26 +24,26 @@ class PaymentExecutionService
     }
 
     /** @throws AuthenticationException|InvalidPacketException|ORMException|OptimisticLockException|SocketException|InvalidArgumentException */
-    public function execute(array $payment): int
+    public function execute(array $payment): ?string
     {
         /** @var ?ItemHistory $history */
         $history = $this->historyRepository->find($payment['ID_ZAMOWIENIA']);
         $paymentStatus = $payment['STATUS'] * 10;
 
         if ($this->isPaymentExist($payment, $history)) {
-            return PaymentStatusEnum::NOT_EXISTED;
+            return 'This payment is not exist! If it is not right pleas contact with your administrator.';
         }
         if ($paymentStatus !== PaymentStatusEnum::ACCEPTED) {
             $history->setStatus($paymentStatus);
             $this->historyRepository->insertOrUpdate($history);
 
-            return $paymentStatus;
+            return 'This payment is not accepted. If it is not right pleas contact with your administrator.';
         }
         if (!$this->service->isPlayerLoggedIn($history->getUsername())) {
             $history->setStatus(PaymentStatusEnum::NOT_ON_SERVER);
             $this->historyRepository->insertOrUpdate($history);
 
-            return PaymentStatusEnum::ACCEPTED;
+            return 'You are not connected to the server. If it is not right pleas contact with your administrator.';
         }
 
         foreach ($history->getItem()->getCommand() as $command) {
@@ -53,7 +53,7 @@ class PaymentExecutionService
         $history->setStatus(PaymentStatusEnum::REALIZED);
         $this->historyRepository->insertOrUpdate($history);
 
-        return PaymentStatusEnum::REALIZED;
+        return null;
     }
 
     private function isPaymentExist(array $payment, ?ItemHistory $history): bool

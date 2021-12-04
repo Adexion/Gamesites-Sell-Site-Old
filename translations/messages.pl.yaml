@@ -1,6 +1,6 @@
 Text footer: 'nie jest w żaden sposób powiązany z Mojang, AB. Nie powinien być również uważany za firmę wspieraną przez Mojang, AB. Wszelkie wpłaty i zakupy dokonane w tym sklepie są przeznaczonenu rozwoj na rozwój projektu. Aby uzyskać więcej informacji, wsparcie lub historię zakupów, wyślij do nas zapytanie drogą mailową.'
 No informations: 'Nie dodano żadnych produktów dla tego serwera. Proszę skontaktuj się z administracją serwera.'
-Main: Strona głowna
+Home: Strona głowna
 Rank: Ranking
 Rules: Regulamin
 Item Shop: Sklep serwera
@@ -41,7 +41,7 @@ Rule: Regulamin
 Name: Nazwa
 Count: Ilość
 Image: Obrazek
-Dashboard: Konsola rCon
+Dashboard: Strona główna PA
 Content: Zawartość strony
 Item: Przedmiot
 History: Historia płatności
@@ -56,7 +56,7 @@ Point: Punkty
 Type: Typ
 Description: Opis
 Price: Cena
-Command: Komendy
+Command: Komenda
 Short Description: Krótki opis
 Secret: Sekret
 Is Active: Czy używany
@@ -79,3 +79,15 @@ R Con Ip: rCon Ip
 R Con Port: rCon Port
 R Con Password: rCon Hasło
 First create server: Najpierw utwórz serwer
+Console: Konsola rCon
+Main: Gółwne
+Wrong data given: Nie udało się przetworzyć otrzymanych danych. Sprawdż proszę czy szystko zostało porawnie ustawione i wrazie potrzeby skontaktuj się z administratorem.
+Opps! Something went wrong: Coś poszło nie tak!
+Voucher is not valid or expired: Voucher jest nieprawidłowy lub wygasł
+Hooray! Items was properly executed on the server: Udało się! Przedmioty zostały prwaidłowo wypłacone na serwerze!
+Voucher used too match times:  Voucher został użyty zbyt wiele razy!
+There was a problem connecting to the server. Please contact your administrator.: Wystąpił problem podczas łączenia z serwerem. Skontaktuj się z administratorem.
+This payment is not exist! If it is not right pleas contact with your administrator.: Wybrana płatność nie istnieje! Jeżeli to błąd skontaktuj się z administratorem.
+This payment is not accepted. If it is not right pleas contact with your administrator.: Wybrana płatność nie została zaakceptowana. Jeżeli to błąd skontaktuj się z administratorem.
+You are not connected to the server. If it is not right pleas contact with your administrator.: Nie ma cię na serwerze! Jeżeli to błąd skontaktuj się z administratorem.
+Have fun with new bought pack!: Miłej zabawy z twoim nowym pakietem!

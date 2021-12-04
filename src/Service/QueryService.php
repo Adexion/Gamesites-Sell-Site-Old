@@ -29,12 +29,14 @@ class QueryService
             $this->sourceQuery = new SourceQuery();
             $this->sourceQuery->connect($server->getRConIp() ?? '', $server->getRConPort() ?? 0, 1);
             $this->sourceQuery->setRConPassword($server->getRConPassword());
-        } catch (SocketException $exception) {}
+        } catch (SocketException $exception) {
+        }
 
         try {
             $this->queryMinecraft = new MinecraftQuery();
             $this->queryMinecraft->connect($config->getMinecraftQueryIp(), $config->getMinecraftQueryPort(), 1);
-        } catch (MinecraftQueryException $exception) {}
+        } catch (MinecraftQueryException $exception) {
+        }
     }
 
     /** @throws InvalidPacketException|AuthenticationException|InvalidArgumentException|SocketException */

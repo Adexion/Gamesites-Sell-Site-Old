@@ -1,0 +1,14 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block main %}
+    <div class="container bg-dark console">
+        {% if response %}
+            <p class="{% if code == 200 %}text-success{% else %}text-white{% endif %}">{{ '[' ~ 'now' | date('Y-m-d H:i:s') ~ '] ' ~ response }}</p>
+        {% endif %}
+    </div>
+    {{ form_start(form) }}
+    {{ form_row(form.command) }}
+    {{ form_row(form.server) }}
+    <button class="btn btn-info w-100">Wyślij</button>
+    {{ form_end(form) }}
+{% endblock %}
