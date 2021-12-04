@@ -33,37 +33,37 @@ class Additional
     private $trailerText;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $discord;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $ts3;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $facebook;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $yt;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $instagram;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $tiktok;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $trailer;
 
@@ -101,7 +101,7 @@ class Additional
         return $this->trailerText;
     }
 
-    public function setTrailerText(string $trailerText): self
+    public function setTrailerText(?string $trailerText): self
     {
         $this->trailerText = $trailerText;
 
@@ -113,7 +113,7 @@ class Additional
         return $this->discord;
     }
 
-    public function setDiscord(string $discord): self
+    public function setDiscord(?string $discord): self
     {
         $this->discord = $discord;
 
@@ -125,7 +125,7 @@ class Additional
         return $this->ts3;
     }
 
-    public function setTs3(string $ts3): self
+    public function setTs3(?string $ts3): self
     {
         $this->ts3 = $ts3;
 
@@ -137,7 +137,7 @@ class Additional
         return $this->facebook;
     }
 
-    public function setFacebook(string $facebook): self
+    public function setFacebook(?string $facebook): self
     {
         $this->facebook = $facebook;
 
@@ -149,7 +149,7 @@ class Additional
         return $this->yt;
     }
 
-    public function setYt(string $yt): self
+    public function setYt(?string $yt): self
     {
         $this->yt = $yt;
 
@@ -161,7 +161,7 @@ class Additional
         return $this->instagram;
     }
 
-    public function setInstagram(string $instagram): self
+    public function setInstagram(?string $instagram): self
     {
         $this->instagram = $instagram;
 
@@ -173,7 +173,7 @@ class Additional
         return $this->tiktok;
     }
 
-    public function setTiktok(string $tiktok): self
+    public function setTiktok(?string $tiktok): self
     {
         $this->tiktok = $tiktok;
 

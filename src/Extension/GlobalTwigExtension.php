@@ -9,7 +9,6 @@ use App\Repository\AdditionalRepository;
 use App\Repository\ConfigurationRepository;
 use App\Service\QueryService;
 use App\Service\Rank\RankService;
-use stdClass;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
@@ -41,7 +40,7 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
     {
         $additional = $this->additionalRepository->findOneBy([]) ?? (new Additional());
         $configuration = $this->configurationRepository->findOneBy([]) ?? (new Configuration())
-            ->setLogo('/assets/images/minecraft.png')
+            ->setLogo('minecraft.png')
             ->setServerName('A Minecraft Server');
 
         return
