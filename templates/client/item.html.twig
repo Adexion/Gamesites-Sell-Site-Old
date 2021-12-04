@@ -25,9 +25,7 @@
                     <h1 class="text3">{{ item.name }}</h1>
                     <div class="text1" id="pay1">
                         <p><b>{{ 'By purchasing this item you get' | trans }}:</b></p>
-                        {% for command in item.command %}
-                            <p>{{ command }}</p>
-                        {% endfor %}
+                        {{ item.shortDescription | raw | nl2br }}
                     </div>
                 </div>
             </div>
