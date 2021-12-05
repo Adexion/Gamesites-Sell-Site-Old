@@ -3,9 +3,14 @@
 {% block main %}
     <div class="container bg-dark console">
         {% if response %}
-            <p class="{% if code == 200 %}text-success{% else %}text-white{% endif %}">{{ '[' ~ 'now' | date('Y-m-d H:i:s') ~ '] ' ~ response }}</p>
+            <p class="response">{{ '[' ~ 'now' | date('Y-m-d H:i:s') ~ '] ' ~ response }}</p>
         {% endif %}
     </div>
+    <script>
+        (()=> {
+            document.querySelector('.response').innerHTML = replaceColorCodes( document.querySelector('.response').innerHTML);
+        })();
+    </script>
     {{ form_start(form) }}
     {{ form_row(form.command) }}
     {{ form_row(form.server) }}

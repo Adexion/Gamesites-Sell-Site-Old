@@ -74,7 +74,8 @@ class DashboardController extends AbstractDashboardController
     public function configureAssets(): Assets
     {
         return parent::configureAssets()
-            ->addWebpackEncoreEntry('console');
+            ->addWebpackEncoreEntry('console')
+            ->addJsFile('https://cdn.rawgit.com/FoxInFlame/MinecraftColorCodes/master/MinecraftColorCodes.3.0.js');
     }
 
     public function configureDashboard(): Dashboard
