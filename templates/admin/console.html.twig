@@ -3,7 +3,7 @@
 {% block main %}
     <div class="container bg-dark console">
         {% if response %}
-            <p class="response">{{ '[' ~ 'now' | date('Y-m-d H:i:s') ~ '] ' ~ response }}</p>
+            <p class="response text-white">{{ '[' ~ 'now' | date('Y-m-d H:i:s') ~ '] ' ~ response }}</p>
         {% endif %}
     </div>
     <script>

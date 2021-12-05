@@ -15,10 +15,8 @@ use App\Entity\Server;
 use App\Entity\User;
 use App\Entity\Voucher;
 use App\Form\RConType;
-use App\Repository\ServerRepository;
 use App\Service\QueryService;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -74,8 +72,8 @@ class DashboardController extends AbstractDashboardController
     public function configureAssets(): Assets
     {
         return parent::configureAssets()
-            ->addWebpackEncoreEntry('console')
-            ->addJsFile('https://cdn.rawgit.com/FoxInFlame/MinecraftColorCodes/master/MinecraftColorCodes.3.0.js');
+            ->addWebpackEncoreEntry('ea-app')
+            ->addWebpackEncoreEntry('console');
     }
 
     public function configureDashboard(): Dashboard
