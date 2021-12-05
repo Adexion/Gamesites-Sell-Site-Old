@@ -31,8 +31,8 @@
                                 <p class="shop-desc">{{ item.description | raw }}</p>
                                 <p class="shop-price">
                                     {% if item.discount %}
-                                        <stroke class="text-1 small">{{ item.price | format_currency('PLN') }}</stroke>
-                                        {{ item.discountedPrice | format_currency('PLN') }}
+                                        <del class="text1 small">{{ item.price | format_currency('PLN') }}</del>
+                                        <strong>{{ item.discountedPrice | format_currency('PLN') }}</strong>
                                     {% else %}
                                         {{ item.price | format_currency('PLN') }}
                                     {% endif %}
