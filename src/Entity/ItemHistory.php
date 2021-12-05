@@ -18,8 +18,8 @@ class ItemHistory
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Item::class)
-     * @ORM\JoinColumn(nullable=false, onDelete="SET NULL")
+     * @ORM\ManyToOne(targetEntity=Item::class, cascade="remove")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $item;
 
