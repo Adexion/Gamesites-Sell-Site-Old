@@ -27,7 +27,7 @@ class QueryService
     }
 
     /** @throws InvalidPacketException|AuthenticationException|InvalidArgumentException|SocketException */
-    public function execute($command, Server $server, string $username): ?string
+    public function execute($command, Server $server, string $username = ''): ?string
     {
         return $this->getRConConnect($server)->rcon(str_replace('%player%', $username, $command));
     }
