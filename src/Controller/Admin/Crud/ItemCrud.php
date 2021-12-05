@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\PercentField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -51,6 +52,8 @@ class ItemCrud extends AbstractCrudController
                 ->setNumDecimals(2)
                 ->setStoredAsCents(false)
                 ->setFormTypeOption('html5', true),
+            PercentField::new('discount')
+                ->setNumDecimals(0),
             CollectionField::new('command')
                 ->allowAdd(true)
                 ->allowDelete(true)

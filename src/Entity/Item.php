@@ -38,6 +38,11 @@ class Item
     private $price;
 
     /**
+     * @ORM\Column(type="decimal", precision=5, scale=2)
+     */
+    private $discount = 0;
+
+    /**
      * @ORM\Column(type="json")
      */
     private $command = [];
@@ -93,12 +98,17 @@ class Item
         return $this;
     }
 
-    public function getPrice(): ?string
+    public function getPrice(): ?float
     {
         return $this->price;
     }
 
-    public function setPrice(string $price): self
+    public function getDiscountedPrice(): ?float
+    {
+        return $this->price - ($this->price * $this->discount);
+    }
+
+    public function setPrice(?float $price): self
     {
         $this->price = $price;
 
@@ -137,6 +147,18 @@ class Item
     public function setServer(?Server $server): self
     {
         $this->server = $server;
+
+        return $this;
+    }
+
+    public function getDiscount(): ?float
+    {
+        return $this->discount;
+    }
+
+    public function setDiscount(?float $discount): self
+    {
+        $this->discount = $discount;
 
         return $this;
     }

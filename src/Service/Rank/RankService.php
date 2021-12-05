@@ -28,9 +28,9 @@ class RankService
 
         $db = $this->manager->getConnection($type);
         $qb = $db->createQueryBuilder()
-            ->select($rank->getName().' AS name', $rank->getPoint().' AS point')
-            ->from($rank->getDirectory())
-            ->orderBy($rank->getPoint(), 'DESC')
+            ->select('x.`'.$rank->getName().'` AS name', 'x.`'.$rank->getPoint().'` AS point')
+            ->from($rank->getDirectory(), 'x')
+            ->orderBy('x.`'.$rank->getPoint().'`', 'DESC')
             ->setMaxResults(self::MAX_RESULT);
 
         if ($value) {

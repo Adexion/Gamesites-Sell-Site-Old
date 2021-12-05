@@ -30,7 +30,7 @@ class PaymentRequestBuilder
             'ID_ZAMOWIENIA' => $history->getId(),
             'NAZWA_USLUGI' => $item->getName(),
             'SEKRET' => $data['payment']->getSecret(),
-            'KWOTA' => $item->getPrice(),
+            'KWOTA' => $item->getDiscountedPrice(),
             'EMAIL' => $data['email'],
             'ADRES_WWW' => sprintf('%s/%s/payment', $data['uri'], $data['locale']),
             'PRZEKIEROWANIE_SUKCESS' => sprintf('%s/%s/payment', $data['uri'], $data['locale']),
