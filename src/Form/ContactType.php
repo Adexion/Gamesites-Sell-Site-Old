@@ -16,7 +16,7 @@ class ContactType extends BaseType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('description', TextareaType::class, ['label' => 'text'])
+            ->add('description', TextareaType::class, ['label' => 'Text'])
             ->add('name', TextType::class)
             ->add('email', EmailType::class)
             ->add('submit', SubmitType::class);
