@@ -27,9 +27,7 @@ Encore
         config.corejs = 3;
     })
     .enableSassLoader()
-    .enableTypeScriptLoader()
     .enableIntegrityHashes(Encore.isProduction())
-    .autoProvidejQuery()
     .addPlugin( new CompressionPlugin({
         filename: "[path][base].gz",
         algorithm: "gzip",

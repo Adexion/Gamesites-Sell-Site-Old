@@ -31,6 +31,7 @@ class AdditionalCrud extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
+            TextareaField::new('siteTitle'),
             TextareaField::new('mainText'),
             TextareaField::new('mainDescription'),
             TextareaField::new('trailerText'),

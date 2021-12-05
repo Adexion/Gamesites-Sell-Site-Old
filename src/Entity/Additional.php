@@ -16,6 +16,10 @@ class Additional
      * @ORM\Column(type="integer")
      */
     private $id;
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $siteTitle;
 
     /**
      * @ORM\Column(type="text")
@@ -184,6 +188,7 @@ class Additional
     {
         return [
             'id' => $this->getId(),
+            'siteTitle' => $this->getSiteTitle(),
             'mainText' => $this->getMainText(),
             'mainDescription' => $this->getMainDescription(),
             'trailerText' => $this->getTrailerText(),
@@ -205,6 +210,18 @@ class Additional
     public function setTrailer(?string $trailer): self
     {
         $this->trailer = $trailer;
+
+        return $this;
+    }
+
+    public function getSiteTitle(): ?string
+    {
+        return $this->siteTitle;
+    }
+
+    public function setSiteTitle(?string $siteTitle): self
+    {
+        $this->siteTitle = $siteTitle;
 
         return $this;
     }

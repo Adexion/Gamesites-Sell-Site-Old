@@ -12,7 +12,7 @@
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item ms-lg-5">
-                    <a class="nav-link active" href="{{ path('index', {_locale: app.request.locale}) }}"><i class="fas fa-home"></i> {% trans %}Home{% endtrans %}</a>
+                    <a class="nav-link {% if app.request.get('_route') == 'index' %}active{% endif %}" href="{{ path('index', {_locale: app.request.locale}) }}"><i class="fas fa-home"></i> {% trans %}Home{% endtrans %}</a>
                 </li>
                 {% if playerRank is not empty or guildRank is not empty %}
                 <li class="nav-item ms-lg-5">
@@ -20,8 +20,18 @@
                 </li>
                 {% endif %}
                 <li class="nav-item ms-lg-5">
-                    <a class="nav-link" href="{{ path('rule', {_locale: app.request.locale}) }}"><i class="fas fa-book"></i> {% trans %}Rules{% endtrans %}</a>
+                    <a class="nav-link {% if app.request.get('_route') == 'rule' %}active{% endif %}" href="{{ path('rule', {_locale: app.request.locale}) }}"><i class="fas fa-book"></i> {% trans %}Rules{% endtrans %}</a>
                 </li>
+                {% if discord %}
+                    <li class="nav-item ms-lg-5">
+                        <a class="nav-link" rel="noreferrer" href="{{ discord }}"><i class="fab fa-discord"></i> Discord</a>
+                    </li>
+                {% endif %}
+                {% if ts3 %}
+                    <li class="nav-item ms-lg-5">
+                        <a class="nav-link" rel="noreferrer" href="{{ ts3 }}"><i class="fab fa-teamspeak"></i> TeamSpeak3</a>
+                    </li>
+                {% endif %}
                 <li class="nav-item ms-lg-5">
                     <a href="{{ path('shop', {_locale: app.request.locale}) }}">
                         <button type="button" class="btn-shop"><i class="fas fa-cart"></i>{% trans %}Item Shop{% endtrans %}</button>

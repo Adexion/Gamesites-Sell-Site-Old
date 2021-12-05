@@ -54,6 +54,11 @@ header {
     border: 0;
 }
 
+.cube {
+    max-height: 200px;
+    max-width: 200px;
+}
+
 .text1, .form-label {
     color: #838383;
 }
@@ -96,6 +101,13 @@ header {
 .text-xs {
     color: #5c5c5c;
     font-size: 12px;
+}
+
+.trailer {
+    display: block;
+    width: 100%;
+    max-width: 100vw;
+    height: 315px;
 }
 
 /*center text on mobile*/

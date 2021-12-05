@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -46,11 +47,13 @@ class UserCrud extends AbstractCrudController
     {
         return [
             EmailField::new('email')
-                ->setFormTypeOption('constraint', [
+                ->setFormTypeOption('constraints', [
                     new Email([
                         'mode' => Email::VALIDATION_MODE_STRICT
                     ])
                 ]),
+            TextField::new('username'),
+            TextareaField::new('description'),
             ArrayField::new('roles')
                 ->setDisabled(true)
                 ->setValue(['ROLE_ADMIN']),

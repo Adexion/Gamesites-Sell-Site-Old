@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Additional;
 use App\Entity\Configuration;
+use App\Entity\Contact;
 use App\Entity\GuildItem;
 use App\Entity\Item;
 use App\Entity\ItemHistory;
@@ -89,6 +90,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Main');
         yield MenuItem::linkToRoute('Console', 'fa fa-terminal', 'console');
         yield MenuItem::linkToRoute('Changelog', 'fab fa-readme', 'changes');
+        yield MenuItem::linkToCrud('Contact', 'fas fa-address-book', Contact::class);
 
         yield MenuItem::section('Content');
         yield MenuItem::linkToCrud('Rule', 'fa fa-book', Rule::class);

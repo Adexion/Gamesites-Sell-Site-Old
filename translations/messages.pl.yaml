@@ -34,8 +34,6 @@ Here are the items you need to create a guild: Oto przedmioty jakie potrzebujesz
 To be able to play with his friends as one band: by grać ze swoimi przyjaciółmi jako jeden zespół.
 GUILD: GILDIE
 Items for: Przedmioty na
-
-#Admin Panel
 Guild Item: Przedmioty do gildii
 Rule: Regulamin
 Name: Nazwa
@@ -84,7 +82,7 @@ Main: Gółwne
 Wrong data given: Nie udało się przetworzyć otrzymanych danych. Sprawdż proszę czy szystko zostało porawnie ustawione i wrazie potrzeby skontaktuj się z administratorem.
 Opps! Something went wrong: Coś poszło nie tak!
 Voucher is not valid or expired: Voucher jest nieprawidłowy lub wygasł
-Hooray! Items was properly executed on the server: Udało się! Przedmioty zostały prwaidłowo wypłacone na serwerze!
+Hooray! Items was properly executed on the server: Udało się! Przedmioty zostały prawidłowo wypłacone na serwerze!
 Voucher used too match times:  Voucher został użyty zbyt wiele razy!
 There was a problem connecting to the server. Please contact your administrator.: Wystąpił problem podczas łączenia z serwerem. Skontaktuj się z administratorem.
 This payment is not exist! If it is not right pleas contact with your administrator.: Wybrana płatność nie istnieje! Jeżeli to błąd skontaktuj się z administratorem.
@@ -93,3 +91,6 @@ You are not connected to the server. If it is not right pleas contact with your 
 Have fun with new bought pack!: Miłej zabawy z twoim nowym pakietem!
 Is Default: Czy domyślny?
 be replaced to player nick: '%player% - zostanie zamienione na nick gracza'
+Site Title: Tytuł strony
+Administration: Administracja
+Next noname: Kolejny noname

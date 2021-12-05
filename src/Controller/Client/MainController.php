@@ -3,6 +3,7 @@
 namespace App\Controller\Client;
 
 use App\Repository\GuildItemRepository;
+use App\Repository\UserRepository;
 use Doctrine\DBAL\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,10 +23,11 @@ class MainController extends AbstractController
      *
      * @throws Exception
      */
-    public function index(GuildItemRepository $repository): Response
+    public function index(GuildItemRepository $guildItemRepository, UserRepository $userRepository): Response
     {
         return $this->render('client/index.html.twig', [
-            'guildItem' => $repository->findBy([]),
+            'guildItem' => $guildItemRepository->findBy([]),
+            'users' => $userRepository->findBy([])
         ]);
     }
 }

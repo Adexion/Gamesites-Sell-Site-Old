@@ -1,9 +1,11 @@
-<div class="bg2">
-    <div class="container" id="rank">
-        {% if playerRank is not empty or guildRank is not empty %}
+{% if playerRank is not empty or guildRank is not empty %}
+    <div class="bg2 mb-5">
+        <div class="container" id="rank">
             <div class="row mb-5">
                 <div class="col-lg-7">
-                    {{ descriptionThree | raw }}
+                    <h1 class="text1 mb-3">
+                        <i class="fas fa-trophy text4 mr-3" aria-hidden="true"></i> {{ "Rank" | trans }}
+                    </h1>
                 </div>
                 {% if playerRank is not empty %}
                     <div class="col-lg-5 text-end">
@@ -16,45 +18,45 @@
                     </div>
                 {% endif %}
             </div>
-        {% endif %}
-        <div class="row mb-5 flex justify-content-lg-between">
-            {% if playerRank is not empty %}
-                <div class="col-lg-5 mb-2">
-                    <h6 class="text5 mb-2">{% trans %}Best players{% endtrans %}</h6>
-                    <div class="col-lg-12 mb-3 ranking anime">
-                        {% for player in playerRank %}
-                            <div class="row">
-                                <div class="col-9">
-                                    <button class="btn-ranking" disabled>{{ loop.index }}.</button>
-                                    <img src="https://crafthead.net/cube/{{ player.name }}" height="48px" width="48px" alt="{{ "Cube of" | trans }} {{ player.name }}">
-                                    <span class="text8">{{ player.name }}</span>
+            <div class="row mb-5 flex justify-content-lg-between">
+                {% if playerRank is not empty %}
+                    <div class="col-lg-5 mb-2">
+                        <h6 class="text5 mb-2">{% trans %}Best players{% endtrans %}</h6>
+                        <div class="col-lg-12 mb-3 ranking anime">
+                            {% for player in playerRank %}
+                                <div class="row">
+                                    <div class="col-9">
+                                        <button class="btn-ranking" disabled>{{ loop.index }}.</button>
+                                        <img src="https://crafthead.net/cube/{{ player.name }}" height="48px" width="48px" alt="{{ "Cube of" | trans }} {{ player.name }}">
+                                        <span class="text8">{{ player.name }}</span>
+                                    </div>
+                                    <div class="col-3 text7 text-end">
+                                        <p>{{ player.point }}</p>
+                                    </div>
                                 </div>
-                                <div class="col-3 text7 text-end">
-                                    <p>{{ player.point }}</p>
-                                </div>
-                            </div>
-                        {% endfor %}
+                            {% endfor %}
+                        </div>
                     </div>
-                </div>
-            {% endif %}
-            {% if guildRank is not empty %}
-                <div class="col-lg-5 mb-2">
-                    <h6 class="text5 mb-2">{% trans %}Best guilds{% endtrans %}</h6>
-                    <div class="col-lg-12 mb-3 ranking anime">
-                        {% for guild in guildRank %}
-                            <div class="row">
-                                <div class="col-9">
-                                    <button class="btn-ranking" disabled>{{ loop.index }}.</button>
-                                    <span class="text8">{{ guild.name }}</span>
+                {% endif %}
+                {% if guildRank is not empty %}
+                    <div class="col-lg-5 mb-2">
+                        <h6 class="text5 mb-2">{% trans %}Best guilds{% endtrans %}</h6>
+                        <div class="col-lg-12 mb-3 ranking anime">
+                            {% for guild in guildRank %}
+                                <div class="row">
+                                    <div class="col-9">
+                                        <button class="btn-ranking" disabled>{{ loop.index }}.</button>
+                                        <span class="text8">{{ guild.name }}</span>
+                                    </div>
+                                    <div class="col-3 text7 text-end">
+                                        <p>{{ player.point }}</p>
+                                    </div>
                                 </div>
-                                <div class="col-3 text7 text-end">
-                                    <p>{{ player.point }}</p>
-                                </div>
-                            </div>
-                        {% endfor %}
+                            {% endfor %}
+                        </div>
                     </div>
-                </div>
-            {% endif %}
+                {% endif %}
+            </div>
         </div>
     </div>
-</div>
+{% endif %}

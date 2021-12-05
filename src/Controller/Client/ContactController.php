@@ -16,8 +16,6 @@ class ContactController extends AbstractController
 {
     /**
      * @Route(name="contact", path="/contact")
-     *
-     * @throws Exception| TransportExceptionInterface
      */
     public function contact(Request $request, SenderService $service): Response
     {
@@ -25,7 +23,8 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $service->sendEmailBySchema('contact', $form->getData());
+            $this->getDoctrine()->getManager()->persist($form->getData());
+            $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', 'Wiadomość wysłana');
         }

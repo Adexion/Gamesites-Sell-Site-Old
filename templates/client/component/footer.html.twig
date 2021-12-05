@@ -8,17 +8,17 @@
             {% if discord or ts3 or facebook %}
             <div class="col-lg-2 col-6">
                 <h4 class="text8">{% trans %}LINKS{% endtrans %}</h4>
-                {% if discord %}<h6><a href="{{ discord }}"><i class="fab fa-discord"></i> Discord</a></h6>{% endif %}
-                {% if ts3 %}<h6><a href="{{ ts3 }}"><i class="fab fa-teamspeak"></i> TeamSpeak3</a></h6>{% endif %}
-                {% if facebook %}<h6><a href="{{ facebook }}"><i class="fab fa-facebook"></i> Facebook</a></h6>{% endif %}
+                {% if discord %}<h6><a rel="noreferrer" href="{{ discord }}"><i class="fab fa-discord"></i> Discord</a></h6>{% endif %}
+                {% if ts3 %}<h6><a rel="noreferrer" href="{{ ts3 }}"><i class="fab fa-teamspeak"></i> TeamSpeak3</a></h6>{% endif %}
+                {% if facebook %}<h6><a rel="noreferrer" href="{{ facebook }}"><i class="fab fa-facebook"></i> Facebook</a></h6>{% endif %}
             </div>
             {% endif %}
             {% if instagram or yt or tiktok %}
             <div class="col-lg-2 col-6">
                 <h4 class="text8">{% trans %}LINKS{% endtrans %}</h4>
-                {% if instagram %}<h6><a href="{{ instagram }}"><i class="fab fa-instagram"></i> Instagram</a></h6>{% endif %}
-                {% if yt %}<h6><a href="{{ yt }}"><i class="fab fa-youtube"></i> YouTube</a></h6>{% endif %}
-                {% if tiktok %}<h6><a href="{{ tiktok }}"><i class="fab fa-tiktok"></i> TikTok</a></h6>{% endif %}
+                {% if instagram %}<h6><a rel="noreferrer" href="{{ instagram }}"><i class="fab fa-instagram"></i> Instagram</a></h6>{% endif %}
+                {% if yt %}<h6><a rel="noreferrer" href="{{ yt }}"><i class="fab fa-youtube"></i> YouTube</a></h6>{% endif %}
+                {% if tiktok %}<h6><a rel="noreferrer" href="{{ tiktok }}"><i class="fab fa-tiktok"></i> TikTok</a></h6>{% endif %}
             </div>
             {% endif %}
             <div class="col-lg-2">
@@ -26,7 +26,7 @@
                 <h6><a href="{{ path('rule', {_locale: app.request.locale})}}">{% trans %}Rules{% endtrans %}</a></h6>
                 <h6><a href="{{ path('shop', {_locale: app.request.locale})}}">{% trans %}Item Shop{% endtrans %}</a></h6>
                 <h6><a href="{{ path('contact', {_locale: app.request.locale})}}">{% trans %}Contact{% endtrans %}</a></h6>
-                <h6><a href="https://hotpay.pl/program-ochrony-klientow/">{% trans %}Customer protection program{% endtrans %}</a></h6>
+                <h6><a rel="noreferrer" href="https://hotpay.pl/program-ochrony-klientow/">{% trans %}Customer protection program{% endtrans %}</a></h6>
             </div>
         </div>
         <div class="mb-3"><small class="text-xs"> {{ serverName }} {% trans %}Text footer{% endtrans %}</small></div>
