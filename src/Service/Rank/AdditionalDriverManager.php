@@ -10,7 +10,7 @@ use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Exception;
 use InvalidArgumentException;
 
-class RankDriverManager
+class AdditionalDriverManager
 {
     private RankRepository $repository;
 

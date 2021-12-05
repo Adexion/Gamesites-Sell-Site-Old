@@ -7,12 +7,12 @@ use Doctrine\DBAL\Exception;
 
 class RankService
 {
-    private RankDriverManager $manager;
+    private AdditionalDriverManager $manager;
     private RankRepository $repository;
 
     private const MAX_RESULT = 10;
 
-    public function __construct(RankDriverManager $manager, RankRepository $repository)
+    public function __construct(AdditionalDriverManager $manager, RankRepository $repository)
     {
         $this->manager = $manager;
         $this->repository = $repository;
