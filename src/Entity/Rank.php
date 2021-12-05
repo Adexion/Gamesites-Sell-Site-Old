@@ -55,7 +55,7 @@ class Rank
     private $name;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2)
+     * @ORM\Column(type="string", length=255)
      */
     private $point;
 

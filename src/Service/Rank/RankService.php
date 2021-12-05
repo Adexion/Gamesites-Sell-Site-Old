@@ -33,7 +33,6 @@ class RankService
             ->orderBy('x.`'.$rank->getPoint().'`', 'DESC')
             ->setMaxResults(self::MAX_RESULT);
 
-        var_dump($qb->getSQL());die;
         if ($value) {
             $qb
                 ->where($rank->getName().' = :value')
