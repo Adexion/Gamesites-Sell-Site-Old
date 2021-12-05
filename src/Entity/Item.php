@@ -38,7 +38,7 @@ class Item
     private $price;
 
     /**
-     * @ORM\Column(type="decimal", precision=5, scale=2, options={"default" : 0}")
+     * @ORM\Column(type="decimal", precision=5, scale=2, options={"default" : 0.00}")
      */
     private $discount = 0;
 
