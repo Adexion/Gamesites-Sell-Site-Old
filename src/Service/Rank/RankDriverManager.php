@@ -20,7 +20,7 @@ class RankDriverManager
     }
 
     /** @throws Exception */
-    public function getConnection($type): Connection
+    public function getConnection(int $type): Connection
     {
         if (!RankEnum::isValid($type)) {
             throw new InvalidArgumentException('Given wrong type');

@@ -19,7 +19,7 @@ class RankService
     }
 
     /** @throws Exception */
-    public function getRank(string $type, $value = null): ?array
+    public function getRank(int $type, $value = null): ?array
     {
         $rank = $this->repository->findOneBy(['type' => $type]);
         if (!$rank) {
