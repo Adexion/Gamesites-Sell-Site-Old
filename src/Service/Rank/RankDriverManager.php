@@ -25,9 +25,13 @@ class RankDriverManager
         if (!RankEnum::isValid($type)) {
             throw new InvalidArgumentException('Given wrong type');
         }
-
+        $rank = $this->repository->findConnectionDataByType($type)[0];
+        var_dump($rank);die;
         return DriverManager::getConnection([
-            'url' => sprintf('mysql://%s:%s@%s:%s/%s?serverVersion=13&charset=utf8', ...$this->repository->findConnectionDataByType($type)[0])
+            'url' => sprintf(
+                'mysql://%s:%s@%s:%s/%s?serverVersion=13&charset=utf8',
+                $rank['login']
+            )
         ], new Configuration());
     }
 }
