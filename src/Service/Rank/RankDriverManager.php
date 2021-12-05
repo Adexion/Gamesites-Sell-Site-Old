@@ -27,7 +27,7 @@ class RankDriverManager
         }
 
         return DriverManager::getConnection([
-            'url' => sprintf('mysql://%s:%s@%s:%s/%s?serverVersion=13&charset=utf8', ...$this->repository->findConnectionDataByType($type))
+            'url' => sprintf('mysql://%s:%s@%s:%s/%s?serverVersion=13&charset=utf8', ...$this->repository->findConnectionDataByType($type)[0])
         ], new Configuration());
     }
 }
