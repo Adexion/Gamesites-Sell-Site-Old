@@ -11,30 +11,36 @@
             <ul class="navbar-nav">
             </ul>
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item ms-lg-5">
+                <li class="nav-item ms-lg-2">
                     <a class="nav-link {% if app.request.get('_route') == 'index' %}active{% endif %}" href="{{ path('index', {_locale: app.request.locale}) }}"><i class="fas fa-home"></i> {% trans %}Home{% endtrans %}</a>
                 </li>
+                <li class="nav-item ms-lg-2">
+                    <a class="nav-link" href="{{ path('index', {_locale: app.request.locale}) }}#admin"><i class="fas fa-user-shield"></i> {% trans %}Administration{% endtrans %}</a>
+                </li>
                 {% if playerRank is not empty or guildRank is not empty %}
-                <li class="nav-item ms-lg-5">
+                <li class="nav-item ms-lg-2">
                     <a class="nav-link" href="{{ path('index', {_locale: app.request.locale}) }}#rank"><i class="fas fa-users"></i> {% trans %}Rank{% endtrans %}</a>
                 </li>
                 {% endif %}
-                <li class="nav-item ms-lg-5">
+                <li class="nav-item ms-lg-2">
                     <a class="nav-link {% if app.request.get('_route') == 'rule' %}active{% endif %}" href="{{ path('rule', {_locale: app.request.locale}) }}"><i class="fas fa-book"></i> {% trans %}Rules{% endtrans %}</a>
                 </li>
                 {% if discord %}
-                    <li class="nav-item ms-lg-5">
+                    <li class="nav-item ms-lg-2">
                         <a class="nav-link" rel="noreferrer" href="{{ discord }}"><i class="fab fa-discord"></i> Discord</a>
                     </li>
                 {% endif %}
                 {% if ts3 %}
-                    <li class="nav-item ms-lg-5">
+                    <li class="nav-item ms-lg-2">
                         <a class="nav-link" rel="noreferrer" href="{{ ts3 }}"><i class="fab fa-teamspeak"></i> TeamSpeak3</a>
                     </li>
                 {% endif %}
+                <li class="nav-item ms-lg-2">
+                    <a class="nav-link" href="{{ path('contact', {_locale: app.request.locale}) }}#admin"><i class="fas fa-address-book"></i> {% trans %}Contact{% endtrans %}</a>
+                </li>
                 <li class="nav-item ms-lg-5">
                     <a href="{{ path('shop', {_locale: app.request.locale}) }}">
-                        <button type="button" class="btn-shop"><i class="fas fa-cart"></i>{% trans %}Item Shop{% endtrans %}</button>
+                        <button type="button" class="btn-shop"><i class="fas fa-cart"></i>{% trans %}Shop{% endtrans %}</button>
                     </a>
                 </li>
             </ul>
