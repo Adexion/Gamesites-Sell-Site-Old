@@ -19,7 +19,7 @@ class ItemHistory
 
     /**
      * @ORM\ManyToOne(targetEntity=Item::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="SET NULL")
      */
     private $item;
 

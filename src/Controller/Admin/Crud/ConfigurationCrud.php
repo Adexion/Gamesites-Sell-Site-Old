@@ -31,13 +31,18 @@ class ConfigurationCrud extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
-            TextField::new('serverName'),
-            TextField::new('ip'),
+        $image =
             ImageField::new('logo')
                 ->setUploadDir($this->getParameter('uploadPath'))
                 ->setBasePath($this->getParameter('basePath'))
-                ->hideWhenUpdating(),
+                ->setSortable(false);
+
+        return [
+            TextField::new('serverName'),
+            TextField::new('ip'),
+            $pageName === Crud::PAGE_EDIT
+                ? $image->setFormTypeOption('required', false)
+                : $image,
             TextField::new('minecraftQueryIp'),
             NumberField::new('minecraftQueryPort'),
         ];
