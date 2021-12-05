@@ -43,7 +43,7 @@ class Item
     private $command = [];
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $shortDescription;
 
