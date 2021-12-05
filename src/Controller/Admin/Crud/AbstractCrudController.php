@@ -10,12 +10,6 @@ abstract class AbstractCrudController extends AbstractBaseCrudController
 {
     public abstract static function getEntityFqcn(): string;
 
-    public function configureAssets(Assets $assets): Assets
-    {
-        return $assets
-            ->addWebpackEncoreEntry('ea-app');
-    }
-
     public function configureCrud(Crud $crud): Crud
     {
         return $crud

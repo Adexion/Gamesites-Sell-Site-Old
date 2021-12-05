@@ -32,12 +32,6 @@ class ConfigurationCrud extends AbstractCrudController
             ->remove(Crud::PAGE_NEW, Action::SAVE_AND_ADD_ANOTHER);
     }
 
-    public function configureAssets(Assets $assets): Assets
-    {
-        return $assets
-            ->addWebpackEncoreEntry('ea-app');
-    }
-
     public function configureFields(string $pageName): iterable
     {
         return [
