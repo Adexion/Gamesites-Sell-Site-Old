@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Service\Rank;
+namespace App\Service;
 
 use App\Repository\RankRepository;
 use Doctrine\DBAL\Exception;
 
 class RankService
 {
-    private AdditionalDriverManager $manager;
+    private RemoteDriverManager $manager;
     private RankRepository $repository;
 
     private const MAX_RESULT = 10;
 
-    public function __construct(AdditionalDriverManager $manager, RankRepository $repository)
+    public function __construct(RemoteDriverManager $manager, RankRepository $repository)
     {
         $this->manager = $manager;
         $this->repository = $repository;
@@ -26,7 +26,7 @@ class RankService
             return [];
         }
 
-        $db = $this->manager->getConnection($type);
+        $db = $this->manager->getConnection($type, $this->repository);
         $qb = $db->createQueryBuilder()
             ->select('x.`'.$rank->getName().'` AS name', 'x.`'.$rank->getPoint().'` AS point')
             ->from($rank->getDirectory(), 'x')
