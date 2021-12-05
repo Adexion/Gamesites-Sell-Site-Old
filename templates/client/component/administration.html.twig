@@ -6,7 +6,7 @@
             <div class="col-lg-4 col-12 d-flex flex-column justify-content-center align-items-center">
                 <img src="https://mc-heads.net/body/{{ u.username ?? 'Steve'}}" alt="{{ u.username }}" class="mb-3 cube"/>
                 <h2 class="text3">{{ u.username }}</h2>
-                <h4 class="text4">{{ ( u.description | raw | nl2br ) ?? ('Next noname' | trans ~ ' ...')}}</h4>
+                <h4 class="text4">{{ (u.description ?? ('Next noname' | trans ~ ' ...'))  | raw | nl2br }}</h4>
             </div>
             {% endfor %}
         </div>
