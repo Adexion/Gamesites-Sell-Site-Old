@@ -1,6 +1,7 @@
 import 'ckeditor';
-import replaceColorCodes from './js/MinecraftColorCodes.3.7'
+import './js/MinecraftColorCodes.3.7'
 
 (()=> {
-    document.querySelector('.response').innerHTML = replaceColorCodes( document.querySelector('.response').innerHTML);
+    let response = document.querySelector('.response').innerHTML;
+    document.querySelector('.response').innerHTML = response.replaceColorCodes()
 })();
