@@ -66,6 +66,10 @@ class Configuration
 
     public function setLogo(?string $logo): self
     {
+        if (!$logo) {
+            return $this;
+        }
+
         $this->logo = $logo;
 
         return $this;

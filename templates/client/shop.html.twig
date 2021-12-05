@@ -29,7 +29,14 @@
                                 <div class="mb-60px"></div>
                                 <p class="shop-item">{{ item.name }}</p>
                                 <p class="shop-desc">{{ item.description | raw }}</p>
-                                <p class="shop-price">{{ item.price | format_currency('PLN') }}</p>
+                                <p class="shop-price">
+                                    {% if item.discount %}
+                                        <stroke class="text-1 small">{{ item.price | format_currency('PLN') }}</stroke>
+                                        {{ item.discountedPrice | format_currency('PLN') }}
+                                    {% else %}
+                                        {{ item.price | format_currency('PLN') }}
+                                    {% endif %}
+                                </p>
                             </div>
                             <div class="col-12 text-end">
                                 <h2>

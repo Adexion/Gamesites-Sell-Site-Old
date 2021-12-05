@@ -66,8 +66,12 @@ class GuildItem
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
+        if (!$image) {
+            return $this;
+        }
+
         $this->image = $image;
 
         return $this;

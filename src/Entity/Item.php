@@ -67,8 +67,12 @@ class Item
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
+        if (!$image) {
+            return $this;
+        }
+
         $this->image = $image;
 
         return $this;
@@ -79,7 +83,7 @@ class Item
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -91,7 +95,7 @@ class Item
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
@@ -120,7 +124,7 @@ class Item
         return $this->command;
     }
 
-    public function setCommand(array $command): self
+    public function setCommand(?array $command): self
     {
         $this->command = $command;
 
@@ -132,7 +136,7 @@ class Item
         return $this->shortDescription;
     }
 
-    public function setShortDescription(string $shortDescription): self
+    public function setShortDescription(?string $shortDescription): self
     {
         $this->shortDescription = $shortDescription;
 
