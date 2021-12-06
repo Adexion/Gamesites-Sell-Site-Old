@@ -105,3 +105,6 @@ This payment can not checked correctly. Pleas contact with administrator.: Nie m
 You are not connected to serwer! Contact with administration and give him this payment ID: Nie ma cię na serwerze! Zachowaj ID płątności oraz podaj je podczas kontaktu z administracją serwera, by mogli potwierdzić twoją płatność.
 Payment realized successfully.: Platność przebiegła pomyślnie, a wszystkie komendy wykonane poprawnie. Jeszcze raz dziękujemy.
 Given payment does not exist.: Podana płatnośc nie istnieje. Jeżeli uważasz że dana sytuacja to błąd, skontaktuj się z administracją w celu ustalenia szczegółów.
+Date From: Data nadania
+Reason: Powód
+Bans: Lista banów

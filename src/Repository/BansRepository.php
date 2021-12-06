@@ -2,8 +2,8 @@
 
 namespace App\Repository;
 
+use App\Entity\Bans;
 use App\Entity\Rank;
-use App\Service\RemoteDriverManager;
 use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -13,33 +13,23 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Rank[]    findAll()
  * @method Rank[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RankRepository extends AbstractRemoteRepository
+class BansRepository extends AbstractRemoteRepository
 {
-    private const MAX_RESULT = 10;
+    private const MAX_RESULT = 20;
 
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Rank::class);
+        parent::__construct($registry, Bans::class);
     }
 
     /** @throws Exception */
     public function findRemote(array $criteria = [], array $filters = []): ?array
     {
-        $rank = $this->findOneBy($criteria);
-        if (!$rank) {
-            return [];
-        }
+        $bans = $this->findOneBy($criteria);
 
-        $qb = $this->createQB($rank)
-            ->setMaxResults(self::MAX_RESULT);
-
-        if ($criteria['name']) {
-            $qb
-                ->where($rank->getName().' = :value')
-                ->setParameter('value', $criteria['name']);
-        }
-
-        return $qb
+        return $this->createQB($bans)
+            ->addSelect('x.'. $bans->getColumnTwo().' AS reason')
+            ->setMaxResults(self::MAX_RESULT)
             ->executeQuery()
             ->fetchAllAssociative();
     }

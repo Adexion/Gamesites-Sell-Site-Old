@@ -25,13 +25,13 @@
                         <div class="col-lg-12 mb-3 ranking anime">
                             {% for player in playerRank %}
                                 <div class="row">
-                                    <div class="col-8">
-                                        <button class="btn-ranking" disabled>{{ loop.index }}.</button>
+                                    <div class="col-6">
+                                        <button class="btn-ranking" disabled>{{ loop.index }}.</button>&nbsp;&nbsp;
                                         <img src="https://crafthead.net/cube/{{ player.name }}" height="48px" width="48px" alt="{{ "Cube of" | trans }} {{ player.name }}">
                                         <span class="text8">{{ player.name }}</span>
                                     </div>
-                                    <div class="col-4 text7 text-end">
-                                        <p>{{ player.point }}</p>
+                                    <div class="col-6 text7 text-end">
+                                        <p>{{ player.value }}</p>
                                     </div>
                                 </div>
                             {% endfor %}
@@ -45,11 +45,11 @@
                             {% for guild in guildRank %}
                                 <div class="row">
                                     <div class="col-9">
-                                        <button class="btn-ranking" disabled>{{ loop.index }}.</button>
+                                        <button class="btn-ranking" disabled>{{ loop.index }}.</button>&nbsp;&nbsp;
                                         <span class="text8">{{ guild.name }}</span>
                                     </div>
                                     <div class="col-3 text7 text-end">
-                                        <p>{{ player.point }}</p>
+                                        <p>{{ player.value }}</p>
                                     </div>
                                 </div>
                             {% endfor %}

@@ -19,6 +19,11 @@
                     <a class="nav-link" href="{{ path('index', {_locale: app.request.locale}) }}#rank"><i class="fas fa-users"></i> {% trans %}Rank{% endtrans %}</a>
                 </li>
                 {% endif %}
+                {% if areBansSet %}
+                <li class="nav-item ms-lg-2">
+                    <a class="nav-link" href="{{ path('bans', {_locale: app.request.locale}) }}#rank"><i class="fas fa-shield-alt"></i> {% trans %}Bans{% endtrans %}</a>
+                </li>
+                {% endif %}
                 <li class="nav-item ms-lg-2">
                     <a class="nav-link {% if app.request.get('_route') == 'rule' %}active{% endif %}" href="{{ path('rule', {_locale: app.request.locale}) }}"><i class="fas fa-book"></i> {% trans %}Rules{% endtrans %}</a>
                 </li>

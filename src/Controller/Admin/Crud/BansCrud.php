@@ -2,18 +2,16 @@
 
 namespace App\Controller\Admin\Crud;
 
-use App\Entity\Rank;
-use App\Enum\RankEnum;
+use App\Entity\Bans;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class RankCrud extends AbstractCrudController
+class BansCrud extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Rank::class;
+        return Bans::class;
     }
 
     public function configureFields(string $pageName): iterable
@@ -26,9 +24,8 @@ class RankCrud extends AbstractCrudController
             TextField::new('database'),
             TextField::new('directory'),
             TextField::new('name'),
-            TextField::new('columnOne', 'Points'),
-            ChoiceField::new('type')
-                ->setChoices(RankEnum::toArray()),
+            TextField::new('columnOne', 'Date From'),
+            TextField::new('columnTwo', 'Reason')
         ];
     }
 }
