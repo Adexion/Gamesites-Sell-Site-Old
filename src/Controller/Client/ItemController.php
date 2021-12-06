@@ -11,6 +11,7 @@ use App\Service\PaymentRequestBuilder;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,7 +26,7 @@ class ItemController extends AbstractController
 
         return $this->render('client/shop.html.twig', [
             'items' => $repository->findAll(),
-            'voucherForm' => $form->createView()
+            'voucherForm' => $form->createView(),
         ]);
     }
 
@@ -59,15 +60,17 @@ class ItemController extends AbstractController
             $redirectForm = $this->createForm(PaymentType::class);
             $redirectForm->submit($request);
 
-            return $this->render('client/payment.html.twig', [
+            $response = $this->render('client/payment.html.twig', [
                 'form' => $redirectForm->createView(),
-                'paymentType' => $form->getData()['payment']->getType()
+                'paymentType' => $form->getData()['payment']->getType(),
             ]);
+
+            $cookie = new Cookie('paymentId', $request['ID_ZAMOWIENIA'], strtotime('now + 30 minutes'));
+            $response->headers->setCookie($cookie);
+
+            return $response;
         }
 
-        return $this->render('client/shop.html.twig', [
-            'item' => $item,
-            'form' => $form->createView(),
-        ]);
+        return $this->redirectToRoute('item', ['id' => $item->getId()]);
     }
 }

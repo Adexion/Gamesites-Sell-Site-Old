@@ -2,8 +2,10 @@
 
 namespace App\Controller\Client;
 
+use App\Enum\PaymentStatusEnum;
 use App\Form\PaymentStatusType;
 use App\Form\VoucherType;
+use App\Repository\ItemHistoryRepository;
 use App\Service\PaymentExecutionService;
 use App\Service\VoucherExecutionService;
 use Doctrine\ORM\OptimisticLockException;
@@ -68,10 +70,40 @@ class PaymentController extends AbstractController
     }
 
     /**
-     * @Route(name="returnPayment", path="/payment/")
+     * @Route(name="thankYoy", path="/payment/")
      */
-    public function payment(Request $request)
+    public function payment(Request $request, ItemHistoryRepository $itemHistoryRepository)
     {
-        var_dump($request->request->all(), $request->query->all(), $request->getContent());die;
+        $cookies = $request->cookies;
+        $itemHistory = $itemHistoryRepository->find($cookies->get('paymentId', 0));
+
+        switch ($itemHistory->getStatus()) {
+            case PaymentStatusEnum::CREATED:
+            case PaymentStatusEnum::UNACCEPTED:
+            case PaymentStatusEnum::FAILURE:
+            case PaymentStatusEnum::CANCELED:
+                $message = 'This payment is not accepted. If it is not right pleas contact with your administrator.';
+                break;
+            case PaymentStatusEnum::PENDING:
+                $message = 'This payment is still pending. Pleas not log out from server.';
+                break;
+            case PaymentStatusEnum::TIME_OUT:
+                $message = 'This payment can not checked correctly. Pleas contact with administrator.';
+                breAK;
+            case PaymentStatusEnum::NOT_ON_SERVER:
+                $message = "You are not connected to serwer! Contact with administration and give him this payment ID";
+                break;
+            case PaymentStatusEnum::REALIZED:
+                $message = "Payment realized successfully.";
+                break;
+            case PaymentStatusEnum::NOT_EXISTED:
+                $message = 'Given payment does not exist.';
+                break;
+        }
+
+        return $this->render('client/thankYou.html.twig', [
+            'message' => $message ?? '',
+            'paymentId' => $cookies->get('paymentId', 0)
+        ]);
     }
 }

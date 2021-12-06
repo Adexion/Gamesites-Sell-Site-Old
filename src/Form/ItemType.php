@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Length;
 
 class ItemType extends BaseType
 {
@@ -16,7 +17,11 @@ class ItemType extends BaseType
     {
         $builder
             ->add('email', EmailType::class)
-            ->add('username', TextType::class)
+            ->add('username', TextType::class, [
+                'constraints' => [
+                    new Length(['max' => 15])
+                ]
+            ])
             ->add('payment', EntityType::class, [
                 'class' => Payment::class,
                 'choice_label' => 'type',

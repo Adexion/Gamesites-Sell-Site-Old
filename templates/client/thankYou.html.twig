@@ -1,0 +1,15 @@
+{% extends 'client/base.html.twig' %}
+
+{% block body %}
+    <div class="bg2 h-100">
+        <div class="container pt-5">
+            <div class="container mt-5 text-white">
+                <h1>{{ "Thank You Payment" | trans }}</h1>
+                <h2 class="h4">{{ "Your payment id is" | trans ~ " : "  }}<span class="text4">{{ paymentId }}</span></h2>
+                <hr>
+                <h2 class="h4 text4">{{ message | trans }}</h2>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
