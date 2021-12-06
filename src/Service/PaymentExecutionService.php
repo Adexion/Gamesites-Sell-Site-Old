@@ -44,6 +44,10 @@ class PaymentExecutionService
             return 'This payment is not exist! If it is not right pleas contact with your administrator.';
         }
         if (!in_array($paymentStatus, [PaymentStatusEnum::SUCCESS, PaymentStatusEnum::ACCEPTED])) {
+            if (in_array($paymentStatus, [PaymentStatusEnum::FAILURE, PaymentStatusEnum::PENDING])) {
+                $paymentStatus = PaymentStatusEnum::UNACCEPTED;
+            }
+
             $history->setStatus($paymentStatus);
             $this->historyRepository->insertOrUpdate($history);
 
