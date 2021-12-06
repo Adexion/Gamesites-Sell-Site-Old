@@ -2,7 +2,6 @@ import bootstrap from 'bootstrap/dist/js/bootstrap.bundle';
 
 import './styles/app.css';
 import './bootstrap';
-import 'ckeditor';
 
 (() => {
     const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
