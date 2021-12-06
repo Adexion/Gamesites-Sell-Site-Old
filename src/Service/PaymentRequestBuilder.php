@@ -32,7 +32,7 @@ class PaymentRequestBuilder
             'SEKRET' => $data['payment']->getSecret(),
             'KWOTA' => $item->getDiscountedPrice(),
             'EMAIL' => $data['email'],
-            'ADRES_WWW' => sprintf('%s/%s/payment', $data['uri'], $data['locale']),
+            'ADRES_WWW' => sprintf('%s/%s/payment/', $data['uri'], $data['locale']),
             'PRZEKIEROWANIE_SUKCESS' => sprintf('%s/%s/payment', $data['uri'], $data['locale']),
             'PRZEKIEROWANIE_BLAD' => sprintf('%s/%s/payment', $data['uri'], $data['locale']),
         ];
