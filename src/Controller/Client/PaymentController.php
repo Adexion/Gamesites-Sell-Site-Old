@@ -67,4 +67,12 @@ class PaymentController extends AbstractController
 
         return $this->render('client/success.html.twig');
     }
+
+    /**
+     * @Route(name="returnPayment", path="/payment/")
+     */
+    public function payment(Request $request)
+    {
+        var_dump($request->request->all(), $request->query->all(), $request->getContent());die;
+    }
 }
