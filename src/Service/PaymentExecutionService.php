@@ -4,7 +4,9 @@ namespace App\Service;
 
 use App\Entity\ItemHistory;
 use App\Enum\PaymentStatusEnum;
+use App\Enum\PaymentTypeEnum;
 use App\Repository\ItemHistoryRepository;
+use App\Repository\PaymentRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use xPaw\SourceQuery\Exception\AuthenticationException;
@@ -15,11 +17,14 @@ use xPaw\SourceQuery\Exception\SocketException;
 class PaymentExecutionService
 {
     private ItemHistoryRepository $historyRepository;
+    private PaymentRepository $paymentRepository;
     private QueryService $service;
+    private ?string $hash;
 
-    public function __construct(ItemHistoryRepository $historyRepository, QueryService $service)
+    public function __construct(ItemHistoryRepository $historyRepository, PaymentRepository $paymentRepository, QueryService $service)
     {
         $this->historyRepository = $historyRepository;
+        $this->paymentRepository = $paymentRepository;
         $this->service = $service;
     }
 
@@ -28,6 +33,9 @@ class PaymentExecutionService
     {
         /** @var ?ItemHistory $history */
         $history = $this->historyRepository->find($payment['ID_ZAMOWIENIA']);
+        if (in_array($history->getType(), PaymentTypeEnum::values())) {
+            $this->hash = $this->paymentRepository->findOneBy(['type' => $history->getType(), 'id' => $history->getPaymentId()])->getHash();
+        }
 
         /** @var int|string $paymentStatus */
         $paymentStatus = $payment['STATUS'];
@@ -66,7 +74,8 @@ class PaymentExecutionService
 
     private function getHash(array $data): string
     {
-        return hash("sha256", "HASHZUSTAWIEN;"
+        return hash("sha256",
+            $this->hash.";"
             .$data["KWOTA"].";"
             .$data["ID_PLATNOSCI"].";"
             .$data["ID_ZAMOWIENIA"].";"

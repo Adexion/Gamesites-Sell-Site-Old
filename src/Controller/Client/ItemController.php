@@ -59,8 +59,6 @@ class ItemController extends AbstractController
             $redirectForm = $this->createForm(PaymentType::class);
             $redirectForm->submit($request);
 
-            if($redirectForm->isSubmitted())
-
             return $this->render('client/payment.html.twig', [
                 'form' => $redirectForm->createView(),
                 'paymentType' => $form->getData()['payment']->getType()

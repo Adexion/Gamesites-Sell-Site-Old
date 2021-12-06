@@ -35,7 +35,7 @@ class QueryService
     public function getPlayerList(): ?array
     {
         try {
-            return $this->getMinecraftQuery()->GetPlayers();
+            return $this->getMinecraftQuery()->GetPlayers() ?: [];
         } catch (Exception $e) {
             try {
                 return $this->getRConConnect()->GetInfo();
@@ -48,7 +48,7 @@ class QueryService
     public function getInfo(): ?array
     {
         try {
-            return $this->getMinecraftQuery()->GetInfo();
+            return $this->getMinecraftQuery()->GetInfo() ?: [];
         } catch (Exception  $e) {
             try {
                 return $this->getRConConnect()->GetInfo();

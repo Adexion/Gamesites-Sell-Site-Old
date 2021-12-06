@@ -30,6 +30,11 @@ class Payment
     private $secret;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $hash;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $isActive;
@@ -71,6 +76,18 @@ class Payment
     public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function getHash(): ?string
+    {
+        return $this->hash;
+    }
+
+    public function setHash(?string $hash): self
+    {
+        $this->hash = $hash;
 
         return $this;
     }
