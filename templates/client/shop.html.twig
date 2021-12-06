@@ -20,12 +20,12 @@
             {% endif %}
             <div class="d-flex flex-wrap">
                 {% for item in items %}
-                    <div class="col-lg-6 mb-5">
-                        <div class="shop d-flex flex-wrap">
-                            <div class="col-6">
-                                <img src="{{ asset('/assets/images/' ~ item.image) }}" class="d-none d-lg-block shop-image">
+                    <div class="col-lg-6 col-12 mb-5">
+                        <div class="shop flex-wrap row">
+                            <div class="col-lg-6 d-lg-block d-none">
+                                <div style="background-image: url('{{ asset('/assets/images/' ~ item.image) }}')" class="shop-image"></div>
                             </div>
-                            <div class="col-6 text-center">
+                            <div class="col-lg-6 col-12 text-center">
                                 <div class="mb-60px"></div>
                                 <p class="shop-item">{{ item.name }}</p>
                                 <p class="shop-desc">{{ item.description | raw }}</p>
