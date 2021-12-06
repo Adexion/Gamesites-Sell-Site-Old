@@ -93,7 +93,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Content');
         yield MenuItem::linkToCrud('Rule', 'fa fa-book', Rule::class);
         yield MenuItem::linkToCrud('Rank', 'fas fa-users', Rank::class);
-        yield MenuItem::linkToCrud('Bans', 'fas fa-shield-alt', Bans::class);
+        yield MenuItem::linkToCrud('Bans', 'fas fa-ban', Bans::class);
 
         yield MenuItem::section('Item Shop');
         yield MenuItem::linkToCrud('Item', 'fas fa-shopping-cart', Item::class);
