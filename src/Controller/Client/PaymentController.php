@@ -29,6 +29,7 @@ class PaymentController extends AbstractController
     {
         $form = $this->createForm(PaymentStatusType::class);
         $form->handleRequest($request);
+        $form->submit([]);
 
         var_dump($form->isSubmitted(), $form->isValid());die;
         if (!$form->isSubmitted() || !$form->isValid()) {
