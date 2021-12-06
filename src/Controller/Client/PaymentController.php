@@ -9,6 +9,7 @@ use App\Service\VoucherExecutionService;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -38,9 +39,7 @@ class PaymentController extends AbstractController
 
         $message = $executionService->execute($form->getData());
 
-        return $this->render($message ? 'client/rejected.html.twig' : 'client/success.html.twig', [
-            'message' => $message
-        ]);
+        return new JsonResponse(['message' => $message]);
     }
 
     /**
