@@ -55,8 +55,14 @@ header {
 }
 
 .cube {
-    max-height: 200px;
-    max-width: 200px;
+    height: 200px;
+    width: 83px;
+}
+
+.text-blue-xs {
+    padding-top: 80px;
+    font-size: 20px;
+    color: #67a7eb;
 }
 
 .text1, .form-label {
@@ -75,7 +81,6 @@ header {
 .text4 {
     color: #67a7eb;
 }
-
 
 .text5 {
     color: #e1e0e0;
