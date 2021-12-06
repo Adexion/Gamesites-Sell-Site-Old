@@ -28,12 +28,14 @@ class PaymentExecutionService
     {
         /** @var ?ItemHistory $history */
         $history = $this->historyRepository->find($payment['ID_ZAMOWIENIA']);
-        $paymentStatus = $payment['STATUS'] * 10;
+
+        /** @var int|string $paymentStatus */
+        $paymentStatus = $payment['STATUS'];
 
         if ($this->isPaymentExist($payment, $history)) {
             return 'This payment is not exist! If it is not right pleas contact with your administrator.';
         }
-        if ($paymentStatus !== PaymentStatusEnum::ACCEPTED) {
+        if (!in_array($paymentStatus, [PaymentStatusEnum::SUCCESS, PaymentStatusEnum::ACCEPTED])) {
             $history->setStatus($paymentStatus);
             $this->historyRepository->insertOrUpdate($history);
 
