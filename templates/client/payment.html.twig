@@ -9,13 +9,13 @@
         {{ form_start(form, {method:'POST', action: 'https://' ~ paymentType ~ '.hotpay.pl', name: 'payment'}) }}
         <button class="btn-shop h3 mt-4" type="submit">{{ 'Go to payment now' | trans }}</button>
         {{ form_end(form) }}
-{#        <script>#}
-{#            window.onload = function () {#}
-{#                window.setTimeout(function () {#}
-{#                    document.payment.submit();#}
-{#                }, 5000);#}
-{#            };#}
-{#        </script>#}
+        <script>
+            window.onload = function () {
+                window.setTimeout(function () {
+                    document.payment.submit();
+                }, 5000);
+            };
+        </script>
     </div>
 {% endblock %}
 
