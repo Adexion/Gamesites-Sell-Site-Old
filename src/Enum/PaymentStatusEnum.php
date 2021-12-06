@@ -6,6 +6,10 @@ use MyCLabs\Enum\Enum;
 
 class PaymentStatusEnum extends Enum
 {
+    const SUCCESS = "SUCCESS";
+    const FAILURE = "FAILURE";
+    const PENDING = "PENDING";
+
     const CREATED = 0;
     const ACCEPTED = 10;
     const UNACCEPTED = 20;
