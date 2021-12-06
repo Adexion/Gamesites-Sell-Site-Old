@@ -27,7 +27,6 @@ class PaymentController extends AbstractController
      */
     public function status(Request $request, PaymentExecutionService $executionService): Response
     {
-        var_dump($request->request->all());die;
         $form = $this->createForm(PaymentStatusType::class);
         $form->handleRequest($request);
 
