@@ -28,7 +28,7 @@ class PaymentController extends AbstractController
     public function status(Request $request, PaymentExecutionService $executionService): Response
     {
         $form = $this->createForm(PaymentStatusType::class);
-        $form->submit(json_decode($request->getContent(), true));
+        $form->submit($request->request->all());
 
         if (!$form->isSubmitted() || !$form->isValid()) {
             return $this->render('client/rejected.html.twig', [
