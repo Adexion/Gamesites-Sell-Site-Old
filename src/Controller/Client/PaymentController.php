@@ -31,7 +31,6 @@ class PaymentController extends AbstractController
         $form->handleRequest($request);
         $form->submit([]);
 
-        var_dump($form->isSubmitted(), $form->isValid());die;
         if (!$form->isSubmitted() || !$form->isValid()) {
             return $this->render('client/rejected.html.twig', [
                 'message' => 'Wrong data given',
