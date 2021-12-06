@@ -40,7 +40,7 @@ class PaymentExecutionService
         /** @var int|string $paymentStatus */
         $paymentStatus = $payment['STATUS'];
 
-        if ($this->isPaymentExist($payment, $history)) {
+        if ($this->isPaymentNotExist($payment, $history) || $history->getStatus() !== PaymentStatusEnum::CREATED) {
             return 'This payment is not exist! If it is not right pleas contact with your administrator.';
         }
         if (!in_array($paymentStatus, [PaymentStatusEnum::SUCCESS, PaymentStatusEnum::ACCEPTED])) {
@@ -70,7 +70,7 @@ class PaymentExecutionService
         return null;
     }
 
-    private function isPaymentExist(array $payment, ?ItemHistory $history): bool
+    private function isPaymentNotExist(array $payment, ?ItemHistory $history): bool
     {
         return !$history
             || ($payment['HASH'] && $this->getHash($payment) !== $payment['HASH']);
