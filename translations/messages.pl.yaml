@@ -1,6 +1,6 @@
-Text footer: 'nie jest w żaden sposób powiązany z Mojang, AB. Nie powinien być również uważany za firmę wspieraną przez Mojang, AB. Wszelkie wpłaty i zakupy dokonane w tym sklepie są przeznaczonenu rozwoj na rozwój projektu. Aby uzyskać więcej informacji, wsparcie lub historię zakupów, wyślij do nas zapytanie drogą mailową.'
-No informations: 'Nie dodano żadnych produktów dla tego serwera. Proszę skontaktuj się z administracją serwera.'
-Home: Strona głowna
+Text footer: 'nie jest w żaden sposób powiązany z Mojang, AB. Nie powinien być również uważany za firmę wspieraną przez Mojang, AB. Wszelkie wpłaty i zakupy dokonane w tym sklepie są przeznaczonemu rozwój na rozwój projektu. Aby uzyskać więcej informacji, wsparcie lub historię zakupów, wyślij do nas zapytanie drogą mailową.'
+No informations: 'Nie dodano żadnych produktów dla tego serwera. Proszę, skontaktuj się z administracją serwera.'
+Home: Strona główna
 Rank: Ranking
 Rules: Regulamin
 Item Shop: Sklep serwera
@@ -14,13 +14,13 @@ Search player: Wyszukaj gracza
 Enter a player name: Podaj nazwę gracza
 Cube of: Główka gracza
 Realize voucher: Zrealizuj voucher
-Shop information: Korzystając ze sklepu dokładasz się do rachunków za serwer. Dziękujemy!
+Shop information: Korzystając ze sklepu, dokładasz się do rachunków za serwer. Dziękujemy!
 Shop rules: Przejdź do regulaminu korzystania z usługi
-By purchasing this item you get: Kupując ten przedmiot otrzymujesz dostęp do
-Choose payment option: Wybierz formę płatnosci
+By purchasing this item you get: Kupując ten przedmiot, otrzymasz dostęp do
+Choose payment option: Wybierz formę płatności
 Back to the product list: Powrót na listę produktów
 Payment form: Formularz płatności
-platnosc: Przelew bądź płatnosć kartą
+platnosc: Przelew bądź płatność kartą
 directbilling: SMS+
 psc: PaySafeCard
 Username: Nick
@@ -30,7 +30,7 @@ Please wiat: Proszę czekać
 Redirect: W ciągu 3 sekund zostaniesz przekierowany na stronę płatności
 Buy now: Kup teraz
 Join to us: Dołącz do nas
-Here are the items you need to create a guild: Oto przedmioty jakie potrzebujesz aby utworzyć gildię
+Here are the items you need to create a guild: Oto przedmioty, jakich potrzebujesz, aby utworzyć gildię
 To be able to play with his friends as one band: by grać ze swoimi przyjaciółmi jako jeden zespół.
 GUILD: GILDIE
 Items for: Przedmioty na
@@ -69,7 +69,7 @@ Main Description: Pomniejszy tekst na stronie
 Trailer Text: Tekst obok prezentacji serwera
 Trailer: Prezentacja
 Server name: Nazwa serwera
-Caution! Deleting this entity will be required to change the image!: Uwaga! by zmienić obrazek wyamagane jest usunięcie i ponowne utworzenie produktu
+Caution! Deleting this entity will be required to change the image!: Uwaga! by zmienić obrazek wymagane, jest usunięcie i ponowne utworzenie produktu
 Server: Serwer
 Default Server: Serwer Domyślny
 Server Name: Nazwa serwera
@@ -79,11 +79,11 @@ R Con Password: rCon Hasło
 First create server: Najpierw utwórz serwer
 Console: Konsola rCon
 Main: Gółwne
-Wrong data given: Nie udało się przetworzyć otrzymanych danych. Sprawdż proszę czy szystko zostało porawnie ustawione i wrazie potrzeby skontaktuj się z administratorem.
+Wrong data given: Nie udało się przetworzyć otrzymanych danych. Sprawdź, czy wszystko zostało poprawnie ustawione i w razie potrzeby skontaktuj się z administratorem.
 Opps! Something went wrong: Coś poszło nie tak!
 Voucher is not valid or expired: Voucher jest nieprawidłowy lub wygasł
 Hooray! Items was properly executed on the server: Udało się! Przedmioty zostały prawidłowo wypłacone na serwerze!
-Voucher used too match times:  Voucher został użyty zbyt wiele razy!
+Voucher used too match times: Voucher został użyty zbyt wiele razy!
 There was a problem connecting to the server. Please contact your administrator.: Wystąpił problem podczas łączenia z serwerem. Skontaktuj się z administratorem.
 This payment is not exist! If it is not right pleas contact with your administrator.: Wybrana płatność nie istnieje! Jeżeli to błąd skontaktuj się z administratorem.
 This payment is not accepted. If it is not right pleas contact with your administrator.: Wybrana płatność nie została zaakceptowana. Jeżeli to błąd skontaktuj się z administratorem.
@@ -97,4 +97,4 @@ Next noname: Kolejny noname
 Submit: Wyślij
 Text: Treść
 Shop: Sklep
-I am not set yet: Nie zostałem jeszcze ustalony
+I am not set yet: Nie zostałem jeszcze ustalony.
