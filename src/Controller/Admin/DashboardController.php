@@ -23,6 +23,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use xPaw\SourceQuery\Exception\InvalidPacketException;
 use xPaw\SourceQuery\Exception\SocketException;
 
 class DashboardController extends AbstractDashboardController
@@ -47,17 +48,14 @@ class DashboardController extends AbstractDashboardController
             $server = $form->getData()['server'];
             try {
                 $response = $service->execute($form->getData()['command'], $server);
-                $code = Response::HTTP_OK;
             } catch (SocketException $e) {
                 $response = $e->getMessage();
-                $code = $e->getCode();
             }
         }
 
         return $this->render('admin/console.html.twig', [
             'form' => $form->createView(),
-            'response' => $response ?? '',
-            'code' => Response::HTTP_FOUND
+            'response' => $response ?? ''
         ]);
     }
 
