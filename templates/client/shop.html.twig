@@ -10,7 +10,7 @@
             </h4>
             <div class="col-lg-12 text-end">
                 <h4>
-                    <button type="button" class="btn-shop anime" data-bs-toggle="modal" data-bs-target="#modal">{{ 'Realize voucher' | trans }}</button>
+                    <button type="button" class="btn-shop animate" data-bs-toggle="modal" data-bs-target="#modal">{{ 'Realize voucher' | trans }}</button>
                 </h4>
             </div>
             {% if items is empty %}
@@ -40,7 +40,7 @@
                             </div>
                             <div class="col-12 text-end">
                                 <h2>
-                                    <a class="btn-item anime" href="{{ path('item', {_locale: app.request.locale, id: item.id}) }}"><i class="fas fa-cart-plus"></i>&nbsp;</a>
+                                    <a class="btn-item anime" href="{{ path('item', {_locale: app.request.locale, id: item.id}) }}"><i class="fa fa-shopping-cart"></i>&nbsp;</a>
                                 </h2>
                             </div>
                         </div>

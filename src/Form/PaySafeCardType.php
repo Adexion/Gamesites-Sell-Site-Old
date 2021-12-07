@@ -2,21 +2,35 @@
 
 namespace App\Form;
 
+use App\Entity\Item;
+use App\Entity\PaySafeCard;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\BaseType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
 
-class VoucherType extends BaseType
+class PaySafeCardType extends BaseType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class)
             ->add('username', TextType::class)
+            ->add('email', EmailType::class, [
+                'constraints' => [
+                    new Email(['mode' => Email::VALIDATION_MODE_STRICT])
+                ]
+            ])
             ->add('code', TextType::class)
+            ->add('item', EntityType::class, [
+                'class' => Item::class,
+                'choice_label' => 'name',
+                'attr' => ['hidden' => true],
+                'label' => false
+            ])
             ->add('submit', SubmitType::class);
     }
 

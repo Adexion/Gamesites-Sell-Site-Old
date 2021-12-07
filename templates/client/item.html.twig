@@ -10,6 +10,9 @@
                 </a>
             </h4>
             <div class="row mt-5">
+                <div class="col-12 text-end">
+                    <button class="px-2 animate h4 btn-shop" data-bs-toggle="modal" data-bs-target="#modal"><i class="fas fa-lock"></i>&nbsp;PaySafeCard</button>
+                </div>
                 <div class="col-lg-7">
                     <h1 class="text5 mb-3">{{ 'Payment form' | trans }}</h1>
                     {{ form_start(form, {method: 'POST', action: path('payment', {_locale: app.request.locale, id: item.id})}) }}
@@ -32,4 +35,5 @@
 
         </div>
     </main>
+    {% include 'client/component/paySafeCard.html.twig' %}
 {% endblock %}

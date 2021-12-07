@@ -150,12 +150,12 @@ a:active {
     text-decoration: none;
 }
 
-.anime {
+.animate {
     transition: transform .5s; /* Animation */
     margin: 2px auto;
 }
 
-.anime:hover {
+.animate:hover {
     transform: scale(1.03); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 

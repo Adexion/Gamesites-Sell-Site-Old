@@ -42,6 +42,11 @@ class Configuration
      */
     private $ip;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default": true})
+     */
+    private $simplePaySafeCard;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -107,6 +112,18 @@ class Configuration
     public function setIp(string $ip): self
     {
         $this->ip = $ip;
+
+        return $this;
+    }
+
+    public function getSimplePaySafeCard(): ?bool
+    {
+        return $this->simplePaySafeCard;
+    }
+
+    public function setSimplePaySafeCard(?bool $simplePaySafeCard): self
+    {
+        $this->simplePaySafeCard = $simplePaySafeCard;
 
         return $this;
     }

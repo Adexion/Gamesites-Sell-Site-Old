@@ -4,10 +4,16 @@
     <div class="bg2 h-100">
         <div class="container pt-5">
             <div class="container mt-5 text-white">
-                <h1>{{ "Thank You Payment" | trans }}</h1>
+                <h1>{{ "Thank You Payment" | trans ~ " : "}}<span class="text4">{{ type | trans }}</span></h1>
                 <h2 class="h4">{{ "Your payment id is" | trans ~ " : "  }}<span class="text4">{{ paymentId }}</span></h2>
                 <hr>
-                <h2 class="h4 text4">{{ message | trans }}</h2>
+                <h2 class="h4 text3 my-5">{{ message | trans | nl2br }}</h2>
+                {% if link is defined %}
+                    <a class="animate h5" href="{{ link }}">{{ app.request.schemeAndHttpHost }}{{ link }}</a>
+                {% endif %}
+                {% if voucher is defined %}
+                    <h5>{{ "This is your voucher" | trans ~ " : " }}<span class="text4">{{ voucher }}</span></h5>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -2,13 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\VoucherRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=VoucherRepository::class)
+ * @ORM\Entity()
  */
-class Voucher
+class PaySafeCard
 {
     /**
      * @ORM\Id
@@ -23,9 +22,14 @@ class Voucher
     private $code;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="string")
      */
-    private $times;
+    private $username;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $email;
 
     /**
      * @ORM\ManyToOne(targetEntity=Item::class)
@@ -37,6 +41,11 @@ class Voucher
      * @ORM\Column(type="datetime")
      */
     private $date;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default": false})
+     */
+    private $used;
 
     public function getId(): ?int
     {
@@ -51,18 +60,6 @@ class Voucher
     public function setCode(string $code): self
     {
         $this->code = $code;
-
-        return $this;
-    }
-
-    public function getTimes(): ?int
-    {
-        return $this->times;
-    }
-
-    public function setTimes(int $times): self
-    {
-        $this->times = $times;
 
         return $this;
     }
@@ -87,6 +84,42 @@ class Voucher
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getUsed(): ?bool
+    {
+        return $this->used;
+    }
+
+    public function setUsed(?bool $used): ?self
+    {
+        $this->used = $used;
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(?string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
 
         return $this;
     }

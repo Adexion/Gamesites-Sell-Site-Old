@@ -5,6 +5,7 @@ namespace App\Controller\Client;
 use App\Entity\Item;
 use App\Form\ItemType;
 use App\Form\PaymentType;
+use App\Form\PaySafeCardType;
 use App\Form\VoucherType;
 use App\Repository\ItemRepository;
 use App\Service\PaymentRequestBuilder;
@@ -33,11 +34,13 @@ class ItemController extends AbstractController
     /** @Route (name="item", path="/shop/{id}") */
     public function item(Item $item): Response
     {
-        $form = $this->createForm(ItemType::class);
+        $itemForm = $this->createForm(ItemType::class);
+        $paySafeCardForm = $this->createForm(PaySafeCardType::class, ['item' => $item]);
 
         return $this->render('client/item.html.twig', [
             'item' => $item,
-            'form' => $form->createView(),
+            'form' => $itemForm->createView(),
+            'paySafeCardForm' => $paySafeCardForm->createView(),
         ]);
     }
 
