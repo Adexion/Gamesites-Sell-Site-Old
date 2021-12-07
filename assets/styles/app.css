@@ -115,6 +115,10 @@ header {
     height: 315px;
 }
 
+#contact_description {
+    height: 150px;
+}
+
 /*center text on mobile*/
 @media (max-width: 980px) {
     .mobile-text-center {

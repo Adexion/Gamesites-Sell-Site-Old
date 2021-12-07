@@ -23,7 +23,7 @@ class ContactController extends AbstractController
             $this->getDoctrine()->getManager()->persist($form->getData());
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'Wiadomość wysłana');
+            $this->addFlash('success', 'Message send');
         }
 
         return $this->render('client/contact.html.twig', [
