@@ -154,8 +154,14 @@ class PaymentController extends AbstractController
     }
 
     /** @Route(name="pscVoucher", path="/paySafeCard/{hash}") */
-    public function getVoucher(PaySafeCardVoucher $hash): Response
+    public function getVoucher(?PaySafeCardVoucher $hash): Response
     {
+        if (!$hash) {
+            return $this->render('client/rejected.html.twig', [
+                'message' => "Payment not exist ore removed."
+            ]);
+        }
+
         if (!$hash->getPaySafeCard()->getUsed()) {
             return $this->render('client/thankYou.html.twig', [
                 'type' => PaymentTypeEnum::PAY_SAFE_CARD,
@@ -184,7 +190,7 @@ class PaymentController extends AbstractController
             'type' => PaymentTypeEnum::PAY_SAFE_CARD,
             'message' => 'Payment realized successfully. Get your voucher.',
             'voucher' => $hash->getVoucher()->getCode(),
-            'paymentId' => $hash->getPaySafeCard()->getId()
+            'paymentId' => $hash->getPaySafeCard()->getId(),
         ]);
     }
 }

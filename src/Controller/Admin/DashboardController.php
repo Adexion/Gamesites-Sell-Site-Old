@@ -11,6 +11,7 @@ use App\Entity\Item;
 use App\Entity\ItemHistory;
 use App\Entity\Payment;
 use App\Entity\PaySafeCard;
+use App\Entity\PaySafeCardVoucher;
 use App\Entity\Rank;
 use App\Entity\Rule;
 use App\Entity\Server;
@@ -101,6 +102,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Payment', 'fas fa-money-bill', Payment::class);
         yield MenuItem::linkToCrud('Voucher', 'fas fa-receipt', Voucher::class);
         yield MenuItem::linkToCrud('PaySafeCard', 'fas fa-lock', PaySafeCard::class);
+        yield MenuItem::linkToCrud('PaySafeCardVoucher', 'fas fa-fingerprint', PaySafeCardVoucher::class);
         yield MenuItem::linkToCrud('History', 'fa fa-history', ItemHistory::class);
 
         yield MenuItem::section('Settings');

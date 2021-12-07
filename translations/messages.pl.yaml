@@ -118,6 +118,7 @@ Contact Text 3: Dzięki!
 Used: Czy użyto?
 Simple Pay Safe Card: Prosta płatność PSC?
 Given wrong data in PSC form: Podano błędne dane w formularzy płatności
+Payment not exist ore removed.: Podana płatność nie istnieje bądź została usunięta z powodu błędnego kodu PaySafeCard
 PaySafeCard is pending. Contact with administrator:
   Płatność PSC musi zostać zaakceptowana przez administratora. Do tego czasu będzie ona w syatusie oczekującym
   Przybliżony czas realizacji płatnośći to 24h.
