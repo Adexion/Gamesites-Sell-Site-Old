@@ -33,16 +33,15 @@ class PaySafeCardVoucherCrud extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('hash')
-                ->setDisabled(),
-            EntityField::new('paySafeCard')
-                ->setClass(PaySafeCard::class, 'code')
-                ->setDisabled(),
-            EntityField::new('paySafeCard', 'username')
+            TextField::new('hash'),
+            EntityField::new('paySafeCard', 'Username')
                 ->setClass(PaySafeCard::class, 'username'),
+            EntityField::new('paySafeCard', 'Email')
+                ->setClass(PaySafeCard::class, 'email'),
+            EntityField::new('paySafeCard')
+                ->setClass(PaySafeCard::class, 'code'),
             EntityField::new('voucher')
-                ->setClass(Voucher::class, 'code')
-                ->setDisabled(),
+                ->setClass(Voucher::class, 'code'),
         ];
     }
 }
