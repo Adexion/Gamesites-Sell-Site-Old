@@ -29,4 +29,18 @@ class PaySafeCardVoucherCrud extends AbstractCrudController
             ->remove(Crud::PAGE_INDEX, Action::NEW)
             ->remove(Crud::PAGE_INDEX, Action::EDIT);
     }
+
+    public function configureFields(string $pageName): iterable
+    {
+        return [
+            TextField::new('hash')
+                ->setDisabled(),
+            EntityField::new('paySafeCard')
+                ->setClass(PaySafeCard::class, 'code')
+                ->setDisabled(),
+            EntityField::new('voucher')
+                ->setClass(Voucher::class, 'code')
+                ->setDisabled(),
+        ];
+    }
 }
