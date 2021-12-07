@@ -38,6 +38,8 @@ class PaySafeCardVoucherCrud extends AbstractCrudController
             EntityField::new('paySafeCard')
                 ->setClass(PaySafeCard::class, 'code')
                 ->setDisabled(),
+            EntityField::new('paySafeCard')
+                ->setClass(PaySafeCard::class, 'username'),
             EntityField::new('voucher')
                 ->setClass(Voucher::class, 'code')
                 ->setDisabled(),
