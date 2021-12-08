@@ -109,7 +109,7 @@ class Item
 
     public function getDiscountedPrice(): ?float
     {
-        return $this->price - ($this->price * $this->discount);
+        return round($this->price - ($this->price * $this->discount), 2);
     }
 
     public function setPrice(?float $price): self

@@ -49,7 +49,7 @@ class PaySafeCardCrud extends AbstractCrudController
             TextField::new('code')
                 ->setDisabled(),
             EntityField::new('item', 'Price')
-                ->setClass(Item::class, 'price')
+                ->setClass(Item::class, 'discountedPrice')
                 ->setDisabled(),
             EntityField::new('item', 'Item')
                 ->setClass(Item::class, 'name')
