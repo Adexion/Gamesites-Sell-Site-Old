@@ -10,11 +10,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PaySafeCardCrud extends AbstractCrudController
@@ -50,7 +48,10 @@ class PaySafeCardCrud extends AbstractCrudController
         return [
             TextField::new('code')
                 ->setDisabled(),
-            EntityField::new('item')
+            EntityField::new('item', 'Price')
+                ->setClass(Item::class, 'price')
+                ->setDisabled(),
+            EntityField::new('item', 'Item')
                 ->setClass(Item::class, 'name')
                 ->setDisabled(),
             DateField::new('date', 'Date From')

@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Item;
-use App\Entity\PaySafeCard;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\BaseType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;

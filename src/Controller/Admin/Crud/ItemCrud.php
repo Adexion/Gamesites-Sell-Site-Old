@@ -50,8 +50,7 @@ class ItemCrud extends AbstractCrudController
             MoneyField::new('price')
                 ->setCurrency('PLN')
                 ->setNumDecimals(2)
-                ->setStoredAsCents(false)
-                ->setFormTypeOption('html5', true),
+                ->setStoredAsCents(false),
             PercentField::new('discount')
                 ->setNumDecimals(0),
             CollectionField::new('command')
