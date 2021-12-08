@@ -5,13 +5,16 @@ namespace App\Controller\Admin\Crud;
 use App\Controller\Admin\Field\EntityField;
 use App\Entity\Item;
 use App\Entity\PaySafeCard;
+use App\Enum\PaySafeCardStatusEnum;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PaySafeCardCrud extends AbstractCrudController
@@ -32,7 +35,7 @@ class PaySafeCardCrud extends AbstractCrudController
     {
         return $crud
             ->setHelp(Crud::PAGE_INDEX,
-                $this->translator->trans('PaySafeCard used flag when active it is allow to generating voucher for user')
+                $this->translator->trans('PaySafeCard status WORKING when active it is allow to generating voucher for user')
             );
     }
 
@@ -53,7 +56,8 @@ class PaySafeCardCrud extends AbstractCrudController
             DateField::new('date', 'Date From')
                 ->renderAsNativeWidget(true)
                 ->setDisabled(),
-            BooleanField::new('used'),
+            ChoiceField::new('status')
+                ->setChoices(PaySafeCardStatusEnum::toArray()),
         ];
     }
 }

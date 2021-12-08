@@ -31,7 +31,7 @@ class PaySafeCardVoucherCrud extends AbstractCrudController
     {
         return $crud
             ->setHelp(Crud::PAGE_INDEX,
-                $this->translator->trans('PaySafeCard used flag when active it is allow to generating voucher for user')
+                $this->translator->trans('PaySafeCard status WORKING when active it is allow to generating voucher for user')
             );
     }
 

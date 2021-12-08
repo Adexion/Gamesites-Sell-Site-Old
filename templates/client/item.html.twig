@@ -10,6 +10,13 @@
                 </a>
             </h4>
             <div class="row mt-5">
+                {% if app.session.flashbag.peek('error') | length > 0 %}
+                    <div class="col-12 alert-info alert">
+                        {% for message in app.flashes('error') %}
+                            {{ message | trans }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
                 <div class="col-12 text-end">
                     <button class="px-2 animate h4 btn-shop" data-bs-toggle="modal" data-bs-target="#modal"><i class="fas fa-lock"></i>&nbsp;PaySafeCard</button>
                 </div>

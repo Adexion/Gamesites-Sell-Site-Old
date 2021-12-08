@@ -117,7 +117,7 @@ Contact Text 2: Potrzebujesz pomocy? Użyj formularza!
 Contact Text 3: Dzięki!
 Used: Czy użyto?
 Simple Pay Safe Card: Prosta płatność PSC?
-Given wrong data in PSC form: Podano błędne dane w formularzy płatności
+Given wrong data in PSC form: Podano błędne dane w formularzu płatności
 Payment not exist ore removed.: Podana płatność nie istnieje bądź została usunięta z powodu błędnego kodu PaySafeCard
 PaySafeCard is pending. Contact with administrator:
   Płatność PSC musi zostać zaakceptowana przez administratora. Do tego czasu będzie ona w syatusie oczekującym
@@ -125,7 +125,11 @@ PaySafeCard is pending. Contact with administrator:
   Aby przyśpieszyć realizację płatności skontaktuj się z administracją w celu otrzymania Vouchera bądź sprawdzaj jej status pod poniższym linkiem.
 This is your voucher: Oto twój voucher
 PaySafeCardVoucher: Powiązanie PSC Voucher
-PaySafeCard used flag when active it is allow to generating voucher for user:
-  Flaga czy użyto pozwala na wygenerowanie przez użytkownika kodu rabatowgo.
-  Dzięki niej nie ma potrzeby kontaktu z klientam w celu przekazania kodu.
-  Zaznacz tylko jeśli kod PSC działa prawidłowo, bądź usuń powiązanie jeśli kod nie działa.
+ACCEPTED: Użyty
+NOT_WORKING: Błędny
+NEW: Nowy
+PaySafeCard status WORKING when active it is allow to generating voucher for user:
+  Status "Nowy" pozwala na wygenerowanie przez użytkownika kodu vouchera.
+  Po ustawieniu statusu jako "Użyty" nie ma potrzeby kontaktu z klientami w celu przekazania kodu.
+  Voucher jest generowany automatycznie.
+  Status "Błędny" blokuje dalsze działanie na tym kodzie PSC

@@ -7,6 +7,7 @@ use App\Entity\PaySafeCardVoucher;
 use App\Entity\Voucher;
 use App\Enum\PaymentStatusEnum;
 use App\Enum\PaymentTypeEnum;
+use App\Enum\PaySafeCardStatusEnum;
 use App\Form\PaymentStatusType;
 use App\Form\PaySafeCardType;
 use App\Form\VoucherType;
@@ -120,6 +121,11 @@ class PaymentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $item = $form->getData()['item'];
+            if ($this->getDoctrine()->getRepository(PaySafeCard::class)->findOneBy(['code' => $form->getData()['code']])) {
+                $this->addFlash('error', 'Given wrong data in PSC form');
+
+                return $this->redirectToRoute('item', ['id' => $form->getData()['item']->getId()]);
+            }
 
             $psc = (new PaySafeCard())
                 ->setItem($item)
@@ -127,7 +133,7 @@ class PaymentController extends AbstractController
                 ->setEmail($form->getData()['email'])
                 ->setUsername($form->getData()['username'])
                 ->setCode($form->getData()['code'])
-                ->setUsed(false);
+                ->setStatus(false);
 
             $this->getDoctrine()->getManager()->persist($psc);
             $this->getDoctrine()->getManager()->flush();
@@ -150,19 +156,19 @@ class PaymentController extends AbstractController
 
         $this->addFlash('error', 'Given wrong data in PSC form');
 
-        return $this->redirectToRoute('payment', ['id' => $request->request->get('item')]);
+        return $this->redirectToRoute('item', ['id' => $form->getData()['item']->getId()]);
     }
 
     /** @Route(name="pscVoucher", path="/paySafeCard/{hash}") */
     public function getVoucher(?PaySafeCardVoucher $hash): Response
     {
-        if (!$hash) {
+        if (!$hash || $hash->getPaySafeCard()->getStatus() === PaySafeCardStatusEnum::NOT_WORKING) {
             return $this->render('client/rejected.html.twig', [
                 'message' => "Payment not exist ore removed."
             ]);
         }
 
-        if (!$hash->getPaySafeCard()->getUsed()) {
+        if ($hash->getPaySafeCard()->getStatus() === PaySafeCardStatusEnum::NEW) {
             return $this->render('client/thankYou.html.twig', [
                 'type' => PaymentTypeEnum::PAY_SAFE_CARD,
                 'message' => 'This payment is still pending. Please wait little bit more ore contact with administration on the server.',

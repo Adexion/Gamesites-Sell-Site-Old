@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity()
+ * @UniqueEntity("code")
  */
 class PaySafeCard
 {
@@ -43,9 +45,9 @@ class PaySafeCard
     private $date;
 
     /**
-     * @ORM\Column(type="boolean", options={"default": false})
+     * @ORM\Column(type="integer", options={"default": 0})
      */
-    private $used;
+    private $status;
 
     public function getId(): ?int
     {
@@ -88,14 +90,14 @@ class PaySafeCard
         return $this;
     }
 
-    public function getUsed(): ?bool
+    public function getStatus(): ?int
     {
-        return $this->used;
+        return $this->status;
     }
 
-    public function setUsed(?bool $used): ?self
+    public function setStatus(?int $status): ?self
     {
-        $this->used = $used;
+        $this->status = $status;
 
         return $this;
     }
