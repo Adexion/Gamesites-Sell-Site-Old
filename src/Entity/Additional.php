@@ -37,6 +37,11 @@ class Additional
     private $trailerText;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $guildText;
+
+    /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $discord;
@@ -192,6 +197,7 @@ class Additional
             'mainText' => $this->getMainText(),
             'mainDescription' => $this->getMainDescription(),
             'trailerText' => $this->getTrailerText(),
+            'guildText' => $this->getGuildText(),
             'trailer' => $this->getTrailer(),
             'discord' => $this->getDiscord(),
             'ts3' => $this->getTs3(),
@@ -222,6 +228,18 @@ class Additional
     public function setSiteTitle(?string $siteTitle): self
     {
         $this->siteTitle = $siteTitle;
+
+        return $this;
+    }
+
+    public function getGuildText(): ?string
+    {
+        return $this->guildText;
+    }
+
+    public function setGuildText(?string $guildText): self
+    {
+        $this->guildText = $guildText;
 
         return $this;
     }

@@ -30,8 +30,9 @@ Please wiat: Proszę czekać
 Redirect: W ciągu 3 sekund zostaniesz przekierowany na stronę płatności
 Buy now: Kup teraz
 Join to us: Dołącz do nas
-Here are the items you need to create a guild: Oto przedmioty, jakich potrzebujesz, aby utworzyć gildię
-To be able to play with his friends as one band: by grać ze swoimi przyjaciółmi jako jeden zespół.
+Here are the items you need to create a guild:
+  Oto przedmioty, jakich potrzebujesz, aby utworzyć gildię
+  by grać ze swoimi przyjaciółmi jako jeden zespół.
 GUILD: GILDIE
 Items for: Przedmioty na
 Guild Item: Przedmioty do gildii
@@ -67,6 +68,7 @@ Date: Data
 Main Text: Głowny tekst na stronie
 Main Description: Pomniejszy tekst na stronie
 Trailer Text: Tekst obok prezentacji serwera
+Guild Text: Tekst gildyjny
 Trailer: Prezentacja
 Server name: Nazwa serwera
 Caution! Deleting this entity will be required to change the image!: Uwaga! By zmienić obrazek wymagane, jest usunięcie i ponowne utworzenie produktu

@@ -34,6 +34,7 @@ class AdditionalCrud extends AbstractCrudController
             TextareaField::new('mainText'),
             TextareaField::new('mainDescription'),
             TextareaField::new('trailerText'),
+            TextareaField::new('guildText'),
             TextField::new('discord')
                 ->hideOnIndex(),
             TextField::new('ts3')
