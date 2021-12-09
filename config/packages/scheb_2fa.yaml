@@ -7,4 +7,4 @@ scheb_two_factor:
         issuer: GameSites
         digits: 6
         window: 1
-        template: admin/2fa_form.html.twig
+        template: admin/2faForm.html.twig

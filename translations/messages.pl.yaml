@@ -143,5 +143,5 @@ Can turn on 2FA authentication:
   Chcesz włączyć 2FA dla swojego konta
 Click to generate QR and token:
   Klikając poniższy przycisk zostanie wygenerowany sekret oraz kod QR.
-  Użyj jednego z nich w aplikacji Google Authenticator?
+  Użyj jednego z nich w aplikacji Google Authenticator
 Here your token and QR: Poniżej znajdusię się twój sekret oraz kod QR. Zapamiętaj te dane, gdyż nie zostaną ponownie wyświetlone!
