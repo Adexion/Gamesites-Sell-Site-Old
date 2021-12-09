@@ -120,7 +120,8 @@ header {
 }
 
 .bans {
-    min-height: 580px;
+    display: table;
+    min-height: 620px;
 }
 
 /*center text on mobile*/
