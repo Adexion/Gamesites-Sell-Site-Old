@@ -119,6 +119,10 @@ header {
     height: 150px;
 }
 
+.min-h-100 {
+    min-height: 100%;
+}
+
 /*center text on mobile*/
 @media (max-width: 980px) {
     .mobile-text-center {
