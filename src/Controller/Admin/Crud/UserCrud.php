@@ -49,8 +49,8 @@ class UserCrud extends AbstractCrudController
             EmailField::new('email')
                 ->setFormTypeOption('constraints', [
                     new Email([
-                        'mode' => Email::VALIDATION_MODE_STRICT
-                    ])
+                        'mode' => Email::VALIDATION_MODE_STRICT,
+                    ]),
                 ]),
             TextField::new('username'),
             TextareaField::new('description'),

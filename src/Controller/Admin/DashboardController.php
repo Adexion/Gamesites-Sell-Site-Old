@@ -23,6 +23,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
+use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
+use Scheb\TwoFactorBundle\Security\TwoFactor\QrCode\QrCodeGenerator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -70,6 +73,39 @@ class DashboardController extends AbstractDashboardController
         return $this->render('admin/changes.html.twig');
     }
 
+    /**
+     * @Route("/admin/user/2fa", name="user2fa")
+     */
+    public function twoFactoryAuthentication(Request $request, GoogleAuthenticatorInterface  $googleAuthenticator, QrCodeGenerator $codeGenerator): Response
+    {
+        if ($request->request->get('generate')) {
+            /** @var User $user */
+            $user = $this->getUser();
+
+            $secret = $googleAuthenticator->generateSecret();
+            $user->setGoogleAuthenticatorSecret($secret);
+
+            $this->getDoctrine()->getManager()->persist($user);
+            $this->getDoctrine()->getManager()->flush();
+
+            $qrCodeContent = $codeGenerator->getGoogleAuthenticatorQrCode($user)->writeString();
+        }
+
+        if ($request->request->get('turnOff')) {
+            /** @var User $user */
+            $user = $this->getUser();
+            $user->setGoogleAuthenticatorSecret(null);
+
+            $this->getDoctrine()->getManager()->persist($user);
+            $this->getDoctrine()->getManager()->flush();
+        }
+
+        return $this->render('admin/2fa.html.twig', [
+            'secret' => $secret ?? null,
+            'qrCodeContent' => base64_encode($qrCodeContent ?? '')
+        ]);
+    }
+
     public function configureAssets(): Assets
     {
         return parent::configureAssets()
@@ -113,5 +149,6 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('');
         yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
+        yield MenuItem::linkToRoute('2FA Google Authenticator', 'fab fa-google', 'user2fa');
     }
 }

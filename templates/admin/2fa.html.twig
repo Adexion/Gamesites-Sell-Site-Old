@@ -1,0 +1,37 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block main %}
+    <div class="text-center mb-5">
+        <h1>2FA Google Authenticator</h1>
+        {% if secret is not null %}
+            <div class="mb5">
+                <h1 class="h3">{{ "Here your token and QR" | trans }}</h1>
+                <p>{{ secret }}</p>
+                <img src="data:image/png;base64, {{ qrCodeContent }}" alt="qrCode">
+            </div>
+        {% endif %}
+
+        {% if app.user.googleAuthenticatorEnabled %}
+            <h1 class="h3">{{ "Have already turn on 2FA" | trans }}</h1>
+            <h2 class="h5">{{ "Click to generate QR and token" | trans }}</h2>
+            <hr/>
+            <form method="post" class="d-inline-block">
+                <input type="hidden" name="generate" value="true">
+                <input type="submit" class="btn btn-primary" value="{{ "Generate New" | trans }}">
+            </form>
+            <form method="post" class="d-inline-block">
+                <input type="hidden" name="turnOff" value="true">
+                <input type="submit" class="btn btn-danger" value="{{ "Turn off" | trans }}">
+            </form>
+        {% else %}
+            <h1 class="h3">{{ "Can turn on 2FA authentication" | trans }}?</h1>
+            <h2 class="h5">{{ "Click to generate QR and token" | trans }}</h2>
+            <hr/>
+            <form method="post" class="d-inline-block">
+                <input type="hidden" name="generate" value="true">
+                <input type="submit" class="btn btn-primary" value="{{ "Generate" | trans }}">
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}
+

@@ -135,3 +135,13 @@ PaySafeCard status WORKING when active it is allow to generating voucher for use
   Status "Błędny" blokuje dalsze działanie na tym kodzie PSC
 Allow removing psc with voucher:
   Pozwala na usunięcie PSC i wygenerowanych do nich voucherów. Uwaga! nie zalecane przez wzgląd na utrate danych o historii płatności
+Generate New: Wygeneruj nowy
+Generate: Generuj
+Turn off: Wyłącz 2FA
+Have already turn on 2FA: Masz już obecnie włączone 2FA. Czy chcesz ponownie wygenerować sekret oraz kod QR?
+Can turn on 2FA authentication:
+  Chcesz włączyć 2FA dla swojego konta
+Click to generate QR and token:
+  Klikając poniższy przycisk zostanie wygenerowany sekret oraz kod QR.
+  Użyj jednego z nich w aplikacji Google Authenticator?
+Here your token and QR: Poniżej znajdusię się twój sekret oraz kod QR. Zapamiętaj te dane, gdyż nie zostaną ponownie wyświetlone!

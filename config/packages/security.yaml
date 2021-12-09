@@ -18,12 +18,18 @@ security:
             lazy: true
             provider: app_user_provider
             form_login:
+                default_target_path: admin
                 enable_csrf: true
                 login_path: login
                 check_path: login
             logout:
                 path: logout
+            two_factor:
+                auth_form_path: 2fa_login
+                check_path: 2fa_login_check
+                default_target_path: admin
     access_control:
-         - { path: ^/admin/logout, roles: ROLE_ADMIN }
+         - { path: ^/admin/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/admin/2fa, role: IS_AUTHENTICATED_2FA_IN_PROGRESS }
          - { path: ^/admin, roles: ROLE_ADMIN }

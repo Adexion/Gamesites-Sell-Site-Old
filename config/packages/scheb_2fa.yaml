@@ -1,0 +1,10 @@
+scheb_two_factor:
+    security_tokens:
+        - Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken
+    google:
+        enabled: true
+        server_name: GameSites
+        issuer: GameSites
+        digits: 6
+        window: 1
+        template: admin/2fa_form.html.twig
