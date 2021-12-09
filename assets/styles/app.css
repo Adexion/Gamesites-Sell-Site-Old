@@ -119,8 +119,8 @@ header {
     height: 150px;
 }
 
-.min-h-100 {
-    min-height: 100%;
+.bans {
+    min-height: 580px;
 }
 
 /*center text on mobile*/
