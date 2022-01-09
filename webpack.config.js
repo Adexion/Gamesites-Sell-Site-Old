@@ -12,6 +12,7 @@ Encore
     .addStyleEntry('console', './assets/styles/console.css')
     .addStyleEntry('securedArea', './assets/styles/securedArea.css')
     .addEntry('app', './assets/app.js')
+    .addEntry('readable', './assets/readable.js')
     .addEntry('ea-app', './assets/ea-app.js')
     .enableStimulusBridge('./assets/controllers.json')
     .splitEntryChunks()

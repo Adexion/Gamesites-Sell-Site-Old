@@ -30,7 +30,7 @@ class BansRepository extends AbstractRemoteRepository
         return $this->createQB($bans)
             ->addSelect('x.'. $bans->getColumnTwo().' AS reason')
             ->setMaxResults(self::MAX_RESULT)
-            ->executeQuery()
+            ->execute()
             ->fetchAllAssociative();
     }
 }

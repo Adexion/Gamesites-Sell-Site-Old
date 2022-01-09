@@ -43,6 +43,11 @@ class Configuration
     private $ip;
 
     /**
+     * @ORM\Column(type="string", length=25, nullable=true)
+     */
+    private $template;
+
+    /**
      * @ORM\Column(type="boolean", options={"default": true})
      */
     private $simplePaySafeCard;
@@ -124,6 +129,18 @@ class Configuration
     public function setSimplePaySafeCard(?bool $simplePaySafeCard): self
     {
         $this->simplePaySafeCard = $simplePaySafeCard;
+
+        return $this;
+    }
+
+    public function getTemplate(): ?string
+    {
+        return $this->template;
+    }
+
+    public function setTemplate(?string $template): self
+    {
+        $this->template = $template;
 
         return $this;
     }

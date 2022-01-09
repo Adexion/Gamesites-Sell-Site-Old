@@ -1,0 +1,38 @@
+<footer class="footer mt-auto bg-dark-blue mobile-text-center">
+    <div class="container">
+        <hr class="hr">
+        <div class="row mb-3">
+            <div class="col-lg-5">
+                <img src="/assets/images/{{ logo }}" width="164px" height="164px" alt="{{ serverName }}">
+            </div>
+            {% if discord or ts3 or facebook %}
+            <div class="col-lg-2 col-6">
+                <h1 class="text8 h4">{% trans %}LINKS{% endtrans %}</h1>
+                {% if discord %}<h2 class="h6"><a rel="noreferrer" href="{{ discord }}"><i class="fab fa-discord"></i> Discord</a></h2>{% endif %}
+                {% if ts3 %}<h2 class="h6"><a rel="noreferrer" href="{{ ts3 }}"><i class="fab fa-teamspeak"></i> TeamSpeak3</a></h2>{% endif %}
+                {% if facebook %}<h2 class="h6"><a rel="noreferrer" href="{{ facebook }}"><i class="fab fa-facebook"></i> Facebook</a></h2>{% endif %}
+            </div>
+            {% endif %}
+            {% if instagram or yt or tiktok %}
+            <div class="col-lg-2 col-6">
+                <h1 class="text8 h4">{% trans %}LINKS{% endtrans %}</h1>
+                {% if instagram %}<h2 class="h6"><a rel="noreferrer" href="{{ instagram }}"><i class="fab fa-instagram"></i> Instagram</a></h2>{% endif %}
+                {% if yt %}<h2 class="h6"><a rel="noreferrer" href="{{ yt }}"><i class="fab fa-youtube"></i> YouTube</a></h2>{% endif %}
+                {% if tiktok %}<h2 class="h6"><a rel="noreferrer" href="{{ tiktok }}"><i class="fab fa-tiktok"></i> TikTok</a></h2>{% endif %}
+            </div>
+            {% endif %}
+            <div class="col-lg-2">
+                <h1 class="text8 h4">{% trans %}LINKS{% endtrans %}</h1>
+                <h2 class="h6"><a href="{{ path('rule', {_locale: app.request.locale})}}">{% trans %}Rules{% endtrans %}</a></h2>
+                <h2 class="h6"><a href="{{ path('shop', {_locale: app.request.locale})}}">{% trans %}Item Shop{% endtrans %}</a></h2>
+                <h2 class="h6"><a href="{{ path('contact', {_locale: app.request.locale})}}">{% trans %}Contact{% endtrans %}</a></h2>
+                <h2 class="h6"><a rel="noreferrer" href="https://hotpay.pl/program-ochrony-klientow/">{% trans %}Customer protection program{% endtrans %}</a></h2>
+            </div>
+        </div>
+        <div class="mb-3"><small class="text-blue-xs"> {{ serverName }} {% trans %}Text footer{% endtrans %}</small></div>
+        <h1 class="text5 text-center h6">
+            Project by <a href="https://www.facebook.com/xfilipfilak" target="_blank" rel="noreferrer"> Filip Filak</a>
+            <i class="fas fa-heart" style="color:red;" aria-hidden="true"></i>
+            Create by GameSites.pl &copy; Copyright MNGame 2016 - {{ "now" | date('Y') }} </h1>
+    </div>
+</footer>

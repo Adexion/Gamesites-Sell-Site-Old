@@ -3,11 +3,13 @@
 namespace App\Controller\Admin\Crud;
 
 use App\Entity\Configuration;
+use App\Enum\TemplateEnum;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -46,6 +48,8 @@ class ConfigurationCrud extends AbstractCrudController
                 : $image,
             TextField::new('minecraftQueryIp'),
             NumberField::new('minecraftQueryPort'),
+            ChoiceField::new('template')
+                ->setChoices(TemplateEnum::toArray()),
             BooleanField::new('simplePaySafeCard')
         ];
     }
