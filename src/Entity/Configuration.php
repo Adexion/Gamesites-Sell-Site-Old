@@ -38,7 +38,7 @@ class Configuration
     private $minecraftQueryPort;
 
     /**
-     * @ORM\Column(type="string", length=16)
+     * @ORM\Column(type="string", length=255)
      */
     private $ip;
 
