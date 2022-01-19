@@ -1,0 +1,26 @@
+<meta charset="UTF-8">
+<meta name="description" content="{{ global.site.content ?? null }}">
+<meta property="og:description" content="{{ global.site.content ?? null }}">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Language" content="pl"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"/>
+
+<meta property="fb:pages" content="230949007314398"/>
+<meta property="og:image" content="/assets/images/main.jpg"/>
+<meta property="og:image:alt" content="{{ global.site.title ?? null }}"/>
+<meta property="og:title" content="{{ global.site.title ?? null }}"/>
+<meta property="og:type" content="application"/>
+<meta property="og:site_name" content="{{ global.site.title ?? null }}"/>
+<meta property="og:url" content="{{ app.request.schemeAndHttpHost }}"/>
+
+<meta name="keywords" content="{{ global.site.keywords ?? 'Minecraft, Serwery, Sieć, Serwer, Server' }}">
+<meta name="author" content="Mateusz Poźniak ak. Adexion">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>{{ global.site.title ?? null }}</title>
+
+<link rel="icon" type="image/png" href="{{ asset('/assets/images/' ~ global.site.favicon ?? null)  }}">
+<link rel="manifest" href="/assets/manifest.json">
+
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/assets/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">

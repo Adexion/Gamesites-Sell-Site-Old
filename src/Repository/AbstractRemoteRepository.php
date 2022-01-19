@@ -19,7 +19,7 @@ abstract class AbstractRemoteRepository extends ServiceEntityRepository
     }
 
     /** @throws Exception */
-    protected function connect(AbstractRemoteEntity $entity): Connection
+    protected function connect(?AbstractRemoteEntity $entity): ?Connection
     {
         return DriverManager::getConnection([
             'url' => sprintf('mysql://%s:%s@%s:%s/%s?serverVersion=13&charset=utf8', ...array_values($entity->toArray())),
@@ -30,7 +30,7 @@ abstract class AbstractRemoteRepository extends ServiceEntityRepository
     public abstract function findRemote(array $criteria = [], array $filters = []): ?array;
 
     /** @throws Exception */
-    protected function createQB(AbstractRemoteEntity $entity = null): QueryBuilder
+    protected function createQB(?AbstractRemoteEntity $entity): QueryBuilder
     {
         return $this->connect($entity)->createQueryBuilder()
             ->select('x.`'.$entity->getName().'` AS name', 'x.`'.$entity->getColumnOne().'` AS value')

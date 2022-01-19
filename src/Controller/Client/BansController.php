@@ -8,7 +8,6 @@ use Exception;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/** @Route(requirements={"_locale": "en|pl"}, path="{_locale}") */
 class BansController extends AbstractRenderController
 {
     /**

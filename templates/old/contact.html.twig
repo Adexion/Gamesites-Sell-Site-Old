@@ -1,0 +1,25 @@
+{% extends "old/base.html.twig" %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row justify-content-center m-lg-4 m-md-0 pb-4">
+            <div class="col-lg-12 mb-5 mt-5 text-center">
+                <h1>{{ "Contact Form" | trans }}</h1>
+                <h2 class="base">Przestrzegaj zasad, dzięki temu rozgrywka będzie fair play!</h2>
+            </div>
+
+            {% if app.session.flashbag.peek('success') | length > 0 %}
+                <div class="alert alert-success m-3 p-3">
+                    {% for message in app.flashes('success') %}
+                        {{ message | trans }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="col-md-12 col-lg-7 pr-lg-5 pr-md-1 mb-4">
+                {{ form_start(form) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

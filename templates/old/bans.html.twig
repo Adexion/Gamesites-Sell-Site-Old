@@ -1,0 +1,31 @@
+{% extends 'old/base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row justify-content-center m-lg-4 m-md-0 pb-4">
+            <div class="col-lg-12 mb-5 mt-5 text-center">
+                <h1>
+                    <i class="fas fa-ban text4 mr-3" aria-hidden="true"></i> {{ "Bans" | trans }}
+                </h1>
+            </div>
+            <div class="col-12">
+                {% for ban in bans %}
+                    <div class="col-lg-6 col-12 p-3">
+                        <div class="ranking animate row">
+                            <div class="col-6">
+                                <button class="btn-ranking" disabled>{{ loop.index }}.</button>&nbsp;&nbsp;
+                                <img src="https://crafthead.net/cube/{{ ban.name }}" height="48px" width="48px"
+                                     alt="{{ "Cube of" | trans }} {{ ban.name }}">
+                                <span class="text8">{{ ban.name }}</span>
+                            </div>
+                            <div class="col-6 text7 text-end d-flex flex-column m-0">
+                                <span>{{ "Date From" | trans }}: {{ ban.value }}</span>
+                                <span>{{ "Reason" | trans }}: {{ ban.reason }}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
