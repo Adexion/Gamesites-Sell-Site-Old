@@ -22,10 +22,12 @@ class BansRepository extends AbstractRemoteRepository
         parent::__construct($registry, Bans::class);
     }
 
-    /** @throws Exception */
-    public function findRemote(array $criteria = [], array $filters = []): ?array
+    /** @throws Exception|\Doctrine\DBAL\Driver\Exception */
+    public function findRemote(array $criteria = [], array $filters = []): array
     {
-        $bans = $this->findOneBy($criteria);
+        if (!$bans = $this->findOneBy($criteria)) {
+            return [];
+        }
 
         return $this->createQB($bans)
             ->addSelect('x.'. $bans->getColumnTwo().' AS reason')

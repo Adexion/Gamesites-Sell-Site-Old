@@ -8,8 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/** @Route(requirements={"_locale": "en|pl"}, path="{_locale}") */
-class ContactController extends AbstractController
+class ContactController extends AbstractRenderController
 {
     /**
      * @Route(name="contact", path="/contact")

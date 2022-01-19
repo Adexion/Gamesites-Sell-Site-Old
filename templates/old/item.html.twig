@@ -1,0 +1,52 @@
+{% extends 'old/base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row justify-content-center text-center flex-column m-lg-4 m-md-0 pb-4">
+            <div class="col-12 mb-5 mt-5">
+                <h1>Właśnie kupujesz: {{ item.name }}</h1>
+                <h2 class="base">Wybierz formę płatności której chcesz użyć</h2>
+            </div>
+            <div class="col-12 font-weight-normal">
+                <div class="row">
+                    {% if app.session.flashbag.peek('error') | length > 0 %}
+                        <div class="col-12 alert-info alert mb-5">
+                            {% for message in app.flashes('error') %}
+                                {{ message | trans }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="row justify-content-center">
+                    <div class="gs-item col-lg-7">
+
+                        <div class="gs-item-content-shop text-center d-flex flex-column justify-content-center w-100">
+                            <img src="{{ asset('/assets/images/' ~ item.image) }}" alt=""/>
+                            <div class="mt-4">
+                                <h4 class="font-weight-bold">{{ item.name | upper }}</h4>
+                                {{ item.discount | number_format(2) }} zł
+                                <div class="gs-item-desc">{{ item.description | raw }}</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-12 p-lg-5 m-4">
+                        <div class="row flex-column">
+                            {{ form_start(form, {method: 'POST', action: path('payment', {_locale: app.request.locale, id: item.id})}) }}
+                            {{ form_row(form.email) }}
+                            {{ form_row(form.username) }}
+                            {{ form_row(form.payment) }}
+
+                            <button type="submit" class="gs-accept">{{ 'Buy now' | trans }}</button>
+                            {{ form_end(form) }}
+                        </div>
+                        <p class="m-3">lub użyj</p>
+                        <button class="gs-accept" data-bs-toggle="modal" data-bs-target="#modal"><i class="fas fa-lock"></i>&nbsp;PaySafeCard</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'old/component/paySafeCard.html.twig' %}
+{% endblock %}

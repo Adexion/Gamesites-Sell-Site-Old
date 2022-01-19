@@ -27,7 +27,6 @@ use xPaw\SourceQuery\Exception\InvalidArgumentException;
 use xPaw\SourceQuery\Exception\InvalidPacketException;
 use xPaw\SourceQuery\Exception\SocketException;
 
-/** @Route(requirements={"_locale": "en|pl"}, path="{_locale}") */
 class PaymentController extends AbstractController
 {
     /**
