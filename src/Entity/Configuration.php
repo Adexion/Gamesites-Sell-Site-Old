@@ -52,6 +52,11 @@ class Configuration
      */
     private $simplePaySafeCard;
 
+    /**
+     * @ORM\Column(type="decimal", precision=5, scale=2, nullable=true)
+     */
+    private $target;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -143,5 +148,17 @@ class Configuration
         $this->template = $template;
 
         return $this;
+    }
+
+    public function setTarget(?float $target): self
+    {
+        $this->target = $target;
+
+        return $this;
+    }
+
+    public function getTarget(): ?float
+    {
+        return $this->target;
     }
 }

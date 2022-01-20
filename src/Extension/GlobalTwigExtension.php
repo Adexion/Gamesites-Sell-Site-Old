@@ -57,7 +57,8 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
                 'guildRank' => $this->rankRepository->findRemote(['type' => RankEnum::GUILD]),
                 'playerRank' => $this->rankRepository->findRemote(['type' => RankEnum::PLAYER], $this->request->query->all()),
                 'areBansSet' => (bool)$this->bansRepository->findOneBy([]),
-                'isSimplePaySafeCard' => $configuration->getSimplePaySafeCard()
+                'isSimplePaySafeCard' => $configuration->getSimplePaySafeCard(),
+                'target' => $configuration->getTarget()
             ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Additional;
+use App\Entity\Article;
 use App\Entity\Bans;
 use App\Entity\Configuration;
 use App\Entity\Contact;
@@ -130,6 +131,7 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Content');
         yield MenuItem::linkToCrud('Rule', 'fa fa-book', Rule::class);
+        yield MenuItem::linkToCrud('Artykuły', 'fa fa-newspaper', Article::class);
         yield MenuItem::linkToCrud('Rank', 'fas fa-users', Rank::class);
         yield MenuItem::linkToCrud('Bans', 'fas fa-ban', Bans::class);
 

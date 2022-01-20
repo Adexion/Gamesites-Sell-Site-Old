@@ -3,8 +3,9 @@
         <h1>Kilka słów o naszej historii</h1>
         <h2 class="base">Kiedy to wszystko się zaczęło?</h2>
         <div class="p-lg-5 p-md-0 story justify-content-center d-flex">
+            {{ mainText | raw | nl2br }}<br/>
             {{ mainDescription | raw | nl2br }}
         </div>
     </div>
-    <div class="col-md-12 col-lg-5 mb-4 row justify-content-center"></div>
+    <div class="col-md-12 col-lg-5 mb-4 row justify-content-center cool-guy"></div>
 </div>

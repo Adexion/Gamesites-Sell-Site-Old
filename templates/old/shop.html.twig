@@ -27,27 +27,27 @@
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="is-info">
-                        <h3>Ostatnie zamówienia</h3>
-                        {% if lastBuyerList.userBought is defined %}
-                            {% set minotar = "https://minotar.net/avatar/" %}
-                            {% for key, count in lastBuyerList.userBought %}
-                                <img class="is-info-head" src="{{ minotar }}{{ key }}" alt="{{ key }}"/>
-                            {% endfor %}
-                        {% else %}
-                            <h4>Brak zamówień w tym miesiącu</h4>
-                        {% endif %}
-                    </div>
+{#                    <div class="is-info">#}
+{#                        <h3>Ostatnie zamówienia</h3>#}
+{#                        {% if lastBuyerList.userBought is defined %}#}
+{#                            {% set minotar = "https://minotar.net/avatar/" %}#}
+{#                            {% for key, count in lastBuyerList.userBought %}#}
+{#                                <img class="is-info-head" src="{{ minotar }}{{ key }}" alt="{{ key }}"/>#}
+{#                            {% endfor %}#}
+{#                        {% else %}#}
+{#                            <h4>Brak zamówień w tym miesiącu</h4>#}
+{#                        {% endif %}#}
+{#                    </div>#}
 
-                    <div class="is-info font-weight-normal">
-                        <h3>Cel serwera</h3>
-                        <div class="progress">
-                            {% set progress = 0 | round(2) %}
-                            <div class="progress-bar bg-progress" style="width: {{ progress }}%"></div>
-                            <span class="progress-percentage">{{ progress }}%</span>
-                        </div>
-                        <span>Na opłacenie serwera i rozwój</span>
-                    </div>
+{#                    <div class="is-info font-weight-normal">#}
+{#                        <h3>Cel serwera</h3>#}
+{#                        <div class="progress">#}
+{#                            {% set progress = (100 - ((target) / target * 100)) | round(2) %}#}
+{#                            <div class="progress-bar bg-progress" style="width: {{ progress }}%"></div>#}
+{#                            <span class="progress-percentage">{{ progress }}%</span>#}
+{#                        </div>#}
+{#                        <span>Na opłacenie serwera i rozwój</span>#}
+{#                    </div>#}
                 </div>
             </div>
 

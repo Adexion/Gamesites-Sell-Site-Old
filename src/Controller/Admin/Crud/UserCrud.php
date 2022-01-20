@@ -35,10 +35,16 @@ class UserCrud extends AbstractCrudController
         parent::updateEntity($entityManager, $entityInstance);
     }
 
+    /**
+     * @param EntityManagerInterface $entityManager
+     * @param User $entityInstance
+     * @return void
+     */
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
         $encodedPassword = $this->hasher->hashPassword($entityInstance, $entityInstance->getPassword());
         $entityInstance->setPassword($encodedPassword);
+        $entityInstance->setRoles(['ROLE_ADMIN']);
 
         parent::persistEntity($entityManager, $entityInstance);
     }
