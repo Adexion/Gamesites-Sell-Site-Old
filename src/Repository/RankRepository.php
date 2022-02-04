@@ -33,14 +33,14 @@ class RankRepository extends AbstractRemoteRepository
         $qb = $this->createQB($rank)
             ->setMaxResults(self::MAX_RESULT);
 
-        if ($criteria['name']) {
+        if (isset($criteria['name'])) {
             $qb
                 ->where($rank->getName().' = :value')
                 ->setParameter('value', $criteria['name']);
         }
 
         return $qb
-            ->executeQuery()
+            ->execute()
             ->fetchAllAssociative();
     }
 }

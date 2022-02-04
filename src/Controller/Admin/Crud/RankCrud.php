@@ -26,7 +26,7 @@ class RankCrud extends AbstractCrudController
             TextField::new('database'),
             TextField::new('directory'),
             TextField::new('name'),
-            TextField::new('columnOne', 'Points'),
+            TextField::new('columnOne', 'Punkty'),
             ChoiceField::new('type')
                 ->setChoices(RankEnum::toArray()),
         ];
