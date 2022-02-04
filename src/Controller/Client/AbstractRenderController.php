@@ -7,6 +7,7 @@ use App\Repository\ConfigurationRepository;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Twig\Error\SyntaxError;
 use UnexpectedValueException;
 
 class AbstractRenderController extends AbstractController
@@ -32,11 +33,15 @@ class AbstractRenderController extends AbstractController
             $replaced = str_replace('client', $this->template->getValue(), $view);
 
             return parent::render($replaced, $parameters, $response);
-        } catch (Exception $e) {}
-var_dump($e->getMessage());die;
+        } catch (SyntaxError $e) {
+            if ($_ENV['APP_ENV'] === 'dev')  {
+                throw $e;
+            }
+        }
+
         try {
             return parent::render($view, $parameters, $response);
-        } catch (Exception $e) {
+        } catch (SyntaxError $e) {
             return $this->redirectToRoute('index');
         }
     }

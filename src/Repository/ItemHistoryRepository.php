@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\ItemHistory;
+use App\Enum\PaymentStatusEnum;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -28,5 +30,20 @@ class ItemHistoryRepository extends ServiceEntityRepository
         $this->_em->flush();
 
         return $history;
+    }
+
+    public function getCountOfBoughtItems(?DateTime $dateTime = null): int
+    {
+        $qb = $this->createQueryBuilder('ih')
+            ->select('COUNT(1) AS count')
+            ->where('ih.status = :status')
+            ->setParameter(':status', PaymentStatusEnum::REALIZED);
+
+        if ($dateTime) {
+            !$qb->andWhere('ih.date >= :date')
+                ->setParameter(':date', $dateTime->format('Y-m-d'));
+        }
+
+        return $qb->getQuery()->execute()[0]['count'];
     }
 }

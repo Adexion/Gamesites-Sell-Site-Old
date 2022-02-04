@@ -1,0 +1,11 @@
+{% extends 'purple/base.html.twig' %}
+
+{% block body %}
+    <section class="other-padding">
+        <div class="mx-auto flex flex-center flex-column flex-align">
+            <h1>{{ "Opps! Something went wrong" | trans }}</h1>
+            <h5>{{ message | trans }}</h5>
+        </div>
+    </section>
+{% endblock %}
+

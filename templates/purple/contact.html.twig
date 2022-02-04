@@ -1,0 +1,52 @@
+{% extends 'purple/base.html.twig' %}
+
+{% block body %}
+    <section class="payments">
+        <div class="payments-direction mw-auto flex flex-between">
+            <div class="payments-box">
+                {% if app.session.flashbag.peek('success') | length > 0 %}
+                    <div class="col-12 alert-info alert">
+                        {% for message in app.flashes('success') %}
+                            {{ message | trans }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="col-lg-7">
+                    {{ form_start(form) }}
+                    <h1>Formularz kontaktowy
+                    </h1>
+                    <div class="mx-between">
+                        <p>&nbsp;</p>
+                        <p class="payments-box-text">Treść</p>
+                    </div>
+                    {{ form_widget(form.description, { 'attr': {'class': 'payments-box-input'} }) }}
+                    <div class="mx-between">
+                        <p>&nbsp;</p>
+                        <p class="payments-box-text">Twój nick / Imię i nazwisko</p>
+                    </div>
+                    {{ form_widget(form.name, { 'attr': {'class': 'payments-box-input'} }) }}
+                    <div class="mx-between">
+                        <p>&nbsp;</p>
+                        <p class="payments-box-text">Email kontaktów</p>
+                    </div>
+                    {{ form_widget(form.email, { 'attr': {'class': 'payments-box-input'} }) }}
+                    <div class="payments-box-checkbox mx-align">
+                        {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-color-g'} }) }}
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+            <div class="payments-box">
+                <h1>{{ "Contact Text 2" | trans }}</h1>
+                <div class="mx-between">
+                    <p>&nbsp;</p>
+                </div>
+                <div class="text1">
+                    <p>{{ "Contact Text 1" | trans }}</p>
+                    <p>{{ "Contact Text 3" | trans }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

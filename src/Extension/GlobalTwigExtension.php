@@ -8,8 +8,11 @@ use App\Enum\RankEnum;
 use App\Repository\AdditionalRepository;
 use App\Repository\BansRepository;
 use App\Repository\ConfigurationRepository;
+use App\Repository\ItemHistoryRepository;
 use App\Repository\RankRepository;
+use App\Repository\ServerRepository;
 use App\Service\QueryService;
+use DateTime;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -54,6 +57,7 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
                 'serverInfo' => $this->queryService->getInfo(),
                 'logo' => $configuration->getLogo(),
                 'serverName' => $configuration->getServerName(),
+                'serverDescription' => $configuration->getDescription(),
                 'guildRank' => $this->rankRepository->findRemote(['type' => RankEnum::GUILD]),
                 'playerRank' => $this->rankRepository->findRemote(['type' => RankEnum::PLAYER], $this->request->query->all()),
                 'areBansSet' => (bool)$this->bansRepository->findOneBy([]),

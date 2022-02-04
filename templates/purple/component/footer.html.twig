@@ -1,0 +1,38 @@
+<footer class="footer">
+    <div class="footer-direction flex flex-between flex-align mw-auto">
+        <div class="footer-left flex flex-align">
+            <img class="footer-logo" src="/assets/images/{{ logo }}" alt="LOGO">
+            <div class="footer-server_address">
+                <h1 class="footer-text_h1">{{ serverName }}</h1>
+            </div>
+        </div>
+        <div class="footer-right flex">
+            {% if discord or ts3 or facebook %}
+            <div class="footer-box flex flex-column">
+                <h3 class="footer-box_h3">SOCIAL LINKI</h3>
+                {% if discord %}<a href="/" class="footer-box_link"><i class="fab fa-discord"></i> Discord</a>{% endif %}
+                {% if ts3 %}<a href="/" class="footer-box_link"><i class="fab fa-teamspeak"></i> TeamSpeak3</a>{% endif %}
+                {% if facebook %}<a href="/" class="footer-box_link"><i class="fab fa-facebook"></i> Facebook</a>{% endif %}
+            </div>
+            {% endif %}
+            {% if instagram or yt or tiktok %}
+            <div class="footer-box flex flex-column">
+                <h3 class="footer-box_h3">SOCIAL LINKI</h3>
+                <a href="{{ instagram }}" class="footer-box_link"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="{{ yt }}" class="footer-box_link"><i class="fab fa-youtube"></i> YouTube</a>
+                <a href="{{ tiktok }}" class="footer-box_link"><i class="fab fa-tiktok"></i> TikTok</a>
+            </div>
+            {% endif %}
+            <div class="footer-box flex flex-column">
+                <h3 class="footer-box_h3">DODATKOWE</h3>
+                <a href="{{ path('rule') }}" class="footer-box_link">Regulamin</a>
+                <a href="{{ path('shop') }}" class="footer-box_link">Sklep serwera</a>
+                <a href="{{ path('contact') }}" class="footer-box_link">Strona kontaktowa</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright flex flex-between flex-align mw-auto">
+        <p class="footer-copyright_p">GameSites.pl © 2022 | Wszelkie prawa zastrzeżone.</p>
+        <p class="footer-copyright_p">Design and code by: CodeStation.pl</p>
+    </div>
+</footer>

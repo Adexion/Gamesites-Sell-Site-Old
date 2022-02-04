@@ -7,6 +7,7 @@ use App\Entity\Item;
 use App\Entity\ItemHistory;
 use App\Enum\PaymentStatusEnum;
 use App\Enum\PaymentTypeEnum;
+use App\Repository\PaymentRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -16,6 +17,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class ItemHistoryCrud extends AbstractCrudController
 {
@@ -45,12 +47,12 @@ class ItemHistoryCrud extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            NumberField::new('paymentId')
-            ->setDisabled(),
             ChoiceField::new('status')
                 ->setChoices(PaymentStatusEnum::toArray()),
             ChoiceField::new('type')
                 ->setChoices(PaymentTypeEnum::toArray() + ['VOUCHER' => 'voucher'])
+                ->setDisabled(),
+            TextField::new('username')
                 ->setDisabled(),
             EmailField::new('email')
                 ->setDisabled(),

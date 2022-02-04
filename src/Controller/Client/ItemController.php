@@ -3,15 +3,16 @@
 namespace App\Controller\Client;
 
 use App\Entity\Item;
+use App\Enum\PaymentStatusEnum;
 use App\Form\ItemType;
 use App\Form\PaymentType;
 use App\Form\PaySafeCardType;
 use App\Form\VoucherType;
+use App\Repository\ItemHistoryRepository;
 use App\Repository\ItemRepository;
 use App\Service\PaymentRequestBuilder;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,12 +21,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class ItemController extends AbstractRenderController
 {
     /** @Route (name="shop", path="/shop") */
-    public function shop(ItemRepository $repository): Response
+    public function shop(ItemRepository $repository, ItemHistoryRepository $itemHistoryRepository): Response
     {
         $form = $this->createForm(VoucherType::class);
 
         return $this->render('client/shop.html.twig', [
             'items' => $repository->findAll(),
+            'lastBuyers' => $itemHistoryRepository->findBy(['status' => PaymentStatusEnum::REALIZED], null, 10),
             'voucherForm' => $form->createView(),
         ]);
     }

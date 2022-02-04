@@ -6,7 +6,8 @@ use MyCLabs\Enum\Enum;
 
 class TemplateEnum extends Enum
 {
-    const BASE = 'client';
-    const OLD = 'old';
+    const BLUE = 'client';
+    const GRAY = 'old';
+    const PURPLE = 'purple';
     const NONE = '';
 }

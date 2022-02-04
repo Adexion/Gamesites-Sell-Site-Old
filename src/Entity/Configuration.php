@@ -23,6 +23,11 @@ class Configuration
     private $serverName;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $logo;
@@ -160,5 +165,17 @@ class Configuration
     public function getTarget(): ?float
     {
         return $this->target;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
     }
 }

@@ -25,7 +25,7 @@ class ItemType extends BaseType
             ->add('payment', EntityType::class, [
                 'class' => Payment::class,
                 'choice_label' => 'type',
-                'choice_translation_domain' => 'messages',
+                'choice_translation_domain' => 'messages'
             ])
             ->add('uri', HiddenType::class)
             ->add('locale', HiddenType::class);

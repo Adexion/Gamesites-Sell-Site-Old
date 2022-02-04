@@ -1,0 +1,51 @@
+{% extends 'purple/base.html.twig' %}
+
+{% block body %}
+    <section class="payments">
+        {{ form_start(form, {method: 'POST', action: path('payment', {id: item.id})}) }}
+        <div class="payments-direction mw-auto flex flex-between">
+            <div class="payments-box">
+                <h1>Twoje dane <span>(Wymagane)</span></h1>
+                <div class="mx-between">
+                    <p>&nbsp;</p>
+                    <p class="payments-box-text">Nick z serwera</p>
+                </div>
+                {{ form_widget(form.username, { 'attr': {'class': 'payments-box-input', 'placeholder':'np. Steve'} }) }}
+                <div class="mx-between">
+                    <p>&nbsp;</p>
+                    <p class="payments-box-text">Email kontaktów</p>
+                </div>
+                {{ form_widget(form.email,{ 'attr': {'class': 'payments-box-input', 'placeholder':'np. test@test.pl'}}) }}
+
+                <div class="payments-box-checkbox mx-align">
+                    <input type="checkbox" id="check" style="display: none;">
+                    <label for="check" class="payments-box-check">
+                        <svg width="18px" height="18px" viewBox="0 0 18 18">
+                            <path
+                                    d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z">
+                            </path>
+                            <polyline points="1 9 7 14 15 4"></polyline>
+                        </svg>
+                    </label>
+                    <p>Potwierdzam poprawność nicku w grze, akceptuje postanowienia regulaminu serwisu oraz
+                        jestem
+                        świadomy, że usługa nie podlega zwrotowi.</p>
+                </div>
+
+
+            </div>
+            <div class="payments-box">
+                <h1>Zatwierdź płatność</h1>
+                <div class="mx-between">
+                    <p>&nbsp;</p>
+                    <p class="payments-box-text">Forma płatności</p>
+                </div>
+                {{ form_widget(form.payment,{ 'attr': {'class': 'payments-box-input', 'placeholder':'np. test@test.pl'}}) }}
+                <div class="payments-box-checkbox mx-align">
+                    <button type="submit" class="btn btn-color-g">{{ 'Buy now' | trans }} za {{ item.discountedPrice | format_currency('PLN') }}</button>
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </section>
+{% endblock %}

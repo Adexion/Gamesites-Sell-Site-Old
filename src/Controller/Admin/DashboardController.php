@@ -117,7 +117,10 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('SellSite');
+            ->renderSidebarMinimized()
+            ->renderContentMaximized()
+            ->disableUrlSignatures()
+            ->setTitle('Panel Administracyjny');
     }
 
     public function configureMenuItems(): iterable

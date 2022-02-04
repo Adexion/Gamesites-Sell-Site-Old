@@ -1,0 +1,25 @@
+<nav class="navbar">
+    <div class="mw-auto flex flex-between flex-align">
+        <div class="flex flex-align">
+            <img class="navbar-logo" src="/assets/images/{{ logo }}" alt="LOGO">
+
+            <ul class="navbar-menu flex flex-align">
+                <li>
+                    <a class="navbar-link navbar-active circle-active" href="/">Strona Główna</a>
+                </li>
+                {% if playerRank is not empty or guildRank is not empty %}
+                <li>
+                    <a class="navbar-link" href="#ranking">Rankingi</a>
+                </li>
+                {% endif %}
+                <li>
+                    <a class="navbar-link" href="{{ path('rule') }}">Regulamin</a>
+                </li>
+            </ul>
+
+        </div>
+        <button class="btn btn-color-g">
+            <a href="{{ path('shop') }}">Sklep serwera</a>
+        </button>
+    </div>
+</nav>

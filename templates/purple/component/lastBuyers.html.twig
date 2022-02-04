@@ -1,0 +1,10 @@
+<section class="last-buy">
+    <div class="mw-auto flex flex-center flex-column flex-align">
+        <p class="last-buy_p">Ostatnie zakupy</p>
+        <div class="last-buy-box">
+            {% for last in lastBuyers %}
+                <img class="last-buy-box_image" src="https://crafthead.net/avatar/{{ last.username }}/55" alt="{{ last.username }}">
+            {% endfor %}
+        </div>
+    </div>
+</section>

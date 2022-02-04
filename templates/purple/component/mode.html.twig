@@ -1,0 +1,10 @@
+<section class="mode mode-color">
+    <div class="mode-responsive flex flex-center">
+        {% for server in serverList %}
+            <div class="mode-box_two flex flex-align flex-center flex-column">
+                <h1 class="mode-box_one-h1">{{ server.serverName }}</h1>
+                <p class="mode-box_one-p">{% if server.isDefault %}Jest to główny tryb na naszym serwerze{% endif %}</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
