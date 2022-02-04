@@ -4,7 +4,12 @@
             <h1 class="header-text_h1">{{ mainText | raw | nl2br }}</h1>
             <p class="header-text_p">{{ mainDescription | raw | nl2br }}</p>
             <div class="header-embed flex flex-align">
-                <button class="btn btn-color-g">Skopiuj IP</button>
+                <button id="clipboard" class="btn btn-color-g" onclick="copyToClipboard()" data-ip="{{ serverIp ?? serverName }}">Skopiuj IP</button>
+                <script>
+                    function copyToClipboard() {
+                        navigator.clipboard.writeText(document.getElementById('clipboard').getAttribute('data-ip'))
+                    }
+                </script>
                 <a href="{{ discord }}" aria-label="Discord">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29.404 22.403">
                         <path

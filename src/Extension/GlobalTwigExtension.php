@@ -55,6 +55,7 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
         return
             $additional->toArray() + [
                 'serverInfo' => $this->queryService->getInfo(),
+                'serverIp' => $configuration->getIp(),
                 'logo' => $configuration->getLogo(),
                 'serverName' => $configuration->getServerName(),
                 'serverDescription' => $configuration->getDescription(),
