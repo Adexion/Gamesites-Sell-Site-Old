@@ -14,7 +14,7 @@ class AbstractRemoteEntity
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=16)
+     * @ORM\Column(type="text")
      */
     protected $ip;
 
