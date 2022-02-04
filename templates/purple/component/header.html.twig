@@ -7,7 +7,8 @@
                 <button id="clipboard" class="btn btn-color-g" onclick="copyToClipboard()" data-ip="{{ serverIp ?? serverName }}">Skopiuj IP</button>
                 <script>
                     function copyToClipboard() {
-                        navigator.clipboard.writeText(document.getElementById('clipboard').getAttribute('data-ip'))
+                        navigator.clipboard.writeText(document.getElementById('clipboard').getAttribute('data-ip'));
+                        document.getElementById('clipboard').innerHTML = "Skopiowano!";
                     }
                 </script>
                 <a href="{{ discord }}" aria-label="Discord">
