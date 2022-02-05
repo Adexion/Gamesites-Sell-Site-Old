@@ -33,16 +33,6 @@ class Configuration
     private $logo;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $minecraftQueryIp;
-
-    /**
-     * @ORM\Column(type="smallint", length=255, nullable=true)
-     */
-    private $minecraftQueryPort;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $ip;
@@ -91,30 +81,6 @@ class Configuration
         }
 
         $this->logo = $logo;
-
-        return $this;
-    }
-
-    public function getMinecraftQueryIp(): ?string
-    {
-        return $this->minecraftQueryIp;
-    }
-
-    public function setMinecraftQueryIp(?string $minecraftQueryIp): self
-    {
-        $this->minecraftQueryIp = $minecraftQueryIp;
-
-        return $this;
-    }
-
-    public function getMinecraftQueryPort(): ?int
-    {
-        return $this->minecraftQueryPort;
-    }
-
-    public function setMinecraftQueryPort(?int $minecraftQueryPort): self
-    {
-        $this->minecraftQueryPort = $minecraftQueryPort;
 
         return $this;
     }

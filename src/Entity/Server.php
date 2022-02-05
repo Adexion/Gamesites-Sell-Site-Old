@@ -42,6 +42,41 @@ class Server
      */
     private $isDefault;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $minecraftQueryIp;
+
+    /**
+     * @ORM\Column(type="smallint", length=255, nullable=true)
+     */
+    private $minecraftQueryPort;
+
+
+    public function getMinecraftQueryIp(): ?string
+    {
+        return $this->minecraftQueryIp;
+    }
+
+    public function setMinecraftQueryIp(?string $minecraftQueryIp): self
+    {
+        $this->minecraftQueryIp = $minecraftQueryIp;
+
+        return $this;
+    }
+
+    public function getMinecraftQueryPort(): ?int
+    {
+        return $this->minecraftQueryPort;
+    }
+
+    public function setMinecraftQueryPort(?int $minecraftQueryPort): self
+    {
+        $this->minecraftQueryPort = $minecraftQueryPort;
+
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

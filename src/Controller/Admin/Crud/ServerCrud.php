@@ -21,6 +21,8 @@ class ServerCrud extends AbstractCrudController
             TextField::new('RConIp'),
             NumberField::new('RConPort'),
             TextField::new('RConPassword'),
+            TextField::new('minecraftQueryIp'),
+            NumberField::new('minecraftQueryPort'),
             BooleanField::new('isDefault')
         ];
     }

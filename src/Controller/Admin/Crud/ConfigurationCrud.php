@@ -12,7 +12,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -49,8 +48,6 @@ class ConfigurationCrud extends AbstractCrudController
             $pageName === Crud::PAGE_EDIT
                 ? $image->setFormTypeOption('required', false)
                 : $image,
-            TextField::new('minecraftQueryIp'),
-            NumberField::new('minecraftQueryPort'),
             MoneyField::new('target')
                 ->setCurrency('PLN')
                 ->setNumDecimals(2)

@@ -2,9 +2,7 @@
 
 namespace App\Service;
 
-use App\Entity\Configuration;
 use App\Entity\Server;
-use App\Repository\ConfigurationRepository;
 use App\Repository\ServerRepository;
 use Exception;
 use xPaw\MinecraftQuery;
@@ -18,12 +16,10 @@ use xPaw\SourceQuery\SourceQuery;
 class QueryService
 {
     private ServerRepository $serverRepository;
-    private ConfigurationRepository $configurationRepository;
 
-    public function __construct(ConfigurationRepository $configurationRepository, ServerRepository $serverRepository)
+    public function __construct(ServerRepository $serverRepository)
     {
         $this->serverRepository = $serverRepository;
-        $this->configurationRepository = $configurationRepository;
     }
 
     /** @throws InvalidPacketException|AuthenticationException|InvalidArgumentException|SocketException */
@@ -60,7 +56,7 @@ class QueryService
 
     public function isPlayerLoggedIn(string $username): bool
     {
-        return array_search($username, $this->getPlayerList()) !== false;
+        return in_array($username, $this->getPlayerList());
     }
 
     /** @throws InvalidPacketException|AuthenticationException|InvalidArgumentException */
@@ -81,10 +77,10 @@ class QueryService
     /** @throws MinecraftQueryException */
     private function getMinecraftQuery(): MinecraftQuery
     {
-        $config = $this->configurationRepository->findOneBy([]) ?? new Configuration();
-        $queryMinecraft = new MinecraftQuery();
+        $server = $this->serverRepository->findOneBy(['isDefault' => true]);
 
-        $queryMinecraft->connect($config->getMinecraftQueryIp(), $config->getMinecraftQueryPort());
+        $queryMinecraft = new MinecraftQuery();
+        $queryMinecraft->connect($server->getMinecraftQueryIp(), $server->getMinecraftQueryPort());
 
         return $queryMinecraft;
     }
