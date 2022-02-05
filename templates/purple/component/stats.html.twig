@@ -4,7 +4,7 @@
             <div class="status-box flex flex-align">
                 <div class="status-box_category status-box_category-green"></div>
                 <div class="status-box_info">
-                    <h1 class="status-box_h1">{% if serverInfo | length == 0 %}0/0{% else %}&nbsp;{{ serverInfo.Players }}/{{ serverInfo.MaxPlayers }}{% endif %}</h1>
+                    <h1 class="status-box_h1">{% if serverInfo | length == 0 %}0/0{% else %}{{ serverInfo.Players }}/{{ serverInfo.MaxPlayers }}{% endif %}</h1>
                     <p class="status-box_p">Ilość graczy online</p>
                 </div>
             </div>
