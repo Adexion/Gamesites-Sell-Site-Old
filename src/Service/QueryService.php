@@ -77,7 +77,7 @@ class QueryService
     /** @throws MinecraftQueryException */
     private function getMinecraftQuery(): MinecraftQuery
     {
-        $server = $this->serverRepository->findOneBy(['isDefault' => true]);
+        $server = $this->serverRepository->findOneBy(['isDefault' => true]) ?? new Server();
 
         $queryMinecraft = new MinecraftQuery();
         $queryMinecraft->connect($server->getMinecraftQueryIp(), $server->getMinecraftQueryPort());
