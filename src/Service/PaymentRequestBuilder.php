@@ -4,19 +4,16 @@ namespace App\Service;
 
 use App\Entity\Item;
 use App\Entity\ItemHistory;
-use App\Entity\Payment;
 use App\Repository\ItemHistoryRepository;
-use App\Repository\PaymentRepository;
 use DateTime;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use Symfony\Component\HttpFoundation\Request;
 
 class PaymentRequestBuilder
 {
     private ItemHistoryRepository $historyRepository;
 
-    public function __construct( ItemHistoryRepository $historyRepository)
+    public function __construct(ItemHistoryRepository $historyRepository)
     {
         $this->historyRepository = $historyRepository;
     }
@@ -41,15 +38,16 @@ class PaymentRequestBuilder
     /** @throws OptimisticLockException|ORMException */
     private function createHistory(array $data, Item $item): ItemHistory
     {
-         $history = (new ItemHistory())
+        $history = (new ItemHistory())
             ->setDate(new DateTime())
             ->setItem($item)
             ->setEmail($data['email'])
             ->setPaymentId($data['payment']->getId())
             ->setStatus(0)
             ->setType($data['payment']->getType())
-            ->setUsername($data['username']);
+            ->setUsername($data['username'])
+            ->setPrice($item->getDiscountedPrice());
 
-         return $this->historyRepository->insertOrUpdate($history);
+        return $this->historyRepository->insertOrUpdate($history);
     }
 }

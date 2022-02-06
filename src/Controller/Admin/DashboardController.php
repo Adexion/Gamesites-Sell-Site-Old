@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Additional;
+use App\Entity\Administration;
 use App\Entity\Article;
 use App\Entity\Bans;
 use App\Entity\Configuration;
@@ -111,6 +112,7 @@ class DashboardController extends AbstractDashboardController
     {
         return parent::configureAssets()
             ->addWebpackEncoreEntry('ea-app')
+            ->addWebpackEncoreEntry('admin')
             ->addWebpackEncoreEntry('console');
     }
 
@@ -135,6 +137,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Artykuły', 'fa fa-newspaper', Article::class);
         yield MenuItem::linkToCrud('Rank', 'fas fa-users', Rank::class);
         yield MenuItem::linkToCrud('Bans', 'fas fa-ban', Bans::class);
+        yield MenuItem::linkToCrud('Administration', 'fas fa-user-shield', Administration::class);
 
         yield MenuItem::section('Item Shop');
         yield MenuItem::linkToCrud('Item', 'fas fa-shopping-cart', Item::class);

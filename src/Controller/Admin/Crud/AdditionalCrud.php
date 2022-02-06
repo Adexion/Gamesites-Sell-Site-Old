@@ -11,6 +11,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class AdditionalCrud extends AbstractCrudController
 {
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInSingular("wpis");
+    }
+
     public static function getEntityFqcn(): string
     {
         return Additional::class;

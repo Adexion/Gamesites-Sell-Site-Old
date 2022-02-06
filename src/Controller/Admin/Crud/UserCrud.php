@@ -4,10 +4,9 @@ namespace App\Controller\Admin\Crud;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -20,6 +19,12 @@ class UserCrud extends AbstractCrudController
     public function __construct(UserPasswordHasherInterface $hasher)
     {
         $this->hasher = $hasher;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInSingular("wpis");
     }
 
     public static function getEntityFqcn(): string
@@ -58,11 +63,6 @@ class UserCrud extends AbstractCrudController
                         'mode' => Email::VALIDATION_MODE_STRICT,
                     ]),
                 ]),
-            TextField::new('username'),
-            TextareaField::new('description'),
-            ArrayField::new('roles')
-                ->setDisabled(true)
-                ->setValue(['ROLE_ADMIN']),
             TextField::new('password')
                 ->setFormType(PasswordType::class),
         ];

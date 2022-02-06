@@ -53,6 +53,11 @@ class ItemHistory
      */
     private $paymentId;
 
+    /**
+     * @ORM\Column(type="decimal", precision=5, scale=2, nullable=true)
+     */
+    private $price;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -140,5 +145,17 @@ class ItemHistory
         $this->paymentId = $paymentId;
 
         return $this;
+    }
+
+    public function setPrice(?float $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
     }
 }

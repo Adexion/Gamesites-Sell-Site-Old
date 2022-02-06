@@ -1,7 +1,7 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
 {% block main %}
-    <div class="container bg-dark console">
+    <div class="container-fluid bg-dark console">
         {% if response %}
             <p class="response text-white">{{ '[' ~ 'now' | date('Y-m-d H:i:s') ~ '] ' ~ response }}</p>
         {% endif %}

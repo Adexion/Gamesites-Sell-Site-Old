@@ -5,6 +5,7 @@ namespace App\Controller\Admin\Crud;
 use App\Controller\Admin\Field\EntityField;
 use App\Entity\Item;
 use App\Entity\Voucher;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
@@ -12,6 +13,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class VoucherCrud extends AbstractCrudController
 {
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInSingular("wpis");
+    }
+
     public static function getEntityFqcn(): string
     {
         return Voucher::class;

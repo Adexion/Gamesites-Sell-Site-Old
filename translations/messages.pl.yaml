@@ -55,13 +55,17 @@ Point: Punkty
 Type: Typ
 Description: Opis
 Price: Cena
+User: Użytkownicy PAó
 Command: Komenda
 Short Description: Krótki opis
 Secret: Sekret
 Is Active: Czy używany
 Code: Kod
 Times: Ilość użyć
-Expired: wygasa
+Expired: Data wygaśnięcia
+Discount: Żniżka
+Template: Wygląd strony
+Priority: Priorytet
 -1 unlimited, 0 is off, 1+ is specific use number: -1 nielimitowana ilość, 0 wyłączone, 1 lub więcej to dozwolona ilość użyć
 Payment Id: Id Płatności
 Date: Data

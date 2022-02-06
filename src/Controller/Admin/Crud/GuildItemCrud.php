@@ -19,7 +19,7 @@ class GuildItemCrud extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular("Guild Item")
+            ->setEntityLabelInSingular("wpis")
             ->setEntityLabelInPlural("Guild Item");
     }
 

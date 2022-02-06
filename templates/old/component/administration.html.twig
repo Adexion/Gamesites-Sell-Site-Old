@@ -1,19 +1,19 @@
+{% if administration %}
 <div class="container">
     <div class="whats-up row text-center flex-column justify-content-center">
         <h1>Administracja na naszym serwerze</h1>
         <h2 class="base">Zobacz kto jest w naszej administracji!</h2>
         <div class="row w-100 mt-4">
             {% set minotar = "https://mc-heads.net/body/" %}
-            {% for u in users %}
-                {% if u.username %}
+            {% for a in administration %}
                 <div class="col-lg-4 col-md-12">
                     <div class="gs-body d-flex align-items-center justify-content-end flex-column">
-                        <img src="{{ minotar }}{{ u.username }}" alt="skin {{ u.username }}">
+                        <img src="{{ minotar }}{{ a.username }}" alt="skin {{ a.username }}">
                     </div>
-                    <h2 class="mt-5 mb-4">{{ (u.description ?? ('Next noname' | trans ~ ' ...'))  | raw | nl2br }}</h2>
+                    <h2 class="mt-5 mb-4">{{ (a.description ?? ('Next noname' | trans ~ ' ...'))  | raw | nl2br }}</h2>
                 </div>
-                {% endif %}
             {% endfor %}
         </div>
     </div>
 </div>
+{% endif %}

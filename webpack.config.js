@@ -11,6 +11,7 @@ Encore
     .setPublicPath('/build')
     .addStyleEntry('console', './assets/styles/console.css')
     .addStyleEntry('securedArea', './assets/styles/securedArea.css')
+    .addStyleEntry('admin', './assets/styles/admin.css')
     .addEntry('app', './assets/js/app.js')
     .addEntry('old', './assets/js/old.js')
     .addEntry('purple', './assets/js/purple/purple.js')

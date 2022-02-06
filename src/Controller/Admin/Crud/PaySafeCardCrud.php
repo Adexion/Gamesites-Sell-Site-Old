@@ -32,6 +32,7 @@ class PaySafeCardCrud extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
+            ->setEntityLabelInSingular('wpis')
             ->setHelp(Crud::PAGE_INDEX,
                 $this->translator->trans('PaySafeCard status WORKING when active it is allow to generating voucher for user')
             );

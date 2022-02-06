@@ -31,16 +31,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true, nullable=true)
-     */
-    private $username;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $description;
-
-    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -115,30 +105,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         // $this->plainPassword = null;
     }
 
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(?string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
     public function isGoogleAuthenticatorEnabled(): bool
     {
         return null !== $this->googleAuthenticatorSecret;
@@ -146,7 +112,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
     public function getGoogleAuthenticatorUsername(): string
     {
-        return $this->username ?: $this->getEmail();
+        return $this->getEmail();
     }
 
     public function getGoogleAuthenticatorSecret(): ?string
@@ -159,5 +125,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         $this->googleAuthenticatorSecret = $googleAuthenticatorSecret;
 
         return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->email;
     }
 }

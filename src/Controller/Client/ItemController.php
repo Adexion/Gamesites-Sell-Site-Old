@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Error\SyntaxError;
 
 class ItemController extends AbstractRenderController
 {
@@ -49,7 +50,7 @@ class ItemController extends AbstractRenderController
     /**
      * @Route (name="payment", path="/shop/{id}/payment")
      *
-     * @throws OptimisticLockException|ORMException
+     * @throws OptimisticLockException|ORMException|SyntaxError
      */
     public function payment(Item $item, Request $request, PaymentRequestBuilder $builder): Response
     {

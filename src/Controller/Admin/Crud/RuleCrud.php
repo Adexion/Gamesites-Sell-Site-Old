@@ -10,6 +10,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class RuleCrud extends AbstractCrudController
 {
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInSingular("wpis");
+    }
+
     public static function getEntityFqcn(): string
     {
         return Rule::class;
