@@ -40,8 +40,10 @@
                             <button type="submit" class="gs-accept">{{ 'Buy now' | trans }}</button>
                             {{ form_end(form) }}
                         </div>
-                        <p class="m-3">lub użyj</p>
-                        <button class="gs-accept" data-bs-toggle="modal" data-bs-target="#modal"><i class="fas fa-lock"></i>&nbsp;PaySafeCard</button>
+                        {% if isSimplePaySafeCard %}
+                            <p class="m-3">lub użyj</p>
+                            <button class="gs-accept" data-bs-toggle="modal" data-bs-target="#modal"><i class="fas fa-lock"></i>&nbsp;PaySafeCard</button>
+                        {% endif %}
                     </div>
                 </div>
             </div>

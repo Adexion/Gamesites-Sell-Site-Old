@@ -2,6 +2,8 @@
 
 {% block body %}
     <section class="payments">
+        {% form_theme form with ['form_div_layout.html.twig'] %}
+
         {{ form_start(form, {method: 'POST', action: path('payment', {id: item.id})}) }}
         <div class="payments-direction mw-auto flex flex-between">
             <div class="payments-box">
@@ -18,7 +20,7 @@
                 {{ form_widget(form.email,{ 'attr': {'class': 'payments-box-input', 'placeholder':'np. test@test.pl'}}) }}
 
                 <div class="payments-box-checkbox mx-align">
-                    <input type="checkbox" id="check" style="display: none;">
+                    {{ form_widget(form.check, {'attr': {'style': 'display: none;'}}) }}
                     <label for="check" class="payments-box-check">
                         <svg width="18px" height="18px" viewBox="0 0 18 18">
                             <path
@@ -26,14 +28,34 @@
                             </path>
                             <polyline points="1 9 7 14 15 4"></polyline>
                         </svg>
+                        <p>Potwierdzam poprawność nicku w grze, akceptuje postanowienia regulaminu serwisu oraz
+                            jestem
+                            świadomy, że usługa nie podlega zwrotowi.</p>
                     </label>
-                    <p>Potwierdzam poprawność nicku w grze, akceptuje postanowienia regulaminu serwisu oraz
-                        jestem
-                        świadomy, że usługa nie podlega zwrotowi.</p>
                 </div>
-
-
             </div>
+
+            <div class="payments-box flex flex-around flex-align">
+                <img src="{{ asset('/assets/images/' ~ item.image) }}" alt="SHOP-IMG">
+                <div class="flex flex-align flex-column">
+                    <h1 class="shop-box_h1">{{ item.name | raw }}</h1>
+                    <p>{{ item.description | raw }}</p>
+                    <div class="mx-between">
+                        <p>&nbsp;</p>
+                        <p>{{ item.shortDescription | raw }}</p>
+                    </div>
+                    <p>
+                        Cena:
+                        {% if item.discount %}
+                            <del class="disabled">{{ item.price | format_currency('PLN') }}</del>
+                            {{ item.discountedPrice | format_currency('PLN') }}
+                        {% else %}
+                            {{ item.price | format_currency('PLN') }}
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+
             <div class="payments-box">
                 <h1>Zatwierdź płatność</h1>
                 <div class="mx-between">
@@ -42,7 +64,21 @@
                 </div>
                 {{ form_widget(form.payment,{ 'attr': {'class': 'payments-box-input', 'placeholder':'np. test@test.pl'}}) }}
                 <div class="payments-box-checkbox mx-align">
-                    <button type="submit" class="btn btn-color-g">{{ 'Buy now' | trans }} za {{ item.discountedPrice | format_currency('PLN') }}</button>
+                    <button id="submit" type="submit" class="btn btn-color-g"
+                            style="display: none;">{{ 'Buy now' | trans }}
+                        za {{ item.discountedPrice | format_currency('PLN') }}</button>
+                    <script>
+                        document.getElementById('check').addEventListener('click', () => {
+                            const checkbox = document.getElementById('check');
+                            const submitBtn = document.getElementById('submit');
+
+                            !checkbox.checked
+                                ? submitBtn.setAttribute('style', 'display:none')
+                                : submitBtn.removeAttribute('style');
+
+                            console.log(submitBtn)
+                        })
+                    </script>
                 </div>
             </div>
         </div>

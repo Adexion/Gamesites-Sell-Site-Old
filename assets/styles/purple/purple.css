@@ -11,6 +11,7 @@
     --button-text: hsl(225, 7%, 11%);;
     --green: rgb(0, 255, 0);
     --gray: rgb(30, 30, 30);
+    --lighter-grey: rgb(66, 66, 66);
     --font-family: "Gilroy", sans-serif;
 }
 
@@ -87,6 +88,11 @@ a {
 
 .flex-between {
     justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.flex-around {
+    justify-content:space-around;
     flex-wrap: wrap;
 }
 
@@ -406,6 +412,10 @@ a {
 
 .mode-color {
     background-color: var(--gray);
+}
+
+.disabled {
+    color: var(--lighter-grey);
 }
 
 @media screen and (max-width: 1067px) {
@@ -915,6 +925,7 @@ a {
     width: 49%;
     height: fit-content;
     border-radius: 6.5px;
+    margin-bottom: 35px;
 }
 
 .payments-box h1 {
@@ -1049,10 +1060,6 @@ a {
         width: 100%;
     }
 
-    .payments-box:nth-child(2) {
-        margin-top: 35px;
-    }
-
     .payments-direction {
         flex-direction: column;
     }
@@ -1091,5 +1098,5 @@ a {
 }
 
 .other-padding {
-    padding: 250px 0 250px 0;
+    padding: 274px 0 273px 0;
 }

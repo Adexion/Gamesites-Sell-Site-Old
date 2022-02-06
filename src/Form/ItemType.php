@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Payment;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\BaseType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -27,6 +28,7 @@ class ItemType extends BaseType
                 'choice_label' => 'type',
                 'choice_translation_domain' => 'messages'
             ])
+            ->add('check', CheckboxType::class, [])
             ->add('uri', HiddenType::class)
             ->add('locale', HiddenType::class);
     }

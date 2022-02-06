@@ -38,6 +38,11 @@ class Server
     private $serverName;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
+    /**
      * @ORM\Column(type="boolean", options={"default" : false})
      */
     private $isDefault;
@@ -140,5 +145,17 @@ class Server
         $this->isDefault = $isDefault;
 
         return $this;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
     }
 }

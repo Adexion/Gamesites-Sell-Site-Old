@@ -37,18 +37,16 @@
         <div class="ranking-direction flex flex-align">
             <div class="ranking-left">
                 {% for guild in guildRank %}
-                <div class="ranking-box flex flex-between flex-align">
-                    <div class="flex flex-align">
-                        <h1 class="ranking-box_number">{{ loop.index }}</h1>
-                            <h1 class="ranking-box_nickname">{{ guild.name }}</h1>
-                            <p class="ranking-box_guild">-</p>
+                    <div class="ranking-box flex flex-between flex-align">
+                        <div class="flex flex-align">
+                            <h1 class="ranking-box_number">{{ loop.index }}</h1>
+                            &nbsp;<h1 class="ranking-box_nickname">{{ guild.name }}</h1>
+                        </div>
+                        <div>
+                            <p class="ranking-box_points-name">PKT</p>
+                            <h2 class="ranking-box_points">{{ guild.value }}</h2>
                         </div>
                     </div>
-                    <div>
-                        <p class="ranking-box_points-name">PKT</p>
-                        <h2 class="ranking-box_points">{{ guild.value }}</h2>
-                    </div>
-                </div>
                 {% endfor %}
             </div>
             <div class="ranking-right">

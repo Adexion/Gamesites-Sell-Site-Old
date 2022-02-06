@@ -1,6 +1,21 @@
 @import "~bootstrap";
 @import "~@fortawesome/fontawesome-free/css/all.css";
 
+::-webkit-scrollbar-track {
+    background: var(--background);
+}
+
+::-webkit-scrollbar {
+    width: 0.5vw;
+    height: 0.3vw;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #67a7eb;
+    border-right-width: 0.3vw;
+}
+
 .active {
     padding-bottom: 5px;
     border-bottom: 1px solid #67a7eb;

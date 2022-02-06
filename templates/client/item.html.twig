@@ -17,9 +17,11 @@
                         {% endfor %}
                     </div>
                 {% endif %}
-                <div class="col-12 text-end">
-                    <button class="px-2 animate h4 btn-shop" data-bs-toggle="modal" data-bs-target="#modal"><i class="fas fa-lock"></i>&nbsp;PaySafeCard</button>
-                </div>
+                {% if isSimplePaySafeCard %}
+                    <div class="col-12 text-end">
+                        <button class="px-2 animate h4 btn-shop" data-bs-toggle="modal" data-bs-target="#modal"><i class="fas fa-lock"></i>&nbsp;PaySafeCard</button>
+                    </div>
+                {% endif %}
                 <div class="col-lg-7">
                     <h1 class="text5 mb-3">{{ 'Payment form' | trans }}</h1>
                     {{ form_start(form, {method: 'POST', action: path('payment', {_locale: app.request.locale, id: item.id})}) }}

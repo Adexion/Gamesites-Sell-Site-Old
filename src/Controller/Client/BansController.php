@@ -3,6 +3,7 @@
 namespace App\Controller\Client;
 
 use App\Repository\BansRepository;
+use App\Service\BansMapper;
 use DateTime;
 use Exception;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,19 +14,12 @@ class BansController extends AbstractRenderController
     /**
      * @Route(name="bans", path="/bans")
      *
-     * @throws Exception
+     * @throws Exception|\Doctrine\DBAL\Driver\Exception
      */
-    public function bans(BansRepository $repository): Response
+    public function bans(BansRepository $repository, BansMapper $bansMapper): Response
     {
-        $bans = array_map(function ($ban) {
-            $date = new DateTime('@' . substr($ban['value'], 0, -3));
-            $ban['value'] = $date->format('Y-m-d');
-
-            return $ban;
-        }, $repository->findRemote());
-
         return $this->render('client/bans.html.twig', [
-            'bans' => $bans
+            'bans' => $bansMapper->map($repository->findRemote()),
         ]);
     }
 }
