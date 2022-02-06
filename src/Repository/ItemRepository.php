@@ -18,4 +18,13 @@ class ItemRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Item::class);
     }
+
+    public function groupByServer(): array
+    {
+        foreach ($this->findAll() as $item) {
+            $grouped[$item->getServer()->getServerName()][] = $item;
+        }
+
+        return $grouped ?? [];
+    }
 }

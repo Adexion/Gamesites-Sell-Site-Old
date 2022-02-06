@@ -27,6 +27,7 @@ class ItemController extends AbstractRenderController
 
         return $this->render('client/shop.html.twig', [
             'items' => $repository->findAll(),
+            'groupItems' => $repository->groupByServer(),
             'lastBuyers' => $itemHistoryRepository->findBy(['status' => PaymentStatusEnum::REALIZED], null, 10),
             'voucherForm' => $form->createView(),
         ]);

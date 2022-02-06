@@ -4,21 +4,26 @@
             <h1 class="shop-text_h1">Sklep serwera</h1>
             <p class="shop-text_p">{{ 'Shop information' | trans }}</p>
         </div>
-        <div class="shop-direction flex">
-            {% for item in items %}
-                <div class="shop-box flex flex-align flex-center flex-column">
-                    <img class="shop-box_image" src="{{ asset('/assets/images/' ~ item.image) }}" alt="SHOP-IMG">
-                    <h1 class="shop-box_h1">{{ item.description | raw }}</h1>
-                    <a class="btn btn-shop" href="{{ path('item', {id: item.id}) }}">Zakup za
-                        {% if item.discount %}
-                            <del>{{ item.price | format_currency('PLN') }}</del>
-                            {{ item.discountedPrice | format_currency('PLN') }}
-                        {% else %}
-                            {{ item.price | format_currency('PLN') }}
-                        {% endif %}
-                    </a>
-                </div>
-            {% endfor %}
-        </div>
+        {% for serverName, group in groupItems %}
+            <div class="payments-box">
+                <h1>Przedmioty serwera: <b class="navbar-active">{{ serverName }}</b></h1>
+            </div>
+            <div class="shop-direction flex">
+                {% for item in group %}
+                    <div class="shop-box flex flex-align flex-center flex-column">
+                        <img class="shop-box_image" src="{{ asset('/assets/images/' ~ item.image) }}" alt="SHOP-IMG">
+                        <h1 class="shop-box_h1">{{ item.description | raw }}</h1>
+                        <a class="btn btn-shop" href="{{ path('item', {id: item.id}) }}">Zakup za
+                            {% if item.discount %}
+                                <del>{{ item.price | format_currency('PLN') }}</del>
+                                {{ item.discountedPrice | format_currency('PLN') }}
+                            {% else %}
+                                {{ item.price | format_currency('PLN') }}
+                            {% endif %}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
     </div>
 </section>
