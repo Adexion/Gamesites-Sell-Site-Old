@@ -26,8 +26,7 @@ class BansCrud extends AbstractCrudController
                 ->remove(Crud::PAGE_INDEX, Action::NEW);
         }
 
-        return $actions
-            ->remove(Crud::PAGE_NEW, Action::SAVE_AND_ADD_ANOTHER);
+        return $actions;
     }
 
     public static function getEntityFqcn(): string
