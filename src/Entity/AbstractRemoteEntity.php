@@ -19,7 +19,7 @@ class AbstractRemoteEntity
     protected $ip;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     protected $port;
 
@@ -70,12 +70,12 @@ class AbstractRemoteEntity
         return $this;
     }
 
-    public function getPort(): ?int
+    public function getPort(): ?string
     {
         return $this->port;
     }
 
-    public function setPort(int $port): self
+    public function setPort(?string $port): self
     {
         $this->port = $port;
 

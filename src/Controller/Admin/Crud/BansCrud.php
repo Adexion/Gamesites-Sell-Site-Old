@@ -31,7 +31,7 @@ class BansCrud extends AbstractCrudController
             TextField::new('database'),
             TextField::new('directory'),
             TextField::new('name'),
-            TextField::new('columnOne', 'Date From'),
+            TextField::new('columnOne', 'Date'),
             TextField::new('columnTwo', 'Reason')
         ];
     }
