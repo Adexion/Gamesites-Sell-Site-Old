@@ -4,8 +4,15 @@
     <section class="payments">
         {% form_theme form with ['form_div_layout.html.twig'] %}
 
-        {{ form_start(form, {method: 'POST', action: path('payment', {id: item.id})}) }}
+        {{ form_start(form, {method: 'POST'}) }}
         <div class="payments-direction mw-auto flex flex-between">
+            {% if not form.vars.valid %}
+                <div class="payments-box" style="width: 100%">
+                    {{ form_errors(form.username) }}
+                    {{ form_errors(form.code) }}
+                </div>
+            {% endif %}
+
             <div class="payments-box">
                 <h1>Twoje dane <span>(Wymagane)</span></h1>
                 <div class="mx-between">
@@ -77,6 +84,9 @@
                             style="display: none;">{{ 'Buy now' | trans }}
                         za {{ item.discountedPrice | format_currency('PLN') }}</button>
                     <script>
+                        document.getElementById('code').value = '';
+                        document.getElementById('check').checked = false;
+
                         document.getElementById('check').addEventListener('click', () => {
                             const checkbox = document.getElementById('check');
                             const submitBtn = document.getElementById('submit');

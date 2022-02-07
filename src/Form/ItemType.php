@@ -37,7 +37,7 @@ class ItemType extends BaseType
             ->add('email', EmailType::class)
             ->add('username', TextType::class, [
                 'constraints' => [
-                    new Length(['max' => 15]),
+                    new Length(['max' => 15, 'maxMessage' => 'Nazwa użytkownika może mieć maksimum 15 znaków']),
                 ],
             ])
             ->add('payment', ChoiceType::class, [
@@ -47,8 +47,8 @@ class ItemType extends BaseType
             ->add('code', TextType::class, [
                 'required' => false,
                 'constraints' => [
-                    new Type('numeric'),
-                    new Length(16),
+                    new Type(['type' => 'numeric', 'message' => 'Błędny PaySafeCard']),
+                    new Length(['min' => 16, 'max' => 16, 'exactMessage' => 'PaySafeCard powinien mieć dokładnie 16 znaków']),
                 ],
             ])
             ->add('check', CheckboxType::class, [])

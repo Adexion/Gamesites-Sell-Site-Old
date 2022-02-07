@@ -4,55 +4,66 @@ namespace App\Service;
 
 use App\Entity\Item;
 use App\Entity\ItemHistory;
+use App\Entity\Payment;
+use App\Enum\PaymentStatusEnum;
 use App\Repository\ItemHistoryRepository;
 use App\Repository\PaymentRepository;
 use DateTime;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class PaymentRequestBuilder
 {
     private ItemHistoryRepository $historyRepository;
     private PaymentRepository $paymentRepository;
+    private ?Request $request;
 
-    public function __construct(ItemHistoryRepository $historyRepository, PaymentRepository $paymentRepository)
-    {
+    public function __construct(
+        ItemHistoryRepository $historyRepository,
+        PaymentRepository $paymentRepository,
+        RequestStack $requestStack
+    ) {
         $this->historyRepository = $historyRepository;
         $this->paymentRepository = $paymentRepository;
+        $this->request = $requestStack->getCurrentRequest();
     }
 
     /** @throws OptimisticLockException|ORMException */
-    public function buildResponse(array $data, Item $item): array
+    public function buildRequest(array $data, Item $item): array
     {
-        $data['payment'] = $this->paymentRepository->findOneBy(['isActive' => true, 'type' => $data['payment']]);
+        $payment = $this->paymentRepository->findOneBy(['isActive' => true, 'type' => $data['payment']]);
 
-        $history = $this->createHistory($data, $item);
+        $history = $this->createHistory($data, $item, $payment);
+        $uri = $this->request->getSchemeAndHttpHost();
 
         return [
             'ID_ZAMOWIENIA' => $history->getId(),
             'NAZWA_USLUGI' => $item->getName(),
-            'SEKRET' => $data['payment']->getSecret(),
+            'SEKRET' => $payment->getSecret(),
             'KWOTA' => $item->getDiscountedPrice(),
             'EMAIL' => $data['email'],
-            'ADRES_WWW' => sprintf('%s/payment', $data['uri']),
-            'PRZEKIEROWANIE_SUKCESS' => sprintf('%s/payment', $data['uri']),
-            'PRZEKIEROWANIE_BLAD' => sprintf('%s/payment', $data['uri']),
+            'ADRES_WWW' => sprintf('%s/payment', $uri),
+            'PRZEKIEROWANIE_SUKCESS' => sprintf('%s/payment', $uri),
+            'PRZEKIEROWANIE_BLAD' => sprintf('%s/payment', $uri),
         ];
     }
 
-    /** @throws OptimisticLockException|ORMException */
-    private function createHistory(array $data, Item $item): ItemHistory
+    /** @throws ORMException|OptimisticLockException */
+    private function createHistory(array $data, Item $item, ?Payment $payment): ItemHistory
     {
         $history = (new ItemHistory())
             ->setDate(new DateTime())
             ->setItem($item)
+            ->setStatus(PaymentStatusEnum::CREATED)
             ->setEmail($data['email'])
-            ->setPaymentId($data['payment']->getId())
-            ->setStatus(0)
-            ->setType($data['payment']->getType())
             ->setUsername($data['username'])
-            ->setPrice($item->getDiscountedPrice());
+            ->setPrice($item->getDiscountedPrice())
+            ->setPaymentId($payment->getId())
+            ->setType($payment->getType());
 
         return $this->historyRepository->insertOrUpdate($history);
     }
+
 }

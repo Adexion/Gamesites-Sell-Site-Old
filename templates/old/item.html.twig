@@ -40,6 +40,9 @@
                                 {{ form_row(form.code) }}
                             </div>
                             <script>
+                                document.getElementById('code').value = '';
+                                document.getElementById('check').checked = false;
+
                                 document.getElementById('payment').addEventListener('change', (e) => {
                                     e.target.value === 'paySafeCard'
                                         ? document.getElementById('psc-code').removeAttribute('style')

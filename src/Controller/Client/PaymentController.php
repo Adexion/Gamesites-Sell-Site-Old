@@ -2,16 +2,12 @@
 
 namespace App\Controller\Client;
 
-use App\Entity\Item;
-use App\Entity\PaySafeCard;
 use App\Entity\PaySafeCardVoucher;
 use App\Entity\Voucher;
 use App\Enum\PaymentStatusEnum;
 use App\Enum\PaymentTypeEnum;
 use App\Enum\PaySafeCardStatusEnum;
-use App\Form\ItemType;
 use App\Form\PaymentStatusType;
-use App\Form\PaySafeCardType;
 use App\Form\VoucherType;
 use App\Repository\ItemHistoryRepository;
 use App\Service\PaymentExecutionService;
@@ -19,22 +15,22 @@ use App\Service\VoucherExecutionService;
 use DateTime;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Error\SyntaxError;
 use xPaw\SourceQuery\Exception\AuthenticationException;
 use xPaw\SourceQuery\Exception\InvalidArgumentException;
 use xPaw\SourceQuery\Exception\InvalidPacketException;
 use xPaw\SourceQuery\Exception\SocketException;
 
-class PaymentController extends AbstractController
+class PaymentController extends AbstractRenderController
 {
     /**
      * @Route(name="status", path="/payment/status")
      *
-     * @throws AuthenticationException|InvalidPacketException|ORMException|OptimisticLockException|SocketException|InvalidArgumentException
+     * @throws AuthenticationException|InvalidPacketException|ORMException|OptimisticLockException|SocketException|InvalidArgumentException|SyntaxError
      */
     public function status(Request $request, PaymentExecutionService $executionService): Response
     {
@@ -55,7 +51,7 @@ class PaymentController extends AbstractController
     /**
      * @Route(name="voucher", path="/payment/voucher")
      *
-     * @throws AuthenticationException|InvalidArgumentException|InvalidPacketException|ORMException|OptimisticLockException
+     * @throws AuthenticationException|InvalidArgumentException|InvalidPacketException|ORMException|OptimisticLockException|SyntaxError
      */
     public function voucher(Request $request, VoucherExecutionService $executionService): Response
     {
@@ -119,7 +115,7 @@ class PaymentController extends AbstractController
     {
         if (!$hash || $hash->getPaySafeCard()->getStatus() === PaySafeCardStatusEnum::NOT_WORKING) {
             return $this->render('client/rejected.html.twig', [
-                'message' => "Payment not exist ore removed."
+                'message' => "Payment not exist ore removed.",
             ]);
         }
 
