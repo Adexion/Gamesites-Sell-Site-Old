@@ -34,7 +34,7 @@ class AbstractRemoteEntity
     protected $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, name="db")
      */
     protected $database;
 
