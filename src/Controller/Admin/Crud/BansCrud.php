@@ -21,12 +21,13 @@ class BansCrud extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        if ($this->getDoctrine()->getRepository(Rule::class)->count([])) {
+        if ($this->getDoctrine()->getRepository(Bans::class)->count([])) {
             $actions
                 ->remove(Crud::PAGE_INDEX, Action::NEW);
         }
 
-        return $actions;
+        return $actions
+            ->remove(Crud::PAGE_NEW, Action::SAVE_AND_ADD_ANOTHER);
     }
 
     public static function getEntityFqcn(): string
