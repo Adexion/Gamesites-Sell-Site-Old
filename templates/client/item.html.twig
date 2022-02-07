@@ -17,17 +17,23 @@
                         {% endfor %}
                     </div>
                 {% endif %}
-                {% if isSimplePaySafeCard %}
-                    <div class="col-12 text-end">
-                        <button class="px-2 animate h4 btn-shop" data-bs-toggle="modal" data-bs-target="#modal"><i class="fas fa-lock"></i>&nbsp;PaySafeCard</button>
-                    </div>
-                {% endif %}
                 <div class="col-lg-7">
                     <h1 class="text5 mb-3">{{ 'Payment form' | trans }}</h1>
                     {{ form_start(form, {method: 'POST', action: path('payment', {_locale: app.request.locale, id: item.id})}) }}
                         {{ form_row(form.email) }}
                         {{ form_row(form.username) }}
                         {{ form_row(form.payment) }}
+                        <div id="psc-code" style="display:none">
+                            {{ form_row(form.code) }}
+                        </div>
+                        <script>
+                            document.getElementById('payment').addEventListener('change', (e) => {
+                                e.target.value === 'paySafeCard'
+                                    ? document.getElementById('psc-code').removeAttribute('style')
+                                    : document.getElementById('psc-code').setAttribute('style', 'display: none;')
+                            })
+                        </script>
+                        {{ form_row(form.check) }}
 
                         <button type="submit" class="btn-shop">{{ 'Buy now' | trans }}</button>
                     {{ form_end(form) }}
@@ -41,8 +47,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </main>
-    {% include 'client/component/paySafeCard.html.twig' %}
 {% endblock %}

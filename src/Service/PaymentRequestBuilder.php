@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Item;
 use App\Entity\ItemHistory;
 use App\Repository\ItemHistoryRepository;
+use App\Repository\PaymentRepository;
 use DateTime;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -12,15 +13,19 @@ use Doctrine\ORM\ORMException;
 class PaymentRequestBuilder
 {
     private ItemHistoryRepository $historyRepository;
+    private PaymentRepository $paymentRepository;
 
-    public function __construct(ItemHistoryRepository $historyRepository)
+    public function __construct(ItemHistoryRepository $historyRepository, PaymentRepository $paymentRepository)
     {
         $this->historyRepository = $historyRepository;
+        $this->paymentRepository = $paymentRepository;
     }
 
     /** @throws OptimisticLockException|ORMException */
     public function buildResponse(array $data, Item $item): array
     {
+        $data['payment'] = $this->paymentRepository->findOneBy(['isActive' => true, 'type' => $data['payment']]);
+
         $history = $this->createHistory($data, $item);
 
         return [
@@ -29,9 +34,9 @@ class PaymentRequestBuilder
             'SEKRET' => $data['payment']->getSecret(),
             'KWOTA' => $item->getDiscountedPrice(),
             'EMAIL' => $data['email'],
-            'ADRES_WWW' => sprintf('%s/%s/payment/', $data['uri'], $data['locale']),
-            'PRZEKIEROWANIE_SUKCESS' => sprintf('%s/%s/payment', $data['uri'], $data['locale']),
-            'PRZEKIEROWANIE_BLAD' => sprintf('%s/%s/payment', $data['uri'], $data['locale']),
+            'ADRES_WWW' => sprintf('%s/payment', $data['uri']),
+            'PRZEKIEROWANIE_SUKCESS' => sprintf('%s/payment', $data['uri']),
+            'PRZEKIEROWANIE_BLAD' => sprintf('%s/payment', $data['uri']),
         ];
     }
 

@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\PaySafeCardVoucher;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,32 +21,12 @@ class PaySafeCardVoucherRepository extends ServiceEntityRepository
         parent::__construct($registry, PaySafeCardVoucher::class);
     }
 
-    // /**
-    //  * @return PaySafeCardVoucher[] Returns an array of PaySafeCardVoucher objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /** @throws ORMException|OptimisticLockException */
+    public function insertOrUpdate(PaySafeCardVoucher $history): PaySafeCardVoucher
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $this->_em->persist($history);
+        $this->_em->flush();
 
-    /*
-    public function findOneBySomeField($value): ?PaySafeCardVoucher
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $history;
     }
-    */
 }

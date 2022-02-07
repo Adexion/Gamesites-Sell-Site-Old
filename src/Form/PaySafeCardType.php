@@ -31,12 +31,6 @@ class PaySafeCardType extends BaseType
                     new Length(16)
                 ]
             ])
-            ->add('item', EntityType::class, [
-                'class' => Item::class,
-                'choice_label' => 'name',
-                'attr' => ['hidden' => true],
-                'label' => false
-            ])
             ->add('submit', SubmitType::class);
     }
 

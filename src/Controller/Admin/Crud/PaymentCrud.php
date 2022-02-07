@@ -29,7 +29,8 @@ class PaymentCrud extends AbstractCrudController
             ChoiceField::new('type')
                 ->setChoices(PaymentTypeEnum::toArray()),
             TextField::new('secret'),
-            TextField::new('hash')
+            TextField::new('hash'),
+            BooleanField::new('isActive')
         ];
     }
 }

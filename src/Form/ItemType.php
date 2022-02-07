@@ -2,31 +2,54 @@
 
 namespace App\Form;
 
-use App\Entity\Payment;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Enum\PaymentTypeEnum;
+use App\Repository\ConfigurationRepository;
+use App\Repository\PaymentRepository;
 use Symfony\Component\Form\Extension\Core\Type\BaseType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Type;
 
 class ItemType extends BaseType
 {
+    private ?array $payments;
+
+    public function __construct(PaymentRepository $paymentRepository, ConfigurationRepository $configurationRepository)
+    {
+        foreach ($paymentRepository->findBy(['isActive' => true]) as $payment) {
+            $enum = PaymentTypeEnum::from($payment->getType());
+            $this->payments[$enum->getValue()] = $enum->getValue();
+        }
+
+        if ($configurationRepository->findOneBy([])->getSimplePaySafeCard()) {
+            $this->payments['psc'] = 'paySafeCard';
+        }
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('email', EmailType::class)
             ->add('username', TextType::class, [
                 'constraints' => [
-                    new Length(['max' => 15])
-                ]
+                    new Length(['max' => 15]),
+                ],
             ])
-            ->add('payment', EntityType::class, [
-                'class' => Payment::class,
-                'choice_label' => 'type',
-                'choice_translation_domain' => 'messages'
+            ->add('payment', ChoiceType::class, [
+                'choices' => $this->payments,
+                'choice_translation_domain' => 'messages',
+            ])
+            ->add('code', TextType::class, [
+                'required' => false,
+                'constraints' => [
+                    new Type('numeric'),
+                    new Length(16),
+                ],
             ])
             ->add('check', CheckboxType::class, [])
             ->add('uri', HiddenType::class)

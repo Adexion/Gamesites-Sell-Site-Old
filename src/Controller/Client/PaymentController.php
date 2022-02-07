@@ -2,12 +2,14 @@
 
 namespace App\Controller\Client;
 
+use App\Entity\Item;
 use App\Entity\PaySafeCard;
 use App\Entity\PaySafeCardVoucher;
 use App\Entity\Voucher;
 use App\Enum\PaymentStatusEnum;
 use App\Enum\PaymentTypeEnum;
 use App\Enum\PaySafeCardStatusEnum;
+use App\Form\ItemType;
 use App\Form\PaymentStatusType;
 use App\Form\PaySafeCardType;
 use App\Form\VoucherType;
@@ -75,7 +77,7 @@ class PaymentController extends AbstractController
         return $this->render('client/success.html.twig');
     }
 
-    /** @Route(name="thankYoy", path="/payment/") */
+    /** @Route(name="thankYoy", path="/payment") */
     public function payment(Request $request, ItemHistoryRepository $itemHistoryRepository): Response
     {
         $cookies = $request->cookies;
@@ -110,52 +112,6 @@ class PaymentController extends AbstractController
             'message' => $message ?? '',
             'paymentId' => $cookies->get('paymentId', 0),
         ]);
-    }
-
-    /** @Route(name="paySafeCard", path="/paySafeCard/") */
-    public function paySafeCard(Request $request): Response
-    {
-        $form = $this->createForm(PaySafeCardType::class);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $item = $form->getData()['item'];
-            if ($this->getDoctrine()->getRepository(PaySafeCard::class)->findOneBy(['code' => $form->getData()['code']])) {
-                $this->addFlash('error', 'Given wrong data in PSC form');
-
-                return $this->redirectToRoute('item', ['id' => $form->getData()['item']->getId()]);
-            }
-
-            $psc = (new PaySafeCard())
-                ->setItem($item)
-                ->setDate(new DateTime())
-                ->setEmail($form->getData()['email'])
-                ->setUsername($form->getData()['username'])
-                ->setCode($form->getData()['code'])
-                ->setStatus(false);
-
-            $this->getDoctrine()->getManager()->persist($psc);
-            $this->getDoctrine()->getManager()->flush();
-
-            $hash = hash('sha1', date('Y-m-d H:i:s'));
-            $pscVoucher = (new PaySafeCardVoucher())
-                ->setHash($hash)
-                ->setPaySafeCard($psc);
-
-            $this->getDoctrine()->getManager()->persist($pscVoucher);
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->render('client/thankYou.html.twig', [
-                'type' => PaymentTypeEnum::PAY_SAFE_CARD,
-                'message' => 'PaySafeCard is pending. Contact with administrator',
-                'paymentId' => $psc->getId(),
-                'link' => $this->generateUrl('pscVoucher', ['hash' => $hash]),
-            ]);
-        }
-
-        $this->addFlash('error', 'Given wrong data in PSC form');
-
-        return $this->redirectToRoute('item', ['id' => $form->getData()['item']->getId()]);
     }
 
     /** @Route(name="pscVoucher", path="/paySafeCard/{hash}") */

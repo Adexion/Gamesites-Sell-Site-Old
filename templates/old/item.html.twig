@@ -36,19 +36,24 @@
                             {{ form_row(form.email) }}
                             {{ form_row(form.username) }}
                             {{ form_row(form.payment) }}
+                            <div id="psc-code" style="display:none">
+                                {{ form_row(form.code) }}
+                            </div>
+                            <script>
+                                document.getElementById('payment').addEventListener('change', (e) => {
+                                    e.target.value === 'paySafeCard'
+                                        ? document.getElementById('psc-code').removeAttribute('style')
+                                        : document.getElementById('psc-code').setAttribute('style', 'display: none;')
+                                })
+                            </script>
+                            {{ form_row(form.check) }}
 
                             <button type="submit" class="gs-accept">{{ 'Buy now' | trans }}</button>
                             {{ form_end(form) }}
                         </div>
-                        {% if isSimplePaySafeCard %}
-                            <p class="m-3">lub użyj</p>
-                            <button class="gs-accept" data-bs-toggle="modal" data-bs-target="#modal"><i class="fas fa-lock"></i>&nbsp;PaySafeCard</button>
-                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    {% include 'old/component/paySafeCard.html.twig' %}
 {% endblock %}

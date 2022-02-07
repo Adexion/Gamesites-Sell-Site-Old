@@ -4,13 +4,14 @@ namespace App\Controller\Client;
 
 use App\Entity\Item;
 use App\Enum\PaymentStatusEnum;
+use App\Enum\PaymentTypeEnum;
 use App\Form\ItemType;
 use App\Form\PaymentType;
-use App\Form\PaySafeCardType;
 use App\Form\VoucherType;
 use App\Repository\ItemHistoryRepository;
 use App\Repository\ItemRepository;
 use App\Service\PaymentRequestBuilder;
+use App\Service\PaySafeCardManualService;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -38,12 +39,10 @@ class ItemController extends AbstractRenderController
     public function item(Item $item): Response
     {
         $itemForm = $this->createForm(ItemType::class);
-        $paySafeCardForm = $this->createForm(PaySafeCardType::class, ['item' => $item]);
 
         return $this->render('client/item.html.twig', [
             'item' => $item,
             'form' => $itemForm->createView(),
-            'paySafeCardForm' => $paySafeCardForm->createView(),
         ]);
     }
 
@@ -52,15 +51,29 @@ class ItemController extends AbstractRenderController
      *
      * @throws OptimisticLockException|ORMException|SyntaxError
      */
-    public function payment(Item $item, Request $request, PaymentRequestBuilder $builder): Response
-    {
+    public function payment(
+        Item $item,
+        Request $request,
+        PaymentRequestBuilder $builder,
+        PaySafeCardManualService $manualService
+    ): Response {
         $request->request->set('uri', $request->getSchemeAndHttpHost());
-        $request->request->set('locale', $request->getLocale());
 
         $form = $this->createForm(ItemType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($request->request->get('payment') === 'paySafeCard') {
+                $voucher = $manualService->createManualPSC($form, $item);
+
+                return $this->render('client/thankYou.html.twig', [
+                    'type' => PaymentTypeEnum::PAY_SAFE_CARD,
+                    'message' => 'PaySafeCard is pending. Contact with administrator',
+                    'paymentId' => $voucher->getPaySafeCard()->getId(),
+                    'link' => $this->generateUrl('pscVoucher', ['hash' => $voucher->getHash()]),
+                ]);
+            }
+
             $request = $builder->buildResponse($form->getData(), $item);
 
             $redirectForm = $this->createForm(PaymentType::class);
@@ -68,7 +81,7 @@ class ItemController extends AbstractRenderController
 
             $response = $this->render('client/payment.html.twig', [
                 'form' => $redirectForm->createView(),
-                'paymentType' => $form->getData()['payment']->getType(),
+                'paymentType' => $form->getData()['payment'],
             ]);
 
             $cookie = new Cookie('paymentId', $request['ID_ZAMOWIENIA'], strtotime('now + 30 minutes'));
