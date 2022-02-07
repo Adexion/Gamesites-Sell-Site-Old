@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.ea-sidebar-width-compact .menu-header span {
+    color: transparent !important;
+}
+
+.ea-sidebar-width-compact .menu-header {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.menu-header span, .logo-custom, .logo-compact {
+    color: var(--white) !important;
+}
+
+.menu-item {
+    font-weight: normal;
+    line-height: 21px;
+    margin-bottom: 8px;
+}
+
+.menu-item.active a, .menu-item.active span {
+    color: var(--sidebar-bg);
+    background-color: var(--white);
+    padding: 5px;
+    margin-left: -4px;
+    border-radius: 2px;
+    font-weight: 600;
+}
+
+
+.main-header {
+    background: #242526;
+    margin-left: -20px;
+    margin-right: -8px;
+    padding-left: 20px;
+}
+
+.logo {
+    padding: 17px 0 !important;
+}
+
+.content-search input {
+    background: #EFEFEF;
+    border-radius: 17px;
+    padding: 0 15px !important;
+}
+
+.menu-header {
+    padding-top: 15px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.sidebar {
+    background: #3A3B3C;
+}
+
+.ea-sidebar-width-compact .menu-item span {
+    display: none;
+}
+
+.ea-sidebar-width-normal li.menu-item {
+    padding-left: 15px;
+}
+
+#side-menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.ea-sidebar-width-compact .menu-header span {
+    color: transparent;
+}
+
+tr:nth-child(2n) {
+    background-color: var(--row);
+}
+
+thead {
+    background-color: var(--head);
+}
+
+.page-item.active .page-link {
+    background-color: var(--color-primary);
+    border-color: var(--color-border-primary);
+}
+
+:root {
+    --link-color: var(--white);
+    --link-hover-color: #a8b1be;
+    --sidebar-bg: #3A3B3C;
+
+    --white: #FFFFFF;
+    --row: #f8f9fd;
+    --head: #eaecf8;
+    --color-info: #0c4868;
+    --color-primary: #0c4868;
+    --color-border-primary: #093a54;
+}

@@ -3,7 +3,7 @@ No informations: 'Nie dodano żadnych produktów dla tego serwera. Proszę, skon
 Home: Strona główna
 Rank: Ranking
 Rules: Regulamin
-Item Shop: Sklep serwera
+Item Shop: Sklep
 Best players: Najlepsi gracze
 Best guilds: Najlepsze gildie
 LINKS: LINKI
@@ -41,7 +41,7 @@ Name: Nazwa
 Count: Ilość
 Image: Obrazek
 Dashboard: Strona główna PA
-Content: Zawartość strony
+Content: Zawartość
 Item: Przedmiot
 History: Historia płatności
 Settings: Ustawienia
@@ -84,7 +84,7 @@ R Con Port: rCon Port
 R Con Password: rCon Hasło
 First create server: Najpierw utwórz serwer
 Console: Konsola rCon
-Main: Gółwne
+Main: Główne
 Wrong data given: Nie udało się przetworzyć otrzymanych danych. Sprawdź, czy wszystko zostało poprawnie ustawione i w razie potrzeby skontaktuj się z administratorem.
 Opps! Something went wrong: Coś poszło nie tak!
 Voucher is not valid or expired: Voucher jest nieprawidłowy lub wygasł
@@ -131,7 +131,6 @@ PaySafeCard is pending. Contact with administrator:
   Aby przyśpieszyć realizację płatności skontaktuj się z administracją w celu otrzymania Vouchera bądź sprawdzaj jej status pod poniższym linkiem.
 This is your voucher: Oto twój voucher
 PaySafeCardVoucher: Powiązanie PSC Voucher
-ACCEPTED: Użyty
 NOT_WORKING: Błędny
 NEW: Nowy
 PaySafeCard status WORKING when active it is allow to generating voucher for user:
@@ -156,3 +155,16 @@ Title: Tytuł
 Subtitle: Podtytuł
 Article: Artykuł
 Payment Checkbox: Potwierdzam poprawność nicku w grze, akceptuje postanowienia regulaminu serwisu oraz jestem świadomy, że usługa nie podlega zwrotowi.
+
+CREATED: Utworzo
+ACCEPTED: Zaakceptowano
+UNACCEPTED: Odrzucono
+TIME_OUT: Błąd
+CANCELED: Anulowano
+REALIZED: Zrealizowano
+NOT_EXISTED: Nie istnieje
+NOT_ON_SERVER: Nie znaleziono gracza
+
+PURPLE: Nowoczesny (Fioletowy)
+GRAY: Szaro-zielony
+BLUE: Postawowy (Domyślny)

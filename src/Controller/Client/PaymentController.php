@@ -84,11 +84,11 @@ class PaymentController extends AbstractController
         switch ($itemHistory->getStatus()) {
             case PaymentStatusEnum::CREATED:
             case PaymentStatusEnum::UNACCEPTED:
-            case PaymentStatusEnum::FAILURE:
             case PaymentStatusEnum::CANCELED:
+            case "FAILURE":
                 $message = 'This payment is not accepted. If it is not right pleas contact with your administrator.';
                 break;
-            case PaymentStatusEnum::PENDING:
+            case "PENDING":
                 $message = 'This payment is still pending. Pleas not log out from server.';
                 break;
             case PaymentStatusEnum::TIME_OUT:

@@ -112,7 +112,6 @@ class DashboardController extends AbstractDashboardController
     {
         return parent::configureAssets()
             ->addWebpackEncoreEntry('ea-app')
-            ->addWebpackEncoreEntry('admin')
             ->addWebpackEncoreEntry('console');
     }
 
