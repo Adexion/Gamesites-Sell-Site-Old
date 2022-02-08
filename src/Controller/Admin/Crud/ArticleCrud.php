@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Validator\Constraints\Length;
 
 class ArticleCrud extends AbstractCrudController
 {
@@ -28,11 +29,14 @@ class ArticleCrud extends AbstractCrudController
             ImageField::new('image')
                 ->setUploadDir($this->getParameter('uploadPath'))
                 ->setBasePath($this->getParameter('basePath'))
-                ->setSortable(false);
+                ->setSortable(false)
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]);
 
         return [
-            TextField::new('title'),
-            TextField::new('subtitle'),
+            TextField::new('title')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            TextField::new('subtitle')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             CKEditorField::create('text', $pageName),
             $pageName === Crud::PAGE_EDIT
                 ? $image->setFormTypeOption('required', false)

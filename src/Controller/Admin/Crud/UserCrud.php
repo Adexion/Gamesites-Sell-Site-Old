@@ -60,16 +60,14 @@ class UserCrud extends AbstractCrudController
         return [
             EmailField::new('email')
                 ->setFormTypeOption('constraints', [
-                    new Email([
-                        'mode' => Email::VALIDATION_MODE_STRICT,
-                    ]),
+                    new Email(['mode' => Email::VALIDATION_MODE_STRICT]),
+                    new Length(['max' => 180])
                 ]),
             TextField::new('password')
-                ->setFormType(PasswordType::class),
+                ->setFormType(PasswordType::class)
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextField::new('nick')
-                ->setFormTypeOption('constraints', [
-                    new Length(["min" => 3, "max" => 15])
-                ])
+                ->setFormTypeOption('constraints', [new Length(["min" => 3, "max" => 15])])
         ];
     }
 }

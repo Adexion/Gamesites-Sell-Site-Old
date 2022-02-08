@@ -15,6 +15,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\PercentField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Range;
 
 class ItemCrud extends AbstractCrudController
 {
@@ -45,25 +47,31 @@ class ItemCrud extends AbstractCrudController
         $image = ImageField::new('image')
             ->setUploadDir($this->getParameter('uploadPath'))
             ->setBasePath($this->getParameter('basePath'))
-            ->setHelp('Caution! Deleting this entity will be required to change the image!');
+            ->setHelp('Caution! Deleting this entity will be required to change the image!')
+            ->setFormTypeOption('constraints', [new Length(['max' => 255])]);
 
         return [
             $pageName === Crud::PAGE_EDIT
                 ? $image->setFormTypeOption('required', false)
                 : $image,
-            TextField::new('name'),
-            CKEditorField::create('description', $pageName),
+            TextField::new('name')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            TextareaField::new('shortDescription'),
+            CKEditorField::create('description', $pageName)
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             MoneyField::new('price')
                 ->setCurrency('PLN')
                 ->setNumDecimals(2)
-                ->setStoredAsCents(false),
+                ->setStoredAsCents(false)
+                ->setFormTypeOption('constraints', [new Range(['max' => 999.99, 'min' => 0.01])]),
             PercentField::new('discount')
-                ->setNumDecimals(0),
+                ->setNumDecimals(0)
+                ->setFormTypeOption('constraints', [new Range(['max' => 100, 'min' => 0])]),
             CollectionField::new('command')
                 ->allowAdd(true)
                 ->allowDelete(true)
-                ->setHelp("be replaced to player nick"),
-            TextareaField::new('shortDescription'),
+                ->setHelp("be replaced to player nick")
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             EntityField::new('server')
                 ->setClass(Server::class, 'serverName')
                 ->setHelp('First create server'),

@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Validator\Constraints\Length;
 
 class ContactCrud extends AbstractCrudController
 {
@@ -29,9 +30,11 @@ class ContactCrud extends AbstractCrudController
             TextareaField::new('description')
                 ->setDisabled(),
             TextField::new('name')
-                ->setDisabled(),
+                ->setDisabled()
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextField::new('email')
-                ->setDisabled(),
+                ->setDisabled()
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
         ];
     }
 }

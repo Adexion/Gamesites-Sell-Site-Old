@@ -18,12 +18,12 @@ class Item
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=60)
+     * @ORM\Column(type="string", length=255)
      */
     private $image;
 
     /**
-     * @ORM\Column(type="string", length=60)
+     * @ORM\Column(type="string", length=255)
      */
     private $name;
 

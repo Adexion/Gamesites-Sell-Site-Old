@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Validator\Constraints\Length;
 
 class PaymentCrud extends AbstractCrudController
 {
@@ -28,8 +29,10 @@ class PaymentCrud extends AbstractCrudController
         return [
             ChoiceField::new('type')
                 ->setChoices(PaymentTypeEnum::toArray()),
-            TextField::new('secret'),
-            TextField::new('hash'),
+            TextField::new('secret')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            TextField::new('hash')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             BooleanField::new('isActive')
         ];
     }

@@ -14,6 +14,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Range;
 
 class ConfigurationCrud extends AbstractCrudController
 {
@@ -45,22 +47,26 @@ class ConfigurationCrud extends AbstractCrudController
             ImageField::new('logo')
                 ->setUploadDir($this->getParameter('uploadPath'))
                 ->setBasePath($this->getParameter('basePath'))
-                ->setSortable(false);
+                ->setSortable(false)
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]);
 
         return [
-            TextField::new('serverName'),
+            TextField::new('ip')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            TextField::new('serverName')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextareaField::new('description'),
-            TextField::new('ip'),
-            $pageName === Crud::PAGE_EDIT
-                ? $image->setFormTypeOption('required', false)
-                : $image,
             MoneyField::new('target')
                 ->setCurrency('PLN')
                 ->setNumDecimals(2)
-                ->setStoredAsCents(false),
+                ->setStoredAsCents(false)
+                ->setFormTypeOption('constraints', [new Range(['max' => 999.99, 'min' => 0.01])]),
             ChoiceField::new('template')
                 ->setChoices(TemplateEnum::toArray()),
-            BooleanField::new('simplePaySafeCard')
+            BooleanField::new('simplePaySafeCard'),
+            $pageName === Crud::PAGE_EDIT
+                ? $image->setFormTypeOption('required', false)
+                : $image,
         ];
     }
 }

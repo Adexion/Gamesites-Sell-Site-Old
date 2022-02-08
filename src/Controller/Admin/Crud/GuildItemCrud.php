@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Validator\Constraints\Length;
 
 class GuildItemCrud extends AbstractCrudController
 {
@@ -27,11 +28,14 @@ class GuildItemCrud extends AbstractCrudController
     {
         $image = ImageField::new('image')
             ->setUploadDir($this->getParameter('uploadPath'))
-            ->setBasePath($this->getParameter('basePath'));
+            ->setBasePath($this->getParameter('basePath'))
+            ->setFormTypeOption('constraints', [new Length(['max' => 255])]);
 
         return [
-            TextField::new('name'),
-            NumberField::new('count'),
+            TextField::new('name')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            NumberField::new('count')
+                ->setFormTypeOption('constraints', [new Length(['max' => 64])]),
             $pageName === Crud::PAGE_EDIT
                 ? $image->setFormTypeOption('required', false)
                 : $image,

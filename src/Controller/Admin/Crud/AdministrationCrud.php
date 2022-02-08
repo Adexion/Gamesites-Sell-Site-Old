@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Validator\Constraints\Length;
 
 class AdministrationCrud extends AbstractCrudController
 {
@@ -25,7 +26,8 @@ class AdministrationCrud extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('username'),
+            TextField::new('username')
+                ->setFormTypeOption('constraints', [new Length(['max' => 80])]),
             TextareaField::new('description'),
             IntegerField::new('priority')
                 ->setFormTypeOption('attr', ['min' => 1]),

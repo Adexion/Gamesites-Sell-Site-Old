@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Validator\Constraints\Length;
 
 class RankCrud extends AbstractCrudController
 {
@@ -27,13 +28,21 @@ class RankCrud extends AbstractCrudController
     {
         return [
             TextField::new('ip'),
-            NumberField::new('port'),
-            TextField::new('login'),
-            TextField::new('password'),
-            TextField::new('database'),
-            TextField::new('directory'),
-            TextField::new('name'),
-            TextField::new('columnOne', 'Punkty'),
+            NumberField::new('port')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            TextField::new('login')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            TextField::new('password')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            TextField::new('database')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            TextField::new('directory')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            TextField::new('name')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            TextField::new('columnOne', 'Date')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            TextField::new('columnTwo', 'Reason'),
             ChoiceField::new('type')
                 ->setChoices(RankEnum::toArray()),
         ];

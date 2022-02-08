@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use SebastianBergmann\CodeCoverage\Report\Text;
+use Symfony\Component\Validator\Constraints\Length;
 
 class ServerCrud extends AbstractCrudController
 {
@@ -26,13 +27,19 @@ class ServerCrud extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('serverName'),
+            TextField::new('serverName')
+                ->setFormTypeOption('constraints', [new Length(['max' => 60])]),
             TextareaField::new('description'),
-            TextField::new('RConIp'),
-            NumberField::new('RConPort'),
-            TextField::new('RConPassword'),
-            TextField::new('minecraftQueryIp'),
-            NumberField::new('minecraftQueryPort'),
+            TextField::new('RConIp')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            NumberField::new('RConPort')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            TextField::new('RConPassword')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            TextField::new('minecraftQueryIp')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            NumberField::new('minecraftQueryPort')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             BooleanField::new('isDefault')
         ];
     }
