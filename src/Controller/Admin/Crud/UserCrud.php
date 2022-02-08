@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Length;
 
 class UserCrud extends AbstractCrudController
 {
@@ -65,6 +66,10 @@ class UserCrud extends AbstractCrudController
                 ]),
             TextField::new('password')
                 ->setFormType(PasswordType::class),
+            TextField::new('nick')
+                ->setFormTypeOption('constraints', [
+                    new Length(["min" => 3, "max" => 15])
+                ])
         ];
     }
 }

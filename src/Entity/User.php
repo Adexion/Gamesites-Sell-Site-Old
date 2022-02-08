@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="`user`")
  *
  * @UniqueEntity("email")
- * @UniqueEntity("username")
+ * @UniqueEntity("nick")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFactorInterface
 {
@@ -39,6 +39,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="string", length=15)
+     */
+    private $nick;
 
     /**
      * @ORM\Column(name="googleAuthenticatorSecret", type="string", nullable=true)
@@ -130,5 +135,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function getUsername(): ?string
     {
         return $this->email;
+    }
+
+    public function setNick(?string $nick): self
+    {
+        $this->nick = $nick;
+
+        return $this;
+    }
+
+    public function getNick(): ?string
+    {
+        return $this->nick;
     }
 }

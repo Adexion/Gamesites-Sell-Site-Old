@@ -28,7 +28,7 @@ class ArticleRepository extends ServiceEntityRepository
         $builder = $this->getEntityManager()->createQueryBuilder();
 
         $builder
-            ->select('article.id, article.image, article.subhead, article.title, article.text, article.shortText, article.createdAt, user.username as author')
+            ->select('article.id, article.image, article.subhead, article.title, article.text, article.shortText, article.createdAt, user.nick as author')
             ->from(Article::class, 'article')
             ->leftJoin(User::class, 'user', Join::WITH, 'user.id = article.author')
             ->orderBy('article.id', "DESC")
@@ -43,7 +43,7 @@ class ArticleRepository extends ServiceEntityRepository
         $page = max($page, 1);
 
         $builder
-            ->select('article.id, article.image, article.subtitle, article.title, article.text, user.username as author')
+            ->select('article.id, article.image, article.subtitle, article.title, article.text, user.nick as author')
             ->from(Article::class, 'article')
             ->leftJoin(User::class, 'user', Join::WITH, 'user.id = article.author')
             ->orderBy('article.id', "DESC")
