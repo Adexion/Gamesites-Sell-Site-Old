@@ -3,10 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Rank;
-use App\Service\RemoteDriverManager;
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Exception\DriverException;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 
 /**
  * @method Rank|null find($id, $lockMode = null, $lockVersion = null)
@@ -23,7 +21,7 @@ class RankRepository extends AbstractRemoteRepository
         parent::__construct($registry, Rank::class);
     }
 
-    /** @throws Exception|\Doctrine\DBAL\Driver\Exception */
+    /** @throws Exception|\Doctrine\DBAL\Driver\Exception|\Doctrine\DBAL\Exception */
     public function findRemote(array $criteria = [], array $filters = []): ?array
     {
         $rank = $this->findOneBy($criteria);
@@ -44,7 +42,7 @@ class RankRepository extends AbstractRemoteRepository
             return $qb
                 ->execute()
                 ->fetchAllAssociative();
-        } catch (DriverException $e) {
+        } catch (Exception $e) {
             return [];
         }
     }
