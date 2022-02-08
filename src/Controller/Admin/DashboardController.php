@@ -118,8 +118,8 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->renderSidebarMinimized()
-            ->renderContentMaximized()
+            ->renderSidebarMinimized(false)
+            ->renderContentMaximized(true)
             ->disableUrlSignatures()
             ->setTitle('GameSites');
     }

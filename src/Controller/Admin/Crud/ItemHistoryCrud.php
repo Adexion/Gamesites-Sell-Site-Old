@@ -49,6 +49,7 @@ class ItemHistoryCrud extends AbstractCrudController
                 ->setDisabled(),
             MoneyField::new('price')
                 ->setCurrency('PLN')
+                ->setStoredAsCents(false)
                 ->setDisabled(),
             EntityField::new('item')
                 ->setClass(Item::class, 'name')

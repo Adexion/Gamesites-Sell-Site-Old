@@ -25,7 +25,7 @@
 
 .arrow {
     position: absolute;
-    top: 50%;
+    top: 50% !important;
     background: var(--sidebar-bg);
     background-image: url('/assets/images/pa-arrow.png');
     background-position: center;
@@ -34,8 +34,10 @@
     padding-right: 5px;
     right: -7px;
     width: 20px;
-    height: 20px;
+    min-height: 20px !important;
+    height: 20px !important;
     z-index: 0;
+    cursor: pointer;
 }
 
 .ea-sidebar-width-compact .menu-header span {
