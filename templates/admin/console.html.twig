@@ -6,9 +6,12 @@
             <p class="response text-white">{{ '[' ~ 'now' | date('Y-m-d H:i:s') ~ '] ' ~ response }}</p>
         {% endif %}
     </div>
+    <div class="w-25">
     {{ form_start(form) }}
-    {{ form_row(form.command) }}
+    {{ form_row(form.command, {attr: {placeholder: 'np. say Hello world!'}}) }}
     {{ form_row(form.server) }}
-    <button class="btn btn-info w-100">Wyślij</button>
+
+    <button class="btn btn-info w-25">Wyślij&nbsp;<i class="far fa-paper-plane"></i></button>
     {{ form_end(form) }}
+    </div>
 {% endblock %}
