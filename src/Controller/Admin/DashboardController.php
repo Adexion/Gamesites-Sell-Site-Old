@@ -121,7 +121,7 @@ class DashboardController extends AbstractDashboardController
             ->renderSidebarMinimized()
             ->renderContentMaximized()
             ->disableUrlSignatures()
-            ->setTitle('Panel Administracyjny');
+            ->setTitle('GameSites');
     }
 
     public function configureMenuItems(): iterable
@@ -151,8 +151,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Additional', 'fa fa-plus', Additional::class);
         yield MenuItem::linkToCrud('Configuration', 'fas fa-cog', Configuration::class);
 
-        yield MenuItem::section('');
+        yield MenuItem::section('Użytkownicy');
         yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
-        yield MenuItem::linkToRoute('2FA Google Authenticator', 'fab fa-google', 'user2fa');
+        yield MenuItem::linkToRoute('2FA Google', 'fab fa-google', 'user2fa');
     }
 }
