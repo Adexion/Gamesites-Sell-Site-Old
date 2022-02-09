@@ -1,21 +1,35 @@
 {% extends 'admin/base.html.twig' %}
 
 {% block body %}
-    {% if authenticationError %}
-        <div class="alert-danger alert position-fixed vw-100">{{ authenticationError|trans(authenticationErrorData, 'SchebTwoFactorBundle') }}</div>
-    {% endif %}
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="d-flex flex-column justify-content-center align-items-center w-50">
+            <div>
+                <p class="login"> 2FA Google Authenticator</p>
+                <p class="login-text">Zarządzaj stroną i sklepem w jednym miejscu!</p>
+                <div class="login-gap"></div>
+                <form class="form" action="{{ checkPathUrl ? checkPathUrl: path(checkPathRoute) }}" method="post">
+                    <div class="mb-3">
+                        <label for="_auth_code" class="form-label">{{ "auth_code"|trans({}, 'SchebTwoFactorBundle') }} {{ twoFactorProvider }}:</label>
+                        <input class="form-control" id="_auth_code" type="text" name="{{ authCodeParameterName }}" autocomplete="one-time-code" autofocus/>
+                    </div>
+                    <input type="hidden" name="{{ csrfParameterName }}" value="{{ csrf_token(csrfTokenId) }}">
 
-    <div class="d-flex flex-column justify-content-center align-items-center vh-100 text-center">
-        <h1 class="h4 mb-5"><i class="fab fa-google"></i> 2FA Google Authenticator</h1>
-        <form class="form" action="{{ checkPathUrl ? checkPathUrl: path(checkPathRoute) }}" method="post">
-            <div class="mb-3">
-                <label for="_auth_code" class="form-label">{{ "auth_code"|trans({}, 'SchebTwoFactorBundle') }} {{ twoFactorProvider }}:</label>
-                <input class="form-control" id="_auth_code" type="text" name="{{ authCodeParameterName }}" autocomplete="one-time-code" autofocus/>
+                    <input class="btn btn-primary w-100" type="submit" value="{{ "login"|trans({}, 'SchebTwoFactorBundle') }}"/>
+                    <a class="btn btn-danger w-100 mt-2" href="{{ logoutPath }}">{{ "cancel"|trans({}, 'SchebTwoFactorBundle') }}</a>
+                </form>
+                <p class="copyright">©2022 GameSites.pl - Wszelkie prawa zastrzeżone.</p>
             </div>
-            <input type="hidden" name="{{ csrfParameterName }}" value="{{ csrf_token(csrfTokenId) }}">
+            {% if authenticationError %}
+                <div class="alert-danger alert w-100">{{ authenticationError|trans(authenticationErrorData, 'SchebTwoFactorBundle') }}</div>
+            {% endif %}
+        </div>
 
-            <input class="btn btn-primary" type="submit" value="{{ "login"|trans({}, 'SchebTwoFactorBundle') }}"/>
-            <a class="btn btn-danger" href="{{ logoutPath }}">{{ "cancel"|trans({}, 'SchebTwoFactorBundle') }}</a>
-        </form>
+        <div class="vh-100 w-50 gradient d-flex flex-column justify-content-center align-items-center">
+            <div class="gradient-image"></div>
+            <h1>GameSites</h1>
+            <h2>The true power of gaming...</h2>
+            <br>
+            <h3 class="w-75">Zaloguj się do panelu jednej z najbardziej dopracowanych i szczegółowych aplikacji na rynku. Ułatwiamy wszystko byś ty nie musiał robić!</h3>
+        </div>
     </div>
 {% endblock %}

@@ -65,7 +65,7 @@ class UserCrud extends AbstractCrudController
                 ]),
             TextField::new('password')
                 ->setFormType(PasswordType::class)
-                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+                ->setFormTypeOption('constraints', [new Length(['min'=> 8, 'max' => 255])]),
             TextField::new('nick')
                 ->setFormTypeOption('constraints', [new Length(["min" => 3, "max" => 15])])
         ];
