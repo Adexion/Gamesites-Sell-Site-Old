@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Payment;
 
 use App\Entity\Item;
 use App\Entity\ItemHistory;
@@ -31,7 +31,7 @@ class PaymentRequestBuilder
     }
 
     /** @throws OptimisticLockException|ORMException */
-    public function buildRequest(array $data, Item $item): array
+    public function getRequest(array $data, Item $item): array
     {
         $payment = $this->paymentRepository->findOneBy(['isActive' => true, 'type' => $data['payment']]);
 

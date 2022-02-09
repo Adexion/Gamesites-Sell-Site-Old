@@ -3,16 +3,15 @@
 namespace App\Controller\Client;
 
 use App\Entity\PaySafeCardVoucher;
-use App\Entity\Voucher;
 use App\Enum\PaymentStatusEnum;
 use App\Enum\PaymentTypeEnum;
 use App\Enum\PaySafeCardStatusEnum;
 use App\Form\PaymentStatusType;
 use App\Form\VoucherType;
 use App\Repository\ItemHistoryRepository;
-use App\Service\PaymentExecutionService;
-use App\Service\VoucherExecutionService;
-use DateTime;
+use App\Service\Payment\PaymentExecutionService;
+use App\Service\Voucher\VoucherAssignService;
+use App\Service\Voucher\VoucherExecutionService;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -29,8 +28,7 @@ class PaymentController extends AbstractRenderController
 {
     /**
      * @Route(name="status", path="/payment/status")
-     *
-     * @throws AuthenticationException|InvalidPacketException|ORMException|OptimisticLockException|SocketException|InvalidArgumentException|SyntaxError
+     * @throws AuthenticationException|InvalidPacketException|ORMException|OptimisticLockException|SocketException|InvalidArgumentException
      */
     public function status(Request $request, PaymentExecutionService $executionService): Response
     {
@@ -38,9 +36,7 @@ class PaymentController extends AbstractRenderController
         $form->submit($request->request->all());
 
         if (!$form->isSubmitted() || !$form->isValid()) {
-            return $this->render('client/rejected.html.twig', [
-                'message' => 'Wrong data given',
-            ]);
+            new JsonResponse(['message' => 'Wrong data given'], Response::HTTP_BAD_REQUEST);
         }
 
         $message = $executionService->execute($form->getData());
@@ -50,7 +46,6 @@ class PaymentController extends AbstractRenderController
 
     /**
      * @Route(name="voucher", path="/payment/voucher")
-     *
      * @throws AuthenticationException|InvalidArgumentException|InvalidPacketException|ORMException|OptimisticLockException|SyntaxError
      */
     public function voucher(Request $request, VoucherExecutionService $executionService): Response
@@ -73,7 +68,10 @@ class PaymentController extends AbstractRenderController
         return $this->render('client/success.html.twig');
     }
 
-    /** @Route(name="thankYoy", path="/payment") */
+    /**
+     * @Route(name="thankYoy", path="/payment")
+     * @throws SyntaxError
+     */
     public function payment(Request $request, ItemHistoryRepository $itemHistoryRepository): Response
     {
         $cookies = $request->cookies;
@@ -110,44 +108,33 @@ class PaymentController extends AbstractRenderController
         ]);
     }
 
-    /** @Route(name="pscVoucher", path="/paySafeCard/{hash}") */
-    public function getVoucher(?PaySafeCardVoucher $hash): Response
+    /**
+     * @Route(name="pscVoucher", path="/paySafeCard/{pscVoucher}")
+     * @throws SyntaxError|ORMException|OptimisticLockException
+     */
+    public function getVoucher(?PaySafeCardVoucher $pscVoucher, VoucherAssignService $assignService): Response
     {
-        if (!$hash || $hash->getPaySafeCard()->getStatus() === PaySafeCardStatusEnum::NOT_WORKING) {
+        if (!$pscVoucher || $pscVoucher->getPaySafeCard()->getStatus() === PaySafeCardStatusEnum::NOT_WORKING) {
             return $this->render('client/rejected.html.twig', [
                 'message' => "Payment not exist ore removed.",
             ]);
         }
 
-        if ($hash->getPaySafeCard()->getStatus() === PaySafeCardStatusEnum::NEW) {
+        if ($pscVoucher->getPaySafeCard()->getStatus() === PaySafeCardStatusEnum::NEW) {
             return $this->render('client/thankYou.html.twig', [
                 'type' => PaymentTypeEnum::PAY_SAFE_CARD,
                 'message' => 'This payment is still pending. Please wait little bit more ore contact with administration on the server.',
-                'paymentId' => $hash->getPaySafeCard()->getId(),
+                'paymentId' => $pscVoucher->getPaySafeCard()->getId(),
             ]);
         }
 
-        if (!$hash->getVoucher()) {
-            $voucher = (new Voucher())
-                ->setDate(new DateTime())
-                ->setTimes(1)
-                ->setItem($hash->getPaySafeCard()->getItem())
-                ->setCode(uniqid('MG', true));
-
-            $this->getDoctrine()->getManager()->persist($voucher);
-            $this->getDoctrine()->getManager()->flush();
-
-            $hash->setVoucher($voucher);
-
-            $this->getDoctrine()->getManager()->persist($hash);
-            $this->getDoctrine()->getManager()->flush();
-        }
+        $assignService->assign($pscVoucher);
 
         return $this->render('client/thankYou.html.twig', [
             'type' => PaymentTypeEnum::PAY_SAFE_CARD,
             'message' => 'Payment realized successfully. Get your voucher.',
-            'voucher' => $hash->getVoucher()->getCode(),
-            'paymentId' => $hash->getPaySafeCard()->getId(),
+            'voucher' => $pscVoucher->getVoucher()->getCode(),
+            'paymentId' => $pscVoucher->getPaySafeCard()->getId(),
         ]);
     }
 }

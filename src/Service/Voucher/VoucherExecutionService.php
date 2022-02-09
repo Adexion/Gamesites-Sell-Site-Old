@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Voucher;
 
 use App\Entity\ItemHistory;
 use App\Enum\PaymentStatusEnum;
 use App\Repository\ItemHistoryRepository;
 use App\Repository\VoucherRepository;
+use App\Service\QueryService;
 use DateTime;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
