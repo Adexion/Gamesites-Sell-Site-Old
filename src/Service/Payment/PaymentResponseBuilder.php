@@ -6,7 +6,7 @@ use App\Entity\Item;
 use App\Form\PaymentType;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,9 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 class PaymentResponseBuilder
 {
     private PaymentRequestBuilder $requestBuilder;
-    private FormFactory $formFactory;
+    private FormFactoryInterface $formFactory;
 
-    public function __construct(PaymentRequestBuilder $requestBuilder, FormFactory $formFactory)
+    public function __construct(PaymentRequestBuilder $requestBuilder, FormFactoryInterface $formFactory)
     {
         $this->requestBuilder = $requestBuilder;
         $this->formFactory = $formFactory;
