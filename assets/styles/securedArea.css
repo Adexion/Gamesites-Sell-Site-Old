@@ -133,3 +133,13 @@ label input {
     line-height: 37px;
     text-align: center;
 }
+
+@media (max-width: 1410px) {
+    .container {
+        width: 100% !important;
+        height: 100vh;
+    }
+    .gradient {
+        display: none !important;
+    }
+}
