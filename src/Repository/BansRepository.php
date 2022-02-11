@@ -4,8 +4,9 @@ namespace App\Repository;
 
 use App\Entity\Bans;
 use App\Entity\Rank;
-use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\DBAL\Driver;
+use Exception;
 
 /**
  * @method Rank|null find($id, $lockMode = null, $lockVersion = null)
@@ -22,17 +23,21 @@ class BansRepository extends AbstractRemoteRepository
         parent::__construct($registry, Bans::class);
     }
 
-    /** @throws Exception|\Doctrine\DBAL\Driver\Exception */
+    /** @throws Driver\Exception */
     public function findRemote(array $criteria = [], array $filters = []): array
     {
         if (!$bans = $this->findOneBy($criteria)) {
             return [];
         }
 
-        return $this->createQB($bans)
-            ->addSelect('x.'. $bans->getColumnTwo().' AS reason')
-            ->setMaxResults(self::MAX_RESULT)
-            ->execute()
-            ->fetchAllAssociative();
+        try {
+            return $this->createQB($bans)
+                ->addSelect('x.'.$bans->getColumnTwo().' AS reason')
+                ->setMaxResults(self::MAX_RESULT)
+                ->execute()
+                ->fetchAllAssociative();
+        } catch (Exception $e) {
+            return [];
+        }
     }
 }

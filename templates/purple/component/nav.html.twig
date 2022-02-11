@@ -6,7 +6,7 @@
                 <li>
                     <a class="navbar-link navbar-active circle-active" href="/">Strona Główna</a>
                 </li>
-                {% if playerRank is not empty or guildRank is not empty %}
+                {% if isPlayerRank is not empty or isGuildRank is not empty %}
                     <li>
                         <a class="navbar-link" href="{{ path('index') }}#ranking">Rankingi</a>
                     </li>

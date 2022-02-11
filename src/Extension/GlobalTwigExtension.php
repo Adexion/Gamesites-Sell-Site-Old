@@ -2,68 +2,50 @@
 
 namespace App\Extension;
 
-use App\Entity\Additional;
-use App\Entity\Configuration;
-use App\Enum\RankEnum;
-use App\Repository\AdditionalRepository;
-use App\Repository\BansRepository;
-use App\Repository\ConfigurationRepository;
-use App\Repository\ItemHistoryRepository;
-use App\Repository\RankRepository;
-use App\Repository\ServerRepository;
+use App\Service\GlobalDataQuery;
 use App\Service\QueryService;
-use DateTime;
 use Exception;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
 
 class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
 {
-    private AdditionalRepository $additionalRepository;
+    private GlobalDataQuery $globalDataQuery;
     private QueryService $queryService;
-    private ConfigurationRepository $configurationRepository;
-    private RankRepository $rankRepository;
-    private ?Request $request;
-    private BansRepository $bansRepository;
 
-    public function __construct(
-        AdditionalRepository $additionalRepository,
-        ConfigurationRepository $configurationRepository,
-        QueryService $queryService,
-        RankRepository $rankRepository,
-        BansRepository $bansRepository,
-        RequestStack $requestStack
-    ) {
-        $this->additionalRepository = $additionalRepository;
-        $this->configurationRepository = $configurationRepository;
+    public function __construct(GlobalDataQuery $globalDataQuery, QueryService $queryService)
+    {
+        $this->globalDataQuery = $globalDataQuery;
         $this->queryService = $queryService;
-        $this->rankRepository = $rankRepository;
-        $this->bansRepository = $bansRepository;
-        $this->request = $requestStack->getCurrentRequest();
     }
 
     /** @throws Exception */
     public function getGlobals(): array
     {
-        $additional = $this->additionalRepository->findOneBy([]) ?? (new Additional());
-        $configuration = $this->configurationRepository->findOneBy([]) ?? (new Configuration())
-                ->setLogo('minecraft.png')
-                ->setServerName('A Minecraft Server');
-
-        return
-            $additional->toArray() + [
-                'serverInfo' => $this->queryService->getInfo(),
-                'serverIp' => $configuration->getIp(),
-                'logo' => $configuration->getLogo(),
-                'serverName' => $configuration->getServerName(),
-                'serverDescription' => $configuration->getDescription(),
-                'guildRank' => $this->rankRepository->findRemote(['type' => RankEnum::GUILD]),
-                'playerRank' => $this->rankRepository->findRemote(['type' => RankEnum::PLAYER], $this->request->query->all()),
-                'areBansSet' => (bool)$this->bansRepository->findOneBy([]),
-                'isSimplePaySafeCard' => $configuration->getSimplePaySafeCard(),
-                'target' => $configuration->getTarget()
-            ];
+        $globals = $this->globalDataQuery->getGlobals();
+        return [
+            'serverInfo' => $globals['minecraftQueryIp'] ?? null ? $this->queryService->getInfo() : [],
+            'isPlayerRank' => $globals['player'] ?? null,
+            'isGuildRank' => $globals['guild'] ?? null,
+            'serverIp' => $globals['serverIp'] ?? null,
+            'logo' => $globals['logo'] ?? null,
+            'target' => $globals['target'] ?? null,
+            'serverName' => $globals['serverName'] ?? null,
+            'serverDescription' => $globals['description'] ?? null,
+            'areBansSet' => $globals['bans'] ?? null,
+            'simplePaySafeCard' => $globals['simplePaySafeCard'] ?? null,
+            'siteTitle' => $globals['siteTitle'] ?? null,
+            'mainText' => $globals['mainText'] ?? null,
+            'mainDescription' => $globals['mainDescription'] ?? null,
+            'trailerText' => $globals['trailerText'] ?? null,
+            'guildText' => $globals['guildText'] ?? null,
+            'discord' => $globals['discord'] ?? null,
+            'instagram' => $globals['instagram'] ?? null,
+            'yt' => $globals['yt'] ?? null,
+            'ts3' => $globals['ts3'] ?? null,
+            'facebook' => $globals['facebook'] ?? null,
+            'tiktok' => $globals['tiktok'] ?? null,
+            'trailer' => $globals['trailer'] ?? null,
+        ];
     }
 }

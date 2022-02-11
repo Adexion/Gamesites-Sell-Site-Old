@@ -189,25 +189,6 @@ class Additional
         return $this;
     }
 
-    public function toArray()
-    {
-        return [
-            'id' => $this->getId(),
-            'siteTitle' => $this->getSiteTitle(),
-            'mainText' => $this->getMainText(),
-            'mainDescription' => $this->getMainDescription(),
-            'trailerText' => $this->getTrailerText(),
-            'guildText' => $this->getGuildText(),
-            'trailer' => $this->getTrailer(),
-            'discord' => $this->getDiscord(),
-            'ts3' => $this->getTs3(),
-            'facebook' => $this->getFacebook(),
-            'yt' => $this->getYt(),
-            'instagram' => $this->getInstagram(),
-            'tiktok' => $this->getTiktok(),
-        ];
-    }
-
     public function getTrailer(): ?string
     {
         return $this->trailer;
