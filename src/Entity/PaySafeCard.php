@@ -59,7 +59,7 @@ class PaySafeCard
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    public function setCode(?string $code): self
     {
         $this->code = $code;
 

@@ -3,7 +3,8 @@
 namespace App\Controller\Client;
 
 use App\Entity\PaySafeCardVoucher;
-use App\Enum\PaymentStatusEnum;
+use App\Enum\PaymentFullyStatusEnum;
+use App\Enum\PaymentStatusResponseEnum;
 use App\Enum\PaymentTypeEnum;
 use App\Enum\PaySafeCardStatusEnum;
 use App\Form\PaymentStatusType;
@@ -14,6 +15,7 @@ use App\Service\Voucher\VoucherAssignService;
 use App\Service\Voucher\VoucherExecutionService;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use RuntimeException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,13 +24,11 @@ use Twig\Error\SyntaxError;
 use xPaw\SourceQuery\Exception\AuthenticationException;
 use xPaw\SourceQuery\Exception\InvalidArgumentException;
 use xPaw\SourceQuery\Exception\InvalidPacketException;
-use xPaw\SourceQuery\Exception\SocketException;
 
 class PaymentController extends AbstractRenderController
 {
     /**
      * @Route(name="status", path="/payment/status")
-     * @throws AuthenticationException|InvalidPacketException|ORMException|OptimisticLockException|SocketException|InvalidArgumentException
      */
     public function status(Request $request, PaymentExecutionService $executionService): Response
     {
@@ -39,9 +39,11 @@ class PaymentController extends AbstractRenderController
             new JsonResponse(['message' => 'Wrong data given'], Response::HTTP_BAD_REQUEST);
         }
 
-        $message = $executionService->execute($form->getData());
-
-        return new JsonResponse(['message' => $message]);
+        try {
+            return new JsonResponse(['message' => $executionService->execute($form->getData())]);
+        } catch (RuntimeException $e) {
+            return new JsonResponse(['message' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
+        }
     }
 
     /**
@@ -77,33 +79,11 @@ class PaymentController extends AbstractRenderController
         $cookies = $request->cookies;
         $itemHistory = $itemHistoryRepository->find($cookies->get('paymentId', 0));
 
-        switch ($itemHistory->getStatus()) {
-            case PaymentStatusEnum::CREATED:
-            case PaymentStatusEnum::UNACCEPTED:
-            case PaymentStatusEnum::CANCELED:
-            case "FAILURE":
-                $message = 'This payment is not accepted. If it is not right pleas contact with your administrator.';
-                break;
-            case "PENDING":
-                $message = 'This payment is still pending. Pleas not log out from server.';
-                break;
-            case PaymentStatusEnum::TIME_OUT:
-                $message = 'This payment can not checked correctly. Pleas contact with administrator.';
-                break;
-            case PaymentStatusEnum::NOT_ON_SERVER:
-                $message = "You are not connected to serwer! Contact with administration and give him this payment ID";
-                break;
-            case PaymentStatusEnum::REALIZED:
-                $message = "Payment realized successfully.";
-                break;
-            case PaymentStatusEnum::NOT_EXISTED:
-                $message = 'Given payment does not exist.';
-                break;
-        }
-
         return $this->render('client/thankYou.html.twig', [
             'type' => $itemHistory->getType(),
-            'message' => $message ?? '',
+            'message' => PaymentStatusResponseEnum::toArray()[PaymentFullyStatusEnum::from(
+                    $itemHistory->getStatus()
+                )->getKey()] ?? '',
             'paymentId' => $cookies->get('paymentId', 0),
         ]);
     }

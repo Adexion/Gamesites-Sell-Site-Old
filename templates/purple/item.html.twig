@@ -87,6 +87,10 @@
                         document.getElementById('code').value = '';
                         document.getElementById('check').checked = false;
 
+                        if (document.getElementById('payment').value === 'paySafeCard') {
+                            document.getElementById('psc-code').removeAttribute('style');
+                        }
+
                         document.getElementById('check').addEventListener('click', () => {
                             const checkbox = document.getElementById('check');
                             const submitBtn = document.getElementById('submit');
