@@ -18,19 +18,24 @@ class Server
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=25)
+     */
+    private $connectionType;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
-    private $RConIp;
+    private $conIp;
 
     /**
      * @ORM\Column(type="smallint", length=255)
      */
-    private $RConPort;
+    private $conPort;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $RConPassword;
+    private $conPassword;
 
     /**
      * @ORM\Column(type="string", length=60)
@@ -87,38 +92,38 @@ class Server
         return $this->id;
     }
 
-    public function getRConIp(): ?string
+    public function getConIp(): ?string
     {
-        return $this->RConIp;
+        return $this->conIp;
     }
 
-    public function setRConIp(?string $RConIp): self
+    public function setConIp(?string $conIp): self
     {
-        $this->RConIp = $RConIp;
+        $this->conIp = $conIp;
 
         return $this;
     }
 
-    public function getRConPort(): ?int
+    public function getConPort(): ?int
     {
-        return $this->RConPort;
+        return $this->conPort;
     }
 
-    public function setRConPort(?int $RConPort): self
+    public function setConPort(?int $conPort): self
     {
-        $this->RConPort = $RConPort;
+        $this->conPort = $conPort;
 
         return $this;
     }
 
-    public function getRConPassword(): ?string
+    public function getConPassword(): ?string
     {
-        return $this->RConPassword;
+        return $this->conPassword;
     }
 
-    public function setRConPassword(?string $RConPassword): self
+    public function setConPassword(?string $conPassword): self
     {
-        $this->RConPassword = $RConPassword;
+        $this->conPassword = $conPassword;
 
         return $this;
     }
@@ -157,5 +162,17 @@ class Server
     public function getDescription(): ?string
     {
         return $this->description;
+    }
+
+    public function setConnectionType(?string $connectionType): self
+    {
+        $this->connectionType = $connectionType;
+
+        return $this;
+    }
+
+    public function getConnectionType(): ?string
+    {
+        return $this->connectionType;
     }
 }

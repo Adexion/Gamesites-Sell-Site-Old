@@ -67,8 +67,8 @@ class QueryService
 
         error_reporting(E_ALL ^ E_WARNING);
         try {
-            $sourceQuery->connect($server->getRConIp() ?? '', $server->getRConPort() ?? 0, 1);
-            $sourceQuery->setRConPassword($server->getRConPassword());
+            $sourceQuery->connect($server->getConIp() ?? '', $server->getConPort() ?? 0, 1);
+            $sourceQuery->setRConPassword($server->getConPassword());
         } catch (SocketException $e) {}
 
         return $sourceQuery;
