@@ -3,38 +3,49 @@
 namespace App\Service\Connection;
 
 use App\Entity\Server;
+use Redis;
 
 class RedisService implements ExecuteInterface, QueryInterface, ConnectionInterface
 {
     private Server $server;
+    private QueryService $query;
 
     public function __construct(Server $server)
     {
         $this->server = $server;
+        $this->query = new QueryService($server);
     }
 
-    function getConnection()
+    function getConnection(): Redis
     {
-        // TODO: Implement getConnection() method.
+        $redis = new Redis();
+
+        $redis->connect($this->server->getConIp(), $this->server->getConPort());
+        $redis->auth(explode('@', $this->server->getConPassword()));
+
+        return $redis;
     }
 
     public function execute($command, string $username = ''): ?string
     {
-        // TODO: Implement execute() method.
+        return $this->getConnection()->publish(
+            $this->server->getServerName(),
+            str_replace('%player%', $username, $command)
+        );
     }
 
     public function getPlayerList(): ?array
     {
-        // TODO: Implement getPlayerList() method.
+       return $this->query->getPlayerList();
     }
 
     public function getInfo(): ?array
     {
-        // TODO: Implement getInfo() method.
+        return $this->query->getInfo();
     }
 
     public function isPlayerLoggedIn(string $username): bool
     {
-        // TODO: Implement isPlayerLoggedIn() method.
+        return $this->query->isPlayerLoggedIn($username);
     }
 }
