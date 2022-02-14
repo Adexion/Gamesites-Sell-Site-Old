@@ -52,7 +52,9 @@ class ItemType extends BaseType
                 'required' => false,
                 'constraints' => [
                     new Type(['type' => 'numeric', 'message' => 'Błędny PaySafeCard']),
-                    new Length(['min' => 16, 'max' => 16, 'exactMessage' => 'PaySafeCard powinien mieć dokładnie 16 znaków']),
+                    new Length(
+                        ['min' => 16, 'max' => 16, 'exactMessage' => 'PaySafeCard powinien mieć dokładnie 16 znaków']
+                    ),
                 ],
             ])
             ->add('check', CheckboxType::class, [])

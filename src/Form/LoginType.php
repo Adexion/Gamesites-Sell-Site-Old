@@ -8,7 +8,6 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class LoginType extends BaseType
 {
@@ -18,7 +17,7 @@ class LoginType extends BaseType
             ->add('_username', EmailType::class)
             ->add('_password', PasswordType::class)
             ->add('_remember_me', CheckboxType::class, [
-                'required' => false
+                'required' => false,
             ])
             ->add('logIn', SubmitType::class);
     }

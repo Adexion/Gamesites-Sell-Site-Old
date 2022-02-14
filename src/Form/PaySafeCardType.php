@@ -2,8 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Item;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\BaseType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -22,14 +20,14 @@ class PaySafeCardType extends BaseType
             ->add('username', TextType::class)
             ->add('email', EmailType::class, [
                 'constraints' => [
-                    new Email(['mode' => Email::VALIDATION_MODE_STRICT])
-                ]
+                    new Email(['mode' => Email::VALIDATION_MODE_STRICT]),
+                ],
             ])
             ->add('code', TextType::class, [
                 'constraints' => [
                     new Type('numeric'),
-                    new Length(16)
-                ]
+                    new Length(16),
+                ],
             ])
             ->add('submit', SubmitType::class);
     }

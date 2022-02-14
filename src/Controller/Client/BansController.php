@@ -4,7 +4,6 @@ namespace App\Controller\Client;
 
 use App\Repository\BansRepository;
 use App\Service\BansMapper;
-use DateTime;
 use Exception;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

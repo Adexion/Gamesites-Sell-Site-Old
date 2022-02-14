@@ -40,7 +40,7 @@ class Administration
     {
         return $this->id;
     }
-    
+
     public function getUsername(): ?string
     {
         return $this->username;
@@ -52,7 +52,7 @@ class Administration
 
         return $this;
     }
-    
+
     public function getDescription(): ?string
     {
         return $this->description;

@@ -74,7 +74,7 @@ class PaymentExecutionService
         }
     }
 
-    /**  @throws ORMException|OptimisticLockException */
+    /** @throws ORMException|OptimisticLockException */
     private function handleNotOnServerResponse(ItemHistory $history)
     {
         $service = $this->factory->getExecutionService(
@@ -84,7 +84,7 @@ class PaymentExecutionService
         if (!$service->isPlayerLoggedIn($history->getUsername())) {
             $history->setStatus(PaymentStatusEnum::NOT_ON_SERVER);
             $this->historyRepository->insertOrUpdate($history);
-
+ 
             throw new RuntimeException(
                 'You are not connected to the server. If it is not right pleas contact with your administrator.'
             );
@@ -101,12 +101,12 @@ class PaymentExecutionService
     {
         return hash(
             "sha256",
-            $hash.";"
-            .$data["KWOTA"].";"
-            .$data["ID_PLATNOSCI"].";"
-            .$data["ID_ZAMOWIENIA"].";"
-            .$data["STATUS"].";"
-            .$data["SEKRET"]
+            $hash . ";"
+            . $data["KWOTA"] . ";"
+            . $data["ID_PLATNOSCI"] . ";"
+            . $data["ID_ZAMOWIENIA"] . ";"
+            . $data["STATUS"] . ";"
+            . $data["SEKRET"]
         );
     }
 }

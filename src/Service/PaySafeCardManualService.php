@@ -10,7 +10,6 @@ use App\Repository\PaySafeCardVoucherRepository;
 use DateTime;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use Exception;
 use Symfony\Component\Form\FormInterface;
 
 class PaySafeCardManualService

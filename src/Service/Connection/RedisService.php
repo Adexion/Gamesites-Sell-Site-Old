@@ -36,7 +36,7 @@ class RedisService implements ExecuteInterface, QueryInterface, ConnectionInterf
 
     public function getPlayerList(): ?array
     {
-       return $this->query->getPlayerList();
+        return $this->query->getPlayerList();
     }
 
     public function getInfo(): ?array

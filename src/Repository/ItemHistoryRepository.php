@@ -49,7 +49,8 @@ class ItemHistoryRepository extends ServiceEntityRepository
         return $qb->getQuery()->execute()[0]['count'];
     }
 
-    public function getHistoryWithHash(string $orderId): array {
+    public function getHistoryWithHash(string $orderId): array
+    {
         /** @var ?ItemHistory $history */
         $response['history'] = $this->find($orderId);
         if (!in_array($history->getType(), PaymentTypeEnum::values())) {

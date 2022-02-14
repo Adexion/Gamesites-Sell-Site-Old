@@ -4,8 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Bans;
 use App\Entity\Rank;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Driver;
+use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 
 /**
@@ -32,7 +32,7 @@ class BansRepository extends AbstractRemoteRepository
 
         try {
             return $this->createQB($bans)
-                ->addSelect('x.'.$bans->getColumnTwo().' AS reason')
+                ->addSelect('x.' . $bans->getColumnTwo() . ' AS reason')
                 ->setMaxResults(self::MAX_RESULT)
                 ->execute()
                 ->fetchAllAssociative();

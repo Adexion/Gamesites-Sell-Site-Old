@@ -22,26 +22,43 @@ class GlobalDataQuery
 
     public function getGlobals(): array
     {
-       return $this->entityManager->createQueryBuilder()
+        return $this->entityManager->createQueryBuilder()
             ->select(
-                'c.logo', 'c.ip AS serverIp', 'c.description', 'c.simplePaySafeCard', 'c.target, c.serverName',
-                's.minecraftQueryIp', 's.minecraftQueryPort',
-                'a.siteTitle',  'a.mainText', 'a.mainDescription', 'a.trailerText',  'a.guildText', 'a.discord',
-                'a.ts3',  'a.facebook', 'a.yt', 'a.instagram',  'a.tiktok', 'a.trailer',
-                'r1.id AS guild', 'r2.id AS player', 'b.id AS bans'
+                'c.logo',
+                'c.ip AS serverIp',
+                'c.description',
+                'c.simplePaySafeCard',
+                'c.target, c.serverName',
+                's.minecraftQueryIp',
+                's.minecraftQueryPort',
+                'a.siteTitle',
+                'a.mainText',
+                'a.mainDescription',
+                'a.trailerText',
+                'a.guildText',
+                'a.discord',
+                'a.ts3',
+                'a.facebook',
+                'a.yt',
+                'a.instagram',
+                'a.tiktok',
+                'a.trailer',
+                'r1.id AS guild',
+                'r2.id AS player',
+                'b.id AS bans'
             )
-           ->from(Configuration::class, 'c')
-           ->leftJoin(Additional::class, 'a', 'WITH', 'a.id IS NOT NULL')
-           ->leftJoin(Server::class, 's', 'WITH', 's.isDefault = true')
-           ->leftJoin(Rank::class, 'r1', 'WITH', 'r1.type = :guild')
-           ->leftJoin(Rank::class, 'r2', 'WITH', 'r2.type = :player')
-           ->leftJoin(Bans::class, 'b', 'WITH', 'b.id IS NOT NULL')
-           ->setParameters([
-               ':guild' => RankEnum::GUILD,
-               ':player' => RankEnum::PLAYER
-           ])
-           ->where('1 = 1')
-           ->getQuery()
-           ->execute()[0];
+            ->from(Configuration::class, 'c')
+            ->leftJoin(Additional::class, 'a', 'WITH', 'a.id IS NOT NULL')
+            ->leftJoin(Server::class, 's', 'WITH', 's.isDefault = true')
+            ->leftJoin(Rank::class, 'r1', 'WITH', 'r1.type = :guild')
+            ->leftJoin(Rank::class, 'r2', 'WITH', 'r2.type = :player')
+            ->leftJoin(Bans::class, 'b', 'WITH', 'b.id IS NOT NULL')
+            ->setParameters([
+                ':guild' => RankEnum::GUILD,
+                ':player' => RankEnum::PLAYER,
+            ])
+            ->where('1 = 1')
+            ->getQuery()
+            ->execute()[0];
     }
 }

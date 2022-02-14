@@ -41,17 +41,24 @@ class ItemController extends AbstractRenderController
      * @Route (name="item", path="/shop/{id}")
      * @throws ORMException|OptimisticLockException|SyntaxError
      */
-    public function item(Item $item, Request $request, PaymentResponseBuilder $builder, PaySafeCardManualService $manualService): Response
-    {
+    public function item(
+        Item $item,
+        Request $request,
+        PaymentResponseBuilder $builder,
+        PaySafeCardManualService $manualService
+    ): Response {
         $form = $this->createForm(ItemType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($request->request->get('payment') === 'paySafeCard') {
-                return $this->redirectToRoute('voucher', ['hash' => $manualService->createManualPSC($form, $item)->getHash()]);
+                return $this->redirectToRoute(
+                    'voucher',
+                    ['hash' => $manualService->createManualPSC($form, $item)->getHash()]
+                );
             }
 
-            return $builder->getResponse($form, $item, function($parameters) {
+            return $builder->getResponse($form, $item, function ($parameters) {
                 return $this->render('client/payment.html.twig', $parameters);
             });
         }
