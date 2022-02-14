@@ -5,22 +5,32 @@ namespace App\Service\Payment;
 use App\Entity\ItemHistory;
 use App\Enum\PaymentStatusEnum;
 use App\Repository\ItemHistoryRepository;
-use App\Service\QueryService;
+use App\Repository\ServerRepository;
+use App\Service\Connection\ExecuteServiceFactory;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use RuntimeException;
 
 class PaymentExecutionService
 {
     private ItemHistoryRepository $historyRepository;
-    private QueryService $service;
+    private ExecuteServiceFactory $factory;
+    private ServerRepository $serverRepository;
 
     public function __construct(
         ItemHistoryRepository $historyRepository,
-        QueryService $service
+        ExecuteServiceFactory $factory,
+        ServerRepository $serverRepository
     ) {
         $this->historyRepository = $historyRepository;
-        $this->service = $service;
+        $this->factory = $factory;
+        $this->serverRepository = $serverRepository;
     }
 
+    /**
+     * @throws OptimisticLockException
+     * @throws ORMException
+     */
     public function execute(array $payment): ?string
     {
         $data = $this->historyRepository->getHistoryWithHash($payment['ID_ZAMOWIENIA']);
@@ -35,7 +45,10 @@ class PaymentExecutionService
         $this->handleNotOnServerResponse($history);
 
         foreach ($history->getItem()->getCommand() as $command) {
-            $this->service->execute($command, $history->getItem()->getServer(), $history->getUsername());
+            $this->factory->getExecutionService($history->getItem()->getServer())->execute(
+                $command,
+                $history->getUsername()
+            );
         }
 
         $history->setStatus(PaymentStatusEnum::REALIZED);
@@ -44,6 +57,7 @@ class PaymentExecutionService
         return null;
     }
 
+    /**  @throws ORMException|OptimisticLockException */
     private function handleUnsuccessfullyResponse(string $paymentStatus, ItemHistory $history)
     {
         if (!in_array($paymentStatus, ["SUCCESS", (string)PaymentStatusEnum::ACCEPTED])) {
@@ -60,9 +74,14 @@ class PaymentExecutionService
         }
     }
 
+    /**  @throws ORMException|OptimisticLockException */
     private function handleNotOnServerResponse(ItemHistory $history)
     {
-        if (!$this->service->isPlayerLoggedIn($history->getUsername())) {
+        $service = $this->factory->getExecutionService(
+            $this->serverRepository->findOneBy(['isDefault' => true]) ?: $history->getItem()->getServer()
+        );
+
+        if (!$service->isPlayerLoggedIn($history->getUsername())) {
             $history->setStatus(PaymentStatusEnum::NOT_ON_SERVER);
             $this->historyRepository->insertOrUpdate($history);
 

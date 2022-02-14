@@ -1,36 +1,49 @@
 <?php
+
 namespace App\Service\Connection;
 
 use App\Entity\Server;
-use App\Repository\ServerRepository;
 use xPaw\MinecraftQuery;
 use xPaw\MinecraftQueryException;
 
-class QueryService
+class QueryService implements QueryInterface, ConnectionInterface
 {
-    private ServerRepository $serverRepository;
+    private ?Server $server;
 
-    public function __construct(ServerRepository $serverRepository)
+    public function __construct(Server $server)
     {
-        $this->serverRepository = $serverRepository;
+        $this->server = $server;
     }
 
-    public function getInfo(): ?array {
+    public function getInfo(): ?array
+    {
         try {
-            return $this->getMinecraftQuery()->GetInfo() ? : [];
+            return $this->getConnection()->GetInfo() ?: [];
         } catch (MinecraftQueryException $e) {
             return [];
         }
     }
 
     /** @throws MinecraftQueryException */
-    private function getMinecraftQuery(): MinecraftQuery
+    public function getConnection(): MinecraftQuery
     {
-        $server = $this->serverRepository->findOneBy(['isDefault' => true]) ?? new Server();
-
         $queryMinecraft = new MinecraftQuery();
-        $queryMinecraft->connect($server->getMinecraftQueryIp(), $server->getMinecraftQueryPort());
+        $queryMinecraft->connect($this->server->getMinecraftQueryIp(), $this->server->getMinecraftQueryPort());
 
         return $queryMinecraft;
+    }
+
+    public function getPlayerList(): ?array
+    {
+        try {
+            return $this->getConnection()->GetPlayers() ?: [];
+        } catch (MinecraftQueryException $e) {
+            return [];
+        }
+    }
+
+    public function isPlayerLoggedIn(string $username): bool
+    {
+        return in_array($username, $this->getPlayerList());
     }
 }

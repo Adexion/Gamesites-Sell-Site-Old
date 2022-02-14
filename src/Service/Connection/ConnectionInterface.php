@@ -2,7 +2,11 @@
 
 namespace App\Service\Connection;
 
-interface ConnectionInterfacce
-{
+use App\Entity\Server;
 
+interface ConnectionInterface
+{
+    public function __construct(Server $server);
+
+    function getConnection();
 }
