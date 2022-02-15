@@ -28,10 +28,6 @@ class PaySafeCardManualService
     /** @throws OptimisticLockException|ORMException */
     public function createManualPSC(FormInterface $form, Item $item): PaySafeCardVoucher
     {
-        if ($psc = $this->paySafeCardRepository->findOneBy(['code' => $form->getData()['code']])) {
-            return $this->paySafeCardVoucherRepository->findOneBy(['paySafeCard' => $psc]);
-        }
-
         $psc = (new PaySafeCard())
             ->setItem($item)
             ->setDate(new DateTime())
