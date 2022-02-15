@@ -19,7 +19,7 @@ class PaySafeCard
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="json")
      */
     private $code;
 
@@ -54,12 +54,12 @@ class PaySafeCard
         return $this->id;
     }
 
-    public function getCode(): ?string
+    public function getCode(): ?array
     {
         return $this->code;
     }
 
-    public function setCode(?string $code): self
+    public function setCode(?array $code): self
     {
         $this->code = $code;
 

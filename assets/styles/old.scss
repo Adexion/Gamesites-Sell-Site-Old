@@ -32,6 +32,15 @@ a {
   color: white !important;
 }
 
+#code-fields-list {
+  list-style: none;
+  padding: 0;
+}
+
+#code-fields-list li {
+  margin: 5px 0;
+}
+
 footer {
   font-weight: normal;
   height: 455px;

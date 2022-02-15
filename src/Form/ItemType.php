@@ -8,6 +8,7 @@ use App\Repository\PaymentRepository;
 use Symfony\Component\Form\Extension\Core\Type\BaseType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -15,6 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Type;
 
@@ -48,13 +50,23 @@ class ItemType extends BaseType
                 'choices' => $this->payments,
                 'choice_translation_domain' => 'messages',
             ])
-            ->add('code', TextType::class, [
+            ->add('code', CollectionType::class, [
                 'required' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'entry_type' => TextType::class,
+                'label' => false,
                 'constraints' => [
-                    new Type(['type' => 'numeric', 'message' => 'Błędny PaySafeCard']),
-                    new Length(
-                        ['min' => 16, 'max' => 16, 'exactMessage' => 'PaySafeCard powinien mieć dokładnie 16 znaków']
-                    ),
+                    new All([
+                        new Type(['type' => 'numeric', 'message' => 'Błędny PaySafeCard']),
+                        new Length(
+                            [
+                                'min' => 16,
+                                'max' => 16,
+                                'exactMessage' => 'PaySafeCard powinien mieć dokładnie 16 znaków',
+                            ]
+                        ),
+                    ]),
                 ],
             ])
             ->add('check', CheckboxType::class, [])
