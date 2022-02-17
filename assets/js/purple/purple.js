@@ -119,8 +119,6 @@ paymentsButtons.forEach((button) => {
     });
 });
 
-
-
 $(document).ready(function () {
     $('.add-another-collection-widget').click(function (e) {
         const list = $($(this).attr('data-list-selector'));
