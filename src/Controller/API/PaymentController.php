@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PaymentController extends AbstractController
 {
     /**
-     * @Route(name="status", path="api/payment/status/{type}", methods={'POST})
+     * @Route(name="status", path="api/payment/status/{type}", methods={"POST"})
      */
     public function status(Request $request, OperatorFactory $factory, string $type): Response
     {
