@@ -62,7 +62,7 @@ class GlobalDataQuery
             ->getQuery();
 
         try {
-            return $query->execute()[0];
+            return $query->execute() ? $query->execute()[0] : [];
         } catch (Exception $exception) {
             return [];
         }
