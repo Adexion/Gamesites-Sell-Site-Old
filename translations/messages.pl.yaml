@@ -25,6 +25,8 @@ CashBill: Płatności CashBill
 HotPay: Przelew bądź płatność kartą (HotPay)
 DirectBilling: SMS+ (HotPay)
 PaySafeCard: PaySafeCard (HotPay)
+TPay: Płatności TPay
+
 HOT_PAY: HotPay
 PAY_SAFE_CARD: PaySafeCard (HotPay)
 DIRECT_BILLING: SMS+ (HotPay)

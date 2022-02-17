@@ -10,8 +10,8 @@ use RuntimeException;
 
 class TPayOperator extends OperatorAbstract implements OperatorInterface
 {
-    protected const SUCCESSFULLY_STATUES = ["TRUE"];
-    protected const FAILURE_STATUSES = ["overpay", "surcharge"];
+    protected const SUCCESSFULLY_STATUES = ['TRUE', 'PAID'];
+    protected const FAILURE_STATUSES = ['FALSE', 'CHARGEBACK'];
 
     /** @throws ORMException|OptimisticLockException */
     public function getResponse(array $request): ?string
@@ -21,9 +21,7 @@ class TPayOperator extends OperatorAbstract implements OperatorInterface
         $history = $this->historyRepository->findOneBy(['id' => $request['tr_crc']]);
         $paymentHash = $this->historyRepository->getPaymentHash($history);
 
-        $paymentStatus = filter_var($request['tr_status'], FILTER_VALIDATE_BOOL)
-            ? $request['tr_error']
-            : $request['tr_status'];
+        $paymentStatus = $request['tr_status'];
 
         $this->handlePaymentExist($request, $history, $paymentHash);
 
