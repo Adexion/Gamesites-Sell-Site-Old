@@ -20,9 +20,16 @@ By purchasing this item you get: Kupując ten przedmiot, otrzymasz dostęp do
 Choose payment option: Wybierz formę płatności
 Back to the product list: Powrót na listę produktów
 Payment form: Formularz płatności
-HotPay: Przelew bądź płatność kartą
-DirectBilling: SMS+
-PaySafeCard: PaySafeCard
+
+CashBill: Płatności CashBill
+HotPay: Przelew bądź płatność kartą (HotPay)
+DirectBilling: SMS+ (HotPay)
+PaySafeCard: PaySafeCard (HotPay)
+HOT_PAY: HotPay
+PAY_SAFE_CARD: PaySafeCard (HotPay)
+DIRECT_BILLING: SMS+ (HotPay)
+CASH_BILL:  CashBill
+
 Username: Nick
 Payment: Forma płatności
 Go to payment now: Przejdź od razu do płatności
@@ -155,6 +162,7 @@ Title: Tytuł
 Subtitle: Podtytuł
 Article: Artykuł
 Check: Potwierdzam poprawność nicku w grze, akceptuje postanowienia regulaminu serwisu oraz jestem świadomy, że usługa nie podlega zwrotowi.
+Connection Type: Połączenie za pośrednictwem
 
 CREATED: Utworzo
 ACCEPTED: Zaakceptowano
@@ -169,6 +177,6 @@ PURPLE: Nowoczesny (Fioletowy)
 GRAY: Szaro-zielony
 BLUE: Postawowy (Domyślny)
 
-R_CON: rCon Connection
-REDIS: Redis Connection
-PLUGIN: Gamesites System
+R_CON: rCon + Query
+REDIS: Redis Connection + Query
+PLUGIN: Gamesites System Plugin

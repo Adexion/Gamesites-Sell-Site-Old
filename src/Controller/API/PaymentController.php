@@ -26,9 +26,8 @@ class PaymentController extends AbstractController
 
             $factory->execute($type, $request);
         } catch (RuntimeException $e) {
-            return new JsonResponse(['message' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
         }
 
-        return new JsonResponse();
+        return new JsonResponse("OK", Response::HTTP_OK);
     }
 }

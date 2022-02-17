@@ -19,7 +19,7 @@ class OperatorFactory
         $this->uri = $requestStack->getCurrentRequest()->getSchemeAndHttpHost();
     }
 
-    function getForm(array $data, Item $item, string $secret, int $id): FormInterface
+    function getForm(array $data, Item $item, int $id, string $secret, string $hash): FormInterface
     {
         $className = 'App\Service\Payment\Request\Operator\\'. $data['payment'] .'Operator';
 
@@ -27,6 +27,6 @@ class OperatorFactory
             throw new RuntimeException();
         }
 
-        return (new $className($this->formFactory, $this->uri))->getForm($data, $item, $secret, $id);
+        return (new $className($this->formFactory, $this->uri))->getForm($data, $item, $id, $secret, $hash);
     }
 }

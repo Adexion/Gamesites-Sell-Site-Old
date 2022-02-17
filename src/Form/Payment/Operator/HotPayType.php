@@ -16,8 +16,8 @@ class HotPayType extends BaseType
         $builder
             ->add('SEKRET', HiddenType::class)
             ->add('KWOTA', HiddenType::class)
-            ->add('NAZWA_USLUGI', HiddenType::class, ['constraints' => new Optional()])
-            ->add('ADRES_WWW', HiddenType::class, ['constraints' => new Optional()])
+            ->add('NAZWA_USLUGI', HiddenType::class)
+            ->add('ADRES_WWW', HiddenType::class)
             ->add('ID_ZAMOWIENIA', HiddenType::class)
             ->add('EMAIL', HiddenType::class);
     }

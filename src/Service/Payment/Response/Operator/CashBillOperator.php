@@ -8,19 +8,18 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use RuntimeException;
 
-class HotPayOperator extends OperatorAbstract implements OperatorInterface
+class CashBillOperator extends OperatorAbstract implements OperatorInterface
 {
-    protected const UNSUCCESSFULLY_STATUES = ["SUCCESS"];
-    protected const FAILURE_STATUSES = ["FAILURE", "PENDING"];
+    protected const FAILURE_STATUSES = ["ERR", "err"];
 
     /** @throws ORMException|OptimisticLockException */
     public function getResponse(array $request)
     {
         parent::getResponse($request);
 
-        $history = $this->historyRepository->findOneBy(['id' => $request['ID_ZAMOWIENIA']]);
+        $history = $this->historyRepository->findOneBy(['id' => $request['userdata']]);
         $paymentHash = $this->historyRepository->getPaymentHash($history);
-        $paymentStatus = $request['STATUS'];
+        $paymentStatus = $request['status'];
 
         $this->handlePaymentExist($request, $history, $paymentHash);
 
@@ -42,33 +41,25 @@ class HotPayOperator extends OperatorAbstract implements OperatorInterface
 
     private function isPaymentNotExist(array $request, ?ItemHistory $history, string $paymentHash): bool
     {
-        return !$history || !$request['HASH'] || $this->getHash($request, $paymentHash) !== $request['HASH'];
+        return !$history || !$request['sign'] || $this->getHash($request, $paymentHash) !== $request['sign'];
     }
 
     private function getHash(array $data, string $hash): string
     {
-        return hash(
-            "sha256",
-            $hash . ";"
-            . ($data["KWOTA"] ?? '') . ";"
-            . ($data["ID_PLATNOSCI"] ?? '') . ";"
-            . $data["ID_ZAMOWIENIA"] . ";"
-            . ($data["STATUS"] ?? '') . ";"
-            . ($data["SEKRET"] ?? '')
-        );
+        return md5($data['service'] . $data['orderid'] . $data['amount'] . $data['userdata'] . $data['status'] . $hash);
     }
 
     public function validate(array $request)
     {
-        if (!isset($request["ID_ZAMOWIENIA"])) {
+        if (!isset($request["userdata"])) {
             throw new RuntimeException();
         }
 
-        if (!isset($request["STATUS"])) {
+        if (!isset($request["status"])) {
             throw new RuntimeException();
         }
 
-        if (!isset($request["HASH"])) {
+        if (!isset($request["sign"])) {
             throw new RuntimeException();
         }
     }

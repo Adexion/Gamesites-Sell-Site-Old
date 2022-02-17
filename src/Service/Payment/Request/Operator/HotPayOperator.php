@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormInterface;
 
 final class HotPayOperator extends AbstractOperator implements OperatorInterface
 {
-    public function getForm(array $data, Item $item, string $secret, int $id): FormInterface
+    public function getForm(array $data, Item $item, int $id, string $secret, string $hash): FormInterface
     {
         $formData = [
             'SEKRET' => $secret,

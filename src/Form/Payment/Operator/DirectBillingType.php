@@ -16,8 +16,8 @@ class DirectBillingType extends BaseType
         $builder
             ->add('SEKRET', HiddenType::class)
             ->add('KWOTA', HiddenType::class)
-            ->add('PRZEKIEROWANIE_SUKCESS', HiddenType::class, ['constraints' => new Optional()])
-            ->add('PRZEKIEROWANIE_BLAD', HiddenType::class, ['constraints' => new Optional()])
+            ->add('PRZEKIEROWANIE_SUKCESS', HiddenType::class)
+            ->add('PRZEKIEROWANIE_BLAD', HiddenType::class)
             ->add('ID_ZAMOWIENIA', HiddenType::class);
     }
 
