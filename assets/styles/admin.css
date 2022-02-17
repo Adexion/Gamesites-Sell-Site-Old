@@ -85,7 +85,7 @@
 }
 
 .menu-item:hover a {
-    color: var(--white) !important;
+    color: var(--link-hover-color) !important;
 }
 
 .main-header {
@@ -208,20 +208,20 @@ thead {
 }
 
 :root {
-    --link-color: #aaaaab;
-    --link-hover-color: #aaaaab;
-    --hover: #242938;
-    --sidebar-bg: #111728;
+    --link-color: #FFFFFF;
+    --link-hover-color: #c0a4b9;
+    --hover: #661158;
+    --sidebar-bg: #49093f;
     --active: #242526;
     --search: #EFEFEF;
 
     --white: #FFFFFF;
     --row: #f8f9fd;
     --head: #eaecf8;
-    --indigo-500: #e1ad01;
-    --color-info: #e1ad01;
-    --color-primary: #e1ad01;
-    --color-border-primary: #e1ad01;
+    --indigo-500: #661158;
+    --color-info: #661158;
+    --color-primary: #661158;
+    --color-border-primary: #661158;
 }
 
 #sidebar-resizer-handler {

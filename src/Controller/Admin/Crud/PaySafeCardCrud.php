@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -50,7 +51,9 @@ class PaySafeCardCrud extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('code')
+            CollectionField::new('code')
+                ->allowDelete(false)
+                ->allowAdd(false)
                 ->setDisabled(),
             EntityField::new('item', 'Price')
                 ->setClass(Item::class, 'discountedPrice')
