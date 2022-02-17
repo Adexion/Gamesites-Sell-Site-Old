@@ -13,7 +13,7 @@ final class DirectBillingOperator extends OperatorAbstract implements OperatorIn
     protected const FAILURE_STATUSES = [PaymentStatusEnum::UNACCEPTED];
 
     /** @throws OptimisticLockException|ORMException */
-    public function getResponse(array $request)
+    public function getResponse(array $request): ?string
     {
         parent::getResponse($request);
 
@@ -27,6 +27,8 @@ final class DirectBillingOperator extends OperatorAbstract implements OperatorIn
 
         $history->setStatus(PaymentStatusEnum::REALIZED);
         $this->historyRepository->insertOrUpdate($history);
+
+        return 'OK';
     }
 
     public function validate(array $request): bool

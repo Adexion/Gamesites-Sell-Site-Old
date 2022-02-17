@@ -10,11 +10,11 @@ use RuntimeException;
 
 class HotPayOperator extends OperatorAbstract implements OperatorInterface
 {
-    protected const UNSUCCESSFULLY_STATUES = ["SUCCESS"];
+    protected const SUCCESSFULLY_STATUES = ["SUCCESS"];
     protected const FAILURE_STATUSES = ["FAILURE", "PENDING"];
 
     /** @throws ORMException|OptimisticLockException */
-    public function getResponse(array $request)
+    public function getResponse(array $request): ?string
     {
         parent::getResponse($request);
 
@@ -31,6 +31,8 @@ class HotPayOperator extends OperatorAbstract implements OperatorInterface
 
         $history->setStatus(PaymentStatusEnum::REALIZED);
         $this->historyRepository->insertOrUpdate($history);
+
+        return 'OK';
     }
 
     private function handlePaymentExist(array $request, ?ItemHistory $history, string $paymentHash)

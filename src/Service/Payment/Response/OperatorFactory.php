@@ -20,7 +20,7 @@ class OperatorFactory
         $this->factory = $factory;
     }
 
-    public function execute(string $type, array $request)
+    public function execute(string $type, array $request): ?string
     {
         $className = 'App\Service\Payment\Response\Operator\\' . $type . 'Operator';
 
@@ -28,6 +28,6 @@ class OperatorFactory
             throw new RuntimeException();
         }
 
-        (new $className($this->historyRepository, $this->serverRepository, $this->factory))->getResponse($request);
+        return (new $className($this->historyRepository, $this->serverRepository, $this->factory))->getResponse($request);
     }
 }

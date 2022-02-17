@@ -29,6 +29,7 @@ HOT_PAY: HotPay
 PAY_SAFE_CARD: PaySafeCard (HotPay)
 DIRECT_BILLING: SMS+ (HotPay)
 CASH_BILL:  CashBill
+T_PAY:  Płatności TPay
 
 Username: Nick
 Payment: Forma płatności

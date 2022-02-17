@@ -10,4 +10,5 @@ class OperatorTypeEnum extends Enum
     public const PAY_SAFE_CARD = 'PaySafeCard';
     public const DIRECT_BILLING = 'DirectBilling';
     public const CASH_BILL = 'CashBill';
+    public const T_PAY = 'TPay';
 }

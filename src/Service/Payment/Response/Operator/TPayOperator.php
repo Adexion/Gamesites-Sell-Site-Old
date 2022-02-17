@@ -8,19 +8,22 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use RuntimeException;
 
-class CashBillOperator extends OperatorAbstract implements OperatorInterface
+class TPayOperator extends OperatorAbstract implements OperatorInterface
 {
-    protected const SUCCESSFULLY_STATUES = ["OK", "ok"];
-    protected const FAILURE_STATUSES = ["ERR", "err"];
+    protected const SUCCESSFULLY_STATUES = ["TRUE"];
+    protected const FAILURE_STATUSES = ["overpay", "surcharge"];
 
     /** @throws ORMException|OptimisticLockException */
     public function getResponse(array $request): ?string
     {
         parent::getResponse($request);
 
-        $history = $this->historyRepository->findOneBy(['id' => $request['userdata']]);
+        $history = $this->historyRepository->findOneBy(['id' => $request['tr_crc']]);
         $paymentHash = $this->historyRepository->getPaymentHash($history);
-        $paymentStatus = $request['status'];
+
+        $paymentStatus = filter_var($request['tr_status'], FILTER_VALIDATE_BOOL)
+            ? $request['tr_error']
+            : $request['tr_status'];
 
         $this->handlePaymentExist($request, $history, $paymentHash);
 
@@ -32,7 +35,7 @@ class CashBillOperator extends OperatorAbstract implements OperatorInterface
         $history->setStatus(PaymentStatusEnum::REALIZED);
         $this->historyRepository->insertOrUpdate($history);
 
-        return 'OK';
+        return 'TRUE';
     }
 
     private function handlePaymentExist(array $request, ?ItemHistory $history, string $paymentHash)
@@ -44,25 +47,21 @@ class CashBillOperator extends OperatorAbstract implements OperatorInterface
 
     private function isPaymentNotExist(array $request, ?ItemHistory $history, string $paymentHash): bool
     {
-        return !$history || !$request['sign'] || $this->getHash($request, $paymentHash) !== $request['sign'];
+        return !$history || !$request['md5sum'] || $this->getHash($request, $paymentHash) !== $request['md5sum'];
     }
 
-    private function getHash(array $data, string $hash): string
+    private function getHash(array $request, string $hash): string
     {
-        return md5($data['service'] . $data['orderid'] . $data['amount'] . $data['userdata'] . $data['status'] . $hash);
+        return md5($request['id'] . $request['tr_id '] . $request['tr_amount'] . $request['tr_crc'] . $hash);
     }
 
     public function validate(array $request)
     {
-        if (!isset($request["userdata"])) {
+        if (!isset($request["tr_id"])) {
             throw new RuntimeException();
         }
 
-        if (!isset($request["status"])) {
-            throw new RuntimeException();
-        }
-
-        if (!isset($request["sign"])) {
+        if (!isset($request["id"])) {
             throw new RuntimeException();
         }
     }
