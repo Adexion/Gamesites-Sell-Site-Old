@@ -15,7 +15,7 @@ class AdditionalCrud extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular("wpis");
+            ->setEntityLabelInSingular("Wpis");
     }
 
     public static function getEntityFqcn(): string

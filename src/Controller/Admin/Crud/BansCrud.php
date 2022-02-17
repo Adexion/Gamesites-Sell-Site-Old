@@ -16,7 +16,7 @@ class BansCrud extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular("wpis");
+            ->setEntityLabelInSingular("Wpis");
     }
 
     public function configureActions(Actions $actions): Actions

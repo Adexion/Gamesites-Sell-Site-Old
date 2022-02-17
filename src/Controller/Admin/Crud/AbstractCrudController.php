@@ -12,7 +12,7 @@ abstract class AbstractCrudController extends AbstractBaseCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('wpis')
+            ->setEntityLabelInSingular('Wpis')
             ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig');
     }
 }

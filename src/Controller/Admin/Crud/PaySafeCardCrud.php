@@ -32,7 +32,7 @@ class PaySafeCardCrud extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('wpis')
+            ->setEntityLabelInSingular('Wpis')
             ->setHelp(
                 Crud::PAGE_INDEX,
                 $this->translator->trans(

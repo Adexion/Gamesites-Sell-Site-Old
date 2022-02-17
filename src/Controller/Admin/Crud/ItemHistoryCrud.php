@@ -28,7 +28,7 @@ class ItemHistoryCrud extends AbstractCrudController
     {
         return $crud
             ->setEntityLabelInPlural('History')
-            ->setEntityLabelInSingular('wpis');
+            ->setEntityLabelInSingular('Wpis');
     }
 
     public function configureActions(Actions $actions): Actions
