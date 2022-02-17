@@ -6,7 +6,7 @@
         <h4 class="text1">
             {{ 'Redirect' | trans }}
         </h4>
-        {{ form_start(form, {method:'POST', action: 'https://' ~ paymentType ~ '.hotpay.pl', name: 'payment'}) }}
+        {{ form_start(form, {name: 'payment'}) }}
         <button class="btn-shop h3 mt-4" type="submit">{{ 'Go to payment now' | trans }}</button>
         {{ form_end(form) }}
         <script>

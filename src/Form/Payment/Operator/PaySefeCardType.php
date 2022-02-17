@@ -1,26 +1,25 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Payment\Operator;
 
 use Symfony\Component\Form\Extension\Core\Type\BaseType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Optional;
 
-class PaymentType extends BaseType
+class PaySefeCardType extends BaseType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('ID_ZAMOWIENIA', HiddenType::class)
-            ->add('NAZWA_USLUGI', HiddenType::class, ['constraints' => new Optional()])
             ->add('SEKRET', HiddenType::class)
             ->add('KWOTA', HiddenType::class)
-            ->add('EMAIL', HiddenType::class)
+            ->add('NAZWA_USLUGI', HiddenType::class, ['constraints' => new Optional()])
             ->add('ADRES_WWW', HiddenType::class, ['constraints' => new Optional()])
-            ->add('PRZEKIEROWANIE_SUKCESS', HiddenType::class, ['constraints' => new Optional()])
-            ->add('PRZEKIEROWANIE_BLAD', HiddenType::class, ['constraints' => new Optional()]);
+            ->add('ID_ZAMOWIENIA', HiddenType::class)
+            ->add('EMAIL', HiddenType::class);
     }
 
     public function getBlockPrefix(): string
@@ -31,6 +30,10 @@ class PaymentType extends BaseType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefault('csrf_protection', false);
+            ->setDefaults([
+                'csrf_protection' => false,
+                'action' => 'https://psc.hotpay.pl',
+                'method' => Request::METHOD_POST,
+            ]);
     }
 }

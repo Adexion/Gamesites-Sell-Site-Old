@@ -6,7 +6,7 @@ use App\Controller\Admin\Field\EntityField;
 use App\Entity\Item;
 use App\Entity\ItemHistory;
 use App\Enum\PaymentStatusEnum;
-use App\Enum\PaymentTypeEnum;
+use App\Enum\OperatorTypeEnum;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -55,7 +55,7 @@ class ItemHistoryCrud extends AbstractCrudController
                 ->setClass(Item::class, 'name')
                 ->setDisabled(),
             ChoiceField::new('type')
-                ->setChoices(PaymentTypeEnum::toArray() + ['VOUCHER' => 'voucher'])
+                ->setChoices(OperatorTypeEnum::toArray() + ['VOUCHER' => 'voucher'])
                 ->setDisabled(),
             DateTimeField::new('date')
                 ->setDisabled(),

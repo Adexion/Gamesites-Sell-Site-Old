@@ -8,7 +8,7 @@ use App\Form\ItemType;
 use App\Form\VoucherType;
 use App\Repository\ItemHistoryRepository;
 use App\Repository\ItemRepository;
-use App\Service\Payment\PaymentResponseBuilder;
+use App\Service\Payment\Request\RequestBuilder;
 use App\Service\PaySafeCardManualService;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -16,9 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Error\SyntaxError;
-use xPaw\SourceQuery\Exception\AuthenticationException;
-use xPaw\SourceQuery\Exception\InvalidArgumentException;
-use xPaw\SourceQuery\Exception\InvalidPacketException;
 
 class ItemController extends AbstractRenderController
 {
@@ -40,26 +37,19 @@ class ItemController extends AbstractRenderController
 
     /**
      * @Route (name="item", path="/shop/{id}")
-     * @throws AuthenticationException|InvalidArgumentException|InvalidPacketException|ORMException|OptimisticLockException|SyntaxError
+     * @throws ORMException|OptimisticLockException|SyntaxError
      */
-    public function item(
-        Item $item,
-        Request $request,
-        PaymentResponseBuilder $builder,
-        PaySafeCardManualService $manualService
-    ): Response {
+    public function item(Item $item, Request $request, RequestBuilder $builder, PaySafeCardManualService $manualService): Response
+    {
         $form = $this->createForm(ItemType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($request->request->get('payment') === 'paySafeCard') {
-                return $this->redirectToRoute(
-                    'pscPending',
-                    ['hash' => $manualService->createManualPSC($form, $item)->getHash()]
-                );
+                return $this->redirectToRoute('pscPending', ['hash' => $manualService->createManualPSC($form, $item)->getHash()]);
             }
 
-            return $builder->getResponse($form, $item, function ($parameters) {
+            return $builder->get($form->getData(), $item, function ($parameters) {
                 return $this->render('client/payment.html.twig', $parameters);
             });
         }

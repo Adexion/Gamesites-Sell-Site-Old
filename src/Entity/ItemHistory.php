@@ -44,7 +44,7 @@ class ItemHistory
     private $date;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="text", length=2)
      */
     private $status;
 
@@ -123,12 +123,12 @@ class ItemHistory
         return $this;
     }
 
-    public function getStatus(): ?int
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    public function setStatus(int $status): self
+    public function setStatus(?string $status): self
     {
         $this->status = $status;
 

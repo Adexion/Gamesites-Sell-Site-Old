@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Enum\PaymentTypeEnum;
+use App\Enum\OperatorTypeEnum;
 use App\Repository\ConfigurationRepository;
 use App\Repository\PaymentRepository;
 use Symfony\Component\Form\Extension\Core\Type\BaseType;
@@ -28,7 +28,7 @@ class ItemType extends BaseType
     public function __construct(PaymentRepository $paymentRepository, ConfigurationRepository $configurationRepository)
     {
         foreach ($paymentRepository->findBy(['isActive' => true]) as $payment) {
-            $enum = PaymentTypeEnum::from($payment->getType());
+            $enum = OperatorTypeEnum::from($payment->getType());
             $this->payments[$enum->getValue()] = $enum->getValue();
         }
 

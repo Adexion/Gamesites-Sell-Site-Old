@@ -3,7 +3,7 @@
 namespace App\Controller\Admin\Crud;
 
 use App\Entity\Payment;
-use App\Enum\PaymentTypeEnum;
+use App\Enum\OperatorTypeEnum;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
@@ -28,7 +28,7 @@ class PaymentCrud extends AbstractCrudController
     {
         return [
             ChoiceField::new('type')
-                ->setChoices(PaymentTypeEnum::toArray()),
+                ->setChoices(OperatorTypeEnum::toArray()),
             TextField::new('secret')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextField::new('hash')

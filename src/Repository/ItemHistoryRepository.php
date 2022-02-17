@@ -5,7 +5,7 @@ namespace App\Repository;
 use App\Entity\ItemHistory;
 use App\Entity\Payment;
 use App\Enum\PaymentStatusEnum;
-use App\Enum\PaymentTypeEnum;
+use App\Enum\OperatorTypeEnum;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -49,22 +49,17 @@ class ItemHistoryRepository extends ServiceEntityRepository
         return $qb->getQuery()->execute()[0]['count'];
     }
 
-    public function getHistoryWithHash(string $orderId): array
+    public function getPaymentHash(ItemHistory $history): ?string
     {
-        /** @var ?ItemHistory $history */
-        $response['history'] = $this->find($orderId);
-        if (!in_array($history->getType(), PaymentTypeEnum::values())) {
-            return $response;
-        }
-
-        $response['hash'] = $this->getEntityManager()->createQueryBuilder()
+       $query = $this->getEntityManager()->createQueryBuilder()
             ->from(Payment::class, 'p')
             ->select('p.hash')
             ->where('p.type = :type')
             ->andWhere('p.id = :id')
             ->setParameters([':type' => $history->getType(), ':id' => $history->getPaymentId()]
-            )->getQuery()->execute()[0];
+            )->getQuery();
 
-        return $response;
+
+       return $query->execute() ? $query->execute()[0]['hash'] : '';
     }
 }

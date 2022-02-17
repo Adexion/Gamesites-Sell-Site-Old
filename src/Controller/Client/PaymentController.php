@@ -3,20 +3,16 @@
 namespace App\Controller\Client;
 
 use App\Entity\PaySafeCardVoucher;
+use App\Enum\OperatorTypeEnum;
 use App\Enum\PaymentFullyStatusEnum;
 use App\Enum\PaymentStatusResponseEnum;
-use App\Enum\PaymentTypeEnum;
 use App\Enum\PaySafeCardStatusEnum;
-use App\Form\PaymentStatusType;
 use App\Form\VoucherType;
 use App\Repository\ItemHistoryRepository;
-use App\Service\Payment\PaymentExecutionService;
 use App\Service\Voucher\VoucherAssignService;
 use App\Service\Voucher\VoucherExecutionService;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use RuntimeException;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,25 +23,6 @@ use xPaw\SourceQuery\Exception\InvalidPacketException;
 
 class PaymentController extends AbstractRenderController
 {
-    /**
-     * @Route(name="status", path="/payment/status")
-     */
-    public function status(Request $request, PaymentExecutionService $executionService): Response
-    {
-        $form = $this->createForm(PaymentStatusType::class);
-        $form->submit($request->request->all());
-
-        if (!$form->isSubmitted() || !$form->isValid()) {
-            new JsonResponse(['message' => 'Wrong data given'], Response::HTTP_BAD_REQUEST);
-        }
-
-        try {
-            return new JsonResponse(['message' => $executionService->execute($form->getData())]);
-        } catch (RuntimeException $e) {
-            return new JsonResponse(['message' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
-        }
-    }
-
     /**
      * @Route(name="voucher", path="/payment/voucher")
      * @throws AuthenticationException|InvalidArgumentException|InvalidPacketException|ORMException|OptimisticLockException|SyntaxError
@@ -95,7 +72,7 @@ class PaymentController extends AbstractRenderController
     public function pscPending(PaySafeCardVoucher $voucher): Response
     {
         return $this->render('client/thankYou.html.twig', [
-            'type' => PaymentTypeEnum::PAY_SAFE_CARD,
+            'type' => OperatorTypeEnum::PAY_SAFE_CARD,
             'message' => 'PaySafeCard is pending. Contact with administrator',
             'paymentId' => $voucher->getPaySafeCard()->getId(),
             'link' => $this->generateUrl('pscVoucher', ['pscVoucher' => $voucher->getHash()]),
@@ -116,7 +93,7 @@ class PaymentController extends AbstractRenderController
 
         if ($pscVoucher->getPaySafeCard()->getStatus() === PaySafeCardStatusEnum::NEW) {
             return $this->render('client/thankYou.html.twig', [
-                'type' => PaymentTypeEnum::PAY_SAFE_CARD,
+                'type' => OperatorTypeEnum::PAY_SAFE_CARD,
                 'message' => 'This payment is still pending. Please wait little bit more ore contact with administration on the server.',
                 'paymentId' => $pscVoucher->getPaySafeCard()->getId(),
             ]);
@@ -125,7 +102,7 @@ class PaymentController extends AbstractRenderController
         $assignService->assign($pscVoucher);
 
         return $this->render('client/thankYou.html.twig', [
-            'type' => PaymentTypeEnum::PAY_SAFE_CARD,
+            'type' => OperatorTypeEnum::PAY_SAFE_CARD,
             'message' => 'Payment realized successfully. Get your voucher.',
             'voucher' => $pscVoucher->getVoucher()->getCode(),
             'paymentId' => $pscVoucher->getPaySafeCard()->getId(),
