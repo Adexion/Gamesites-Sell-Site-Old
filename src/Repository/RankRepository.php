@@ -35,7 +35,7 @@ class RankRepository extends AbstractRemoteRepository
 
         if (isset($criteria['name'])) {
             $qb
-                ->where($rank->getName().' = :value')
+                ->where($rank->getName() . ' = :value')
                 ->setParameter('value', $criteria['name']);
         }
 

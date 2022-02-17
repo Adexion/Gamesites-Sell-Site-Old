@@ -6,25 +6,28 @@ use App\Entity\ItemHistory;
 use App\Enum\PaymentStatusEnum;
 use App\Repository\ItemHistoryRepository;
 use App\Repository\VoucherRepository;
-use App\Service\QueryService;
+use App\Service\Connection\ExecuteServiceFactory;
 use DateTime;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Exception;
 use xPaw\SourceQuery\Exception\AuthenticationException;
 use xPaw\SourceQuery\Exception\InvalidArgumentException;
 use xPaw\SourceQuery\Exception\InvalidPacketException;
-use xPaw\SourceQuery\Exception\SocketException;
 
 class VoucherExecutionService
 {
     private ItemHistoryRepository $historyRepository;
-    private QueryService $service;
+    private ExecuteServiceFactory $factory;
     private VoucherRepository $voucherRepository;
 
-    public function __construct(ItemHistoryRepository $historyRepository, VoucherRepository $voucherRepository, QueryService $service)
-    {
+    public function __construct(
+        ItemHistoryRepository $historyRepository,
+        VoucherRepository $voucherRepository,
+        ExecuteServiceFactory $factory
+    ) {
         $this->historyRepository = $historyRepository;
-        $this->service = $service;
+        $this->factory = $factory;
         $this->voucherRepository = $voucherRepository;
     }
 
@@ -41,14 +44,15 @@ class VoucherExecutionService
             return 'Voucher used too match times';
         }
 
-        if (!$this->service->isPlayerLoggedIn($data['username'])) {
+        $service = $this->factory->getExecutionService($voucher->getItem()->getServer());
+        if (!$service->isPlayerLoggedIn($data['username'])) {
             return 'You are not connected to the server. If it is not right pleas contact with your administrator.';
         }
 
         foreach ($voucher->getItem()->getCommand() as $command) {
             try {
-                $this->service->execute($command, $voucher->getItem()->getServer(), $data['username']);
-            } catch (SocketException $ignored) {
+                $service->execute($command, $data['username']);
+            } catch (Exception $ignored) {
                 return 'There was a problem connecting to the server. Please contact your administrator.';
             }
         }

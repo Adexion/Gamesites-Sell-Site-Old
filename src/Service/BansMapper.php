@@ -12,7 +12,7 @@ class BansMapper
         return array_map(function ($ban) {
             $ban['value'] = ($this::getDateByTimestamp($ban['value'])
                 ?: $this::getDateFromString($ban['value'])
-                ?: new DateTime())->format('d.m.Y H:i');
+                    ?: new DateTime())->format('d.m.Y H:i');
 
             return $ban;
         }, $bans);
@@ -21,7 +21,7 @@ class BansMapper
     public static function getDateByTimestamp($value): ?DateTime
     {
         try {
-            return new DateTime('@'.substr($value, 0, -3));
+            return new DateTime('@' . substr($value, 0, -3));
         } catch (Exception $e) {
         }
 

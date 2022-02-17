@@ -33,7 +33,7 @@ class PaymentCrud extends AbstractCrudController
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextField::new('hash')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
-            BooleanField::new('isActive')
+            BooleanField::new('isActive'),
         ];
     }
 }

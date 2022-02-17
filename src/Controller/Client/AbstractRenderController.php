@@ -4,7 +4,6 @@ namespace App\Controller\Client;
 
 use App\Enum\TemplateEnum;
 use App\Repository\ConfigurationRepository;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Error\SyntaxError;
@@ -34,7 +33,7 @@ class AbstractRenderController extends AbstractController
 
             return parent::render($replaced, $parameters, $response);
         } catch (SyntaxError $e) {
-            if ($_ENV['APP_ENV'] === 'dev')  {
+            if ($_ENV['APP_ENV'] === 'dev') {
                 throw $e;
             }
         }

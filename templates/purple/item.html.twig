@@ -8,8 +8,7 @@
         <div class="payments-direction mw-auto flex flex-between">
             {% if not form.vars.valid %}
                 <div class="payments-box" style="width: 100%">
-                    {{ form_errors(form.username) }}
-                    {{ form_errors(form.code) }}
+                    {{ form_errors(form) }}
                 </div>
             {% endif %}
 
@@ -60,7 +59,17 @@
                         <p>&nbsp;</p>
                         <p class="payments-box-text">Kod PSC</p>
                     </div>
-                    {{ form_widget(form.code,{ 'attr': {'class': 'payments-box-input', 'placeholder':''}}) }}
+                    <ul id="code-fields-list"
+                        data-prototype="{{ form_widget(form.code.vars.prototype)|e }}"
+                        data-widget-tags="{{ '<li></li>'|e }}"
+                        data-widget-counter="{{ form.code|length }}">
+                        {% for code in form.code %}
+                            <li>{{ form_widget(code,{ 'attr': {'class': 'payments-box-input', 'placeholder':''}}) }}</li>
+                        {% endfor %}
+                    </ul>
+                    <button type="button"
+                            class="btn btn-color-g add-another-collection-widget"
+                            data-list-selector="#code-fields-list">Dodaj Kod</button>
                 </div>
 
                 <div class="payments-box-checkbox mx-align">
@@ -84,7 +93,6 @@
                             style="display: none;">{{ 'Buy now' | trans }}
                         za {{ item.discountedPrice | format_currency('PLN') }}</button>
                     <script>
-                        document.getElementById('code').value = '';
                         document.getElementById('check').checked = false;
 
                         if (document.getElementById('payment').value === 'paySafeCard') {

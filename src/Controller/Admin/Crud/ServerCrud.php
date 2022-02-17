@@ -3,12 +3,12 @@
 namespace App\Controller\Admin\Crud;
 
 use App\Entity\Server;
+use App\Enum\ConnectionEnum;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use SebastianBergmann\CodeCoverage\Report\Text;
 use Symfony\Component\Validator\Constraints\Length;
 
 class ServerCrud extends AbstractCrudController
@@ -30,17 +30,18 @@ class ServerCrud extends AbstractCrudController
             TextField::new('serverName')
                 ->setFormTypeOption('constraints', [new Length(['max' => 60])]),
             TextareaField::new('description'),
-            TextField::new('RConIp')
+            ChoiceField::new('connectionType')
+                ->setChoices(ConnectionEnum::toArray()),
+            TextField::new('conIp')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
-            NumberField::new('RConPort')
+            NumberField::new('conPort')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
-            TextField::new('RConPassword')
+            TextField::new('conPassword')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextField::new('minecraftQueryIp')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             NumberField::new('minecraftQueryPort')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
-            BooleanField::new('isDefault')
         ];
     }
 }

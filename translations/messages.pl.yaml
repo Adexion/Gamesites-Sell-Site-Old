@@ -79,11 +79,11 @@ Caution! Deleting this entity will be required to change the image!: Uwaga! By z
 Server: Serwer
 Default Server: Serwer Domyślny
 Server Name: Nazwa serwera
-R Con Ip: rCon Ip
-R Con Port: rCon Port
-R Con Password: rCon Hasło
+Con Ip: IP
+Con Port: Port
+Con Password: Hasło
 First create server: Najpierw utwórz serwer
-Console: Konsola rCon
+Console: Konsola
 Main: Główne
 Wrong data given: Nie udało się przetworzyć otrzymanych danych. Sprawdź, czy wszystko zostało poprawnie ustawione i w razie potrzeby skontaktuj się z administratorem.
 Opps! Something went wrong: Coś poszło nie tak!
@@ -168,3 +168,7 @@ NOT_ON_SERVER: Nie znaleziono gracza
 PURPLE: Nowoczesny (Fioletowy)
 GRAY: Szaro-zielony
 BLUE: Postawowy (Domyślny)
+
+R_CON: rCon Connection
+REDIS: Redis Connection
+PLUGIN: Gamesites System

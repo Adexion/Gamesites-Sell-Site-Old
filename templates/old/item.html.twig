@@ -32,17 +32,24 @@
                     </div>
                     <div class="col-lg-4 col-md-12 p-lg-5 m-4">
                         <div class="row flex-column">
-                            {{ form_start(form, {method: 'POST', action: path('payment', {_locale: app.request.locale, id: item.id})}) }}
+                            {{ form_start(form, {method: 'POST'})}}
                             {{ form_row(form.email) }}
                             {{ form_row(form.username) }}
                             {{ form_row(form.payment) }}
                             <div id="psc-code" style="display:none">
-                                {{ form_row(form.code) }}
+                                <ul id="code-fields-list"
+                                    data-prototype="{{ form_widget(form.code.vars.prototype)|e }}"
+                                    data-widget-tags="{{ '<li></li>'|e }}"
+                                    data-widget-counter="{{ form.code|length }}">
+                                    {% for code in form.code %}
+                                        <li>{{ form_widget(code) }}</li>
+                                    {% endfor %}
+                                </ul>
+                                <button type="button"
+                                        class="gs-accept add-another-collection-widget mb-3 w-100"
+                                        data-list-selector="#code-fields-list">Dodaj Kod</button>
                             </div>
                             <script>
-                                document.getElementById('code').value = '';
-                                document.getElementById('check').checked = false;
-
                                 if (document.getElementById('payment').value === 'paySafeCard') {
                                     document.getElementById('psc-code').removeAttribute('style');
                                 }
@@ -55,7 +62,7 @@
                             </script>
                             {{ form_row(form.check) }}
 
-                            <button type="submit" class="gs-accept">{{ 'Buy now' | trans }}</button>
+                            <button type="submit" class="gs-accept w-100">{{ 'Buy now' | trans }}</button>
                             {{ form_end(form) }}
                         </div>
                     </div>

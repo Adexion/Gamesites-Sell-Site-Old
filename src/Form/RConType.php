@@ -15,7 +15,7 @@ class RConType extends BaseType
         $builder
             ->add('server', EntityType::class, [
                 'class' => Server::class,
-                'choice_label' => 'serverName'
+                'choice_label' => 'serverName',
             ])
             ->add('command', TextType::class);
     }

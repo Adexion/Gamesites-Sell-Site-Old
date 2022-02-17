@@ -2,8 +2,10 @@
 
 namespace App\Extension;
 
+use App\Entity\Server;
+use App\Repository\ServerRepository;
+use App\Service\Connection\QueryService;
 use App\Service\GlobalDataQuery;
-use App\Service\QueryService;
 use Exception;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
@@ -11,18 +13,18 @@ use Twig\Extension\GlobalsInterface;
 class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
 {
     private GlobalDataQuery $globalDataQuery;
-    private QueryService $queryService;
 
-    public function __construct(GlobalDataQuery $globalDataQuery, QueryService $queryService)
+    public function __construct(GlobalDataQuery $globalDataQuery, ServerRepository $serverRepository)
     {
         $this->globalDataQuery = $globalDataQuery;
-        $this->queryService = $queryService;
+        $this->queryService = new QueryService($serverRepository->findOneBy(['isDefault' => true]) ?? new Server()) ;
     }
 
     /** @throws Exception */
     public function getGlobals(): array
     {
         $globals = $this->globalDataQuery->getGlobals();
+
         return [
             'serverInfo' => $globals['minecraftQueryIp'] ?? null ? $this->queryService->getInfo() : [],
             'isPlayerRank' => $globals['player'] ?? null,

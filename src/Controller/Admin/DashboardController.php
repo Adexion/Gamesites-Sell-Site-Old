@@ -13,26 +13,24 @@ use App\Entity\Item;
 use App\Entity\ItemHistory;
 use App\Entity\Payment;
 use App\Entity\PaySafeCard;
-use App\Entity\PaySafeCardVoucher;
 use App\Entity\Rank;
 use App\Entity\Rule;
 use App\Entity\Server;
 use App\Entity\User;
 use App\Entity\Voucher;
 use App\Form\RConType;
+use App\Service\Connection\ExecuteServiceFactory;
 use App\Service\QueryService;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
+use Exception;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 use Scheb\TwoFactorBundle\Security\TwoFactor\QrCode\QrCodeGenerator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use xPaw\SourceQuery\Exception\InvalidPacketException;
-use xPaw\SourceQuery\Exception\SocketException;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -47,7 +45,7 @@ class DashboardController extends AbstractDashboardController
     /**
      * @Route("/admin/console", name="console")
      */
-    public function console(Request $request, QueryService $service): Response
+    public function console(Request $request, ExecuteServiceFactory $factory): Response
     {
         $form = $this->createForm(RConType::class);
         $form->handleRequest($request);
@@ -55,15 +53,15 @@ class DashboardController extends AbstractDashboardController
             /** @var Server $server */
             $server = $form->getData()['server'];
             try {
-                $response = $service->execute($form->getData()['command'], $server);
-            } catch (SocketException $e) {
+                $response = $factory->getExecutionService($server)->execute($form->getData()['command']);
+            } catch (Exception $e) {
                 $response = $e->getMessage();
             }
         }
 
         return $this->render('admin/console.html.twig', [
             'form' => $form->createView(),
-            'response' => $response ?? ''
+            'response' => $response ?? '',
         ]);
     }
 
@@ -78,8 +76,11 @@ class DashboardController extends AbstractDashboardController
     /**
      * @Route("/admin/user/2fa", name="user2fa")
      */
-    public function twoFactoryAuthentication(Request $request, GoogleAuthenticatorInterface  $googleAuthenticator, QrCodeGenerator $codeGenerator): Response
-    {
+    public function twoFactoryAuthentication(
+        Request $request,
+        GoogleAuthenticatorInterface $googleAuthenticator,
+        QrCodeGenerator $codeGenerator
+    ): Response {
         if ($request->request->get('generate')) {
             /** @var User $user */
             $user = $this->getUser();
@@ -104,7 +105,7 @@ class DashboardController extends AbstractDashboardController
 
         return $this->render('admin/2fa.html.twig', [
             'secret' => $secret ?? null,
-            'qrCodeContent' => base64_encode($qrCodeContent ?? '')
+            'qrCodeContent' => base64_encode($qrCodeContent ?? ''),
         ]);
     }
 

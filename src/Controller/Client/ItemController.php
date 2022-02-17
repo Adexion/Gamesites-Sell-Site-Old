@@ -3,9 +3,7 @@
 namespace App\Controller\Client;
 
 use App\Entity\Item;
-use App\Entity\PaySafeCardVoucher;
 use App\Enum\PaymentStatusEnum;
-use App\Enum\PaymentTypeEnum;
 use App\Form\ItemType;
 use App\Form\VoucherType;
 use App\Repository\ItemHistoryRepository;
@@ -18,6 +16,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Error\SyntaxError;
+use xPaw\SourceQuery\Exception\AuthenticationException;
+use xPaw\SourceQuery\Exception\InvalidArgumentException;
+use xPaw\SourceQuery\Exception\InvalidPacketException;
 
 class ItemController extends AbstractRenderController
 {
@@ -39,19 +40,26 @@ class ItemController extends AbstractRenderController
 
     /**
      * @Route (name="item", path="/shop/{id}")
-     * @throws ORMException|OptimisticLockException|SyntaxError
+     * @throws AuthenticationException|InvalidArgumentException|InvalidPacketException|ORMException|OptimisticLockException|SyntaxError
      */
-    public function item(Item $item, Request $request, PaymentResponseBuilder $builder, PaySafeCardManualService $manualService): Response
-    {
+    public function item(
+        Item $item,
+        Request $request,
+        PaymentResponseBuilder $builder,
+        PaySafeCardManualService $manualService
+    ): Response {
         $form = $this->createForm(ItemType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($request->request->get('payment') === 'paySafeCard') {
-                return $this->redirectToRoute('voucher', ['hash' => $manualService->createManualPSC($form, $item)->getHash()]);
+                return $this->redirectToRoute(
+                    'pscPending',
+                    ['hash' => $manualService->createManualPSC($form, $item)->getHash()]
+                );
             }
 
-            return $builder->getResponse($form, $item, function($parameters) {
+            return $builder->getResponse($form, $item, function ($parameters) {
                 return $this->render('client/payment.html.twig', $parameters);
             });
         }
@@ -59,20 +67,6 @@ class ItemController extends AbstractRenderController
         return $this->render('client/item.html.twig', [
             'item' => $item,
             'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route (name="voucher", path="/shop/{hash}/voucher")
-     * @throws SyntaxError
-     */
-    public function voucher(PaySafeCardVoucher $voucher): Response
-    {
-        return $this->render('client/thankYou.html.twig', [
-            'type' => PaymentTypeEnum::PAY_SAFE_CARD,
-            'message' => 'PaySafeCard is pending. Contact with administrator',
-            'paymentId' => $voucher->getPaySafeCard()->getId(),
-            'link' => $this->generateUrl('pscVoucher', ['pscVoucher' => $voucher->getHash()]),
         ]);
     }
 }

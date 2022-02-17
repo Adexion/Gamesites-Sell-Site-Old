@@ -935,7 +935,7 @@ a {
     opacity: 0.35;
 }
 
-.payments-box-input {
+.payments-box-input, #code-fields-list li input {
     border: none;
     border-radius: 3px;
     padding: 10px 15px;
@@ -946,6 +946,10 @@ a {
     background: var(--background);
     color: var(--white);
     transition: opacity 0.2s ease-in-out;
+}
+
+#code-fields-list li input {
+    margin: 5px 0;
 }
 
 .payments-box-input:focus {

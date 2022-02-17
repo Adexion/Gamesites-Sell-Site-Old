@@ -22,7 +22,10 @@ abstract class AbstractRemoteRepository extends ServiceEntityRepository
     protected function connect(?AbstractRemoteEntity $entity): ?Connection
     {
         return DriverManager::getConnection([
-            'url' => sprintf('mysql://%s:%s@%s:%s/%s?serverVersion=13&charset=utf8', ...array_values($entity->toArray())),
+            'url' => sprintf(
+                'mysql://%s:%s@%s:%s/%s?serverVersion=13&charset=utf8',
+                ...array_values($entity->toArray())
+            ),
         ], new Configuration());
     }
 
@@ -33,8 +36,8 @@ abstract class AbstractRemoteRepository extends ServiceEntityRepository
     protected function createQB(?AbstractRemoteEntity $entity): QueryBuilder
     {
         return $this->connect($entity)->createQueryBuilder()
-            ->select('x.`'.$entity->getName().'` AS name', 'x.`'.$entity->getColumnOne().'` AS value')
+            ->select('x.`' . $entity->getName() . '` AS name', 'x.`' . $entity->getColumnOne() . '` AS value')
             ->from($entity->getDirectory(), 'x')
-            ->orderBy('x.`'.$entity->getColumnOne().'`', 'DESC');
+            ->orderBy('x.`' . $entity->getColumnOne() . '`', 'DESC');
     }
 }

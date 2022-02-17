@@ -31,16 +31,18 @@ final class EntityField implements FieldInterface
             ->setCustomOption(self::OPTION_CHOICE_LABEL, $choiceLabel)
             ->setFormTypeOptions([
                 self::OPTION_CLASS => $entityClass,
-                self::OPTION_CHOICE_LABEL => $choiceLabel
+                self::OPTION_CHOICE_LABEL => $choiceLabel,
             ])
             ->formatValue(function ($entity) use ($choiceLabel) {
                 if (!$entity) {
                     return null;
                 }
 
-                if (isset($this->filteredBy) && call_user_func([$entity, 'get' . ucfirst($this->filteredBy)]) == $this->filteredValue){
+                if (isset($this->filteredBy) && call_user_func([$entity, 'get' . ucfirst($this->filteredBy)]
+                    ) == $this->filteredValue) {
                     return null;
                 }
+
                 return call_user_func([$entity, 'get' . ucfirst($choiceLabel)]);
             });
 

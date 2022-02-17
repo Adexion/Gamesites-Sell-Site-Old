@@ -3,7 +3,6 @@
 namespace App\Controller\Admin\Crud;
 
 use App\Entity\Bans;
-use App\Entity\Rule;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;

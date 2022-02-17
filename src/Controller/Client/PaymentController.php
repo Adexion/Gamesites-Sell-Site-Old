@@ -89,6 +89,20 @@ class PaymentController extends AbstractRenderController
     }
 
     /**
+     * @Route (name="pscPending", path="/payment/{hash}/paySafeCard")
+     * @throws SyntaxError
+     */
+    public function pscPending(PaySafeCardVoucher $voucher): Response
+    {
+        return $this->render('client/thankYou.html.twig', [
+            'type' => PaymentTypeEnum::PAY_SAFE_CARD,
+            'message' => 'PaySafeCard is pending. Contact with administrator',
+            'paymentId' => $voucher->getPaySafeCard()->getId(),
+            'link' => $this->generateUrl('pscVoucher', ['pscVoucher' => $voucher->getHash()]),
+        ]);
+    }
+
+    /**
      * @Route(name="pscVoucher", path="/paySafeCard/{pscVoucher}")
      * @throws SyntaxError|ORMException|OptimisticLockException
      */

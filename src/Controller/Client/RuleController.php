@@ -3,7 +3,6 @@
 namespace App\Controller\Client;
 
 use App\Repository\RuleRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,7 +14,7 @@ class RuleController extends AbstractRenderController
         $rule = $repository->findOneBy([]);
 
         return $this->render('client/rule.html.twig', [
-            'rule' => $rule ? $rule->getHtml() : ''
+            'rule' => $rule ? $rule->getHtml() : '',
         ]);
     }
 }
