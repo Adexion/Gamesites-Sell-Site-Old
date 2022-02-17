@@ -10,6 +10,7 @@ use App\Entity\Server;
 use App\Enum\RankEnum;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 
 class GlobalDataQuery
 {
@@ -22,7 +23,7 @@ class GlobalDataQuery
 
     public function getGlobals(): array
     {
-        return $this->entityManager->createQueryBuilder()
+        $query = $this->entityManager->createQueryBuilder()
             ->select(
                 'c.logo',
                 'c.ip AS serverIp',
@@ -58,7 +59,12 @@ class GlobalDataQuery
                 ':player' => RankEnum::PLAYER,
             ])
             ->where('1 = 1')
-            ->getQuery()
-            ->execute()[0];
+            ->getQuery();
+
+        try {
+            return $query->execute()[0];
+        } catch (Exception $exception) {
+            return [];
+        }
     }
 }
