@@ -22,16 +22,16 @@ Back to the product list: Powrót na listę produktów
 Payment form: Formularz płatności
 
 CashBill: Płatności CashBill
-HotPay: Przelew bądź płatność kartą (HotPay)
-DirectBilling: SMS+ (HotPay)
-PaySafeCard: PaySafeCard (HotPay)
+HotPay: Płatności HotPay
 TPay: Płatności TPay
+DirectBilling: SMS+ (DirectBilling)
+PaySafeCard: PaySafeCard
 
 HOT_PAY: Płatności HotPay
 CASH_BILL: Płatności CashBill
 T_PAY:  Płatności TPay
+DIRECT_BILLING: SMS+ (DirectBilling)
 PAY_SAFE_CARD: PaySafeCard (HotPay)
-DIRECT_BILLING: SMS+ (HotPay)
 
 Username: Nick
 Payment: Forma płatności
