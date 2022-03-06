@@ -42,7 +42,6 @@ class RankCrud extends AbstractCrudController
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextField::new('columnOne', 'Date')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
-            TextField::new('columnTwo', 'Reason'),
             ChoiceField::new('type')
                 ->setChoices(RankEnum::toArray()),
         ];
