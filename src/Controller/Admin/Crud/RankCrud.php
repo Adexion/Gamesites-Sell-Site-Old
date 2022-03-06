@@ -40,7 +40,7 @@ class RankCrud extends AbstractCrudController
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextField::new('name')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
-            TextField::new('columnOne', 'Date')
+            TextField::new('columnOne', 'Point')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             ChoiceField::new('type')
                 ->setChoices(RankEnum::toArray()),
