@@ -36,13 +36,13 @@ class ServerCrud extends AbstractCrudController
             TextField::new('conIp')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             NumberField::new('conPort')
-                ->setFormTypeOption('constraints', [new Length(['max' => 4])]),
+                ->setFormTypeOption('constraints', [new Length(['max' => 5])]),
             TextField::new('conPassword')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextField::new('minecraftQueryIp')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             NumberField::new('minecraftQueryPort')
-                ->setFormTypeOption('constraints', [new Length(['max' => 4])]),
+                ->setFormTypeOption('constraints', [new Length(['max' => 5])]),
             BooleanField::new('isDefault')
                 ->setValue(false)
                 ->setHelp('Ustaw jako włączony tylko dla głównego serwera. W innym przypadku aplikacja może nie działać prawidłowo.'),
