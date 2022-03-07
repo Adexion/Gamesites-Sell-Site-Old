@@ -10,7 +10,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\Validator\Constraints\Length;
 
 class ServerCrud extends AbstractCrudController
@@ -46,7 +45,7 @@ class ServerCrud extends AbstractCrudController
                 ->setFormTypeOption('constraints', [new Length(['max' => 4])]),
             BooleanField::new('isDefault')
                 ->setValue(false)
-                ->setHelp('Ustaw jako włączony tylko dla głównego serwera. W innym przypadku aplikacja może nie działać prawidłowo.')
+                ->setHelp('Ustaw jako włączony tylko dla głównego serwera. W innym przypadku aplikacja może nie działać prawidłowo.'),
         ];
     }
 }
