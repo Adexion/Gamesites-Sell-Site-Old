@@ -372,6 +372,7 @@ a:active {
     border-color: #67a7eb;
     border-bottom: 6px solid rgba(0, 0, 0, 0.1);
     text-shadow: none !important;
+    height: fit-content;
 }
 
 .online {

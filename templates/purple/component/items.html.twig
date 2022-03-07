@@ -1,8 +1,13 @@
 <section class="shop">
     <div class="mw-auto">
-        <div class="shop-text">
-            <h1 class="shop-text_h1">Sklep serwera</h1>
-            <p class="shop-text_p">{{ 'Shop information' | trans }}</p>
+        <div class="flex flex-between">
+            <div class="col-6">
+                <h1 class="shop-text_h1">Sklep serwera</h1>
+                <p class="shop-text_p">{{ 'Shop information' | trans }}</p>
+            </div>
+            <div class="flex-end">
+                <button type="button" class="btn btn-shop modal-btn">{{ 'Realize voucher' | trans }}</button>
+            </div>
         </div>
         {% for serverName, group in groupItems %}
             <div class="payments-box">

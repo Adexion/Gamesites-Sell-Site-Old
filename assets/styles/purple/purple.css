@@ -1,5 +1,6 @@
 @import "./font.min.css?v2";
 @import "~@fortawesome/fontawesome-free/css/all.css";
+@import "modal.css";
 
 :root {
     --white: hsl(0, 0%, 100%);
