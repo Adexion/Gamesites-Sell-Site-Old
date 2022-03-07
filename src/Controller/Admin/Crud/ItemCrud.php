@@ -15,6 +15,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\PercentField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Range;
 
@@ -71,7 +72,7 @@ class ItemCrud extends AbstractCrudController
                 ->allowAdd(true)
                 ->allowDelete(true)
                 ->setHelp("be replaced to player nick")
-                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+                ->setFormTypeOption('constraints', [new All([new Length(['max' => 255])])]),
             EntityField::new('server')
                 ->setClass(Server::class, 'serverName')
                 ->setHelp('First create server'),

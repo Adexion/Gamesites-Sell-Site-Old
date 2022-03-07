@@ -224,7 +224,7 @@ thead {
     --color-border-primary: #661158;
 }
 
-td > a {
+td > a, .field-collection-add-button {
     color: var(--color-primary);
 }
 
