@@ -4,6 +4,8 @@ namespace App\Controller\Admin\Crud;
 
 use App\Controller\Admin\Field\CKEditorField;
 use App\Entity\Article;
+use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -21,6 +23,14 @@ class ArticleCrud extends AbstractCrudController
     public static function getEntityFqcn(): string
     {
         return Article::class;
+    }
+
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        /** @var Article $entityInstance */
+        $entityInstance->setAuthor($this->getUser());
+
+        parent::persistEntity($entityManager, $entityInstance);
     }
 
     public function configureFields(string $pageName): iterable
