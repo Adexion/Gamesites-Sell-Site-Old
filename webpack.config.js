@@ -7,6 +7,13 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 }
 
 Encore
+    .copyFiles([
+        {from: './node_modules/ckeditor/', to: 'ckeditor/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: false},
+        {from: './node_modules/ckeditor/adapters', to: 'ckeditor/adapters/[path][name].[ext]'},
+        {from: './node_modules/ckeditor/lang', to: 'ckeditor/lang/[path][name].[ext]'},
+        {from: './node_modules/ckeditor/plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
+        {from: './node_modules/ckeditor/skins', to: 'ckeditor/skins/[path][name].[ext]'}
+    ])
     .setOutputPath('public/build/')
     .setPublicPath('/build')
     .addStyleEntry('console', './assets/styles/console.css')
