@@ -33,7 +33,7 @@ class MongoRemoteRepository implements RemoteRepositoryInterface
             ];
         }
 
-        $result = $this->con->find($name ?? [], $limit ?? [])->toArray();
+        $result = $this->con->find($name ?: [], $limit ?: [])->toArray();
         foreach ($result as $found) {
             $element = [];
             foreach ($this->entity->getSearchFields() as $key => $value) {
