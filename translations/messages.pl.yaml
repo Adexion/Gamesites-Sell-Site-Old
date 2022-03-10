@@ -60,7 +60,7 @@ Configuration: Konfiguracja
 Users: Użytkownicy PA
 Password: Hasło
 Database: Baza danych
-Directory: Tabela w bazie danych
+Directory: Tabela/Kolekcja
 Point: Punkty
 Type: Typ
 Description: Opis
@@ -166,6 +166,8 @@ Subtitle: Podtytuł
 Article: Artykuł
 Check: Potwierdzam poprawność nicku w grze, akceptuje postanowienia regulaminu serwisu oraz jestem świadomy, że usługa nie podlega zwrotowi.
 Connection Type: Połączenie za pośrednictwem
+Database Type: Typ połączenia
+Background: Obraz tła
 
 CREATED: Utworzo
 ACCEPTED: Zaakceptowano

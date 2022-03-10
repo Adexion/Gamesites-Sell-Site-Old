@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header" {% if background %}style="background-image: url('/assets/images/{{ background }}')" {% endif %}>
     <div class="header-height mw-auto flex flex-align flex-center">
         <div class="header-left">
             <h1 class="header-text_h1">{{ mainText | raw | nl2br }}</h1>

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin\Crud;
 
 use App\Entity\Rank;
+use App\Enum\DatabaseTypeEnum;
 use App\Enum\RankEnum;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -30,6 +31,10 @@ class RankCrud extends AbstractCrudController
             TextField::new('ip'),
             NumberField::new('port')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            ChoiceField::new('type')
+                ->setChoices(RankEnum::toArray()),
+            ChoiceField::new('databaseType')
+                ->setChoices(DatabaseTypeEnum::toArray()),
             TextField::new('login')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextField::new('password')
@@ -42,8 +47,6 @@ class RankCrud extends AbstractCrudController
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextField::new('columnOne', 'Point')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
-            ChoiceField::new('type')
-                ->setChoices(RankEnum::toArray()),
         ];
     }
 }

@@ -9,7 +9,6 @@ use App\Repository\ItemHistoryRepository;
 use App\Repository\RankRepository;
 use App\Repository\ServerRepository;
 use DateTime;
-use Doctrine\DBAL;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +18,7 @@ class MainController extends AbstractRenderController
 {
     /**
      * @Route(path="/", name="index")
-     * @throws SyntaxError|DBAL\Driver\Exception|DBAL\Exception
+     * @throws SyntaxError
      */
     public function index(
         GuildItemRepository $guildItemRepository,

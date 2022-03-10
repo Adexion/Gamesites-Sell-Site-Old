@@ -26,4 +26,13 @@ class Bans extends AbstractRemoteEntity
     {
         return $this->columnTwo;
     }
+
+    function getSearchFields(): array
+    {
+        return [
+            'name' => $this->name,
+            'value' => $this->getColumnOne(),
+            'reason' => $this->getColumnTwo(),
+        ];
+    }
 }

@@ -31,6 +31,7 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
             'isGuildRank' => $globals['guild'] ?? null,
             'serverIp' => $globals['serverIp'] ?? null,
             'logo' => $globals['logo'] ?? null,
+            'background' => $globals['background'] ?? null,
             'target' => $globals['target'] ?? null,
             'serverName' => $globals['serverName'] ?? null,
             'serverDescription' => $globals['description'] ?? null,

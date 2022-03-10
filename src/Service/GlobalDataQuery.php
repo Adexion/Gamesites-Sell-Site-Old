@@ -26,6 +26,7 @@ class GlobalDataQuery
         $query = $this->entityManager->createQueryBuilder()
             ->select(
                 'c.logo',
+                'c.background',
                 'c.ip AS serverIp',
                 'c.description',
                 'c.simplePaySafeCard',

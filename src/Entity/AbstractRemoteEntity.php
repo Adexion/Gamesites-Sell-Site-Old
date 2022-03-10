@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-class AbstractRemoteEntity
+abstract class AbstractRemoteEntity
 {
     /**
      * @ORM\Id
@@ -52,6 +52,11 @@ class AbstractRemoteEntity
      * @ORM\Column(type="string", length=255)
      */
     protected $columnOne;
+
+    /**
+     * @ORM\Column(type="smallint", length=1, nullable=true)
+     */
+    protected $databaseType;
 
     public function getId(): ?int
     {
@@ -153,6 +158,20 @@ class AbstractRemoteEntity
 
         return $this;
     }
+
+    public function getDatabaseType(): ?int
+    {
+        return $this->databaseType;
+    }
+
+    public function setDatabaseType(?int $databaseType): self
+    {
+        $this->databaseType = $databaseType;
+
+        return $this;
+    }
+
+    abstract function getSearchFields(): array;
 
     public function toArray(): array
     {

@@ -29,4 +29,12 @@ class Rank extends AbstractRemoteEntity
 
         return $this;
     }
+
+    function getSearchFields(): array
+    {
+        return [
+            'name' => $this->name,
+            'value' => $this->getColumnOne(),
+        ];
+    }
 }

@@ -1,4 +1,4 @@
-<section class="bg">
+<section class="bg" {% if background %}style="background-image: url('/assets/images/{{ background }}')" {% endif %}>
     <div class="container">
         <p class="text-blue"><i class="fas fa-fire" aria-hidden="true"></i> {{ serverName }}</p>
         <h1 class="text-white">{{ mainText | raw | nl2br }}</h1>

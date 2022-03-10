@@ -33,6 +33,11 @@ class Configuration
     private $logo;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $background;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $ip;
@@ -143,5 +148,17 @@ class Configuration
     public function getDescription(): ?string
     {
         return $this->description;
+    }
+
+    public function setBackground(?string $background): self
+    {
+        $this->background = $background;
+
+        return $this;
+    }
+
+    public function getBackground(): ?string
+    {
+        return $this->background;
     }
 }

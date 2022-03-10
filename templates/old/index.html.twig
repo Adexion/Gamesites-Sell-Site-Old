@@ -1,7 +1,7 @@
 {% extends 'old/base.html.twig' %}
 
 {% block body %}
-    <div class="container-fluid container-fluid-bg">
+    <div class="container-fluid container-fluid-bg" {% if background %}style="background-image: url('/assets/images/{{ background }}')" {% endif %}>
         {% include 'old/component/information.html.twig' %}
         {% include 'old/component/whatsup.html.twig' %}
         {% include 'old/component/story.html.twig' %}

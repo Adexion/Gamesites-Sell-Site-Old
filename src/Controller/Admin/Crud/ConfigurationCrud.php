@@ -43,7 +43,7 @@ class ConfigurationCrud extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        $image =
+        $logo =
             ImageField::new('logo')
                 ->setUploadDir($this->getParameter('uploadPath'))
                 ->setBasePath($this->getParameter('basePath'))
@@ -65,8 +65,14 @@ class ConfigurationCrud extends AbstractCrudController
                 ->setChoices(TemplateEnum::toArray()),
             BooleanField::new('simplePaySafeCard'),
             $pageName === Crud::PAGE_EDIT
-                ? $image->setFormTypeOption('required', false)
-                : $image,
+                ? $logo->setFormTypeOption('required', false)
+                : $logo,
+            ImageField::new('background')
+                ->setUploadDir($this->getParameter('uploadPath'))
+                ->setBasePath($this->getParameter('basePath'))
+                ->setSortable(false)
+                ->setHelp('Caution! Deleting this entity will be required to change the image!')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
         ];
     }
 }

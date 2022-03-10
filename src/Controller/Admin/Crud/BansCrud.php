@@ -3,10 +3,12 @@
 namespace App\Controller\Admin\Crud;
 
 use App\Entity\Bans;
+use App\Enum\DatabaseTypeEnum;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Validator\Constraints\Length;
@@ -41,6 +43,8 @@ class BansCrud extends AbstractCrudController
             TextField::new('ip'),
             NumberField::new('port')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            ChoiceField::new('databaseType')
+                ->setChoices(DatabaseTypeEnum::toArray()),
             TextField::new('login')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextField::new('password')
