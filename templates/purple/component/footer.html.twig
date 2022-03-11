@@ -18,9 +18,9 @@
             {% if instagram or yt or tiktok %}
             <div class="footer-box flex flex-column">
                 <h3 class="footer-box_h3">SOCIAL LINKI</h3>
-                <a href="{{ instagram }}" class="footer-box_link"><i class="fab fa-instagram"></i> Instagram</a>
-                <a href="{{ yt }}" class="footer-box_link"><i class="fab fa-youtube"></i> YouTube</a>
-                <a href="{{ tiktok }}" class="footer-box_link"><i class="fab fa-tiktok"></i> TikTok</a>
+                {% if instagram %}<a href="{{ instagram }}" class="footer-box_link"><i class="fab fa-instagram"></i> Instagram</a>{% endif %}
+                {% if yt %}<a href="{{ yt }}" class="footer-box_link"><i class="fab fa-youtube"></i> YouTube</a>{% endif %}
+                {% if tiktok %}<a href="{{ tiktok }}" class="footer-box_link"><i class="fab fa-tiktok"></i> TikTok</a>{% endif %}
             </div>
             {% endif %}
             <div class="footer-box flex flex-column">
