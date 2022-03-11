@@ -41,7 +41,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=15, nullable=true)
+     * @ORM\Column(type="string", length=25, nullable=true)
      */
     private $nick;
 
