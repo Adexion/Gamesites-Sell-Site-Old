@@ -103,15 +103,15 @@ footer {
 .cool-guy {
   height: 746px;
   background-image: url("/assets/images/cool_guy.png");
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 50%;
 }
 
 .think-guy {
   height: 653px;
   background-image: url("/assets/images/thinking_guy.png");
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 50%;
 }
 
 .information {
