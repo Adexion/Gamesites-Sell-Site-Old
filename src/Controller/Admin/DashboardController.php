@@ -20,7 +20,6 @@ use App\Entity\User;
 use App\Entity\Voucher;
 use App\Form\RConType;
 use App\Service\Connection\ExecuteServiceFactory;
-use App\Service\QueryService;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -162,6 +161,7 @@ class DashboardController extends AbstractDashboardController
     public function configureUserMenu(UserInterface $user): UserMenu
     {
         return parent::configureUserMenu($user)
-            ->setAvatarUrl('https://crafthead.net/cube/' . ($this->getUser()->getNick() ?? 'steve'));
+            ->setAvatarUrl('https://crafthead.net/cube/' . ($this->getUser()->getNick() ?: 'steve'))
+            ->setName($this->getUser()->getNick() ?: $this->getUser()->getUserIdentifier());
     }
 }
