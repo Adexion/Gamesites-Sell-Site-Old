@@ -23,9 +23,9 @@
             {% endif %}
             <div class="col-lg-2">
                 <h1 class="text8 h4">{% trans %}LINKS{% endtrans %}</h1>
-                <h2 class="h6"><a href="{{ path('rule', {_locale: app.request.locale})}}">{% trans %}Rules{% endtrans %}</a></h2>
-                <h2 class="h6"><a href="{{ path('shop', {_locale: app.request.locale})}}">{% trans %}Item Shop{% endtrans %}</a></h2>
-                <h2 class="h6"><a href="{{ path('contact', {_locale: app.request.locale})}}">{% trans %}Contact{% endtrans %}</a></h2>
+                <h2 class="h6"><a href="{{ path('rule')}}">{% trans %}Rules{% endtrans %}</a></h2>
+                <h2 class="h6"><a href="{{ path('shop')}}">{% trans %}Item Shop{% endtrans %}</a></h2>
+                <h2 class="h6"><a href="{{ path('contact')}}">{% trans %}Contact{% endtrans %}</a></h2>
             </div>
         </div>
         <div class="mb-3"><small class="text-blue-xs"> {{ serverName }} {% trans %}Text footer{% endtrans %}</small></div>
