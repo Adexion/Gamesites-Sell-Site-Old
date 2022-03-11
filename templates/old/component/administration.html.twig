@@ -1,14 +1,14 @@
 {% if administration %}
-<div class="container">
+<div class="container py-5">
     <div class="whats-up row text-center flex-column justify-content-center">
         <h1>Administracja na naszym serwerze</h1>
         <h2 class="base">Zobacz kto jest w naszej administracji!</h2>
-        <div class="row w-100 mt-4">
+        <div class="row w-100 mt-4 d-flex justify-content-center align-items-center">
             {% set minotar = "https://mc-heads.net/body/" %}
             {% for a in administration %}
                 <div class="col-lg-4 col-md-12">
                     <div class="gs-body d-flex align-items-center justify-content-end flex-column">
-                        <img src="{{ minotar }}{{ a.username }}" alt="skin {{ a.username }}">
+                        <img src="{{ minotar }}{{ a.username }}" alt="skin {{ a.username }}" width="125">
                     </div>
                     <h2 class="mt-5 mb-4">{{ (a.description ?? ('Next noname' | trans ~ ' ...'))  | raw | nl2br }}</h2>
                 </div>
