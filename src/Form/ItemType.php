@@ -21,6 +21,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 class ItemType extends BaseType
@@ -61,6 +62,7 @@ class ItemType extends BaseType
                 'label' => false,
                 'constraints' => [
                     new All([
+                        new NotBlank(),
                         new Type(['type' => 'numeric', 'message' => 'Błędny PaySafeCard']),
                         new Length(
                             [
