@@ -19,7 +19,9 @@ class PaymentController extends AbstractController
     public function status(Request $request, OperatorFactory $factory, string $type): Response
     {
         $type = OperatorTypeEnum::toArray()[OperatorResponseEnum::from($type)->getKey()];
-        $request = json_decode($request->getContent(), true);
+        $request = empty($request->request->all())
+            ? json_decode($request->getContent(), true)
+            : $request->request->all();
 
         try {
             $response = $factory->execute($type, $request);

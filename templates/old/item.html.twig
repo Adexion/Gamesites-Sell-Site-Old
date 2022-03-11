@@ -24,7 +24,7 @@
                             <img src="{{ asset('/assets/images/' ~ item.image) }}" alt=""/>
                             <div class="mt-4">
                                 <h4 class="font-weight-bold">{{ item.name | upper }}</h4>
-                                {{ item.discount | number_format(2) }} zł
+                                Kup <span id="counter">{{ item.multiple ? '1' : '' }}</span> za <span id="prize">{{ item.discountedPrice }}</span> zł
                                 <div class="gs-item-desc">{{ item.description | raw }}</div>
                             </div>
                         </div>
@@ -36,6 +36,11 @@
                             {{ form_row(form.email) }}
                             {{ form_row(form.username) }}
                             {{ form_row(form.payment) }}
+                            {% set class = not item.multiple ? 'd-none': 'd-block' %}
+                            <div class="mb-3 {{ class }}">
+                                <label for="count" class="form-label required">Ilość</label>
+                                {{ form_widget(form.count) }}
+                            </div>
                             <div id="psc-code" style="display:none">
                                 <ul id="code-fields-list"
                                     data-prototype="{{ form_widget(form.code.vars.prototype)|e }}"
@@ -62,7 +67,14 @@
                             </script>
                             {{ form_row(form.check) }}
 
-                            <button type="submit" class="gs-accept w-100">{{ 'Buy now' | trans }}</button>
+                            <button type="submit" class="gs-accept w-100">Kup teraz</button>
+                            <script>
+                                document.getElementById('count').addEventListener('change', (e) => {
+                                    const val = e.target.value * {{ item.discountedPrice }};
+                                    document.getElementById('prize').innerHTML = val.toFixed(2);
+                                    document.getElementById('counter').innerHTML = e.target.value;
+                                })
+                            </script>
                             {{ form_end(form) }}
                         </div>
                     </div>

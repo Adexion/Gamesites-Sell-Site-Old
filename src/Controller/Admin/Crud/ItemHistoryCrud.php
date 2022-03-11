@@ -15,6 +15,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class ItemHistoryCrud extends AbstractCrudController
@@ -48,6 +49,12 @@ class ItemHistoryCrud extends AbstractCrudController
                 ->hideOnIndex()
                 ->setDisabled(),
             MoneyField::new('price')
+                ->setCurrency('PLN')
+                ->setStoredAsCents(false)
+                ->setDisabled(),
+            NumberField::new('count')
+                ->setDisabled(),
+            MoneyField::new('totalPrice')
                 ->setCurrency('PLN')
                 ->setStoredAsCents(false)
                 ->setDisabled(),

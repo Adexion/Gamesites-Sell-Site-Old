@@ -8,11 +8,11 @@ use Symfony\Component\Form\FormInterface;
 
 final class CashBillOperator extends AbstractOperator implements OperatorInterface
 {
-    public function getForm(array $data, Item $item, int $id, string $secret, string $hash = null): FormInterface
+    public function getForm(array $data, Item $item, int $id, int $count, string $secret, string $hash = null): FormInterface
     {
         $formData = [
             'service' => $hash,
-            'amount' => $item->getDiscountedPrice(),
+            'amount' => $item->getTotalDiscountedPrice($count),
             'desc' => $item->getName(),
             'userdata' => $id,
         ];

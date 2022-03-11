@@ -19,14 +19,14 @@ class OperatorFactory
         $this->uri = $requestStack->getCurrentRequest()->getSchemeAndHttpHost();
     }
 
-    function getForm(array $data, Item $item, int $id, string $secret, string $hash): FormInterface
+    function getForm(array $data, Item $item, int $id, int $count, string $secret, string $hash): FormInterface
     {
-        $className = 'App\Service\Payment\Request\Operator\\'. $data['payment'] .'Operator';
+        $className = 'App\Service\Payment\Request\Operator\\' . $data['payment'] . 'Operator';
 
         if (!class_exists($className)) {
             throw new RuntimeException();
         }
 
-        return (new $className($this->formFactory, $this->uri))->getForm($data, $item, $id, $secret, $hash);
+        return (new $className($this->formFactory, $this->uri))->getForm($data, $item, $id, $count, $secret, $hash);
     }
 }

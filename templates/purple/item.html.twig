@@ -35,20 +35,22 @@
                         <p>&nbsp;</p>
                         <p>{{ item.shortDescription | raw }}</p>
                     </div>
-                    <p>
-                        Cena:
-                        {% if item.discount %}
-                            <del class="disabled">{{ item.price | format_currency('PLN') }}</del>
-                            {{ item.discountedPrice | format_currency('PLN') }}
-                        {% else %}
-                            {{ item.price | format_currency('PLN') }}
-                        {% endif %}
+                    <p class="mt-25">
+                        Kup <b id="counter">{{ item.multiple ? '1' : '' }}</b> za <b class="prize">{{ item.discountedPrice }}</b> zł
                     </p>
                 </div>
             </div>
 
             <div class="payments-box">
                 <h1>Zatwierdź płatność</h1>
+                {% set class = not item.multiple ? 'd-none': 'd-block' %}
+                <div class="{{ class }}">
+                    <div class="mx-between">
+                        <p>&nbsp;</p>
+                        <p class="payments-box-text">Ilość</p>
+                    </div>
+                    {{ form_widget(form.count, {'attr': {'class': 'w-100'}}) }}
+                </div>
                 <div class="mx-between">
                     <p>&nbsp;</p>
                     <p class="payments-box-text">Forma płatności</p>
@@ -91,7 +93,7 @@
                 <div class="payments-box-checkbox mx-align">
                     <button id="submit" type="submit" class="btn btn-color-g"
                             style="display: none;">{{ 'Buy now' | trans }}
-                        za {{ item.discountedPrice | format_currency('PLN') }}</button>
+                        za <b class="prize">{{ item.discountedPrice }}</b></button>
                     <script>
                         document.getElementById('check').checked = false;
 
@@ -114,6 +116,15 @@
                             e.target.value === 'paySafeCard'
                                 ? document.getElementById('psc-code').removeAttribute('style')
                                 : document.getElementById('psc-code').setAttribute('style', 'display: none;')
+                        })
+                    </script>
+                    <script>
+                        document.getElementById('count').addEventListener('change', (e) => {
+                            const val = e.target.value * {{ item.discountedPrice }};
+                            document.querySelectorAll('.prize').forEach((e) => {
+                                e.innerHTML = val.toFixed(2);
+                            });
+                            document.getElementById('counter').innerHTML = e.target.value;
                         })
                     </script>
                 </div>

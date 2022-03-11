@@ -10,5 +10,5 @@ interface OperatorInterface
 {
     public function __construct(FormFactoryInterface $formFactory, string $uri);
 
-    public function getForm(array $data, Item $item, int $id, string $secret, string $hash): FormInterface;
+    public function getForm(array $data, Item $item, int $id, int $count, string $secret, string $hash): FormInterface;
 }

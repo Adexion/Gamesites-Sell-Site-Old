@@ -34,7 +34,7 @@ class RequestBuilder
         $history = $this->createHistory($data, $item, $payment);
 
         $response = $callable([
-            'form' => $this->operatorFactory->getForm($data, $item, $history->getId(), $payment->getSecret(), $payment->getHash())->createView(),
+            'form' => $this->operatorFactory->getForm($data, $item, $history->getId(), $history->getCount(), $payment->getSecret(), $payment->getHash())->createView(),
             'paymentType' => $data['payment'],
         ]);
 
@@ -53,7 +53,9 @@ class RequestBuilder
             ->setStatus(PaymentStatusEnum::CREATED)
             ->setEmail($data['email'])
             ->setUsername($data['username'])
+            ->setCount($data['count'] ?? 1)
             ->setPrice($item->getDiscountedPrice())
+            ->setTotalPrice($item->getTotalDiscountedPrice($data['count']))
             ->setPaymentId($payment->getId())
             ->setType($payment->getType());
 

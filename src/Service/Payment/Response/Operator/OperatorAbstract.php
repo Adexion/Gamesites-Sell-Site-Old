@@ -22,7 +22,7 @@ abstract class OperatorAbstract implements OperatorInterface
 
     public function getResponse(array $request): ?string
     {
-        $this->validate($request);
+        return $this->validate($request);
     }
 
     public function __construct(ItemHistoryRepository $historyRepository, ServerRepository $serverRepository, ExecuteServiceFactory $factory)
@@ -34,11 +34,12 @@ abstract class OperatorAbstract implements OperatorInterface
 
     protected function execute(ItemHistory $history)
     {
-        foreach ($history->getItem()->getCommand() as $command) {
-            $this->factory->getExecutionService($history->getItem()->getServer())->execute(
-                $command,
-                $history->getUsername()
-            );
+        for ($i = 0; $i < $history->getCount(); $i++) {
+            foreach ($history->getItem()->getCommand() as $command) {
+                $this->factory->getExecutionService($history->getItem()->getServer())->execute(
+                    $command, $history->getUsername()
+                );
+            }
         }
     }
 
@@ -46,9 +47,7 @@ abstract class OperatorAbstract implements OperatorInterface
     protected function handleUnsuccessfullyResponse(string $paymentStatus, ItemHistory $history)
     {
         if (!in_array($paymentStatus, $this::SUCCESSFULLY_STATUES)) {
-            if (in_array($paymentStatus, $this::FAILURE_STATUSES)) {
-                $paymentStatus = PaymentStatusEnum::UNACCEPTED;
-            }
+            $paymentStatus = PaymentStatusEnum::UNACCEPTED;
 
             $history->setStatus($paymentStatus);
             $this->historyRepository->insertOrUpdate($history);

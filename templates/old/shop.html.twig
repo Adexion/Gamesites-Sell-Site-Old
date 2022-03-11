@@ -27,17 +27,25 @@
                 </div>
 
                 <div class="row justify-content-center">
-{#                    <div class="is-info">#}
-{#                        <h3>Ostatnie zamówienia</h3>#}
-{#                        {% if lastBuyerList.userBought is defined %}#}
-{#                            {% set minotar = "https://minotar.net/avatar/" %}#}
-{#                            {% for key, count in lastBuyerList.userBought %}#}
-{#                                <img class="is-info-head" src="{{ minotar }}{{ key }}" alt="{{ key }}"/>#}
-{#                            {% endfor %}#}
-{#                        {% else %}#}
-{#                            <h4>Brak zamówień w tym miesiącu</h4>#}
-{#                        {% endif %}#}
-{#                    </div>#}
+                    <div class="is-info">
+                        <h3>Ostatnie zamówienia</h3>
+                        {% if lastBuyers is defined %}
+                            {% set crafthead = "https://crafthead.net/avatar/" %}
+                            <div class="d-flex gap-3">
+                            {% for buyer in lastBuyers %}
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <img class="is-info-head" src="{{ crafthead }}{{ buyer.username }}" alt="{{ buyer.username }}"/>
+                                    <div class="d-flex flex-column">
+                                        <p>{{ buyer.username }}</p>
+                                        <p>{{ buyer.date | date('d.m.Y H:i') }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            </div>
+                        {% else %}
+                            <h4>Brak zamówień w tym miesiącu</h4>
+                        {% endif %}
+                    </div>
 
 {#                    <div class="is-info font-weight-normal">#}
 {#                        <h3>Cel serwera</h3>#}

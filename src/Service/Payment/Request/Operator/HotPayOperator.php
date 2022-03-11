@@ -8,11 +8,11 @@ use Symfony\Component\Form\FormInterface;
 
 final class HotPayOperator extends AbstractOperator implements OperatorInterface
 {
-    public function getForm(array $data, Item $item, int $id, string $secret, string $hash): FormInterface
+    public function getForm(array $data, Item $item, int $id, int $count, string $secret, string $hash): FormInterface
     {
         $formData = [
             'SEKRET' => $secret,
-            'KWOTA' => $item->getDiscountedPrice(),
+            'KWOTA' => $item->getTotalDiscountedPrice($count),
             'NAZWA_USLUGI' => $item->getName(),
             'ADRES_WWW' => sprintf('%s/payment', $this->uri),
             'ID_ZAMOWIENIA' => $id,

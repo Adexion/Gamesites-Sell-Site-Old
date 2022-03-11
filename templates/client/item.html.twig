@@ -22,6 +22,11 @@
                     {{ form_start(form, {method: 'POST'}) }}
                         {{ form_row(form.email) }}
                         {{ form_row(form.username) }}
+                        {% set class = not item.multiple ? 'd-none': 'd-block' %}
+                        <div class="mb-3 {{ class }}">
+                            <label for="count" class="form-label required">Ilość</label>
+                            {{ form_widget(form.count) }}
+                        </div>
                         {{ form_row(form.payment) }}
                         <div id="psc-code" style="display:none">
                             <ul id="code-fields-list"
@@ -49,7 +54,14 @@
                         </script>
                         {{ form_row(form.check) }}
 
-                        <button type="submit" class="btn-shop">{{ 'Buy now' | trans }}</button>
+                    <button type="submit" class="btn-shop">Kup <span id="counter">{{ item.multiple ? '1' : '' }}</span> za <span id="prize">{{ item.discountedPrice }}</span> zł</button>
+                    <script>
+                        document.getElementById('count').addEventListener('change', (e) => {
+                            const val = e.target.value * {{ item.discountedPrice }};
+                            document.getElementById('prize').innerHTML = val.toFixed(2);
+                            document.getElementById('counter').innerHTML = e.target.value;
+                        })
+                    </script>
                     {{ form_end(form) }}
                     <br>
                 </div>

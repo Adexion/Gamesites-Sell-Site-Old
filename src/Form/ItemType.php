@@ -11,6 +11,9 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormError;
@@ -68,6 +71,13 @@ class ItemType extends BaseType
                         ),
                     ]),
                 ],
+            ])
+            ->add('count', RangeType::class, [
+                'attr' => [
+                    'min' => 1,
+                    'max' => 10,
+                    'value' => 1,
+                ]
             ])
             ->add('check', CheckboxType::class, [])
             ->add('uri', HiddenType::class)

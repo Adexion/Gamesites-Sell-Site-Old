@@ -8,7 +8,7 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use RuntimeException;
 
-class TPayOperator extends OperatorAbstract implements OperatorInterface
+final class TPayOperator extends OperatorAbstract implements OperatorInterface
 {
     protected const SUCCESSFULLY_STATUES = ['TRUE', 'PAID'];
     protected const FAILURE_STATUSES = ['FALSE', 'CHARGEBACK'];

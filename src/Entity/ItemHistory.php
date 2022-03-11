@@ -58,6 +58,16 @@ class ItemHistory
      */
     private $price;
 
+    /**
+     * @ORM\Column(type="decimal", precision=7, scale=2, nullable=true)
+     */
+    private $totalPrice;
+
+    /**
+     * @ORM\Column(type="integer", options={"default": 1})
+     */
+    private $count;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -157,5 +167,29 @@ class ItemHistory
     public function getPrice(): ?float
     {
         return $this->price;
+    }
+
+    public function setCount(?int $count): self
+    {
+        $this->count = $count;
+
+        return $this;
+    }
+
+    public function getCount(): ?int
+    {
+        return $this->count;
+    }
+
+    public function setTotalPrice(?float $totalPrice): self
+    {
+        $this->totalPrice = $totalPrice;
+
+        return $this;
+    }
+
+    public function getTotalPrice(): ?float
+    {
+        return $this->totalPrice;
     }
 }

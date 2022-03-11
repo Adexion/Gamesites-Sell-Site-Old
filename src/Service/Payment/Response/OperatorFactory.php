@@ -22,7 +22,7 @@ class OperatorFactory
 
     public function execute(string $type, array $request): ?string
     {
-        $className = 'App\Service\Payment\Response\Operator\\' . $type . 'Operator';
+        $className = '\App\Service\Payment\Response\Operator\\' . $type . 'Operator';
 
         if (!class_exists($className)) {
             throw new RuntimeException();

@@ -53,6 +53,11 @@ class Item
     private $shortDescription;
 
     /**
+     * @ORM\Column(type="boolean", options={"default": false})
+     */
+    private $multiple;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Server::class)
      */
     private $server;
@@ -112,6 +117,11 @@ class Item
         return round($this->price - ($this->price * $this->discount), 2);
     }
 
+    public function getTotalDiscountedPrice(int $count): ?float
+    {
+        return $count * $this->getDiscountedPrice();
+    }
+
     public function setPrice(?float $price): self
     {
         $this->price = $price;
@@ -165,5 +175,17 @@ class Item
         $this->discount = $discount;
 
         return $this;
+    }
+
+    public function setMultiple(?bool $multiple): self
+    {
+        $this->multiple = $multiple;
+
+        return $this;
+    }
+
+    public function getMultiple(): ?bool
+    {
+        return $this->multiple;
     }
 }

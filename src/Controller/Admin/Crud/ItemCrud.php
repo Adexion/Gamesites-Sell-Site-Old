@@ -9,12 +9,14 @@ use App\Entity\Server;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\PercentField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Range;
@@ -73,6 +75,7 @@ class ItemCrud extends AbstractCrudController
                 ->allowDelete(true)
                 ->setHelp("be replaced to player nick")
                 ->setFormTypeOption('constraints', [new All([new Length(['max' => 255])])]),
+            BooleanField::new('multiple'),
             EntityField::new('server')
                 ->setClass(Server::class, 'serverName')
                 ->setHelp('First create server'),
