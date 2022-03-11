@@ -1,22 +1,28 @@
 <section class="stats">
-    <div class="mw-auto flex flex-align">
+    <div class="mw-auto flex flex-align flex-center">
         <div class="status-left flex flex-align">
             <div class="status-box flex flex-align">
-                <div class="status-box_category status-box_category-green"></div>
+                <div class="status-box_category status-box_category-green flex flex-center flex-align">
+                    <i class="fas fa-user"></i>
+                </div>
                 <div class="status-box_info">
                     <h1 class="status-box_h1">{% if serverInfo | length == 0 %}0/0{% else %}{{ serverInfo.Players }}/{{ serverInfo.MaxPlayers }}{% endif %}</h1>
                     <p class="status-box_p">Ilość graczy online</p>
                 </div>
             </div>
             <div class="status-box flex flex-align">
-                <div class="status-box_category status-box_category-blue"></div>
+                <div class="status-box_category status-box_category-blue flex flex-center flex-align">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
                 <div class="status-box_info">
                     <h1 class="status-box_h1">{{ boughtAll }}</h1>
-                    <p class="status-box_p">Ilość zakupionych przedmiotów</p>
+                    <p class="status-box_p">Zakupionych ogólnie</p>
                 </div>
             </div>
             <div class="status-box flex flex-align">
-                <div class="status-box_category status-box_category-blue"></div>
+                <div class="status-box_category status-box_category-blue flex flex-center flex-align">
+                    <i class="fas fa-shopping-basket"></i>
+                </div>
                 <div class="status-box_info">
                     <h1 class="status-box_h1">{{ boughtToday }}</h1>
                     <p class="status-box_p">Zakupiono dziś</p>
