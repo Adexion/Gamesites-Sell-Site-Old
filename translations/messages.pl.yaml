@@ -27,9 +27,10 @@ TPay: Płatności TPay
 DirectBilling: SMS+ (DirectBilling)
 PaySafeCard: PaySafeCard
 
-HOT_PAY: Płatności HotPay
-CASH_BILL: Płatności CashBill
-T_PAY:  Płatności TPay
+HOT_PAY: Płatności Online HotPay
+MICRO_SMS: Płatności Online MicroSMS
+CASH_BILL: Płatności Online CashBill
+T_PAY:  Płatności Online TPay
 DIRECT_BILLING: SMS+ (DirectBilling)
 PAY_SAFE_CARD: PaySafeCard (HotPay)
 
