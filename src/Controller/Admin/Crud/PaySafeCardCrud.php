@@ -55,6 +55,8 @@ class PaySafeCardCrud extends AbstractCrudController
                 ->allowDelete(false)
                 ->allowAdd(false)
                 ->setDisabled(),
+            TextField::new('username')
+                ->setDisabled(),
             EntityField::new('item', 'Price')
                 ->setClass(Item::class, 'discountedPrice')
                 ->setDisabled(),
