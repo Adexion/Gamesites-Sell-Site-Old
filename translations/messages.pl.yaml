@@ -21,9 +21,10 @@ Choose payment option: Wybierz formę płatności
 Back to the product list: Powrót na listę produktów
 Payment form: Formularz płatności
 
-CashBill: Płatności CashBill
-HotPay: Płatności HotPay
-TPay: Płatności TPay
+CashBill: Płatności Online CashBill
+HotPay: Płatności Online HotPay
+MicroSMS: Płatności Online MicroSMS
+TPay: Płatności Online TPay
 DirectBilling: SMS+ (DirectBilling)
 PaySafeCard: PaySafeCard
 
