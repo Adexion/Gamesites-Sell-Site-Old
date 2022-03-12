@@ -34,10 +34,21 @@ abstract class OperatorAbstract implements OperatorInterface
 
     protected function execute(ItemHistory $history)
     {
-        for ($i = 0; $i < $history->getCount(); $i++) {
-            foreach ($history->getItem()->getCommand() as $command) {
+        foreach ($history->getItem()->getCommand() as $command) {
+            $this->factory->getExecutionService($history->getItem()->getServer())->execute(
+                $command,
+                $history->getUsername(),
+                $history->getCount() ?: 1,
+            );
+
+            if (str_contains('%amount%', $command) || !$history->getCount()) {
+                break;
+            }
+
+            for ($i = 0; $i < $history->getCount() - 1; $i++) {
                 $this->factory->getExecutionService($history->getItem()->getServer())->execute(
-                    $command, $history->getUsername()
+                    $command,
+                    $history->getUsername()
                 );
             }
         }

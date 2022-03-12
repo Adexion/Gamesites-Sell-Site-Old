@@ -73,7 +73,7 @@ class ItemCrud extends AbstractCrudController
             CollectionField::new('command')
                 ->allowAdd(true)
                 ->allowDelete(true)
-                ->setHelp("be replaced to player nick")
+                ->setHelp("%player% - nick gracza, %amount% - ilość użyć przedmiotu")
                 ->setFormTypeOption('constraints', [new All([new Length(['max' => 255])])]),
             BooleanField::new('multiple'),
             EntityField::new('server')

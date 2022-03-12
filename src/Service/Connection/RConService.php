@@ -21,9 +21,9 @@ class RConService implements ExecuteInterface, QueryInterface, ConnectionInterfa
     }
 
     /** @throws InvalidPacketException|AuthenticationException|InvalidArgumentException|SocketException */
-    public function execute($command, string $username = ''): ?string
+    public function execute($command, string $username = '', int $amount = 1): ?string
     {
-        return $this->getConnection()->rcon(str_replace('%player%', $username, $command));
+        return $this->getConnection()->rcon(str_replace(['%player%', '%amount%'], [$username,$amount], $command));
     }
 
     /** @throws InvalidPacketException|AuthenticationException|InvalidArgumentException */

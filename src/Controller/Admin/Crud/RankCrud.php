@@ -44,9 +44,11 @@ class RankCrud extends AbstractCrudController
             TextField::new('directory')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextField::new('name')
-                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])])
+                ->setLabel('Kolumna z nickiem'),
             TextField::new('columnOne', 'Point')
-                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])])
+                ->setLabel('Kolumna z punktami'),
         ];
     }
 }

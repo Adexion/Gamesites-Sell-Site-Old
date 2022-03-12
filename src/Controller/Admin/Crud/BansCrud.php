@@ -54,11 +54,14 @@ class BansCrud extends AbstractCrudController
             TextField::new('directory')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextField::new('name')
-                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])])
+                ->setLabel('Kolumna z nickiem'),
             TextField::new('columnOne', 'Date')
-                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])])
+                ->setLabel('Kolumna z datą'),
             TextField::new('columnTwo', 'Reason')
-                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])])
+            ->setLabel('Kolumna z powodem'),
 
         ];
     }

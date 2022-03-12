@@ -26,11 +26,11 @@ class RedisService implements ExecuteInterface, QueryInterface, ConnectionInterf
         return $redis;
     }
 
-    public function execute($command, string $username = ''): ?string
+    public function execute($command, string $username = '', int $amount = 1): ?string
     {
         return $this->getConnection()->publish(
             $this->server->getServerName(),
-            str_replace('%player%', $username, $command)
+            str_replace(['%player%', '%amount%'], [$username,$amount], $command)
         );
     }
 
