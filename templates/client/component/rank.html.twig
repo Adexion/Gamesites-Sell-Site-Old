@@ -21,7 +21,7 @@
             <div class="row mb-5 flex justify-content-lg-between">
                 {% if playerRank is not empty %}
                     <div class="col-lg-5 mb-2">
-                        <h1 class="text5 mb-2 h6">{% trans %}Best players{% endtrans %}</h1>
+                        <h1 class="text5 mb-2 h3">{% trans %}Best players{% endtrans %}</h1>
                         <div class="col-lg-12 mb-3 ranking animate">
                             {% for player in playerRank %}
                                 <div class="row">
@@ -30,7 +30,7 @@
                                         <img class="me-4" src="https://crafthead.net/cube/{{ player.name }}" height="48px" width="48px" alt="{{ "Cube of" | trans }} {{ player.name }}">
                                         <span class="text8">{{ player.name | upper }}</span>
                                     </div>
-                                    <div class="col-6 p-2 text7 d-flex justify-content-end align-items-center">
+                                    <div class="col-3 p-2 text7 d-flex justify-content-end align-items-center">
                                         <p>{{ player.value }}</p>
                                     </div>
                                 </div>

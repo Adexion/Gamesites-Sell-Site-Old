@@ -9,11 +9,6 @@
                         <img class="me-2" src="{{ crafthead }}{{ buyer.username }}" alt="{{ buyer.username }}" height="80"
                              data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="top" title="{{ buyer.username }}<br/>{{ buyer.date | date('d.m.Y H:i') }}"/>
                     </div>
-                {% endfor %}                {% for buyer in lastBuyers %}
-                    <div class="d-flex justify-content-center align-items-center text-white">
-                        <img class="me-2" src="{{ crafthead }}{{ buyer.username }}" alt="{{ buyer.username }}" height="80"
-                             data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="top" title="{{ buyer.username }}<br/>{{ buyer.date | date('d.m.Y H:i') }}"/>
-                    </div>
                 {% endfor %}
         </div>
     </div>
