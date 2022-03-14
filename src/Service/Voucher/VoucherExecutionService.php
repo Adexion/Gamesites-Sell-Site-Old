@@ -66,7 +66,7 @@ class VoucherExecutionService
         $history->setStatus(PaymentStatusEnum::REALIZED);
         $history->setItem($voucher->getItem());
         $history->setDate(new DateTime());
-
+        $history->setCount(1);
         $this->historyRepository->insertOrUpdate($history);
 
         return null;
