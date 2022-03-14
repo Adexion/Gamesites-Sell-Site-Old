@@ -22,6 +22,7 @@ class ItemRepository extends ServiceEntityRepository
     public function groupByServer(): array
     {
         foreach ($this->findAll() as $item) {
+            if(!$item->getVisible()) break;
             $grouped[$item->getServer()->getServerName()][] = $item;
         }
 

@@ -48,6 +48,8 @@ class SQLRemoteRepository implements RemoteRepositoryInterface
             $sql .= " WHERE `name` = \"{$name}\"";
         }
 
+        $sql .= ' ORDER BY x.' .$this->entity->getColumnOne() . ' DESC';
+
         if ($limit) {
             $sql .= ' LIMIT ' . $limit;
         }

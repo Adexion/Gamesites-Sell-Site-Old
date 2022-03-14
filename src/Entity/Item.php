@@ -59,8 +59,14 @@ class Item
 
     /**
      * @ORM\ManyToOne(targetEntity=Server::class)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $server;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default": true})
+     */
+    private $visible;
 
     public function getId(): ?int
     {
@@ -187,5 +193,17 @@ class Item
     public function getMultiple(): ?bool
     {
         return $this->multiple;
+    }
+
+    public function getVisible(): ?bool
+    {
+        return $this->visible;
+    }
+
+    public function setVisible(bool $visible): self
+    {
+        $this->visible = $visible;
+
+        return $this;
     }
 }

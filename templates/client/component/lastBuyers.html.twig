@@ -1,3 +1,4 @@
+{% if lastBuyers %}
 <section class="last-buy">
     <div class="container">
         <div class="row mb-5">
@@ -10,6 +11,8 @@
                              data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="top" title="{{ buyer.username }}<br/>{{ buyer.date | date('d.m.Y H:i') }}"/>
                     </div>
                 {% endfor %}
+            </div>
         </div>
     </div>
 </section>
+{% endif %}

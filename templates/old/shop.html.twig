@@ -25,11 +25,10 @@
                 <div class="row justify-content-center mb-5">
                     <button type="button" class="gs-accept animate" data-bs-toggle="modal" data-bs-target="#modal">{{ 'Realize voucher' | trans }}</button>
                 </div>
-
                 <div class="row justify-content-center">
                     <div class="is-info">
                         <h3>Ostatnie zamówienia</h3>
-                        {% if lastBuyers is defined %}
+                        {% if lastBuyers %}
                             {% set crafthead = "https://crafthead.net/avatar/" %}
                             <div class="d-flex gap-3 flex-wrap">
                             {% for buyer in lastBuyers %}

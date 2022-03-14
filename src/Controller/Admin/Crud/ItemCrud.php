@@ -16,9 +16,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\PercentField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Range;
 
 class ItemCrud extends AbstractCrudController
@@ -76,9 +76,12 @@ class ItemCrud extends AbstractCrudController
                 ->setHelp("%player% - nick gracza, %amount% - ilość użyć przedmiotu")
                 ->setFormTypeOption('constraints', [new All([new Length(['max' => 255])])]),
             BooleanField::new('multiple'),
+            BooleanField::new('visible'),
             EntityField::new('server')
+                ->setRequired(true)
                 ->setClass(Server::class, 'serverName')
-                ->setHelp('First create server'),
+                ->setHelp('First create server')
+                ->setFormTypeOption('constraints', [new NotBlank()]),
         ];
     }
 }
