@@ -37,18 +37,28 @@ class SQLRemoteRepository implements RemoteRepositoryInterface
     {
         $mapped = implode(
             ',',
-            array_map(function ($key, $value) {
-                return " x.$value AS \"$key\"";
-            }, array_keys($this->entity->getSearchFields()), array_values($this->entity->getSearchFields()))
+            array_map(
+                fn($key, $value) => "x.$value AS \"$key\"",
+                array_keys($this->entity->getSearchFields()),
+                array_values($this->entity->getSearchFields())
+            )
         );
 
-        $sql = "SELECT{$mapped} FROM {$this->entity->getDirectory()} x";
+        if (!empty($this->entity->getAdditionalFields())) {
+            $names = array_map(fn($value) => $value['name'], $this->entity->getAdditionalFields());
+            $searches = array_map(fn($value) => $value['search'], $this->entity->getAdditionalFields());
+
+            $fields = implode(',', array_map(fn($key, $value) => "x.$value AS \"$key\"", $names, $searches));
+            $mapped .= ',' . $fields;
+        }
+
+        $sql = "SELECT {$mapped} FROM {$this->entity->getDirectory()} x";
 
         if ($name) {
             $sql .= " WHERE `name` = \"{$name}\"";
         }
 
-        $sql .= ' ORDER BY x.' .$this->entity->getColumnOne() . ' DESC';
+        $sql .= ' ORDER BY x.' . $this->entity->getOrderBy() . ' DESC';
 
         if ($limit) {
             $sql .= ' LIMIT ' . $limit;

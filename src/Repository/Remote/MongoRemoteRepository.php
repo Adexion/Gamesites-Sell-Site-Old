@@ -39,6 +39,9 @@ class MongoRemoteRepository implements RemoteRepositoryInterface
             foreach ($this->entity->getSearchFields() as $key => $value) {
                 $element[$key] = $found[$value];
             }
+            foreach ($this->entity->getAdditionalFields() as $field) {
+                $element[$field['name']] = $found[$field['search']];
+            }
 
             $response[] = $element;
         }

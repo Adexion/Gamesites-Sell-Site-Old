@@ -54,9 +54,19 @@ abstract class AbstractRemoteEntity
     protected $columnOne;
 
     /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    protected $additionalFields;
+
+    /**
      * @ORM\Column(type="smallint", length=1, nullable=true)
      */
     protected $databaseType;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $orderBy;
 
     public function getId(): ?int
     {
@@ -176,5 +186,38 @@ abstract class AbstractRemoteEntity
     public function toArray(): array
     {
         return [$this->login, $this->password, $this->ip, $this->port, $this->database];
+    }
+
+    public function getAdditionalFields(): ?array
+    {
+        return $this->additionalFields;
+    }
+
+    public function setAdditionalFields(?array $additionalFields): self
+    {
+        $this->additionalFields = $additionalFields;
+
+        return $this;
+    }
+
+    public function getAdditionalFieldIconByNameList(): array
+    {
+        foreach ($this->additionalFields as $field) {
+            $names[$field['name']] = $field['icon'];
+        }
+
+        return $names ?? [];
+    }
+
+    public function getOrderBy(): ?string
+    {
+        return $this->orderBy ?: $this->columnOne;
+    }
+
+    public function setOrderBy(?string $orderBy): self
+    {
+        $this->orderBy = $orderBy;
+
+        return $this;
     }
 }

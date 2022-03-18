@@ -45,7 +45,7 @@ Join to us: Dołącz do nas
 Here are the items you need to create a guild:
   Oto przedmioty, jakich potrzebujesz, aby utworzyć gildię
   by grać ze swoimi przyjaciółmi jako jeden zespół.
-GUILD: GILDIE
+GUILD: Gildie
 Items for: Przedmioty na
 Guild Item: Przedmioty do gildii
 Rule: Regulamin
@@ -172,6 +172,14 @@ Database Type: Typ połączenia
 Background: Obraz tła
 Multiple: Pozwolić na wiele?
 Visible: Czy widoczny w sklepie?
+
+Additional Fields: Dodatkowe pola
+Searched: Kulumna w bazie
+Showed name: Nazwa pola na stronie
+Icon: Obrazek na stronę
+Oci8: Oracle
+PLAYER: Gracze
+File: Plik
 
 CREATED: Utworzo
 ACCEPTED: Zaakceptowano

@@ -207,6 +207,11 @@ thead {
     border-color: var(--color-primary);
 }
 
+.ea-fileupload .custom-file-label {
+    width: 100% !important;
+    padding: 3px 40px 3px 7px !important;
+}
+
 :root {
     --link-color: #FFFFFF;
     --link-hover-color: #c0a4b9;
@@ -224,7 +229,7 @@ thead {
     --color-border-primary: #661158;
 }
 
-td > a, .field-collection-add-button {
+td > a, .field-collection-add-button, .field-collection-add-button:focus, .field-collection-add-button:active:focus {
     color: var(--color-primary);
 }
 
