@@ -16,6 +16,7 @@ use App\Entity\PaySafeCard;
 use App\Entity\Rank;
 use App\Entity\Rule;
 use App\Entity\Server;
+use App\Entity\TwitchStreamer;
 use App\Entity\User;
 use App\Entity\Voucher;
 use App\Form\RConType;
@@ -139,6 +140,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Rank', 'fas fa-users', Rank::class);
         yield MenuItem::linkToCrud('Bans', 'fas fa-ban', Bans::class);
         yield MenuItem::linkToCrud('Administration', 'fas fa-user-shield', Administration::class);
+        yield MenuItem::linkToCrud('Twitch', 'fas fa-users', TwitchStreamer::class);
 
         yield MenuItem::section('Item Shop');
         yield MenuItem::linkToCrud('Item', 'fas fa-shopping-cart', Item::class);
