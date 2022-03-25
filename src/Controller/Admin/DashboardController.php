@@ -45,11 +45,11 @@ class DashboardController extends AbstractDashboardController
     {
         $response = json_decode(file_get_contents(UrlEnum::GAMESITES_URL . 'v1/application/information/' . $_ENV['COUPON']), true);
         $server = $serverRepository->findOneBy(['isDefault' => true]);
-        $service = new QueryService($server);
+        $service = $server ? new QueryService($server) : null;
 
         return $this->render('admin/dashboard.html.twig', [
             'response' => $response,
-            'serverInfo' => $service->getInfo()
+            'serverInfo' => $service ? $service->getInfo() : []
         ]);
     }
 
