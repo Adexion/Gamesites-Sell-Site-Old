@@ -5,7 +5,10 @@
         {% if response is not empty %}
             {% if response.expireDate > '+7 days' | date('Y-m-d') %}
                 <div class="block col-12 col-lg-3 alert alert-success">
-                    <span>Termin płatności mija <b>{{ response.expireDate | date('d.m.Y') }}</b>.</span>
+                    <span>
+                        Aplikacja opłacona do: <b>{{ response.expireDate | date('d.m.Y') }}</b>.
+                        Możesz bez problemu korzystać z wszystkich udostępnionych funkcjonalności.
+                    </span>
                 </div>
             {% elseif response.expireDate <= '+7 days' | date('Y-m-d') and  response.expireDate > 'now' | date('Y-m-d') %}
                 <div class="block col-12 col-lg-3 alert alert-warning">
