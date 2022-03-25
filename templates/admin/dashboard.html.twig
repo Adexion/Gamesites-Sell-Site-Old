@@ -1,4 +1,39 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
 {% block main %}
+    <div class="d-flex flex-wrap block-list gap-3 justify-content-center">
+        {% if response.expireDate > '+7 days' | date('Y-m-d') %}
+            <div class="block col-12 col-lg-3 alert alert-success">
+                <span>Termin płatności mija <b>{{ response.expireDate | date('d.m.Y') }}</b>.</span>
+            </div>
+        {% elseif response.expireDate <= '+7 days' | date('Y-m-d') and  response.expireDate > 'now' | date('Y-m-d') %}
+            <div class="block col-12 col-lg-3 alert alert-warning">
+                <span>
+                    Uwaga! Zbliża się termin płatności za aplikacje. Opłać ją do <b>{{ response.expireDate | date('d.m.Y') }}</b>.
+                    W innym wypadku dostęp do funkcji panelu administracyjnego zostanie zablokowany!
+                    Dodatkowo po upływie <b>5 dni</b> od tej daty strona zostanie całkowicie zablokowana!
+                </span>
+            </div>
+        {% else %}
+            <div class="block col-12 col-lg-3 alert alert-danger">
+                <span>
+                    Upłynął termin płatności. Dostęp do panelu został&nbsp;zablokowany!
+                    Opłać&nbsp;zamówienie przed <b>{{ response.turnOffDate | date('d.m.Y') }}</b>. W&nbsp;innym wypadku strona zostanie całkowicie
+                    wyłączona.
+                </span>
+            </div>
+        {% endif %}
+
+        {% if serverInfo | length == 0 %}
+            <div class="block col-12 col-lg-3 alert alert-danger">
+                <span>Serwer jest wyłączony</span>
+            </div>
+        {% else %}
+            <div class="block col-12 col-lg-3 alert {{ serverInfo.Players ? 'alert-success' : 'alert-warning' }}">
+                <span>
+                    Graczy online:&nbsp;<b>{{ serverInfo.Players }}/{{ serverInfo.MaxPlayers }}</b>
+                </span>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

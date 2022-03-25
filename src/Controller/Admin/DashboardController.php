@@ -18,8 +18,11 @@ use App\Entity\Rule;
 use App\Entity\Server;
 use App\Entity\User;
 use App\Entity\Voucher;
+use App\Enum\UrlEnum;
 use App\Form\RConType;
+use App\Repository\ServerRepository;
 use App\Service\Connection\ExecuteServiceFactory;
+use App\Service\Connection\QueryService;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -38,9 +41,16 @@ class DashboardController extends AbstractDashboardController
     /**
      * @Route("/admin", name="admin")
      */
-    public function index(): Response
+    public function index(ServerRepository $serverRepository = null): Response
     {
-        return $this->render('admin/dashboard.html.twig');
+        $response = json_decode(file_get_contents(UrlEnum::GAMESITES_URL . 'v1/application/information/' . $_ENV['COUPON']), true);
+        $server = $serverRepository->findOneBy(['isDefault' => true]);
+        $service = new QueryService($server);
+
+        return $this->render('admin/dashboard.html.twig', [
+            'response' => $response,
+            'serverInfo' => $service->getInfo()
+        ]);
     }
 
     /**
@@ -128,6 +138,12 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        $response = json_decode(file_get_contents(UrlEnum::GAMESITES_URL . 'v1/application/information/' . $_ENV['COUPON']), true);
+
+        if ($response['expireDate'] <= date('Y-m-d')) {
+            return [];
+        }
+
         yield MenuItem::section('Main');
         yield MenuItem::linkToRoute('Console', 'fa fa-terminal', 'console');
         yield MenuItem::linkToRoute('Changelog', 'fab fa-readme', 'changes');

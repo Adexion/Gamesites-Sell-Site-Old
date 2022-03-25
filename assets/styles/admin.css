@@ -256,3 +256,21 @@ td > a, .field-collection-add-button, .field-collection-add-button:focus, .field
         display: none !important;
     }
 }
+
+.block-list {
+    height: 255px;
+}
+
+.block-list .block {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.block-list .block span {
+    font-size: 1.1rem;
+}
