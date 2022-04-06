@@ -1,5 +1,5 @@
-import '../styles/old.scss';
-import './bootstrap';
+import '../../styles/old/main.scss';
+import '../bootstrap';
 
 $(document).ready(function () {
     $('.add-another-collection-widget').click(function (e) {

@@ -1,5 +1,5 @@
-import '../styles/readable.css';
-import './bootstrap'
+import '../../styles/admin/readable.css';
+import '../bootstrap'
 
 $(document).ready(function () {
     $('.add-another-collection-widget').click(function (e) {

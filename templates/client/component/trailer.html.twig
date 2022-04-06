@@ -1,7 +1,7 @@
 {% if trailer %}
 <div class="container">
     <div class="row mb-5 d-flex justify-content-lg-between">
-        <div class="col-lg-6 col-12 text3">
+        <div class="col-lg-5 col-12 mb-5">
             <iframe src="{{ trailer }}"
                     title="YouTube video player"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -9,7 +9,7 @@
         </div>
         <div class="col-lg-6 col-12 d-flex flex-column justify-content-center">
             <h1 class="text-white">Trailer naszego serwera</h1>
-            <h2 class="text1 h5">{{ trailerText | raw | nl2br }}</h2>
+            <h2 class=" h5">{{ trailerText | raw | nl2br }}</h2>
 
         </div>
     </div>

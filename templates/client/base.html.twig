@@ -11,19 +11,18 @@
     <meta name="theme-color" content="#7952b3">
     <link rel="shortcut icon" href="/assets/images/{{ logo }}" />
     {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
+        {{ encore_entry_script_tags('client') }}
     {% endblock %}
     {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
+        {{ encore_entry_link_tags('client') }}
     {% endblock %}
 
 </head>
-<body class="d-flex flex-column h-100 bg-dark-blue">
+<body class="d-flex flex-column h-100">
 {% include 'client/component/navabr.html.twig' %}
 
 {% block body %}{% endblock %}
 
 {% include 'client/component/footer.html.twig' %}
-
 </body>
 </html>

@@ -6,7 +6,7 @@
                 <p class="shop-text_p">{{ 'Shop information' | trans }}</p>
             </div>
             <div class="flex-end">
-                <button type="button" class="btn btn-shop modal-btn">{{ 'Realize voucher' | trans }}</button>
+                <button type="button" class="btn btn btn-primary modal-btn">{{ 'Realize voucher' | trans }}</button>
             </div>
         </div>
         {% for serverName, group in groupItems %}
@@ -18,7 +18,7 @@
                     <div class="shop-box flex flex-align flex-center flex-column">
                         <img class="shop-box_image" src="{{ asset('/assets/images/' ~ item.image) }}" alt="SHOP-IMG">
                         <h1 class="shop-box_h1">{{ item.description | raw }}</h1>
-                        <a class="btn btn-shop" href="{{ path('item', {id: item.id}) }}">Zakup za
+                        <a class="btn btn btn-primary" href="{{ path('item', {id: item.id}) }}">Zakup za
                             {% if item.discount %}
                                 <del>{{ item.price | format_currency('PLN') }}</del>
                                 {{ item.discountedPrice | format_currency('PLN') }}

@@ -1,9 +1,19 @@
 {% extends 'client/base.html.twig' %}
 
 {% block body %}
-    <main class="bg2">
+    <main class="particle">
         <div class="container">
-            <div class="row mt-5">
+            <div class="row box p-4">
+                <div class="col-lg-5 d-flex flex-column justify-content-center ">
+                    <h1 class=" mb-5">
+                        {{ "Contact Form" | trans }}
+                    </h1>
+                    <div class="">
+                        <p>{{ "Contact Text 1" | trans}}</p>
+                        <p>{{ "Contact Text 2" | trans}}</p>
+                        <p>{{ "Contact Text 3" | trans}}</p>
+                    </div>
+                </div>
                 {% if app.session.flashbag.peek('success') | length > 0 %}
                 <div class="col-12 alert-info alert">
                     {% for message in app.flashes('success') %}
@@ -14,16 +24,6 @@
                 <div class="col-lg-7">
                     {{ form_start(form) }}
                     {{ form_end(form) }}
-                </div>
-                <div class="col-lg-5 pay-1">
-                    <h1 class="text3 mb-5">
-                        {{ "Contact Form" | trans }}
-                    </h1>
-                    <div class="text1">
-                        <p>{{ "Contact Text 1" | trans}}</p>
-                        <p>{{ "Contact Text 2" | trans}}</p>
-                        <p>{{ "Contact Text 3" | trans}}</p>
-                    </div>
                 </div>
             </div>
         </div>

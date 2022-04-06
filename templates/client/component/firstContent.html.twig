@@ -1,11 +1,11 @@
 <section class="bg" {% if background %}style="background-image: url('/assets/images/{{ background }}')" {% endif %}>
-    <div class="container">
-        <p class="text-blue"><i class="fas fa-fire" aria-hidden="true"></i> {{ serverName }}</p>
-        <h1 class="text-white">{{ mainText | raw | nl2br }}</h1>
-        <h2 class="text1 h4">{{ mainDescription | raw | nl2br }}</h2>
+    <div class="container vh-100 d-flex justify-content-center flex-column">
+        <h1 class="text-white">{{ serverName }}</h1>
+        <h2 class="h4 text-white">{{ mainText | raw | nl2br }}</h2>
+        <h2 class="h4">{{ mainDescription | raw | nl2br }}</h2>
         <div class="d-flex align-items-center mb-10 mt-5 ">
-            <h3 id="clipboard-text" class="text3 h4"> {{ "Join to us" | trans }}&nbsp;</h3>
-            <button id="clipboard" type="button" class="btn-shop" onclick="copyToClipboard()" data-ip="{{ serverIp ?? serverName }}">
+            <h3 id="clipboard-text" class="h4 mb-0"> {{ "Join to us" | trans }}&nbsp;</h3>
+            <button id="clipboard" type="button" class="btn btn-primary" onclick="copyToClipboard()" data-ip="{{ serverIp ?? serverName }}">
                 <i class="fas fa-arrow-right" aria-hidden="true"></i>
             </button>
          </div>

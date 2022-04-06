@@ -1,55 +1,47 @@
 {% extends 'client/base.html.twig' %}
 
 {% block body %}
-    <div class="container-fluid bg2">
-        <div class="container">
-            <p class="text-blue"></p>
-            <h1 class="text-white">{{ 'Item Shop' | trans }}</h1>
-            <h4 class="text1">{{ 'Shop information' | trans }}<br>
-                <a href="#" target="_blank">{{ 'Shop rules' | trans }}</a>
-            </h4>
-            <div class="col-lg-12 text-end">
-                <h4>
-                    <button type="button" class="btn-shop animate" data-bs-toggle="modal" data-bs-target="#modal">{{ 'Realize voucher' | trans }}</button>
-                </h4>
-            </div>
-            {% if items is empty %}
-                <div class="alert alert-info" role="alert">
-                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{ 'No informations' | trans | raw }}
+    <main class="particle">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="col-lg-12 text-end">
+                    <h4>
+                        <button type="button" class="btn btn-primary animate" data-bs-toggle="modal" data-bs-target="#modal">{{ 'Realize voucher' | trans }}</button>
+                    </h4>
                 </div>
-            {% endif %}
-            <div class="d-flex flex-wrap">
-                {% for item in items %}
-                    <div class="col-lg-6 col-12 mb-5">
-                        <div class="shop flex-wrap row">
-                            <div class="col-lg-6 d-lg-block d-none">
-                                <div style="background-image: url('{{ asset('/assets/images/' ~ item.image) }}')" class="shop-image"></div>
-                            </div>
-                            <div class="col-lg-6 col-12 text-center">
-                                <div class="mb-60px"></div>
-                                <p class="shop-item">{{ item.name }}</p>
-                                <p class="shop-desc">{{ item.description | raw }}</p>
-                                <p class="shop-price">
-                                    {% if item.discount %}
-                                        <del class="text1 small">{{ item.price | format_currency('PLN') }}</del>
-                                        <strong>{{ item.discountedPrice | format_currency('PLN') }}</strong>
-                                    {% else %}
-                                        {{ item.price | format_currency('PLN') }}
-                                    {% endif %}
-                                </p>
-                            </div>
-                            <div class="col-12 text-end">
-                                <h2>
-                                    <a class="btn-item anime" href="{{ path('item', {id: item.id}) }}"><i class="fa fa-shopping-cart"></i>&nbsp;</a>
-                                </h2>
+                {% if items is empty %}
+                    <div class="alert alert-info" role="alert">
+                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{ 'No informations' | trans | raw }}
+                    </div>
+                {% endif %}
+                <div class="d-flex flex-wrap">
+                    {% for item in items %}
+                        <div class="col-lg-6 col-12 mb-5 box p-4">
+                            <div class="shop flex-wrap row">
+                                <div class="col-lg-6 d-lg-block d-none">
+                                    <div style="background-image: url('{{ asset('/assets/images/' ~ item.image) }}')" class="item-image"></div>
+                                </div>
+                                <div class="col-lg-6 col-12">
+                                    <div class="mb-60px"></div>
+                                    <h1 class="h3 text-white">{{ item.name }}</h1>
+                                    <p class="">{{ item.description | raw }}</p>
+                                    <p class="item-price">
+                                        {% if item.discount %}
+                                            <strong class="h5 fw-bolder">{{ item.discountedPrice | format_currency('PLN') }}</strong>
+                                            <del class="item-dell"><small>{{ item.price | format_currency('PLN') }}</small></del>
+                                        {% else %}
+                                            {{ item.price | format_currency('PLN') }}
+                                        {% endif %}
+                                    </p>
+                                    <a class="btn btn-primary w-100 mt-4" href="{{ path('item', {id: item.id}) }}"><i class="fa fa-shopping-cart"></i></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
-    </div>
-
+    </main>
     {% include 'client/component/voucher.html.twig' %}
     {% include 'client/component/lastBuyers.html.twig' %}
 {% endblock %}

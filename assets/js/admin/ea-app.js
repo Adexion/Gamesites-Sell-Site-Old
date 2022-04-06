@@ -1,4 +1,3 @@
-import 'ckeditor';
 import './MinecraftColorCodes.3.7';
 
 (()=> {

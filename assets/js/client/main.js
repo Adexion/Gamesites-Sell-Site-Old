@@ -1,5 +1,9 @@
-import '../styles/app.css';
-import './bootstrap';
+import '../../styles/client/main.css';
+import '../bootstrap';
+
+const navbar = document.querySelector(".navbar");
+window.addEventListener("scroll", moveOnScroll);
+moveOnScroll();
 
 $(document).ready(function () {
     $('.add-another-collection-widget').click(function (e) {
@@ -14,3 +18,8 @@ $(document).ready(function () {
         newElem.appendTo(list);
     });
 });
+
+function moveOnScroll() {
+    if (window.scrollY >= 30) navbar.classList.add("scroll");
+    else navbar.classList.remove("scroll");
+}

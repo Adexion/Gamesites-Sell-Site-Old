@@ -1,37 +1,38 @@
-<footer class="footer mt-auto bg-dark-blue mobile-text-center">
+<footer class="footer">
     <div class="container">
         <hr class="hr">
-        <div class="row mb-3">
-            <div class="col-lg-5">
+        <div class="row">
+            <div class="col-lg-5 mb-5">
                 <img src="/assets/images/{{ logo }}" width="164px" height="164px" alt="{{ serverName }}">
             </div>
-            {% if discord or ts3 or facebook %}
-            <div class="col-lg-2 col-6">
-                <h1 class="text8 h4">{% trans %}LINKS{% endtrans %}</h1>
-                {% if discord %}<h2 class="h6"><a rel="noreferrer" href="{{ discord }}"><i class="fab fa-discord"></i> Discord</a></h2>{% endif %}
-                {% if ts3 %}<h2 class="h6"><a rel="noreferrer" href="{{ ts3 }}"><i class="fab fa-teamspeak"></i> TeamSpeak3</a></h2>{% endif %}
-                {% if facebook %}<h2 class="h6"><a rel="noreferrer" href="{{ facebook }}"><i class="fab fa-facebook"></i> Facebook</a></h2>{% endif %}
-            </div>
-            {% endif %}
-            {% if instagram or yt or tiktok %}
-            <div class="col-lg-2 col-6">
-                <h1 class="text8 h4">{% trans %}LINKS{% endtrans %}</h1>
-                {% if instagram %}<h2 class="h6"><a rel="noreferrer" href="{{ instagram }}"><i class="fab fa-instagram"></i> Instagram</a></h2>{% endif %}
-                {% if yt %}<h2 class="h6"><a rel="noreferrer" href="{{ yt }}"><i class="fab fa-youtube"></i> YouTube</a></h2>{% endif %}
-                {% if tiktok %}<h2 class="h6"><a rel="noreferrer" href="{{ tiktok }}"><i class="fab fa-tiktok"></i> TikTok</a></h2>{% endif %}
-            </div>
-            {% endif %}
-            <div class="col-lg-2">
-                <h1 class="text8 h4">{% trans %}LINKS{% endtrans %}</h1>
-                <h2 class="h6"><a href="{{ path('rule')}}">{% trans %}Rules{% endtrans %}</a></h2>
-                <h2 class="h6"><a href="{{ path('shop')}}">{% trans %}Item Shop{% endtrans %}</a></h2>
-                <h2 class="h6"><a href="{{ path('contact')}}">{% trans %}Contact{% endtrans %}</a></h2>
+            <div class="col-lg-7 d-flex flex-row flex-wrap justify-content-lg-end justify-content-center">
+                {% if discord or ts3 or facebook %}
+                    <div class="col-lg-4 col-6 d-flex align-items-lg-start align-items-center flex-column justify-content-center">
+                        <h1 class=" h4">{% trans %}LINKS{% endtrans %}</h1>
+                        {% if discord %}<h2 class="h6"><a rel="noreferrer" href="{{ discord }}"><i class="fab fa-discord"></i>&nbsp;Discord</a></h2>{% endif %}
+                        {% if ts3 %}<h2 class="h6"><a rel="noreferrer" href="{{ ts3 }}"><i class="fab fa-teamspeak"></i>&nbsp;TeamSpeak3</a></h2>{% endif %}
+                        {% if facebook %}<h2 class="h6"><a rel="noreferrer" href="{{ facebook }}"><i class="fab fa-facebook"></i>&nbsp;Facebook</a></h2>{% endif %}
+                    </div>
+                {% endif %}
+                {% if instagram or yt or tiktok %}
+                    <div class="col-lg-4 col-6  d-flex align-items-lg-start align-items-center flex-column  justify-content-center">
+                        <h1 class=" h4">{% trans %}LINKS{% endtrans %}</h1>
+                        {% if instagram %}<h2 class="h6"><a rel="noreferrer" href="{{ instagram }}"><i class="fab fa-instagram"></i> Instagram</a></h2>{% endif %}
+                        {% if yt %}<h2 class="h6"><a rel="noreferrer" href="{{ yt }}"><i class="fab fa-youtube"></i>YouTube</a></h2>{% endif %}
+                        {% if tiktok %}<h2 class="h6"><a rel="noreferrer" href="{{ tiktok }}"><i class="fab fa-tiktok"></i> TikTok</a></h2>{% endif %}
+                    </div>
+                {% endif %}
+                <div class="col-lg-4 col-6 d-flex align-items-lg-start align-items-center flex-column  justify-content-center">
+                    <h1 class=" h4">{% trans %}LINKS{% endtrans %}</h1>
+                    <h2 class="h6"><a href="{{ path('rule') }}">{% trans %}Rules{% endtrans %}</a></h2>
+                    <h2 class="h6"><a href="{{ path('shop') }}">{% trans %}Item Shop{% endtrans %}</a></h2>
+                    <h2 class="h6"><a href="{{ path('contact') }}">{% trans %}Contact{% endtrans %}</a></h2>
+                </div>
             </div>
         </div>
-        <div class="mb-3"><small class="text-blue-xs"> {{ serverName }} {% trans %}Text footer{% endtrans %}</small></div>
-        <h1 class="text5 text-center h6">
-            Project by <a href="https://www.facebook.com/xfilipfilak" target="_blank" rel="noreferrer"> Filip Filak</a>
-            <i class="fas fa-heart" style="color:red;" aria-hidden="true"></i>
+        <div class="mb-5"><small> {{ serverName }} {% trans %}Text footer{% endtrans %}</small>
+        </div>
+        <h1 class=" text-center h6">
             Create by GameSites.pl &copy; Copyright MNGame 2016 - {{ "now" | date('Y') }} </h1>
     </div>
 </footer>

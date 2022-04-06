@@ -3,6 +3,7 @@
 namespace App\Controller\Client;
 
 use App\Enum\RankEnum;
+use App\Service\GuildItemListBuilder;
 use App\Repository\AdministrationRepository;
 use App\Repository\GuildItemRepository;
 use App\Repository\ItemHistoryRepository;
@@ -29,7 +30,7 @@ class MainController extends AbstractRenderController
         Request $request
     ): Response {
         return $this->render('client/index.html.twig', [
-            'guildItem' => $guildItemRepository->findAll(),
+            'guildItem' => (new GuildItemListBuilder)->buildList($guildItemRepository->findAll()),
             'administration' => $administrationRepository->findBy([], ['priority' => 'ASC']),
             'boughtToday' => $itemHistoryRepository->getCountOfBoughtItems(new DateTime()),
             'boughtAll' => $itemHistoryRepository->getCountOfBoughtItems(),
