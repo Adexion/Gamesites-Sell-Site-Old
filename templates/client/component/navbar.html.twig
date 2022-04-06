@@ -2,9 +2,9 @@
     <div class="container">
         <a class="navbar-brand" href="/"><img src="/assets/images/{{ logo }}" width="90" height="90" alt="logo"></a>
         {% if serverInfo | length == 0 %}
-            <span class="navbar-brand d-none d-lg-block"><i class="fa fa-circle offline fa-sm ml-1" id="status-offline"> </i><b>&nbsp;0/0</b></span>
+            <span class="navbar-brand d-none d-lg-block"><i class="fa fa-circle text-danger fa-sm ml-1" id="status-offline"> </i><b>&nbsp;0/0</b></span>
         {% else %}
-            <span class="navbar-brand d-none d-lg-block"><i class="fa fa-circle online fa-sm ml-1" id="status-online"> </i><b>&nbsp;{{ serverInfo.Players }}/{{ serverInfo.MaxPlayers }}</b></span>
+            <div class="navbar-brand d-nne d-lg-flex"><div class="ring-container"><div class="ring-ring"></div><div class="circle"></div></div><b>&nbsp;{{ serverInfo.Players }}/{{ serverInfo.MaxPlayers }}</b></div>
         {% endif %}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbar">
