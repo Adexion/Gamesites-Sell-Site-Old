@@ -1,0 +1,79 @@
+{% extends 'white/base.html.twig' %}
+
+{% block body %}
+    <main class="particle">
+        <div class="container">
+            <h1 class="text-dark">{{ 'Choose payment option' | trans }}</h1>
+            <h4 class="">
+                <a href="{{ path('shop') }}" target="_self">
+                    {{ 'Back to the product list' | trans }}
+                </a>
+            </h4>
+            <div class="row justify-content-between mt-4">
+                {% if app.session.flashbag.peek('error') | length > 0 %}
+                    <div class="col-12 alert-info alert">
+                        {% for message in app.flashes('error') %}
+                            {{ message | trans }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="col-lg-6 box p-4 mb-3">
+                    <h1 class=" mb-5">{{ 'Payment form' | trans }}</h1>
+                    {{ form_start(form, {method: 'POST'}) }}
+                        {{ form_row(form.email) }}
+                        {{ form_row(form.username) }}
+                        {% set class = not item.multiple ? 'd-none': 'd-block' %}
+                        <div class="mb-5 {{ class }}">
+                            <label for="count" class="form-label required">Ilość</label>
+                            {{ form_widget(form.count) }}
+                        </div>
+                        {{ form_row(form.payment) }}
+                        <div id="psc-code" style="display:none">
+                            <ul id="code-fields-list"
+                                data-prototype="{{ form_widget(form.code.vars.prototype)|e }}"
+                                data-widget-tags="{{ '<li></li>'|e }}"
+                                data-widget-counter="{{ form.code|length }}">
+                                {% for code in form.code %}
+                                    <li>{{ form_widget(code,{ 'attr': {'class': 'payments-box-input', 'placeholder':''}}) }}</li>
+                                {% endfor %}
+                            </ul>
+                            <button type="button"
+                                    class="btn btn-primary add-another-collection-widget mb-5"
+                                    data-list-selector="#code-fields-list">Dodaj Kod</button>
+                        </div>
+                        <script>
+                            if (document.getElementById('payment').value === 'paySafeCard') {
+                                document.getElementById('psc-code').removeAttribute('style');
+                            }
+
+                            document.getElementById('payment').addEventListener('change', (e) => {
+                                e.target.value === 'paySafeCard'
+                                    ? document.getElementById('psc-code').removeAttribute('style')
+                                    : document.getElementById('psc-code').setAttribute('style', 'display: none;')
+                            })
+                        </script>
+                        {{ form_row(form.check) }}
+
+                    <button type="submit" class="btn btn-primary">Kup <span id="counter">{{ item.multiple ? '1' : '' }}</span> za <span id="prize">{{ item.discountedPrice }}</span> zł</button>
+                    <script>
+                        document.getElementById('count').addEventListener('change', (e) => {
+                            const val = e.target.value * {{ item.discountedPrice }};
+                            document.getElementById('prize').innerHTML = val.toFixed(2);
+                            document.getElementById('counter').innerHTML = e.target.value;
+                        })
+                    </script>
+                    {{ form_end(form) }}
+                    <br>
+                </div>
+                <div class="col-lg-5 p-4 mb-3 box justify-content-center d-flex flex-column align-items-center">
+                    <div style="background-image: url('{{ asset('/assets/images/' ~ item.image) }}')" class="item-image"></div>
+                    <h1 class="text-dark">{{ item.name }}</h1>
+                    <div>
+                        <p><b>{{ 'By purchasing this item you get' | trans }}:</b></p>
+                        {{ item.shortDescription | raw | nl2br }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

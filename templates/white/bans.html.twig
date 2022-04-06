@@ -1,0 +1,35 @@
+{% extends 'white/base.html.twig' %}
+
+{% block body %}
+    <main class="particle">
+        <div class="pt-5">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-12">
+                        <h1 class="mb-5">
+                            <i class="fas fa-ban mr-3" aria-hidden="true"></i> {{ "Bans" | trans }}
+                        </h1>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                    {% for ban in bans %}
+                        <div class="box p-3 mb-3">
+                            <div class="d-flex">
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-outline-primary" disabled>{{ loop.index }}</button>&nbsp;&nbsp;
+                                    <img src="https://crafthead.net/cube/{{ ban.name }}" height="48px" width="48px"
+                                         alt="{{ "Cube of" | trans }} {{ ban.name }}">
+                                    <span class="">{{ ban.name }}</span>
+                                </div>
+                                <div class="col-6 text-end d-flex flex-column m-0">
+                                    <span>{{ "Date From" | trans }}: {{ ban.value }}</span>
+                                    <span>{{ "Reason" | trans }}: {{ ban.reason }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

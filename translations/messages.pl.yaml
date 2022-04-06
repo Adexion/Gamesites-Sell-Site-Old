@@ -193,6 +193,7 @@ NOT_ON_SERVER: Nie znaleziono gracza
 PURPLE: Nowoczesny (Fioletowy)
 GRAY: Szaro-zielony
 BLUE: Postawowy (Domyślny)
+WHITE: Postawowy (Jasny)
 
 R_CON: rCon + Query
 REDIS: Redis Connection + Query

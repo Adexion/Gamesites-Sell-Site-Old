@@ -9,5 +9,6 @@ class TemplateEnum extends Enum
     const BLUE = 'client';
     const GRAY = 'old';
     const PURPLE = 'purple';
+    const WHITE = 'white';
     const NONE = '';
 }

@@ -1,0 +1,13 @@
+{% extends 'white/base.html.twig' %}
+
+{% block body %}
+    <div class="particle pt-5">
+        <div class="mt-5 container">
+            <h1 class="text-dark">{{  "Rule" | trans }}</h1>
+            <br>
+            <div class="text-dark">
+                {{ rule | raw | nl2br }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

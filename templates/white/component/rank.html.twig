@@ -1,0 +1,63 @@
+{% if playerRank is not empty or guildRank is not empty %}
+    <div class="particle mb-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-7">
+                    <h1 class=" mb-5">
+                        <i class="fas fa-trophy  mr-3" aria-hidden="true"></i> {{ "Rank" | trans }}
+                    </h1>
+                </div>
+                {% if playerRank is not empty %}
+                    <div class="col-lg-5">
+                        <form method="get">
+                            <div class="form-group">
+                                <input class="form-control" type="search" placeholder="{{ 'Enter a player name' | trans }}" aria-label="Search" size="40" name="name">
+                                <button class="btn btn-primary mt-4 text-center text-decoration-none" type="submit"><i class="fa fa-search"></i> {{ 'Search player' | trans }}</button>
+                            </div>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row mb-5 flex justify-content-lg-between">
+                {% if playerRank is not empty %}
+                    <div class="col-lg-5 mb-2">
+                        <h1 class=" mb-2 h3">{% trans %}Best players{% endtrans %}</h1>
+                        <div class="col-lg-12 mb-5 ranking animate">
+                            {% for player in playerRank %}
+                                <div class="d-flex box mb-3">
+                                    <div class="col-9 p-2 d-flex align-items-center">
+                                        <button class="btn btn-outline-primary me-4" disabled>{{ loop.index }}</button>&nbsp
+                                        <img class="me-4" src="https://crafthead.net/cube/{{ player.name }}" height="48px" width="48px" alt="{{ "Cube of" | trans }} {{ player.name }}">
+                                        <span class="">{{ player.name | upper }}</span>
+                                    </div>
+                                    <div class="col-3 p-2 d-flex justify-content-end align-items-center">
+                                        {{ player.value }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+                {% if guildRank is not empty %}
+                    <div class="col-lg-5 mb-2">
+                        <h1 class=" mb-2 h3">{% trans %}Best guilds{% endtrans %}</h1>
+                        <div class="col-lg-12 mb-5 ranking animate d-flex flex-column gap-2">
+                            {% for guild in guildRank %}
+                                <div class="d-flex box mb-3">
+                                    <div class="col-9 p-2 d-flex align-items-center">
+                                        <button class="btn btn-outline-primary me-4" disabled>{{ loop.index }}.</button>
+                                        <img class="me-4" src="{{ asset('assets/images/iconguild.png') }}" height="48px" width="48px" alt="{{ guild.name }}">
+                                        <span class="">{{ guild.name | upper }}</span>
+                                    </div>
+                                    <div class="col-3 p-2 d-flex justify-content-end align-items-center">
+                                        {{ guild.value }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}

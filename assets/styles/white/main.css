@@ -5,16 +5,16 @@
 
 /* ------ MAIN ------ */
 :root {
-    --light: #67a7eb;
-    --dark: #01070c;
-    --dark-alpha: rgba(1, 7, 12, 0.71);
+    --light: #01070c;
+    --dark: #efefef;
+    --dark-alpha: rgba(1, 7, 12, 0.2);
 
-    --text-light: #9dbbdb;
+    --background: #656f7e;
+
+    --text-light: #042441;
     --text-dark: #563030;
 
     --text-success: #62bd19;
-
-    --background: #070000;
 
     --minecraft-eq: #bbbbbb;
     --minecraft-item: #8a8a8a;
@@ -40,7 +40,6 @@
 html, body {
     font-family: Gilroy, Montserrat, sans-serif, serif;
     background-color: var(--dark);
-    color: var(--text-light);
 }
 
 main {
@@ -49,7 +48,8 @@ main {
 }
 
 a {
-    color: var(--text-light);
+    color: var(--light);
+    text-decoration: none;
 }
 
 .particle {
@@ -115,7 +115,7 @@ a {
 
 /* ----- CONTENT ----- */
 .bg {
-    background-image: url("/assets/images/bg.webp");
+    background-image: url("/assets/images/bg-white.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top;
@@ -176,22 +176,21 @@ a {
 /* ----- BOOTSTRAP ----- */
 .btn-primary {
     color: #fff;
-    background-color: var(--light);
-    border-color: var(--light);
+    background-color: var(--text-light);
+    border-color: var(--text-light);
 }
 .btn-outline-primary {
-    color: var(--light);
-    border-color: var(--light);
+    color: var(--text-light);
+    border-color: var(--text-light);
 }
 
 .btn-outline-primary:disabled, .btn-outline-primary.disabled {
-    color: var(--light);
+    color: var(--text-light);
     background-color: transparent;
 }
 
 .form-control, .form-control:focus {
-    background: var(--dark);
-    border: 1px solid var(--light)
+    border: 1px solid var(--text-light)
 }
 
 .form-control:focus {
@@ -200,4 +199,9 @@ a {
 
 .modal-content {
     background-color: var(--dark-alpha);
+}
+
+.text-dark {
+    color: var(--text-light) !important;
+    font-weight: 700;
 }

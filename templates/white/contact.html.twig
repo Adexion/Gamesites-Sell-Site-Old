@@ -1,0 +1,31 @@
+{% extends 'white/base.html.twig' %}
+
+{% block body %}
+    <main class="particle">
+        <div class="container">
+            <div class="row box p-4">
+                <div class="col-lg-5 d-flex flex-column justify-content-center ">
+                    <h1 class=" mb-5">
+                        {{ "Contact Form" | trans }}
+                    </h1>
+                    <div class="">
+                        <p>{{ "Contact Text 1" | trans}}</p>
+                        <p>{{ "Contact Text 2" | trans}}</p>
+                        <p>{{ "Contact Text 3" | trans}}</p>
+                    </div>
+                </div>
+                {% if app.session.flashbag.peek('success') | length > 0 %}
+                <div class="col-12 alert-info alert">
+                    {% for message in app.flashes('success') %}
+                        {{ message | trans }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <div class="col-lg-7">
+                    {{ form_start(form) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

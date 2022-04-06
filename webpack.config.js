@@ -12,6 +12,7 @@ Encore
     .addEntry('client', './assets/js/client/main.js')
     .addEntry('old', './assets/js/old/main.js')
     .addEntry('purple', './assets/js/purple/main.js')
+    .addEntry('white', './assets/js/white/main.js')
 
     .addEntry('readable', './assets/js/admin/readable.js')
     .addEntry('ea-app', './assets/js/admin/ea-app.js')

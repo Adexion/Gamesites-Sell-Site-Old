@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-light nav-styled">
+    <div class="container">
+        <a class="navbar-brand" href="/"><img src="/assets/images/{{ logo }}" width="90" height="90" alt="logo"></a>
+        {% if serverInfo | length == 0 %}
+            <span class="navbar-brand d-none d-lg-block"><i class="fa fa-circle text-danger fa-sm ml-1" id="status-offline"> </i><b>&nbsp;0/0</b></span>
+        {% else %}
+            <div class="navbar-brand d-nne d-lg-flex"><div class="ring-container"><div class="ring-ring"></div><div class="circle"></div></div><b>&nbsp;{{ serverInfo.Players }}/{{ serverInfo.MaxPlayers }}</b></div>
+        {% endif %}
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav">
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item ms-lg-2">
+                    <a class="nav-link {% if app.request.get('_route') == 'index' %}active{% endif %}" href="{{ path('index') }}"><i class="fas fa-home"></i> {% trans %}Home{% endtrans %}</a>
+                </li>
+                {% if isPlayerRank is not empty or isGuildRank is not empty %}
+                <li class="nav-item ms-lg-2">
+                    <a class="nav-link" href="{{ path('index') }}#rank"><i class="fas fa-users"></i> {% trans %}Rank{% endtrans %}</a>
+                </li>
+                {% endif %}
+                {% if areBansSet %}
+                <li class="nav-item ms-lg-2">
+                    <a class="nav-link {% if app.request.get('_route') == 'bans' %}active{% endif %}" href="{{ path('bans') }}#rank"><i class="fas fa-ban"></i> {% trans %}Bans{% endtrans %}</a>
+                </li>
+                {% endif %}
+                <li class="nav-item ms-lg-2">
+                    <a class="nav-link {% if app.request.get('_route') == 'rule' %}active{% endif %}" href="{{ path('rule') }}"><i class="fas fa-book"></i> {% trans %}Rules{% endtrans %}</a>
+                </li>
+                {% if discord %}
+                    <li class="nav-item ms-lg-2">
+                        <a class="nav-link" rel="noreferrer" href="{{ discord }}"><i class="fab fa-discord"></i> Discord</a>
+                    </li>
+                {% endif %}
+                {% if ts3 %}
+                    <li class="nav-item ms-lg-2">
+                        <a class="nav-link" rel="noreferrer" href="{{ ts3 }}"><i class="fab fa-teamspeak"></i> TeamSpeak3</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item ms-lg-2">
+                    <a class="nav-link {% if app.request.get('_route') == 'contact' %}active{% endif %}" href="{{ path('contact') }}#admin"><i class="fas fa-address-book"></i> {% trans %}Contact{% endtrans %}</a>
+                </li>
+                <li class="nav-item ms-lg-5">
+                    <a href="{{ path('shop') }}">
+                        <button type="button" class="btn btn-primary"><i class="fas fa-cart"></i>{% trans %}Shop{% endtrans %}</button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+

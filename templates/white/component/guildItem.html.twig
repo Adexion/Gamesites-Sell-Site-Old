@@ -1,0 +1,27 @@
+{% if guildItem is not empty %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 col-12 mb-5">
+                <h1 class="text-dark">{{ "Items for" | trans }}
+                    <span class=""> {{ "GUILD" | trans }}</span></h1>
+                <h2 class=" mb-5 h5">{{ (guildText ?? "Here are the items you need to create a guild" | trans ) | nl2br | raw }}</h2>
+            </div>
+            <div class="col-xl-6 col-12 d-flex justify-content-xl-end justify-content-center mb-5">
+                <div class="d-flex equipment flex-wrap">
+                    {% for row in guildItem %}
+                        {% for item in row %}
+                            <div class="equipment-item">
+                                {% if item %}
+                                    <img alt="{{ item.name }} x{{ item.count }}" class="equipment-item-image"
+                                         src="/assets/images/{{ item.image }}"
+                                         data-bs-toggle="popover" data-bs-trigger="hover focus"
+                                         data-bs-content="x{{ item.count }}">
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
