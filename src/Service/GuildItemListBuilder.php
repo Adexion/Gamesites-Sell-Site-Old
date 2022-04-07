@@ -6,13 +6,6 @@ class GuildItemListBuilder
 {
     private static int $total = 27;
 
-    /*
-     * cols order:
-     * 2
-     * 1
-     * 3
-     */
-
     public function buildList(array $items): array
     {
         if (empty($items)) {
@@ -34,14 +27,17 @@ class GuildItemListBuilder
 
         $res = array_reverse($tmp ?? []);
 
-        $first = count($res) - 1;
-        $result[$first] = $this->addEmptyCells($res[$first]);
-        for ($i = 0; $i < 3; $i++) {
-            if ($i === $first) {
-                continue;
+        $first = count($res);
+        if ($first === 1) {
+            $result = [
+                $this->addEmptyCells([]),
+                $this->addEmptyCells($res[0]),
+                $this->addEmptyCells([]),
+            ];
+        } else {
+            for ($i = 0; $i < 3; $i++) {
+                $result[$i] = $this->addEmptyCells($res[$i] ?? []);
             }
-
-            $result[$i] = $this->addEmptyCells($res[$i] ?? []);
         }
 
         ksort($result);

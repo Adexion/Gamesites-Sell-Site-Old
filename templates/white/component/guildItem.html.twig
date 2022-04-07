@@ -10,12 +10,10 @@
                 <div class="d-flex equipment flex-wrap">
                     {% for row in guildItem %}
                         {% for item in row %}
-                            <div class="equipment-item">
+                            <div class="equipment-item {{ not item ? 'empty' }}">
                                 {% if item %}
-                                    <img alt="{{ item.name }} x{{ item.count }}" class="equipment-item-image"
-                                         src="/assets/images/{{ item.image }}"
-                                         data-bs-toggle="popover" data-bs-trigger="hover focus"
-                                         data-bs-content="x{{ item.count }}">
+                                    <img alt="{{ item.name }} x{{ item.count }}" class="equipment-item-image" src="/assets/images/{{ item.image }}">
+                                    <p class="count">{{ item.count }}</p>
                                 {% endif %}
                             </div>
                         {% endfor %}
