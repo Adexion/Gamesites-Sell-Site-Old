@@ -2,24 +2,23 @@
 
 namespace App\Controller\Admin\Crud;
 
-use App\Controller\Admin\Field\CKEditorField;
-use App\Controller\Admin\Field\EntityField;
 use App\Entity\Item;
 use App\Entity\Server;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Controller\Admin\Field\EntityField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use Symfony\Component\Validator\Constraints\All;
+use Symfony\Component\Validator\Constraints\Range;
+use Symfony\Component\Validator\Constraints\Length;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\PercentField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use Symfony\Component\Validator\Constraints\All;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Range;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class ItemCrud extends AbstractCrudController
 {
@@ -60,7 +59,8 @@ class ItemCrud extends AbstractCrudController
             TextField::new('name')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextareaField::new('shortDescription'),
-            CKEditorField::create('description', $pageName)
+            TextareaField::new('description')
+                ->setFormTypeOption('attr', ['class' => 'editor'])
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             MoneyField::new('price')
                 ->setCurrency('PLN')

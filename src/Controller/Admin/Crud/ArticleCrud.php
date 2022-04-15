@@ -2,15 +2,14 @@
 
 namespace App\Controller\Admin\Crud;
 
-use App\Controller\Admin\Field\CKEditorField;
 use App\Entity\Article;
-use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Validator\Constraints\Length;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class ArticleCrud extends AbstractCrudController
 {
@@ -47,7 +46,8 @@ class ArticleCrud extends AbstractCrudController
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextField::new('subtitle')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
-            CKEditorField::create('text', $pageName),
+            TextareaField::new('text')
+                ->setFormTypeOption('attr', ['class' => 'editor']),
             $pageName === Crud::PAGE_EDIT
                 ? $image->setFormTypeOption('required', false)
                 : $image,
