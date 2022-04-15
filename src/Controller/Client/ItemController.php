@@ -32,6 +32,7 @@ class ItemController extends AbstractRenderController
             'groupItems' => $repository->groupByServer(),
             'lastBuyers' => $itemHistoryRepository->findBy(['status' => PaymentStatusEnum::REALIZED], null, 10),
             'voucherForm' => $form->createView(),
+            'targetProgress' => $itemHistoryRepository->getProgressOfTarget()
         ]);
     }
 

@@ -38,7 +38,12 @@ a {
 }
 
 #code-fields-list li {
-  margin: 5px 0;
+  margin: 15px 0;
+}
+
+p.count {
+  width: 100%;
+  text-align: left;
 }
 
 footer {
@@ -69,6 +74,7 @@ footer {
 
 .ckcontent {
   font-weight: normal;
+
   .iAccept {
     font-weight: bold;
   }
@@ -105,6 +111,7 @@ footer {
   background-image: url("/assets/images/cool_guy.png");
   background-size: contain;
   background-position: 50%;
+  background-repeat: no-repeat;
 }
 
 .think-guy {
@@ -112,6 +119,7 @@ footer {
   background-image: url("/assets/images/thinking_guy.png");
   background-size: contain;
   background-position: 50%;
+  background-repeat: no-repeat;
 }
 
 .information {
@@ -294,14 +302,11 @@ i.fa-envelope {
 }
 
 .gs-item {
-  background: linear-gradient(#00FF76 0%, #214A34 100%);
+  border: 5px solid #00FF76;
   text-align: justify;
   border-radius: 20px;
   padding: 10px;
   display: inline-block;
-  width: 90%;
-  max-width: 430px;
-  min-width: 340px;
 
   &-sm {
     .gs-item-content {
@@ -386,11 +391,12 @@ i.fa-envelope {
   text-align: center;
   padding: 20px;
   margin-bottom: 20px;
+  font-size: 15px;
 
   &-head {
-    width: 40px;
-    height: 40px;
-    margin: 15px;
+    width: 30px;
+    height: 30px;
+    margin: 13px;
   }
 }
 
@@ -425,7 +431,7 @@ i.fa-envelope {
 .gs-accept {
   font-weight: bold;
   background: linear-gradient(180deg, #00FF76 0%, #214A34 100%);
-  box-shadow: -8px 12px 16px rgba(0, 255, 118, 0.2);
+  box-shadow: -1px 3px 5px rgb(0 255 118 / 20%);
   border-radius: 5px;
   padding: 20px 25px;
   color: white;
@@ -517,6 +523,18 @@ em, pre {
   white-space: pre-wrap;
 }
 
+.ranking {
+  border: 3px solid #00FF76;
+  padding: 10px;
+  border-radius:5px;
+
+  .btn-ranking {
+    background: #00FF76;
+    color: #242424;
+    font-weight: bold;
+    border-radius:5px;
+  }
+}
 
 @media (max-width: 1920px) {
   .container-fluid-bg, .navbar-content {

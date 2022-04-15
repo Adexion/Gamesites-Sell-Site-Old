@@ -185,7 +185,16 @@ a {
     color: var(--text-dark);
 }
 
-/* ----- FOOTER ----- */
+#psc-code ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#psc-code ul li {
+    margin-bottom: 15px;
+}
+
+    /* ----- FOOTER ----- */
 .f-box {
     border-top: 1px solid var(--light);
     backdrop-filter: blur(5px);

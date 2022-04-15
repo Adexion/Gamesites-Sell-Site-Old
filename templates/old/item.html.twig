@@ -18,21 +18,16 @@
                     {% endif %}
                 </div>
                 <div class="row justify-content-center">
-                    <div class="gs-item col-lg-7">
-
-                        <div class="gs-item-content-shop text-center d-flex flex-column justify-content-center w-100">
-                            <img src="{{ asset('/assets/images/' ~ item.image) }}" alt=""/>
-                            <div class="mt-4">
-                                <h4 class="font-weight-bold">{{ item.name | upper }}</h4>
-                                Kup <span id="counter">{{ item.multiple ? '1' : '' }}</span> za <span id="prize">{{ item.discountedPrice }}</span> zł
-                                <div class="gs-item-desc">{{ item.description | raw }}</div>
-                            </div>
+                    <div class="gs-item col-lg-3 col-6 text-center d-flex flex-column justify-content-center">
+                        <img src="{{ asset('/assets/images/' ~ item.image) }}" alt=""/>
+                        <div class="mt-4">
+                            <h4 class="font-weight-bold">{{ item.name | upper }}</h4>
+                            <div class="gs-item-desc">{{ item.description | raw }}</div>
                         </div>
-
                     </div>
-                    <div class="col-lg-4 col-md-12 p-lg-5 m-4">
+                    <div class="col-lg-7 col-12 p-lg-5 m-4">
                         <div class="row flex-column">
-                            {{ form_start(form, {method: 'POST'})}}
+                            {{ form_start(form, {method: 'POST'}) }}
                             {{ form_row(form.email) }}
                             {{ form_row(form.username) }}
                             {{ form_row(form.payment) }}
@@ -40,6 +35,7 @@
                             <div class="mb-3 {{ class }}">
                                 <label for="count" class="form-label required">Ilość</label>
                                 {{ form_widget(form.count) }}
+                                <p class="count">Wybrano <b class="counter">1</b></p>
                             </div>
                             <div id="psc-code" style="display:none">
                                 <ul id="code-fields-list"
@@ -50,31 +46,23 @@
                                         <li>{{ form_widget(code) }}</li>
                                     {% endfor %}
                                 </ul>
-                                <button type="button"
-                                        class="gs-accept add-another-collection-widget mb-3 w-100"
-                                        data-list-selector="#code-fields-list">Dodaj Kod</button>
+                                <div class="d-flex gap-3">
+                                    <button type="button"
+                                            class="gs-accept add-another-collection-widget mb-3 w-50"
+                                            data-list-selector="#code-fields-list">Dodaj Kod
+                                    </button>
+                                    <button type="button"
+                                            class="gs-accept rem-another-collection-widget mb-3 w-50"
+                                            data-list-selector="#code-fields-list">Usuń kod
+                                    </button>
+                                </div>
                             </div>
-                            <script>
-                                if (document.getElementById('payment').value === 'paySafeCard') {
-                                    document.getElementById('psc-code').removeAttribute('style');
-                                }
-
-                                document.getElementById('payment').addEventListener('change', (e) => {
-                                    e.target.value === 'paySafeCard'
-                                        ? document.getElementById('psc-code').removeAttribute('style')
-                                        : document.getElementById('psc-code').setAttribute('style', 'display: none;')
-                                })
-                            </script>
                             {{ form_row(form.check) }}
 
-                            <button type="submit" class="gs-accept w-100">Kup teraz</button>
-                            <script>
-                                document.getElementById('count').addEventListener('change', (e) => {
-                                    const val = e.target.value * {{ item.discountedPrice }};
-                                    document.getElementById('prize').innerHTML = val.toFixed(2);
-                                    document.getElementById('counter').innerHTML = e.target.value;
-                                })
-                            </script>
+                            <button id="submit" type="submit" class="gs-accept w-100" style="display: none;">Kup <span id="counter"
+                                                                                                                       data-price="{{ item.discountedPrice }}">{{ item.multiple ? '1' : '' }}</span>
+                                za <span id="prize">{{ item.discountedPrice }}</span> zł
+                            </button>
                             {{ form_end(form) }}
                         </div>
                     </div>

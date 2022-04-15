@@ -89,44 +89,7 @@
                 </div>
 
                 <div class="payments-box-checkbox mx-align">
-                    <button id="submit" type="submit" class="btn btn-color-g"
-                            style="display: none;">{{ 'Buy now' | trans }}
-                        za <b class="prize">{{ item.discountedPrice }}</b></button>
-                    <script>
-                        document.getElementById('check').checked = false;
-
-                        if (document.getElementById('payment').value === 'paySafeCard') {
-                            document.getElementById('psc-code').removeAttribute('style');
-                        }
-
-                        document.getElementById('check').addEventListener('click', () => {
-                            const checkbox = document.getElementById('check');
-                            const submitBtn = document.getElementById('submit');
-
-                            !checkbox.checked
-                                ? submitBtn.setAttribute('style', 'display:none')
-                                : submitBtn.removeAttribute('style');
-
-                            console.log(submitBtn)
-                        })
-
-                        document.getElementById('payment').addEventListener('change', (e) => {
-                            e.target.value === 'paySafeCard'
-                                ? document.getElementById('psc-code').removeAttribute('style')
-                                : document.getElementById('psc-code').setAttribute('style', 'display: none;')
-                        })
-                    </script>
-                    <script>
-                        document.getElementById('count').addEventListener('change', (e) => {
-                            const val = e.target.value * {{ item.discountedPrice }};
-                            document.querySelectorAll('.prize').forEach((e) => {
-                                e.innerHTML = val.toFixed(2);
-                            });
-                            document.querySelectorAll('.counter').forEach((f) => {
-                                f.innerHTML = e.target.value;
-                            });
-                        })
-                    </script>
+                    <button id="submit" type="submit" class="btn btn-color-g" style="display: none;">{{ 'Buy now' | trans }} za <b class="prize">{{ item.discountedPrice }}</b></button>
                 </div>
             </div>
         </div>

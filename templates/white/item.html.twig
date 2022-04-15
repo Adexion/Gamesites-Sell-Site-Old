@@ -26,6 +26,7 @@
                         <div class="mb-5 {{ class }}">
                             <label for="count" class="form-label required">Ilość</label>
                             {{ form_widget(form.count) }}
+                            <p>Wybrano <b class="counter">1</b></p>
                         </div>
                         {{ form_row(form.payment) }}
                         <div id="psc-code" style="display:none">
@@ -37,34 +38,22 @@
                                     <li>{{ form_widget(code,{ 'attr': {'class': 'payments-box-input', 'placeholder':''}}) }}</li>
                                 {% endfor %}
                             </ul>
-                            <button type="button"
-                                    class="btn btn-primary add-another-collection-widget mb-5"
-                                    data-list-selector="#code-fields-list">Dodaj Kod</button>
+                            <div class="d-flex mb-3 gap-2">
+                                <button type="button"
+                                        class="btn btn-primary add-another-collection-widget"
+                                        data-list-selector="#code-fields-list">Dodaj Kod</button>
+                                <button type="button"
+                                        class="btn btn-primary rem-another-collection-widget"
+                                        data-list-selector="#code-fields-list">Usuń kod</button>
+                            </div>
                         </div>
-                        <script>
-                            if (document.getElementById('payment').value === 'paySafeCard') {
-                                document.getElementById('psc-code').removeAttribute('style');
-                            }
-
-                            document.getElementById('payment').addEventListener('change', (e) => {
-                                e.target.value === 'paySafeCard'
-                                    ? document.getElementById('psc-code').removeAttribute('style')
-                                    : document.getElementById('psc-code').setAttribute('style', 'display: none;')
-                            })
-                        </script>
                         {{ form_row(form.check) }}
 
-                    <button type="submit" class="btn btn-primary">Kup <span id="counter">{{ item.multiple ? '1' : '' }}</span> za <span id="prize">{{ item.discountedPrice }}</span> zł</button>
-                    <script>
-                        document.getElementById('count').addEventListener('change', (e) => {
-                            const val = e.target.value * {{ item.discountedPrice }};
-                            document.getElementById('prize').innerHTML = val.toFixed(2);
-                            document.getElementById('counter').innerHTML = e.target.value;
-                        })
-                    </script>
+                    <button id="submit" type="submit" class="btn btn-primary" style="display: none;">Kup <span id="counter" data-price="{{ item.discountedPrice }}">{{ item.multiple ? '1' : '' }}</span> za <span id="prize">{{ item.discountedPrice }}</span> zł</button>
                     {{ form_end(form) }}
                     <br>
                 </div>
+
                 <div class="col-lg-5 p-4 mb-3 box justify-content-center d-flex flex-column align-items-center">
                     <div style="background-image: url('{{ asset('/assets/images/' ~ item.image) }}')" class="item-image"></div>
                     <h1 class="text-dark">{{ item.name }}</h1>

@@ -6,15 +6,13 @@
         <div class="row justify-content-center m-4">
             <div class="col-lg-8 col-md-12 row justify-content-center font-weight-normal">
                 {% for item in items %}
-                    <div class="gs-item m-lg-4 mb-4">
+                    <div class="col-5 gs-item m-lg-4 mb-4 text-center d-flex flex-column justify-content-center">
                         <a class="gs-link" href="{{ path('item', { id: item.id }) }}">
-                            <div class="gs-item-content-shop text-center d-flex flex-column justify-content-center">
-                                <img src="{{ asset('/assets/images/' ~ item.image) }}" alt=""/>
-                                <div class="mt-4">
-                                    <h4 class="font-weight-bold">{{ item.name | upper }}</h4>
-                                    {{ item.discountedPrice | format_currency('PLN') }}
-                                    <div class="gs-item-desc">{{ item.description | raw }}</div>
-                                </div>
+                            <img src="{{ asset('/assets/images/' ~ item.image) }}" alt=""/>
+                            <div class="mt-4">
+                                <h4 class="font-weight-bold">{{ item.name | upper }}</h4>
+                                {{ item.discountedPrice | format_currency('PLN') }}
+                                <div class="gs-item-desc">{{ item.description | raw }}</div>
                             </div>
                         </a>
                     </div>
@@ -31,30 +29,26 @@
                         {% if lastBuyers %}
                             {% set crafthead = "https://crafthead.net/avatar/" %}
                             <div class="d-flex gap-3 flex-wrap">
-                            {% for buyer in lastBuyers %}
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <img class="is-info-head" src="{{ crafthead }}{{ buyer.username }}" alt="{{ buyer.username }}"/>
-                                    <div class="d-flex flex-column">
-                                        <p>{{ buyer.username }}</p>
-                                        <p>{{ buyer.date | date('d.m.Y H:i') }}</p>
+                                {% for buyer in lastBuyers %}
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <img class="is-info-head" src="{{ crafthead }}{{ buyer.username }}" alt="{{ buyer.username }}"/>
                                     </div>
-                                </div>
-                            {% endfor %}
+                                {% endfor %}
                             </div>
                         {% else %}
                             <h4>Brak zamówień w tym miesiącu</h4>
                         {% endif %}
                     </div>
 
-{#                    <div class="is-info font-weight-normal">#}
-{#                        <h3>Cel serwera</h3>#}
-{#                        <div class="progress">#}
-{#                            {% set progress = (100 - ((target) / target * 100)) | round(2) %}#}
-{#                            <div class="progress-bar bg-progress" style="width: {{ progress }}%"></div>#}
-{#                            <span class="progress-percentage">{{ progress }}%</span>#}
-{#                        </div>#}
-{#                        <span>Na opłacenie serwera i rozwój</span>#}
-{#                    </div>#}
+                                        <div class="is-info font-weight-normal">
+                                            <h3>Cel serwera</h3>
+                                            <div class="progress">
+                                                {% set progress = ((targetProgress * 100) / target) | round(2) %}
+                                                <div class="progress-bar bg-progress" style="width: {{ progress }}%"></div>
+                                                <span class="progress-percentage">{{ progress }}%</span>
+                                            </div>
+                                            <span>Na opłacenie serwera i rozwój</span>
+                                        </div>
                 </div>
             </div>
 
