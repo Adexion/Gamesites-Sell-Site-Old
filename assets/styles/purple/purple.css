@@ -279,10 +279,6 @@ a {
     .navbar-vertical_line {
         display: none;
     }
-
-    .TODO {
-        display: none;
-    }
 }
 
 /*
@@ -843,6 +839,11 @@ a {
 
 .shop-box:hover .shop-box_image {
     filter: blur(10px);
+}
+
+.text-danger {
+    color: #cb0004;
+    margin-bottom: 15px;
 }
 
 @media screen and (max-width: 995px) {

@@ -6,11 +6,6 @@
 
         {{ form_start(form, {method: 'POST'}) }}
         <div class="payments-direction mw-auto flex flex-between">
-                <div class="payments-box" style="width: 100%">
-                    {{ form_errors(form) }}
-                    {{ form_errors(form.count) }}
-                </div>
-
             <div class="payments-box">
                 <h1>Twoje dane <span>(Wymagane)</span></h1>
                 <div class="mx-between">
@@ -66,6 +61,7 @@
                         data-widget-counter="{{ form.code|length }}">
                         {% for code in form.code %}
                             <li>{{ form_widget(code,{ 'attr': {'class': 'payments-box-input', 'placeholder':''}}) }}</li>
+                            <div class="text-danger">{{ form_errors(code) }}</div>
                         {% endfor %}
                     </ul>
                     <button type="button"
