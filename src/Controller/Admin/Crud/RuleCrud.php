@@ -2,11 +2,11 @@
 
 namespace App\Controller\Admin\Crud;
 
-use App\Controller\Admin\Field\CKEditorField;
 use App\Entity\Rule;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 
 class RuleCrud extends AbstractCrudController
 {
@@ -35,7 +35,8 @@ class RuleCrud extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            CKEditorField::create('html', $pageName),
+            TextareaField::new('html')
+                ->setFormTypeOption('attr', ['class' => 'editor']),
         ];
     }
 }
