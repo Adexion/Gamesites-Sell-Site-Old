@@ -120,14 +120,16 @@ paymentsButtons.forEach((button) => {
 });
 
 $(document).ready(function () {
+    $('.rem-another-collection-widget').click(function() {
+        const list = $($(this).attr('data-list-selector'));
+        list.children().last().remove();
+    });
+
     $('.add-another-collection-widget').click(function (e) {
         const list = $($(this).attr('data-list-selector'));
-        let counter = list.data('widget-counter') || list.children().length;
 
         let newWidget = list.attr('data-prototype');
-        newWidget = newWidget.replace(/__name__/g, counter);
-        counter++;
-        list.data('widget-counter', counter);
+        newWidget = newWidget.replace(/__name__/g, list.children().length);
         const newElem = $(list.attr('data-widget-tags')).html(newWidget);
         newElem.appendTo(list);
     });

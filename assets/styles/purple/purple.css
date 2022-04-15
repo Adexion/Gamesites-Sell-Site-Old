@@ -823,9 +823,12 @@ a {
 
 .shop-box {
     width: 32%;
-    padding: 50px;
     background: var(--ranking-box);
     border-radius: 8px;
+}
+
+.shop-box a{
+    margin: 50px;
 }
 
 .shop-box_image {

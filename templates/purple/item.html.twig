@@ -6,11 +6,10 @@
 
         {{ form_start(form, {method: 'POST'}) }}
         <div class="payments-direction mw-auto flex flex-between">
-            {% if not form.vars.valid %}
                 <div class="payments-box" style="width: 100%">
                     {{ form_errors(form) }}
+                    {{ form_errors(form.count) }}
                 </div>
-            {% endif %}
 
             <div class="payments-box">
                 <h1>Twoje dane <span>(Wymagane)</span></h1>
@@ -36,7 +35,7 @@
                         <p>{{ item.shortDescription | raw }}</p>
                     </div>
                     <p class="mt-25">
-                        Kup <b id="counter">{{ item.multiple ? '1' : '' }}</b> za <b class="prize">{{ item.discountedPrice }}</b> zł
+                        Kup <b class="counter">{{ item.multiple ? '1' : '' }}</b> za <b class="prize">{{ item.discountedPrice }}</b> zł
                     </p>
                 </div>
             </div>
@@ -46,10 +45,10 @@
                 {% set class = not item.multiple ? 'd-none': 'd-block' %}
                 <div class="{{ class }}">
                     <div class="mx-between">
-                        <p>&nbsp;</p>
                         <p class="payments-box-text">Ilość</p>
+                        {{ form_widget(form.count, {'attr': {'class': 'w-100'}}) }}
+                        <p>Wybrano <b class="counter">1</b></p>
                     </div>
-                    {{ form_widget(form.count, {'attr': {'class': 'w-100'}}) }}
                 </div>
                 <div class="mx-between">
                     <p>&nbsp;</p>
@@ -72,6 +71,9 @@
                     <button type="button"
                             class="btn btn-color-g add-another-collection-widget"
                             data-list-selector="#code-fields-list">Dodaj Kod</button>
+                    <button type="button"
+                            class="btn btn-color-g rem-another-collection-widget"
+                            data-list-selector="#code-fields-list">Usuń kod</button>
                 </div>
 
                 <div class="payments-box-checkbox mx-align">
@@ -124,7 +126,9 @@
                             document.querySelectorAll('.prize').forEach((e) => {
                                 e.innerHTML = val.toFixed(2);
                             });
-                            document.getElementById('counter').innerHTML = e.target.value;
+                            document.querySelectorAll('.counter').forEach((f) => {
+                                f.innerHTML = e.target.value;
+                            });
                         })
                     </script>
                 </div>

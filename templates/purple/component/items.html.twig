@@ -15,19 +15,20 @@
             </div>
             <div class="shop-direction flex">
                 {% for item in group %}
-                    <div class="shop-box flex flex-align flex-center flex-column">
+                    <div class="shop-box">
+                        <a class="flex flex-align flex-center flex-column" href="{{ path('item', {id: item.id}) }}">
                         <img class="shop-box_image" src="{{ asset('/assets/images/' ~ item.image) }}" alt="SHOP-IMG">
                         <h1 class="shop-box_h1">{{ item.description | raw }}</h1>
-                        <a class="btn btn btn-primary" href="{{ path('item', {id: item.id}) }}">Zakup za
-                            {% if item.discount %}
-                                <del>{{ item.price | format_currency('PLN') }}</del>
-                                {{ item.discountedPrice | format_currency('PLN') }}
-                            {% else %}
-                                {{ item.price | format_currency('PLN') }}
-                            {% endif %}
+                        Zakup za
+                        {% if item.discount %}
+                            <del>{{ item.price | format_currency('PLN') }}</del>
+                            {{ item.discountedPrice | format_currency('PLN') }}
+                        {% else %}
+                            {{ item.price | format_currency('PLN') }}
+                        {% endif %}
                         </a>
                     </div>
-                {% endfor %}
+                    {% endfor %}
             </div>
         {% endfor %}
     </div>
