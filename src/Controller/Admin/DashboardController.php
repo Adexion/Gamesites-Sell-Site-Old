@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Link;
 use App\Entity\Additional;
 use App\Entity\Administration;
 use App\Entity\Article;
@@ -167,6 +168,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Server', 'fas fa-server', Server::class);
         yield MenuItem::linkToCrud('Guild Item', 'fas fa-sitemap', GuildItem::class);
         yield MenuItem::linkToCrud('Additional', 'fa fa-plus', Additional::class);
+        yield MenuItem::linkToCrud('Redirect Link', 'fas fa-link', Link::class);
         yield MenuItem::linkToCrud('Configuration', 'fas fa-cog', Configuration::class);
 
         yield MenuItem::section('Użytkownicy');

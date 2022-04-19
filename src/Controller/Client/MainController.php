@@ -2,18 +2,20 @@
 
 namespace App\Controller\Client;
 
+use DateTime;
 use App\Enum\RankEnum;
-use App\Service\GuildItemListBuilder;
-use App\Repository\AdministrationRepository;
-use App\Repository\GuildItemRepository;
-use App\Repository\ItemHistoryRepository;
+use Twig\Error\SyntaxError;
+use App\Repository\LinkRepository;
 use App\Repository\RankRepository;
 use App\Repository\ServerRepository;
-use DateTime;
+use App\Service\GuildItemListBuilder;
+use App\Repository\GuildItemRepository;
+use App\Repository\ItemHistoryRepository;
+use App\Repository\AdministrationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Twig\Error\SyntaxError;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class MainController extends AbstractRenderController
 {
@@ -38,5 +40,13 @@ class MainController extends AbstractRenderController
             'guildRank' => $rankRepository->findRemote(['type' => RankEnum::GUILD]),
             'playerRank' => $rankRepository->findRemote(['type' => RankEnum::PLAYER], $request->query->all()),
         ]);
+    }
+
+    /**
+     * @Route(path="/{name}", name="app_own_redirect")
+     */
+    public function ownRedirect(string $name, LinkRepository $linkRepository): RedirectResponse
+    {
+        return $this->redirect($linkRepository->findOneBy(['name' => $name])->getUri());
     }
 }
