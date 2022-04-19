@@ -30,7 +30,7 @@
                         <p>{{ item.shortDescription | raw }}</p>
                     </div>
                     <p class="mt-25">
-                        Kup <b class="counter">{{ item.multiple ? '1' : '' }}</b> za <b class="prize">{{ item.discountedPrice }}</b> zł
+                        Kup <b id="counter" data-price="{{ item.discountedPrice }}">{{ item.multiple ? '1' : '' }}</b> za <b id="prize">{{ item.discountedPrice }}</b> zł
                     </p>
                 </div>
             </div>
@@ -52,7 +52,6 @@
                 {{ form_widget(form.payment,{ 'attr': {'class': 'payments-box-input', 'placeholder':'np. test@test.pl'}}) }}
                 <div id="psc-code" style="display: none;">
                     <div class="mx-between">
-                        <p>&nbsp;</p>
                         <p class="payments-box-text">Kod PSC</p>
                     </div>
                     <ul id="code-fields-list"
