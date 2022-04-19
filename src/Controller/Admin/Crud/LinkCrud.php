@@ -4,10 +4,8 @@ namespace App\Controller\Admin\Crud;
 
 use App\Entity\Link;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use Symfony\Component\Validator\Constraints\Length;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class LinkCrud extends AbstractCrudController
 {

@@ -47,6 +47,11 @@ class MainController extends AbstractRenderController
      */
     public function ownRedirect(string $name, LinkRepository $linkRepository): RedirectResponse
     {
-        return $this->redirect($linkRepository->findOneBy(['name' => $name])->getUri());
+        $link = $linkRepository->findOneBy(['name' => $name]);
+        if (!$link) {
+            return $this->redirectToRoute('index');
+        }
+
+        return $this->redirect($link->getUri());
     }
 }
