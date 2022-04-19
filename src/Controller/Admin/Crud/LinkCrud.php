@@ -6,6 +6,7 @@ use App\Entity\Link;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use Symfony\Component\Validator\Constraints\Length;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class LinkCrud extends AbstractCrudController
 {
@@ -24,7 +25,7 @@ class LinkCrud extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            UrlField::new('name')
+            TextField::new('name')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             UrlField::new('uri')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
