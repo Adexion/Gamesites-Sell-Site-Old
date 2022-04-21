@@ -36,6 +36,7 @@ class RuleCrud extends AbstractCrudController
     {
         return [
             TextareaField::new('html')
+                ->setColumns('col-12')
                 ->setFormTypeOption('attr', ['class' => 'editor']),
         ];
     }

@@ -292,5 +292,10 @@
     {% endblock %}
     </body>
 {% endblock body %}
-<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+<script src="{{ asset('assets/js/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
+<script type="text/javascript">
+    (() => {
+        document.querySelectorAll('.editor').forEach(el => CKEDITOR.replace(el));
+    })();
+</script>
 </html>

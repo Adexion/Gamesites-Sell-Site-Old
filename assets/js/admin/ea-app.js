@@ -7,5 +7,4 @@ import './MinecraftColorCodes.3.7';
         document.querySelector('.response').appendChild(response.replaceColorCodes());
     }
 
-    ClassicEditor.create(document.querySelector('.editor')).then();
 })();

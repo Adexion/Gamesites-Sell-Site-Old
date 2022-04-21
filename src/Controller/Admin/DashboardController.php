@@ -44,6 +44,7 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(ServerRepository $serverRepository = null): Response
     {
+        ini_set('default_socket_timeout', 1);
         $response = json_decode(file_get_contents(UrlEnum::GAMESITES_URL . 'v1/application/information/' . $_ENV['COUPON']), true);
         $server = $serverRepository->findOneBy(['isDefault' => true]);
         $service = $server ? new QueryService($server) : null;
