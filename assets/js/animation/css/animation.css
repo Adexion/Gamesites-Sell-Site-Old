@@ -1,0 +1,21 @@
+.downed {
+    padding-top: 300px;
+    opacity: 0;
+}
+
+.lefted {
+    margin-left: -300px;
+    opacity: 0;
+}
+
+.down {
+    opacity: 1;
+    padding-top: 0;
+    transition: opacity 800ms, padding-top 800ms;
+}
+
+.left {
+    opacity: 1;
+    margin-left: 0;
+    transition: opacity 800ms, margin-left 800ms;
+}

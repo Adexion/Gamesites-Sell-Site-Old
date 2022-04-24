@@ -32,6 +32,7 @@ class Configuration
      */
     private $logo;
 
+
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -56,6 +57,11 @@ class Configuration
      * @ORM\Column(type="decimal", precision=5, scale=2, nullable=true)
      */
     private $target;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default": true})
+     */
+    private $showBigLogo = true;
 
     public function getId(): ?int
     {
@@ -160,5 +166,17 @@ class Configuration
     public function getBackground(): ?string
     {
         return $this->background;
+    }
+
+    public function getShowBigLogo(): ?bool
+    {
+        return $this->showBigLogo;
+    }
+
+    public function setShowBigLogo(bool $showBigLogo): self
+    {
+        $this->showBigLogo = $showBigLogo;
+
+        return $this;
     }
 }

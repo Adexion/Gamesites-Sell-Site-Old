@@ -1,0 +1,99 @@
+@import "~bootstrap";
+@import "~@fortawesome/fontawesome-free/css/all.css";
+
+/* ------ MAIN ------ */
+:root {
+  --dark: #01070c;
+  --light: #efefef;
+  --dark-alpha: rgba(1, 7, 12, 0.2);
+
+  --background: #656f7e;
+
+  --text-light: #042441;
+  --text-dark: #563030;
+
+  --text-success: #62bd19;
+
+  --minecraft-eq: #bbbbbb;
+  --minecraft-item: #8a8a8a;
+  --minecraft-border-tl: #363636;
+  --minecraft-border-br: #fdfdfd;
+}
+
+.btn {
+  border-radius: 0 !important;
+  padding-left: 50px;
+  padding-right: 50px;
+  text-transform: uppercase;
+}
+
+/* ----- NAVBAR ----- */
+.navbar {
+  padding: 10px 10%;
+  text-transform: uppercase !important;
+  background-color: var(--minecraft-border-tl);
+  color: var(--light);
+  font-weight: 600;
+
+    .navbar-brand {
+      img {
+        max-height: 50px;
+        max-width: 50px;
+      }
+    }
+
+    .nav-link {
+      color: var(--light);
+
+      &.active {
+        border-bottom: 2px solid var(--light);
+      }
+    }
+
+    .btn {
+      font-weight: 600;
+    }
+}
+
+/* ----- GUILD ITEMS ----- */
+.equipment {
+  background-color: var(--minecraft-eq);
+  border-radius: 8px;
+  padding: 12px;
+  width: 474px;
+}
+
+.equipment-item {
+  position: relative;
+  background-color: var(--minecraft-item);
+  width: 50px;
+  height: 50px;
+  border: 2px solid var(--minecraft-border-tl);
+  border-right-color: var(--minecraft-border-br);
+  border-bottom-color: var(--minecraft-border-br);
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.equipment-item.empty {
+  background-image: url("/assets/images/blue.png");
+  background-size: 39px;
+  background-position: 3px 3px;
+  background-repeat: no-repeat;
+}
+
+.equipment-item-image {
+  width: 42px;
+  height: 46px;
+}
+
+.equipment-item .count {
+  position: absolute;
+  text-shadow: 2px 2px 0 var(--light);
+  bottom: -3px;
+  right: 2px;
+  color: white;
+  margin-bottom: 0;
+}

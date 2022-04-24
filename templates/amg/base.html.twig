@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="PL" class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ serverDescription }}">
+    <meta name="author" content="Adexion ~ Mateusz Poźniak">
+    <meta name="generator" content="xpv00 v1.0">
+    <title>{{ siteTitle ?? "I am not set yet" | trans}}</title>
+    <meta name="theme-color" content="#7952b3">
+    <link rel="shortcut icon" href="/assets/images/{{ logo }}" />
+    {% block javascripts %}
+        {{ encore_entry_script_tags('amg') }}
+    {% endblock %}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('amg') }}
+    {% endblock %}
+
+</head>
+<body class="d-flex flex-column h-100">
+{% include 'amg/component/navbar.html.twig' %}
+
+{% block body %}{% endblock %}
+
+{% include 'amg/component/footer.html.twig' %}
+</body>
+</html>

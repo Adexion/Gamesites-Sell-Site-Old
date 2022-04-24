@@ -1,0 +1,5 @@
+{% if serverInfo | length == 0 %}
+    <span class="navbar-brand d-none d-lg-block"><i class="fa fa-circle text-danger fa-sm ml-1" id="status-offline"> </i><b>&nbsp;0/0</b></span>
+{% else %}
+    <div class="navbar-brand d-nne d-lg-flex"><div class="ring-container"><div class="ring-ring"></div><div class="circle"></div></div><b>&nbsp;{{ serverInfo.Players }}/{{ serverInfo.MaxPlayers }}</b></div>
+{% endif %}

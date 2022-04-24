@@ -30,6 +30,7 @@ class GlobalDataQuery
                 'c.ip AS serverIp',
                 'c.description',
                 'c.simplePaySafeCard',
+                'c.showBigLogo',
                 'c.target',
                 'c.serverName',
                 's.minecraftQueryIp',

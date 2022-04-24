@@ -207,6 +207,7 @@ a {
     padding: 35px 0;
     z-index: 9;
     transition: padding 0.2s ease-in-out, background 0.2s ease-in-out;
+    backdrop-filter: blur(5px);
 }
 
 .navbar.scroll {
@@ -328,6 +329,8 @@ a {
     height: fit-content;
     padding: 10px;
     border-radius: 8px;
+    backdrop-filter: blur(5px);
+    background: rgb(18, 19, 22, 0.95);
 }
 
 .header-embed svg {

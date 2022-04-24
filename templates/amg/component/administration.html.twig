@@ -1,0 +1,16 @@
+{% if administration %}
+<div class="mb-5 particle">
+    <div class="container" id="admin">
+        <h1 class="text-dark mb-5">{{ "Administration" | trans }}</h1>
+        <div class="row justify-content-center flex-wrap">
+            {% for a in administration %}
+                <div class="col-lg-4 col-12 d-flex flex-column justify-content-center align-items-center">
+                    <img src="https://mc-heads.net/body/{{ a.username ?? 'Steve'}}" alt="{{ a.username }}" class="mb-5 cube"/>
+                    <h1 class=" h2">{{ a.username }}</h1>
+                    <h2 class=" h4">{{ (a.description ?? ('Next noname' | trans ~ ' ...'))  | raw | nl2br }}</h2>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}

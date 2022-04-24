@@ -48,14 +48,16 @@ class ConfigurationCrud extends AbstractCrudController
                 ->setUploadDir($this->getParameter('uploadPath'))
                 ->setBasePath($this->getParameter('basePath'))
                 ->setSortable(false)
-                ->setFormTypeOption('constraints', [new Length(['max' => 255])]);
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])])
+                ->hideOnIndex();
 
         return [
             TextField::new('ip')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextField::new('serverName')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
-            TextareaField::new('description'),
+            TextareaField::new('description')
+                ->hideOnIndex(),
             MoneyField::new('target')
                 ->setCurrency('PLN')
                 ->setNumDecimals(2)
@@ -64,6 +66,7 @@ class ConfigurationCrud extends AbstractCrudController
             ChoiceField::new('template')
                 ->setChoices(TemplateEnum::toArray()),
             BooleanField::new('simplePaySafeCard'),
+            BooleanField::new('showBigLogo'),
             $pageName === Crud::PAGE_EDIT
                 ? $logo->setFormTypeOption('required', false)
                 : $logo,
@@ -72,7 +75,8 @@ class ConfigurationCrud extends AbstractCrudController
                 ->setBasePath($this->getParameter('basePath'))
                 ->setSortable(false)
                 ->setHelp('Caution! Deleting this entity will be required to change the image!')
-                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])])
+                ->hideOnIndex(),
         ];
     }
 }

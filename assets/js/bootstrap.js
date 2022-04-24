@@ -1,4 +1,5 @@
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 (() => {
     const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))

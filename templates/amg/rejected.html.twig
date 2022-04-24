@@ -1,0 +1,13 @@
+{% extends 'amg/base.html.twig' %}
+
+{% block body %}
+    <main class="particle">
+        <div class="bg2 pt-5 h-100">
+            <div class="container mt-5 text-dark">
+                <h1>{{ "Opps! Something went wrong" | trans }}</h1>
+                <h5>{{ message | trans }}</h5>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
