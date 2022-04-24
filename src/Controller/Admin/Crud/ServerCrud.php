@@ -29,6 +29,7 @@ class ServerCrud extends AbstractCrudController
     {
         return [
             TextField::new('serverName')
+                ->setRequired(false)
                 ->setFormTypeOption('constraints', [new Length(['max' => 60])]),
             TextareaField::new('description'),
             ChoiceField::new('connectionType')

@@ -38,7 +38,7 @@ class Server
     private $conPassword;
 
     /**
-     * @ORM\Column(type="string", length=60)
+     * @ORM\Column(type="string", length=60, nullable=true)
      */
     private $serverName;
 
@@ -133,7 +133,7 @@ class Server
         return $this->serverName;
     }
 
-    public function setServerName(string $serverName): self
+    public function setServerName(?string $serverName): self
     {
         $this->serverName = $serverName;
 
