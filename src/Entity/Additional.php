@@ -86,7 +86,7 @@ class Additional
         return $this->mainText;
     }
 
-    public function setMainText(string $mainText): self
+    public function setMainText(?string $mainText): self
     {
         $this->mainText = $mainText;
 
@@ -98,7 +98,7 @@ class Additional
         return $this->mainDescription;
     }
 
-    public function setMainDescription(string $mainDescription): self
+    public function setMainDescription(?string $mainDescription): self
     {
         $this->mainDescription = $mainDescription;
 
