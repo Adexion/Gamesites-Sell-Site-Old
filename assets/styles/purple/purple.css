@@ -204,7 +204,8 @@ a {
 .navbar {
     position: fixed;
     width: 100%;
-    padding: 35px 0;
+    padding: 10px 0;
+    background: rgba(18,19,22,.6);
     z-index: 9;
     transition: padding 0.2s ease-in-out, background 0.2s ease-in-out, backdrop-filter 0.2s ease-in-out;
 }
