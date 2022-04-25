@@ -1,0 +1,19 @@
+<div class="header-embed flex flex-align">
+    <button id="clipboard" class="btn btn-color-g" onclick="copyToClipboard()" data-ip="{{ serverIp ?? serverName }}">Skopiuj IP</button>
+    <script>
+        function copyToClipboard() {
+            navigator.clipboard.writeText(document.getElementById('clipboard').getAttribute('data-ip'));
+            document.getElementById('clipboard').innerHTML = "Skopiowano!";
+        }
+    </script>
+    {% if discord %}
+        <a class="header-icon" href="{{ discord }}" aria-label="Discord" target="_blank" rel="noreferrer">
+            <i class="fab fa-discord"></i>
+        </a>
+    {% endif %}
+    {% if facebook %}
+        <a class="header-icon" href="{{ facebook }}" aria-label="Discord" target="_blank" rel="noreferrer">
+            <i class="fab fa-facebook"></i>
+        </a>
+    {% endif %}
+</div>

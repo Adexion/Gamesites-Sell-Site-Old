@@ -10,11 +10,9 @@
             </div>
         </div>
         {% for serverName, group in groupItems %}
-            {% if groupItems | length > 1 %}
             <div class="payments-box">
                 <h1>Przedmioty serwera: <b class="navbar-active">{{ serverName }}</b></h1>
             </div>
-            {% endif %}
             <div class="shop-direction flex">
                 {% for item in group %}
                     <div class="shop-box">

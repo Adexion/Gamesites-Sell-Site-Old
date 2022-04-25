@@ -38,7 +38,7 @@ class Server
     private $conPassword;
 
     /**
-     * @ORM\Column(type="string", length=60, nullable=true)
+     * @ORM\Column(type="string", length=60)
      */
     private $serverName;
 
@@ -61,6 +61,11 @@ class Server
      * @ORM\Column(type="smallint", length=255, nullable=true)
      */
     private $minecraftQueryPort;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default" : false})
+     */
+    private $showOnMainPage;
 
 
     public function getMinecraftQueryIp(): ?string
@@ -133,7 +138,7 @@ class Server
         return $this->serverName;
     }
 
-    public function setServerName(?string $serverName): self
+    public function setServerName(string $serverName): self
     {
         $this->serverName = $serverName;
 
@@ -174,5 +179,17 @@ class Server
     public function getConnectionType(): ?string
     {
         return $this->connectionType;
+    }
+
+    public function getShowOnMainPage(): ?bool
+    {
+        return $this->showOnMainPage;
+    }
+
+    public function setShowOnMainPage(bool $showOnMainPage): self
+    {
+        $this->showOnMainPage = $showOnMainPage;
+
+        return $this;
     }
 }

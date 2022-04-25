@@ -7,6 +7,7 @@ use App\Enum\RankEnum;
 use Twig\Error\SyntaxError;
 use App\Repository\LinkRepository;
 use App\Repository\RankRepository;
+use App\Repository\RuleRepository;
 use App\Repository\ServerRepository;
 use App\Service\GuildItemListBuilder;
 use App\Repository\GuildItemRepository;
@@ -39,6 +40,16 @@ class MainController extends AbstractRenderController
             'serverList' => array_slice($serverRepository->findAll(), 0, 3),
             'guildRank' => $rankRepository->findRemote(['type' => RankEnum::GUILD]),
             'playerRank' => $rankRepository->findRemote(['type' => RankEnum::PLAYER], $request->query->all()),
+        ]);
+    }
+
+    /** @Route(path="/rule", name="rule") */
+    public function rule(RuleRepository $repository): Response
+    {
+        $rule = $repository->findOneBy([]);
+
+        return $this->render('client/rule.html.twig', [
+            'rule' => $rule ? $rule->getHtml() : '',
         ]);
     }
 

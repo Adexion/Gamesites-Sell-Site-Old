@@ -44,6 +44,7 @@ class ServerCrud extends AbstractCrudController
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             NumberField::new('minecraftQueryPort')
                 ->setFormTypeOption('constraints', [new Length(['max' => 5])]),
+            BooleanField::new('showOnMainPage'),
             BooleanField::new('isDefault')
                 ->setValue(false)
                 ->setHelp('Ustaw jako włączony tylko dla głównego serwera. W innym przypadku aplikacja może nie działać prawidłowo.'),
