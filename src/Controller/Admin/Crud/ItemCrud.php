@@ -3,6 +3,7 @@
 namespace App\Controller\Admin\Crud;
 
 use App\Entity\Item;
+use App\Entity\Image;
 use App\Entity\Server;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Controller\Admin\Field\EntityField;
@@ -46,16 +47,12 @@ class ItemCrud extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        $image = ImageField::new('image')
-            ->setUploadDir($this->getParameter('uploadPath'))
-            ->setBasePath($this->getParameter('basePath'))
-            ->setHelp('Caution! Deleting this entity will be required to change the image!')
-            ->setFormTypeOption('constraints', [new Length(['max' => 255])]);
-
         return [
-            $pageName === Crud::PAGE_EDIT
-                ? $image->setFormTypeOption('required', false)
-                : $image,
+            EntityField::new('image')
+                ->setClass(Image::class, 'name')
+                ->setChoiceValue('image')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])])
+                ->hideOnIndex(),
             TextField::new('name')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextareaField::new('shortDescription'),

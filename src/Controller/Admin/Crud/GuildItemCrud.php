@@ -2,7 +2,9 @@
 
 namespace App\Controller\Admin\Crud;
 
+use App\Entity\Image;
 use App\Entity\GuildItem;
+use App\Controller\Admin\Field\EntityField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -26,19 +28,16 @@ class GuildItemCrud extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        $image = ImageField::new('image')
-            ->setUploadDir($this->getParameter('uploadPath'))
-            ->setBasePath($this->getParameter('basePath'))
-            ->setFormTypeOption('constraints', [new Length(['max' => 255])]);
-
         return [
             TextField::new('name')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             NumberField::new('count')
                 ->setFormTypeOption('constraints', [new Length(['max' => 64])]),
-            $pageName === Crud::PAGE_EDIT
-                ? $image->setFormTypeOption('required', false)
-                : $image,
+            EntityField::new('image')
+                ->setClass(Image::class, 'name')
+                ->setChoiceValue('image')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])])
+                ->hideOnIndex()
         ];
     }
 }

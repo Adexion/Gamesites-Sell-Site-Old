@@ -2,22 +2,27 @@
 
 namespace App\Extension;
 
-use App\Entity\Server;
-use App\Repository\ServerRepository;
-use App\Service\Connection\QueryService;
-use App\Service\GlobalDataQuery;
 use Exception;
-use Twig\Extension\AbstractExtension;
+use App\Entity\Server;
+use App\Service\GlobalDataQuery;
+use App\Repository\MetaRepository;
+use App\Repository\HeadRepository;
+use App\Repository\ServerRepository;
 use Twig\Extension\GlobalsInterface;
+use Twig\Extension\AbstractExtension;
+use App\Service\Connection\QueryService;
 
 class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
 {
     private GlobalDataQuery $globalDataQuery;
+    private HeadRepository $headRepository;
+    private QueryService $queryService;
 
-    public function __construct(GlobalDataQuery $globalDataQuery, ServerRepository $serverRepository)
+    public function __construct(GlobalDataQuery $globalDataQuery, ServerRepository $serverRepository, HeadRepository $headRepository)
     {
         $this->globalDataQuery = $globalDataQuery;
-        $this->queryService = new QueryService($serverRepository->findOneBy(['isDefault' => true]) ?? new Server()) ;
+        $this->headRepository = $headRepository;
+        $this->queryService = new QueryService($serverRepository->findOneBy(['isDefault' => true]) ?? new Server());
     }
 
     /** @throws Exception */
@@ -50,6 +55,7 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
             'facebook' => $globals['facebook'] ?? null,
             'tiktok' => $globals['tiktok'] ?? null,
             'trailer' => $globals['trailer'] ?? null,
+            'head' => $this->headRepository->findAll(),
         ];
     }
 }

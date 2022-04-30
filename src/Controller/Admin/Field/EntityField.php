@@ -12,6 +12,7 @@ final class EntityField implements FieldInterface
 
     public const OPTION_CLASS = 'class';
     public const OPTION_CHOICE_LABEL = 'choice_label';
+    private ?string $choiceValue = null;
     private string $filteredBy;
     private string $filteredValue;
 
@@ -27,23 +28,32 @@ final class EntityField implements FieldInterface
 
     public function setClass($entityClass, string $choiceLabel): self
     {
+        $choiceValue = $this->choiceValue;
+
         $this
             ->setCustomOption(self::OPTION_CHOICE_LABEL, $choiceLabel)
             ->setFormTypeOptions([
                 self::OPTION_CLASS => $entityClass,
                 self::OPTION_CHOICE_LABEL => $choiceLabel,
             ])
-            ->formatValue(function ($entity) use ($choiceLabel) {
-                if (!$entity) {
+            ->formatValue(function ($value) use ($choiceLabel) {
+                if (!$value) {
                     return null;
                 }
 
-                if (isset($this->filteredBy) && call_user_func([$entity, 'get' . ucfirst($this->filteredBy)]
+                if (is_string($value)) {
+                    return $value;
+                }
+
+                if (isset($this->filteredBy) && call_user_func([$value, 'get' . ucfirst($this->filteredBy)]
                     ) == $this->filteredValue) {
                     return null;
                 }
 
-                return call_user_func([$entity, 'get' . ucfirst($choiceLabel)]);
+                return call_user_func([$value, 'get' . ucfirst($choiceLabel)]);
+            })
+            ->setFormTypeOption('choice_value', function($entity) use ($choiceValue) {
+                return $choiceValue ? call_user_func([$entity, 'get' . ucfirst($choiceValue)]) : $entity;
             });
 
         return $this;
@@ -53,6 +63,13 @@ final class EntityField implements FieldInterface
     {
         $this->filteredBy = $filteredBy;
         $this->filteredValue = $value;
+
+        return $this;
+    }
+
+    public function setChoiceValue($choiceValue): self
+    {
+        $this->choiceValue = $choiceValue;
 
         return $this;
     }

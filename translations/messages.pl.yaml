@@ -89,6 +89,7 @@ Trailer Text: Tekst obok prezentacji serwera
 Guild Text: Tekst gildyjny
 Trailer: Prezentacja
 Server name: Nazwa serwera
+Site Name: Nazwa na stronie
 Caution! Deleting this entity will be required to change the image!: Uwaga! By zmienić obrazek wymagane, jest usunięcie i ponowne utworzenie produktu
 Server: Serwer
 Default Server: Serwer Domyślny
@@ -177,6 +178,11 @@ Visible: Czy widoczny w sklepie?
 Show Big Logo: Czy pokazać duże logo?
 Show On Main Page: Czy pokazać na liście serwerów?
 
+Value: Wartość typu
+Heading: Nagłówki
+Meta: Lista nagłówków
+Image Repository: Twoje obrazy
+
 Additional Fields: Dodatkowe pola
 Searched: Kulumna w bazie
 Showed name: Nazwa pola na stronie
@@ -200,7 +206,9 @@ BLUE: Gildyjny (Domyślny)
 WHITE: Gildyjny (Jasny)
 AMG: Animowany Multi Serwer (WIP)
 
-
 R_CON: rCon + Query
 REDIS: Redis Connection + Query
 PLUGIN: Gamesites System Plugin
+
+PROPERTY: Właściwość (<meta property>)
+NAME: Definicja (<meta name>)

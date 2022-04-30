@@ -2,8 +2,10 @@
 
 namespace App\Controller\Admin\Crud;
 
+use App\Entity\Image;
 use App\Entity\Configuration;
 use App\Enum\TemplateEnum;
+use App\Controller\Admin\Field\EntityField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -43,21 +45,10 @@ class ConfigurationCrud extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        $logo =
-            ImageField::new('logo')
-                ->setUploadDir($this->getParameter('uploadPath'))
-                ->setBasePath($this->getParameter('basePath'))
-                ->setSortable(false)
-                ->setFormTypeOption('constraints', [new Length(['max' => 255])])
-                ->hideOnIndex();
-
         return [
             TextField::new('ip')
+                ->setLabel('IP do kopiowania dla użytkowników')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
-            TextField::new('serverName')
-                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
-            TextareaField::new('description')
-                ->hideOnIndex(),
             MoneyField::new('target')
                 ->setCurrency('PLN')
                 ->setNumDecimals(2)
@@ -67,16 +58,16 @@ class ConfigurationCrud extends AbstractCrudController
                 ->setChoices(TemplateEnum::toArray()),
             BooleanField::new('simplePaySafeCard'),
             BooleanField::new('showBigLogo'),
-            $pageName === Crud::PAGE_EDIT
-                ? $logo->setFormTypeOption('required', false)
-                : $logo,
-            ImageField::new('background')
-                ->setUploadDir($this->getParameter('uploadPath'))
-                ->setBasePath($this->getParameter('basePath'))
-                ->setSortable(false)
-                ->setHelp('Caution! Deleting this entity will be required to change the image!')
+            EntityField::new('logo')
+                ->setClass(Image::class, 'name')
+                ->setChoiceValue('logo')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])])
                 ->hideOnIndex(),
+            EntityField::new('background')
+                ->setClass(Image::class, 'name')
+                ->setChoiceValue('background')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])])
+                ->hideOnIndex()
         ];
     }
 }

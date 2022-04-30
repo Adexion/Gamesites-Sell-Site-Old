@@ -16,10 +16,11 @@ class Additional
      * @ORM\Column(type="integer")
      */
     private $id;
+
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $siteTitle;
+    private $siteName;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -201,14 +202,14 @@ class Additional
         return $this;
     }
 
-    public function getSiteTitle(): ?string
+    public function getSiteName(): ?string
     {
-        return $this->siteTitle;
+        return $this->siteName;
     }
 
-    public function setSiteTitle(?string $siteTitle): self
+    public function setSiteName(?string $siteName): self
     {
-        $this->siteTitle = $siteTitle;
+        $this->siteName = $siteName;
 
         return $this;
     }

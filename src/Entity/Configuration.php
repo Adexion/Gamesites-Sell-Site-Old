@@ -18,16 +18,6 @@ class Configuration
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $serverName;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $description;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $logo;
@@ -66,18 +56,6 @@ class Configuration
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getServerName(): ?string
-    {
-        return $this->serverName;
-    }
-
-    public function setServerName(?string $serverName): self
-    {
-        $this->serverName = $serverName;
-
-        return $this;
     }
 
     public function getLogo(): ?string
@@ -142,18 +120,6 @@ class Configuration
     public function getTarget(): ?float
     {
         return $this->target;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
     }
 
     public function setBackground(?string $background): self
