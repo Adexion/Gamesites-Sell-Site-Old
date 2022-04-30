@@ -2,21 +2,27 @@
 <html lang="PL" class="h-100">
 <head>
     <meta charset="UTF-8">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ serverDescription }}">
-    <meta name="author" content="Adexion ~ Mateusz Poźniak">
-    <meta name="generator" content="xpv00 v1.0">
-    <title>{{ siteTitle ?? "I am not set yet" | trans}}</title>
-    <meta name="theme-color" content="#7952b3">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="pl"/>
+    <meta name="author" content="Mateusz Poźniak ak. Adexion">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"/>
     <link rel="shortcut icon" href="/assets/images/{{ logo }}" />
-    {% block javascripts %}
-        {{ encore_entry_script_tags('white') }}
-    {% endblock %}
+
+    <link rel="manifest" href="/assets/manifest.json">
+    {% if head %}
+        <title>{{ head.title }}</title>
+        {% for meta in head.meta %}
+            <meta {{ meta.type }}="{{ meta.value }}" content="{{ meta.content }}"
+        {% endfor %}
+        {% if head.custom %}
+            {{ head.custom | raw}}
+        {% endif %}
+    {% endif %}
+
     {% block stylesheets %}
         {{ encore_entry_link_tags('white') }}
     {% endblock %}
-
 </head>
 <body class="d-flex flex-column h-100">
 {% include 'white/component/navbar.html.twig' %}
@@ -24,5 +30,9 @@
 {% block body %}{% endblock %}
 
 {% include 'white/component/footer.html.twig' %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('white') }}
+{% endblock %}
 </body>
 </html>
