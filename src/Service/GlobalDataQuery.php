@@ -33,7 +33,7 @@ class GlobalDataQuery
                 'c.target',
                 's.minecraftQueryIp',
                 's.minecraftQueryPort',
-                'a.serverName',
+                'a.siteName',
                 'a.mainText',
                 'a.mainDescription',
                 'a.trailerText',

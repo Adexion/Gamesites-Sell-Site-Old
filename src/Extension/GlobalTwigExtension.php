@@ -5,7 +5,6 @@ namespace App\Extension;
 use Exception;
 use App\Entity\Server;
 use App\Service\GlobalDataQuery;
-use App\Repository\MetaRepository;
 use App\Repository\HeadRepository;
 use App\Repository\ServerRepository;
 use Twig\Extension\GlobalsInterface;
