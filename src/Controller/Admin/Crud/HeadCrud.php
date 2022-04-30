@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 
 class HeadCrud extends AbstractCrudController
@@ -37,6 +38,7 @@ class HeadCrud extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield TextField::new('title');
+        yield TextareaField::new('custom');
         yield CollectionField::new('meta')
             ->setEntryIsComplex(true)
             ->setEntryType(HeadFieldType::class);

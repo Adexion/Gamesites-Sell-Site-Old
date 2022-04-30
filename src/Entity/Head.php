@@ -27,6 +27,11 @@ class Head
      */
     private $title;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $custom;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +57,18 @@ class Head
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getCustom(): ?string
+    {
+        return $this->custom;
+    }
+
+    public function setCustom(?string $custom): self
+    {
+        $this->custom = $custom;
 
         return $this;
     }
