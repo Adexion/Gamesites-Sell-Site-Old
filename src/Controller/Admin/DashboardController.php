@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use Exception;
 use App\Entity\Link;
 use App\Entity\Head;
 use App\Entity\Bans;
@@ -13,7 +12,6 @@ use App\Entity\User;
 use App\Entity\Image;
 use App\Enum\UrlEnum;
 use App\Entity\Server;
-use App\Form\RConType;
 use App\Entity\Article;
 use App\Entity\Contact;
 use App\Entity\Payment;
@@ -26,22 +24,23 @@ use App\Entity\Configuration;
 use App\Entity\Administration;
 use App\Repository\ServerRepository;
 use App\Service\Connection\QueryService;
-use Symfony\Component\HttpFoundation\Request;
+use App\Controller\Admin\Action\Console;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\Connection\ExecuteServiceFactory;
+use App\Controller\Admin\Action\Authentication;
+use App\Controller\Admin\Action\PasswordManager;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Scheb\TwoFactorBundle\Security\TwoFactor\QrCode\QrCodeGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 
 class DashboardController extends AbstractDashboardController
 {
     use PasswordManager;
+    use Console;
+    use Authentication;
 
     /**
      * @Route("/admin", name="admin")
@@ -60,67 +59,11 @@ class DashboardController extends AbstractDashboardController
     }
 
     /**
-     * @Route("/admin/console", name="console")
-     */
-    public function console(Request $request, ExecuteServiceFactory $factory): Response
-    {
-        $form = $this->createForm(RConType::class);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var Server $server */
-            $server = $form->getData()['server'];
-            try {
-                $response = $factory->getExecutionService($server)->execute($form->getData()['command']);
-            } catch (Exception $e) {
-                $response = $e->getMessage();
-            }
-        }
-
-        return $this->render('admin/console.html.twig', [
-            'form' => $form->createView(),
-            'response' => $response ?? '',
-        ]);
-    }
-
-    /**
      * @Route("/admin/changes", name="changes")
      */
     public function changes(): Response
     {
         return $this->render('admin/changes.html.twig');
-    }
-
-    /**
-     * @Route("/admin/user/2fa", name="user2fa")
-     */
-    public function twoFactoryAuthentication(Request $request, GoogleAuthenticatorInterface $googleAuthenticator, QrCodeGenerator $codeGenerator): Response
-    {
-        if ($request->request->get('generate')) {
-            /** @var User $user */
-            $user = $this->getUser();
-
-            $secret = $googleAuthenticator->generateSecret();
-            $user->setGoogleAuthenticatorSecret($secret);
-
-            $this->getDoctrine()->getManager()->persist($user);
-            $this->getDoctrine()->getManager()->flush();
-
-            $qrCodeContent = $codeGenerator->getGoogleAuthenticatorQrCode($user)->writeString();
-        }
-
-        if ($request->request->get('turnOff')) {
-            /** @var User $user */
-            $user = $this->getUser();
-            $user->setGoogleAuthenticatorSecret(null);
-
-            $this->getDoctrine()->getManager()->persist($user);
-            $this->getDoctrine()->getManager()->flush();
-        }
-
-        return $this->render('admin/2fa.html.twig', [
-            'secret' => $secret ?? null,
-            'qrCodeContent' => base64_encode($qrCodeContent ?? ''),
-        ]);
     }
 
     public function configureAssets(): Assets
@@ -178,7 +121,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Użytkownicy');
         yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
         yield MenuItem::linkToRoute('2FA Google', 'fab fa-google', 'user2fa');
-        yield MenuItem::linkToRoute('Menedżer haseł (WIP)', 'fas fa-key', 'admin_password_manager');
+        yield MenuItem::linkToRoute('Menedżer haseł', 'fas fa-key', 'admin_password_manager');
     }
 
     public function configureUserMenu(UserInterface $user): UserMenu

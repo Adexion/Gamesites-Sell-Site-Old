@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -49,6 +51,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
      * @ORM\Column(name="googleAuthenticatorSecret", type="string", nullable=true)
      */
     private $googleAuthenticatorSecret;
+
+    /**
+     * @ORM\OneToMany(targetEntity=PasswordManager::class, mappedBy="client", orphanRemoval=true)
+     */
+    private $passwordManager;
+
+    public function __construct()
+    {
+        $this->passwordManager = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -147,5 +159,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function getNick(): ?string
     {
         return $this->nick;
+    }
+
+    /**
+     * @return Collection<int, PasswordManager>
+     */
+    public function getPasswordManager(): Collection
+    {
+        return $this->passwordManager;
+    }
+
+    public function addPasswordManager(PasswordManager $passwordManager): self
+    {
+        if (!$this->passwordManager->contains($passwordManager)) {
+            $this->passwordManager[] = $passwordManager;
+            $passwordManager->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removePasswordManager(PasswordManager $passwordManager): self
+    {
+        if ($this->passwordManager->removeElement($passwordManager)) {
+            // set the owning side to null (unless already changed)
+            if ($passwordManager->getClient() === $this) {
+                $passwordManager->setClient(null);
+            }
+        }
+
+        return $this;
     }
 }
