@@ -35,14 +35,10 @@ class Meta
     private $value;
 
     /**
-     * @ORM\OneToMany(targetEntity=Head::class, mappedBy="meta")
+     * @ORM\ManyToOne(targetEntity=Head::class, inversedBy="meta")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $head;
-
-    public function __construct()
-    {
-        $this->head = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -85,32 +81,14 @@ class Meta
         return $this;
     }
 
-    /**
-     * @return Collection<int, Head>
-     */
-    public function getHead(): Collection
+    public function getHead(): ?Head
     {
         return $this->head;
     }
 
-    public function addHead(Head $head): self
+    public function setHead(?Head $head): self
     {
-        if (!$this->head->contains($head)) {
-            $this->head[] = $head;
-            $head->setMeta($this);
-        }
-
-        return $this;
-    }
-
-    public function removeHead(Head $head): self
-    {
-        if ($this->head->removeElement($head)) {
-            // set the owning side to null (unless already changed)
-            if ($head->getMeta() === $this) {
-                $head->setMeta(null);
-            }
-        }
+        $this->head = $head;
 
         return $this;
     }

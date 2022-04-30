@@ -16,7 +16,8 @@ class HeadCrud extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular("Wpis");
+            ->setEntityLabelInSingular("Wpis")
+            ->setEntityLabelInPlural('Heading');
     }
 
     public static function getEntityFqcn(): string

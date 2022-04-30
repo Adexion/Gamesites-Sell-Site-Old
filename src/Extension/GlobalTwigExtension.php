@@ -54,7 +54,7 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
             'facebook' => $globals['facebook'] ?? null,
             'tiktok' => $globals['tiktok'] ?? null,
             'trailer' => $globals['trailer'] ?? null,
-            'head' => $this->headRepository->findAll(),
+            'head' => $this->headRepository->findOneBy([]),
         ];
     }
 }
