@@ -1,0 +1,35 @@
+{% extends 'client/multi/dark/base.html.twig' %}
+
+{% block body %}
+    <section class="other-padding mw-auto" id="ranking">
+        {% if bans is not empty %}
+            <div class="ranking-text flex flex-align">
+                <h1 class="ranking-text_h1">Lista banów</h1>
+            </div>
+            <div class="ranking-direction flex flex-align">
+                <div class="ranking-left">
+                    {% for ban in bans %}
+                        <div class="ranking-box flex flex-between flex-align">
+                            <div class="flex flex-align">
+                                <h1 class="ranking-box_number">{{ loop.index }}</h1>
+                                <img class="ranking-box_img"
+                                     src="https://crafthead.net/cube/{{ ban.name }}" alt="HEAD">
+                                <div>
+                                    <h1 class="ranking-box_nickname">{{ ban.name }}</h1>
+                                    <p class="ranking-box_guild">{{ ban.reason }}</p>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="ranking-box_points-name">Czas trwania</p>
+                                <h2 class="ranking-box_points">{{ ban.value }}</h2>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="ranking-right">
+                    <img class="ranking-image" src="{{ asset("assets/images/ranking_render.jpg") }}" alt="RENDER">
+                </div>
+            </div>
+        {% endif %}
+    </section>
+{% endblock %}

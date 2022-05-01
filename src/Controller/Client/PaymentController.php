@@ -33,18 +33,18 @@ class PaymentController extends AbstractRenderController
         $form->handleRequest($request);
 
         if (!$form->isSubmitted() || !$form->isValid()) {
-            return $this->render('client/rejected.html.twig', [
+            return $this->renderTheme('rejected.html.twig', [
                 'message' => 'Wrong data given',
             ]);
         }
 
         if ($message = $executionService->execute($form->getData())) {
-            return $this->render('client/rejected.html.twig', [
+            return $this->renderTheme('rejected.html.twig', [
                 'message' => $message,
             ]);
         }
 
-        return $this->render('client/success.html.twig');
+        return $this->renderTheme('success.html.twig');
     }
 
     /**
@@ -56,7 +56,7 @@ class PaymentController extends AbstractRenderController
         $cookies = $request->cookies;
         $itemHistory = $itemHistoryRepository->find($cookies->get('paymentId', 0));
 
-        return $this->render('client/thankYou.html.twig', [
+        return $this->renderTheme('thankYou.html.twig', [
             'type' => $itemHistory->getType(),
             'message' => PaymentStatusResponseEnum::toArray()[PaymentFullyStatusEnum::from(
                     $itemHistory->getStatus()
@@ -71,7 +71,7 @@ class PaymentController extends AbstractRenderController
      */
     public function pscPending(PaySafeCardVoucher $voucher): Response
     {
-        return $this->render('client/thankYou.html.twig', [
+        return $this->renderTheme('thankYou.html.twig', [
             'type' => OperatorTypeEnum::PAY_SAFE_CARD,
             'message' => 'PaySafeCard is pending. Contact with administrator',
             'paymentId' => $voucher->getPaySafeCard()->getId(),
@@ -86,13 +86,13 @@ class PaymentController extends AbstractRenderController
     public function getVoucher(?PaySafeCardVoucher $pscVoucher, VoucherAssignService $assignService): Response
     {
         if (!$pscVoucher || $pscVoucher->getPaySafeCard()->getStatus() === PaySafeCardStatusEnum::NOT_WORKING) {
-            return $this->render('client/rejected.html.twig', [
+            return $this->renderTheme('rejected.html.twig', [
                 'message' => "Payment not exist ore removed.",
             ]);
         }
 
         if ($pscVoucher->getPaySafeCard()->getStatus() === PaySafeCardStatusEnum::NEW) {
-            return $this->render('client/thankYou.html.twig', [
+            return $this->renderTheme('thankYou.html.twig', [
                 'type' => OperatorTypeEnum::PAY_SAFE_CARD,
                 'message' => 'This payment is still pending. Please wait little bit more ore contact with administration on the server.',
                 'paymentId' => $pscVoucher->getPaySafeCard()->getId(),
@@ -101,7 +101,7 @@ class PaymentController extends AbstractRenderController
 
         $assignService->assign($pscVoucher);
 
-        return $this->render('client/thankYou.html.twig', [
+        return $this->renderTheme('thankYou.html.twig', [
             'type' => OperatorTypeEnum::PAY_SAFE_CARD,
             'message' => 'Payment realized successfully. Get your voucher.',
             'voucher' => $pscVoucher->getVoucher()->getCode(),

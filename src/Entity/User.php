@@ -53,7 +53,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     private $googleAuthenticatorSecret;
 
     /**
-     * @ORM\OneToMany(targetEntity=PasswordManager::class, mappedBy="client", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=PasswordManager::class, mappedBy="dark", orphanRemoval=true)
      */
     private $passwordManager;
 

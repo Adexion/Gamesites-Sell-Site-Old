@@ -1,0 +1,10 @@
+{% extends 'client/simple/dark/base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid container-fluid-bg" {% if background %}style="background-image: url('/assets/images/{{ background }}')" {% endif %}>
+        {% include 'client/simple/dark/component/information.html.twig' %}
+        {% include 'client/simple/dark/component/whatsup.html.twig' %}
+        {% include 'client/simple/dark/component/story.html.twig' %}
+        {% include 'client/simple/dark/component/administration.html.twig' %}
+    </div>
+{% endblock %}

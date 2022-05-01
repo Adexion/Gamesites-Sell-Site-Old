@@ -17,7 +17,7 @@ class BansController extends AbstractRenderController
      */
     public function bans(BansRepository $repository, BansMapper $bansMapper): Response
     {
-        return $this->render('client/bans.html.twig', [
+        return $this->renderTheme('bans.html.twig', [
             'bans' => $bansMapper->map($repository->findRemote()),
         ]);
     }

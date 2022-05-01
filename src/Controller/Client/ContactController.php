@@ -24,7 +24,7 @@ class ContactController extends AbstractRenderController
             $this->addFlash('success', 'Message send');
         }
 
-        return $this->render('client/contact.html.twig', [
+        return $this->renderTheme('contact.html.twig', [
             'form' => $form->createView(),
         ]);
     }

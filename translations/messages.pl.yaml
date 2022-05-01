@@ -203,11 +203,11 @@ REALIZED: Zrealizowano
 NOT_EXISTED: Nie istnieje
 NOT_ON_SERVER: Nie znaleziono gracza
 
-PURPLE: Multi Serwer (Fioletowy)
-GRAY: Artykuły Pojedynczy (Szarozielony)
-BLUE: Gildyjny (Domyślny)
-WHITE: Gildyjny (Jasny)
-AMG: Animowany Multi Serwer (WIP)
+GUILD_DARK: Gildyjny (Ciemny)
+GUILD_WHITE: Gildyjny (Jasny)
+MULTI_DARK: Multi Serwer (Ciemny)
+MULTI_WHITE: Multi Serwer (Jasny) (WIP)
+SIMPLE_DARK: Prosty (Ciemny) (WIP)
 
 R_CON: rCon + Query
 REDIS: Redis Connection + Query

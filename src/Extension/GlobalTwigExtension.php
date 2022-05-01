@@ -32,7 +32,7 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
         return [
             'serverInfo' => $globals['minecraftQueryIp'] ?? null ? $this->queryService->getInfo() : [],
             'isPlayerRank' => $globals['player'] ?? null,
-            'isGuildRank' => $globals['guild'] ?? null,
+            'isGuildRank' => $globals['dark'] ?? null,
             'serverIp' => $globals['serverIp'] ?? null,
             'logo' => $globals['logo'] ?? null,
             'background' => $globals['background'] ?? null,

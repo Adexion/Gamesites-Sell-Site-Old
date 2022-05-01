@@ -1,0 +1,20 @@
+{% extends 'client/multi/dark/base.html.twig' %}
+
+{% block body %}
+    <section class="other-padding">
+        <div class="mx-auto flex flex-center flex-column flex-align">
+            <h1>{{ "Thank You Payment" | trans ~ " : " }}<span class="">{{ type | trans }}</span></h1>
+            <h2 class="h4">{{ "Your payment id is" | trans ~ " : " }}<span class="">{{ paymentId }}</span></h2>
+            <br/>
+            <h3 class="mode-box_one-p">{{ message | trans }}</h3>
+            <br/>
+            {% if link is defined %}
+                <a class="animate h5" href="{{ link }}">{{ app.request.schemeAndHttpHost }}{{ link }}</a>
+            {% endif %}
+            {% if voucher is defined %}
+                <h5>{{ "This is your voucher" | trans ~ " : " }}<span class="">{{ voucher }}</span></h5>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}
+

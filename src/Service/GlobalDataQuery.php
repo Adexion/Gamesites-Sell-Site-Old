@@ -45,18 +45,18 @@ class GlobalDataQuery
                 'a.instagram',
                 'a.tiktok',
                 'a.trailer',
-                'r1.id AS guild',
+                'r1.id AS dark',
                 'r2.id AS player',
                 'b.id AS bans'
             )
             ->from(Configuration::class, 'c')
             ->leftJoin(Additional::class, 'a', 'WITH', 'a.id IS NOT NULL')
             ->leftJoin(Server::class, 's', 'WITH', 's.isDefault = true')
-            ->leftJoin(Rank::class, 'r1', 'WITH', 'r1.type = :guild')
+            ->leftJoin(Rank::class, 'r1', 'WITH', 'r1.type = :dark')
             ->leftJoin(Rank::class, 'r2', 'WITH', 'r2.type = :player')
             ->leftJoin(Bans::class, 'b', 'WITH', 'b.id IS NOT NULL')
             ->setParameters([
-                ':guild' => RankEnum::GUILD,
+                ':dark' => RankEnum::GUILD,
                 ':player' => RankEnum::PLAYER,
             ])
             ->where('1 = 1')

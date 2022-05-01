@@ -1,0 +1,9 @@
+<div class="information vh-100 lightning row">
+    <img class="col-lg-6 col-md-12" src="/assets/images/{{ logo }}" alt="Logotype">
+    <div class="text-center col-lg-6 col-md-12">
+        <h1>{{ serverName }}</h1>
+        <h2 class="base">{{ mainText | raw | nl2br }}</h2>
+
+        {% include 'client/simple/dark/component/social.html.twig' %}
+    </div>
+</div>

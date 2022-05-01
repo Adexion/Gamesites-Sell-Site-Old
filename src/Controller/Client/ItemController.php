@@ -27,7 +27,7 @@ class ItemController extends AbstractRenderController
     {
         $form = $this->createForm(VoucherType::class);
 
-        return $this->render('client/shop.html.twig', [
+        return $this->renderTheme('shop.html.twig', [
             'items' => $repository->findAll(),
             'groupItems' => $repository->groupByServer(),
             'lastBuyers' => $itemHistoryRepository->findBy(['status' => PaymentStatusEnum::REALIZED], null, 10),
@@ -51,11 +51,11 @@ class ItemController extends AbstractRenderController
             }
 
             return $builder->get($form->getData(), $item, function ($parameters) {
-                return $this->render('client/payment.html.twig', $parameters);
+                return $this->renderTheme('payment.html.twig', $parameters);
             });
         }
 
-        return $this->render('client/item.html.twig', [
+        return $this->renderTheme('item.html.twig', [
             'item' => $item,
             'form' => $form->createView(),
         ]);

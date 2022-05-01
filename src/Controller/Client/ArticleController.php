@@ -19,7 +19,7 @@ class ArticleController extends AbstractRenderController
         /** @var Article $article */
         $article = $repository->find($slug);
 
-        return $this->render('client/article.html.twig', [
+        return $this->renderTheme('dark/article.html.twig', [
             'article' => $article,
             'avatar' => self::PLAYER_AVATAR . $article->getAuthor()->getUsername(),
         ]);
@@ -33,7 +33,7 @@ class ArticleController extends AbstractRenderController
         /** @var Article[] articleList */
         $articleList = $repository->getArticles($slug);
 
-        return $this->render('client/articleList.html.twig', [
+        return $this->renderTheme('dark/articleList.html.twig', [
             'articleList' => $articleList,
             'count' => $repository->count([]),
             'perPages' => ArticleRepository::ARTICLE_PER_PAGES,

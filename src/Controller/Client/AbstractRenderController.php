@@ -11,6 +11,7 @@ use UnexpectedValueException;
 
 class AbstractRenderController extends AbstractController
 {
+    private const DEFAULT = TemplateEnum::GUILD_DARK;
     private TemplateEnum $template;
 
     public function __construct(ConfigurationRepository $configurationRepository)
@@ -22,16 +23,14 @@ class AbstractRenderController extends AbstractController
         }
     }
 
-    protected function render(string $view, array $parameters = [], Response $response = null): Response
+    protected function renderTheme(string $view, array $parameters = [], Response $response = null): Response
     {
         if (!$this->template->getValue()) {
-            return parent::render($view, $parameters, $response);
+            return $this->render(self::DEFAULT . $view, $parameters, $response);
         }
 
         try {
-            $replaced = str_replace('client', $this->template->getValue(), $view);
-
-            return parent::render($replaced, $parameters, $response);
+            return $this->render($this->template->getValue() . $view, $parameters, $response);
         } catch (SyntaxError $e) {
             if ($_ENV['APP_ENV'] === 'dev') {
                 throw $e;
@@ -39,7 +38,7 @@ class AbstractRenderController extends AbstractController
         }
 
         try {
-            return parent::render($view, $parameters, $response);
+            return $this->render(self::DEFAULT . $view, $parameters, $response);
         } catch (SyntaxError $e) {
             return $this->redirectToRoute('index');
         }

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    {% include 'client/multi/dark/component/head.html.twig' %}
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('multi-dark') }}
+    {% endblock %}
+</head>
+<body>
+
+{% include 'client/multi/dark/component/nav.html.twig' %}
+{% block body %}{% endblock %}
+{% include 'client/multi/dark/component/footer.html.twig' %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('multi-dark') }}
+{% endblock %}
+</body>
+</html>

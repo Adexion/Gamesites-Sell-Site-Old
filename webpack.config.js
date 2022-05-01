@@ -9,17 +9,18 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 Encore
     .setOutputPath('public/build/')
     .setPublicPath('/build')
-    .addEntry('client', './assets/js/client/main.js')
-    .addEntry('old', './assets/js/old/main.js')
-    .addEntry('purple', './assets/js/purple/main.js')
-    .addEntry('white', './assets/js/white/main.js')
-    .addEntry('amg', './assets/js/amg/main.js')
+    .addEntry('guild-dark', './assets/js/client/guild/dark/main.js')
+    .addEntry('guild-white', './assets/js/client/guild/white/main.js')
 
-    .addEntry('readable', './assets/js/admin/readable.js')
-    .addEntry('ea-app', './assets/js/admin/ea-app.js')
+    .addEntry('simple-dark', './assets/js/client/simple/dark/main.js')
+
+    .addEntry('multi-dark', './assets/js/client/multi/dark/main.js')
+    .addEntry('multi-white', './assets/js/client/multi/white/main.js')
+
+    .addEntry('admin', './assets/js/admin/admin.js')
+
     .addStyleEntry('console', './assets/styles/admin/console.css')
     .addStyleEntry('securedArea', './assets/styles/admin/securedArea.css')
-    .addStyleEntry('admin', './assets/styles/admin/admin.css')
 
     .autoProvidejQuery()
     .splitEntryChunks()

@@ -32,7 +32,7 @@ class MainController extends AbstractRenderController
         RankRepository $rankRepository,
         Request $request
     ): Response {
-        return $this->render('client/index.html.twig', [
+        return $this->renderTheme('index.html.twig', [
             'guildItem' => (new GuildItemListBuilder)->buildList($guildItemRepository->findAll()),
             'administration' => $administrationRepository->findBy([], ['priority' => 'ASC']),
             'boughtToday' => $itemHistoryRepository->getCountOfBoughtItems(new DateTime()),
@@ -48,7 +48,7 @@ class MainController extends AbstractRenderController
     {
         $rule = $repository->findOneBy([]);
 
-        return $this->render('client/rule.html.twig', [
+        return $this->renderTheme('rule.html.twig', [
             'rule' => $rule ? $rule->getHtml() : '',
         ]);
     }

@@ -1,0 +1,22 @@
+<header class="header" {% if background %}style="background-image: url('/assets/images/{{ background }}')" {% endif %}>
+    <div class="header-height mw-auto flex flex-align flex-center">
+        {% if showBigLogo %}
+            <div class="header-left">
+                <h1 class="header-text_h1">{{ mainText | raw | nl2br }}</h1>
+                <p class="header-text_p">{{ mainDescription | raw | nl2br }}</p>
+                {% include "client/multi/dark/component/embed.html.twig" %}
+            </div>
+            <div class="header-right flex flex-center">
+                <div class="header-right_logo">
+                    <img src="/assets/images/{{ logo }}" alt="LOGO">
+                </div>
+            </div>
+        {% else %}
+        <div class="header-center m-auto">
+            <h1 class="header-text_h1">{{ mainText | raw | nl2br }}</h1>
+            <p class="header-text_p mb-25">{{ mainDescription | raw | nl2br }}</p>
+            {% include "client/multi/dark/component/embed.html.twig" %}
+        </div>
+        {% endif %}
+    </div>
+</header>

@@ -1,0 +1,21 @@
+{% extends 'client/guild/dark/base.html.twig' %}
+
+{% block body %}
+    <div class="container text-center">
+        <h1 class="text-white">{{ 'Please wiat' | trans }} ...</h1>
+        <h4 class="">
+            {{ 'Redirect' | trans }}
+        </h4>
+        {{ form_start(form, {name: 'payment'}) }}
+        <button class="btn btn-primary h3 mt-4" type="submit">{{ 'Go to payment now' | trans }}</button>
+        {{ form_end(form) }}
+        <script>
+            window.onload = function () {
+                window.setTimeout(function () {
+                    document.payment.submit();
+                }, 3000);
+            };
+        </script>
+    </div>
+{% endblock %}
+
