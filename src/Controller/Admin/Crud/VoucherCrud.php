@@ -2,16 +2,17 @@
 
 namespace App\Controller\Admin\Crud;
 
-use App\Controller\Admin\Field\EntityField;
 use App\Entity\Item;
 use App\Entity\Voucher;
+use App\Controller\Admin\Field\EntityField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Range;
+use Symfony\Component\Validator\Constraints\Length;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class VoucherCrud extends AbstractCrudController
 {
@@ -37,8 +38,8 @@ class VoucherCrud extends AbstractCrudController
                 ->setNumDecimals(0)
                 ->setHelp('-1 unlimited, 0 is off, 1+ is specific use number')
                 ->setFormTypeOption('constraints', [new Range(['max' => 100])]),
-            EntityField::new('item')
-                ->setClass(Item::class, 'name'),
+            AssociationField::new('item')
+                ->setCrudController(Item::class),
             DateField::new('date', 'Expired')
                 ->renderAsNativeWidget(true),
         ];

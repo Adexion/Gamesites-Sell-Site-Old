@@ -2,8 +2,8 @@
 
 namespace App\Controller\Admin\Crud;
 
+use App\Entity\Image;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController as AbstractBaseCrudController;
 
 abstract class AbstractCrudController extends AbstractBaseCrudController
@@ -14,5 +14,14 @@ abstract class AbstractCrudController extends AbstractBaseCrudController
     {
         return $crud
             ->setEntityLabelInSingular('Wpis');
+    }
+
+    protected function getImagesList(): array
+    {
+        foreach ($this->getDoctrine()->getRepository(Image::class)->findAll() as $item) {
+            $images[$item->getName()] = $item->getImage();
+        }
+
+        return $images ?? [];
     }
 }

@@ -9,6 +9,7 @@ use App\Enum\PaySafeCardStatusEnum;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
@@ -57,14 +58,10 @@ class PaySafeCardCrud extends AbstractCrudController
                 ->setDisabled(),
             TextField::new('username')
                 ->setDisabled(),
-            EntityField::new('item', 'Price')
-                ->setClass(Item::class, 'discountedPrice')
-                ->setDisabled(),
-            EntityField::new('item', 'Item')
-                ->setClass(Item::class, 'name')
+            AssociationField::new('item')
+                ->setCrudController(ItemCrud::class)
                 ->setDisabled(),
             DateField::new('date', 'Date From')
-                ->renderAsNativeWidget(true)
                 ->setDisabled(),
             ChoiceField::new('status')
                 ->setChoices(PaySafeCardStatusEnum::toArray()),

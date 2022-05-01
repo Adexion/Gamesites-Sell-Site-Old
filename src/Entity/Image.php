@@ -60,4 +60,11 @@ class Image
     {
         return $this->getImage();
     }
+
+    public function toArray(): array
+    {
+        return [
+            $this->getName() => $this->getImage()
+        ];
+    }
 }

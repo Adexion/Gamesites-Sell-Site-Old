@@ -10,6 +10,7 @@ use App\Enum\OperatorTypeEnum;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -58,8 +59,8 @@ class ItemHistoryCrud extends AbstractCrudController
                 ->setCurrency('PLN')
                 ->setStoredAsCents(false)
                 ->setDisabled(),
-            EntityField::new('item')
-                ->setClass(Item::class, 'name')
+            AssociationField::new('item')
+                ->setCrudController(ItemCrud::class)
                 ->setDisabled(),
             ChoiceField::new('type')
                 ->setChoices(OperatorTypeEnum::toArray() + ['VOUCHER' => 'voucher'])

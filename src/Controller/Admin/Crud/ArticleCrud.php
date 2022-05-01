@@ -2,24 +2,15 @@
 
 namespace App\Controller\Admin\Crud;
 
-use App\Entity\Image;
 use App\Entity\Article;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Controller\Admin\Field\EntityField;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use Symfony\Component\Validator\Constraints\Length;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class ArticleCrud extends AbstractCrudController
 {
-    public function configureCrud(Crud $crud): Crud
-    {
-        return $crud
-            ->setEntityLabelInSingular("Wpis");
-    }
-
     public static function getEntityFqcn(): string
     {
         return Article::class;
@@ -40,11 +31,11 @@ class ArticleCrud extends AbstractCrudController
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextField::new('subtitle')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            ChoiceField::new('image')
+                ->setChoices(fn() => $this->getImagesList()),
             TextareaField::new('text')
                 ->setFormTypeOption('attr', ['class' => 'editor']),
-            EntityField::new('image')
-                ->setClass(Image::class, 'name')
-                ->setChoiceValue('image')
+
         ];
     }
 }

@@ -37,10 +37,6 @@ class AbstractRenderController extends AbstractController
             }
         }
 
-        try {
-            return $this->render(self::DEFAULT . $view, $parameters, $response);
-        } catch (SyntaxError $e) {
-            return $this->redirectToRoute('index');
-        }
+        return $this->redirectToRoute('index');
     }
 }
