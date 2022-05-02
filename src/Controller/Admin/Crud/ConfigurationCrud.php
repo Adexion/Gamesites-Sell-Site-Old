@@ -47,10 +47,12 @@ class ConfigurationCrud extends AbstractCrudController
                 ->setChoices(TemplateEnum::toArray()),
             BooleanField::new('simplePaySafeCard'),
             BooleanField::new('showBigLogo'),
-            ChoiceField::new('image')
-                ->setChoices(fn() => $this->getImagesList()),
-            ChoiceField::new('image')
+            ChoiceField::new('logo')
                 ->setChoices(fn() => $this->getImagesList())
+                ->hideOnIndex(),
+            ChoiceField::new('background')
+                ->setChoices(fn() => $this->getImagesList())
+                ->hideOnIndex(),
         ];
     }
 }
