@@ -49,7 +49,7 @@ trait Authentication
     /**
      * @Route("/admin/login", name="login")
      */
-    public function index(AuthenticationUtils $authenticationUtils, Request $request): Response
+    public function login(AuthenticationUtils $authenticationUtils, Request $request): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
