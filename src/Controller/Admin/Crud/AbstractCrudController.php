@@ -15,13 +15,4 @@ abstract class AbstractCrudController extends AbstractBaseCrudController
         return $crud
             ->setEntityLabelInSingular('Wpis');
     }
-
-    protected function getImagesList(): array
-    {
-        foreach ($this->getDoctrine()->getRepository(Image::class)->findAll() as $item) {
-            $images[$item->getName()] = $item->getImage();
-        }
-
-        return $images ?? [];
-    }
 }

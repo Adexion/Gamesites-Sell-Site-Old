@@ -3,12 +3,14 @@
 namespace App\Controller\Admin\Crud;
 
 use App\Entity\Item;
+use App\Entity\Image;
 use App\Entity\Server;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Validator\Constraints\Length;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use App\Controller\Admin\Field\ImageRepositoryField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
@@ -39,8 +41,8 @@ class ItemCrud extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            ChoiceField::new('image')
-                ->setChoices(fn() => $this->getImagesList()),
+            ImageRepositoryField::new('image')
+                ->setImageRepository($this->getDoctrine()->getRepository(Image::class)),
             TextField::new('name')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextareaField::new('shortDescription'),

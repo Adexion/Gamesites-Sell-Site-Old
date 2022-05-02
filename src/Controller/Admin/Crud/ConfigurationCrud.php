@@ -2,11 +2,13 @@
 
 namespace App\Controller\Admin\Crud;
 
+use App\Entity\Image;
 use App\Entity\Configuration;
 use App\Enum\TemplateEnum;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use App\Controller\Admin\Field\ImageRepositoryField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
@@ -47,12 +49,10 @@ class ConfigurationCrud extends AbstractCrudController
                 ->setChoices(TemplateEnum::toArray()),
             BooleanField::new('simplePaySafeCard'),
             BooleanField::new('showBigLogo'),
-            ChoiceField::new('logo')
-                ->setChoices(fn() => $this->getImagesList())
-                ->hideOnIndex(),
-            ChoiceField::new('background')
-                ->setChoices(fn() => $this->getImagesList())
-                ->hideOnIndex(),
+            ImageRepositoryField::new('logo')
+                ->setImageRepository($this->getDoctrine()->getRepository(Image::class)),
+            ImageRepositoryField::new('background')
+                ->setImageRepository($this->getDoctrine()->getRepository(Image::class)),
         ];
     }
 }
