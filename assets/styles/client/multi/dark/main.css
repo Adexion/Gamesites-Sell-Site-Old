@@ -4,8 +4,10 @@
 
 :root {
     --white: hsl(0, 0%, 100%);
+    --light: hsl(0, 0%, 100%);
     --black: rgb(27, 24, 37);
     --color-g: hsl(312, 57%, 60%);
+    --dark: hsl(312, 57%, 60%);
     --background: hsl(225, 10%, 8%);
     --status: hsl(225, 7%, 11%);
     --ranking-box: hsl(225, 7%, 11%);

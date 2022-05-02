@@ -5,13 +5,16 @@ namespace App\Controller\Client;
 use DateTime;
 use App\Enum\RankEnum;
 use Twig\Error\SyntaxError;
+use App\Form\DevTemplateType;
 use App\Repository\LinkRepository;
 use App\Repository\RankRepository;
 use App\Repository\RuleRepository;
 use App\Repository\ServerRepository;
 use App\Service\GuildItemListBuilder;
 use App\Repository\GuildItemRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ItemHistoryRepository;
+use App\Repository\ConfigurationRepository;
 use App\Repository\AdministrationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,7 +46,33 @@ class MainController extends AbstractRenderController
         ]);
     }
 
-    /** @Route(path="/rule", name="rule") */
+    /**
+     * @Route(path="/template", name="app_template")
+     */
+    public function template(Request $request, ConfigurationRepository $configurationRepository, EntityManagerInterface $em): Response
+    {
+        if (!isset($_ENV['APP_DEV']) || $_ENV['APP_DEV'] !== 'development') {
+            return $this->redirectToRoute('index');
+        }
+
+        $form = $this->createForm(DevTemplateType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $configuration = $configurationRepository->findOneBy([]);
+            $configuration->setTemplate($form->getData()['template']);
+
+            $em->persist($configuration);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('index');
+    }
+
+    /**
+     * @Route(path="/rule", name="rule")
+     * @throws SyntaxError
+     */
     public function rule(RuleRepository $repository): Response
     {
         $rule = $repository->findOneBy([]);

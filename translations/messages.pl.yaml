@@ -208,6 +208,7 @@ GUILD_WHITE: Gildyjny (Jasny)
 MULTI_DARK: Multi Serwer (Ciemny)
 MULTI_WHITE: Multi Serwer (Jasny) (WIP)
 SIMPLE_DARK: Prosty (Ciemny) (WIP)
+NONE: Domyślny
 
 R_CON: rCon + Query
 REDIS: Redis Connection + Query
