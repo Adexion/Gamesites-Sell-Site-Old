@@ -1,5 +1,5 @@
 <div class="header-embed flex flex-align">
-    <button id="clipboard" class="btn btn-color-g" onclick="copyToClipboard()" data-ip="{{ serverIp ?? serverName }}">Skopiuj IP</button>
+    <button id="clipboard" class="btn btn-color-g" onclick="copyToClipboard()" data-ip="{{ serverIp }}">Skopiuj IP</button>
     <script>
         function copyToClipboard() {
             navigator.clipboard.writeText(document.getElementById('clipboard').getAttribute('data-ip'));

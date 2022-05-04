@@ -41,7 +41,7 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
             'logo' => $globals['logo'] ?? null,
             'background' => $globals['background'] ?? null,
             'target' => $globals['target'] ?? null,
-            'serverName' => $globals['serverName'] ?? null,
+            'siteName' => $globals['siteName'] ?? null,
             'serverDescription' => $globals['description'] ?? null,
             'areBansSet' => $globals['bans'] ?? null,
             'simplePaySafeCard' => $globals['simplePaySafeCard'] ?? null,
