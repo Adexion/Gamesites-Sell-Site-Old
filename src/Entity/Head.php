@@ -30,7 +30,7 @@ class Head
     private $custom;
 
     /**
-     * @ORM\OneToMany(targetEntity=Meta::class, mappedBy="head", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Meta::class, mappedBy="head", orphanRemoval=true,cascade={"persist"})
      */
     private $meta;
 
