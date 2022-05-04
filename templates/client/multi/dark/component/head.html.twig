@@ -10,7 +10,7 @@
 {% if head %}
     <title>{{ head.title }}</title>
     {% for meta in head.meta %}
-        <meta {{ meta.type }}="{{ meta.value }}" content="{{ meta.content }}"
+        <meta {{ meta.type }}="{{ meta.value }}" content="{{ meta.content }}">
     {% endfor %}
     {% if head.custom %}
         {{ head.custom | raw}}
