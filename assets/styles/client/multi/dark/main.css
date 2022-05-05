@@ -83,6 +83,7 @@ a {
 .mb-25 {
     margin-bottom: 25px;
 }
+
 .mr-5 {
     margin-right: 5px;
 }
@@ -114,7 +115,7 @@ a {
 }
 
 .flex-around {
-    justify-content:space-around;
+    justify-content: space-around;
     flex-wrap: wrap;
 }
 
@@ -211,7 +212,7 @@ a {
     position: fixed;
     width: 100%;
     padding: 10px 0;
-    background: rgba(18,19,22,.5);
+    background: rgba(18, 19, 22, .5);
     z-index: 9;
     transition: padding 0.2s ease-in-out, background 0.2s ease-in-out, backdrop-filter 0.2s ease-in-out;
 }
@@ -836,7 +837,7 @@ a {
     border-radius: 8px;
 }
 
-.shop-box a{
+.shop-box a {
     padding: 50px;
 }
 
@@ -949,12 +950,14 @@ a {
 }
 
 .payments-box {
-    background: var(--ranking-box);
-    padding: 35px;
     width: 49%;
     height: fit-content;
-    border-radius: 6.5px;
+    gap: 35px;
     margin-bottom: 35px;
+}
+
+.payments-box > .payments-box--bg {
+    width: 100%;
 }
 
 .payments-box h1 {
@@ -966,6 +969,12 @@ a {
     font-weight: 300;
     font-size: 18px;
     opacity: 0.35;
+}
+
+.payments-box--bg {
+    border-radius: 6.5px;
+    background: var(--ranking-box);
+    padding: 35px;
 }
 
 .payments-box-input, #code-fields-list li input {
