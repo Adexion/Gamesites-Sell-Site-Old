@@ -7,9 +7,11 @@
                 <h1>Newsy i nowości na naszym serwerze</h1>
                 <h2 class="base">Sprawdź co nowego u nas...</h2>
             </div>
-            {{ include('client/simple/dark/component/article.html.twig') }}
+            {% for article in articleList %}
+                {{ include('client/component/article.html.twig') }}
+            {% endfor %}
             {% set path = 'article-list' %}
-            {{ include('client/simple/dark/component/pagination.html.twig') }}
+            {{ include('client/component/pagination.html.twig') }}
         </div>
     </div>
 {% endblock %}

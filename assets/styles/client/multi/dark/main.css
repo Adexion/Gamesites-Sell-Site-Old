@@ -655,6 +655,10 @@ a {
     background: rgba(155, 210, 136, 0.1);
 }
 
+.status-box_category-red {
+    background: rgba(255, 0, 0, 0.1);
+}
+
 .status-box_category-blue {
     background: rgba(84, 157, 253, 0.1);
 }

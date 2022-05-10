@@ -7,6 +7,7 @@ use App\Entity\Server;
 use App\Form\DevTemplateType;
 use App\Service\GlobalDataQuery;
 use App\Repository\HeadRepository;
+use App\Repository\BansRepository;
 use App\Repository\ServerRepository;
 use Twig\Extension\GlobalsInterface;
 use Twig\Extension\AbstractExtension;
@@ -19,12 +20,19 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
     private HeadRepository $headRepository;
     private QueryService $queryService;
     private FormFactoryInterface $factory;
+    private BansRepository $bansRepository;
 
-    public function __construct(GlobalDataQuery $globalDataQuery, ServerRepository $serverRepository, HeadRepository $headRepository, FormFactoryInterface $factory)
-    {
+    public function __construct(
+        GlobalDataQuery $globalDataQuery,
+        ServerRepository $serverRepository,
+        HeadRepository $headRepository,
+        FormFactoryInterface $factory,
+        BansRepository $bansRepository
+    ) {
         $this->globalDataQuery = $globalDataQuery;
         $this->headRepository = $headRepository;
         $this->factory = $factory;
+        $this->bansRepository  = $bansRepository;
         $this->queryService = new QueryService($serverRepository->findOneBy(['isDefault' => true]) ?? new Server());
     }
 
@@ -44,6 +52,7 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
             'siteName' => $globals['siteName'] ?? null,
             'serverDescription' => $globals['description'] ?? null,
             'areBansSet' => $globals['bans'] ?? null,
+            'bansCount' => ($globals['bans'] ?? null) ? count($this->bansRepository->findRemote()) : 0,
             'simplePaySafeCard' => $globals['simplePaySafeCard'] ?? null,
             'showBigLogo' => $globals['showBigLogo'] ?? null,
             'siteTitle' => $globals['siteTitle'] ?? null,
@@ -60,7 +69,7 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
             'trailer' => $globals['trailer'] ?? null,
             'head' => $this->headRepository->findOneBy([]),
             'templates' => $this->factory->create(DevTemplateType::class)->createView(),
-            'development' => isset($_ENV['APP_DEV']) && $_ENV['APP_DEV'] == 'development'
+            'development' => isset($_ENV['APP_DEV']) && $_ENV['APP_DEV'] == 'development',
         ];
     }
 }

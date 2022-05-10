@@ -2,7 +2,7 @@
     <div class="mw-auto flex flex-align flex-center">
         <div class="status-left flex flex-align">
             <div class="status-box flex flex-align">
-                <div class="status-box_category status-box_category-green flex flex-center flex-align">
+                <div class="status-box_category status-box_category-{% if serverInfo | length == 0 %}red{% else%}green{% endif %} flex flex-center flex-align">
                     <i class="fas fa-user"></i>
                 </div>
                 <div class="status-box_info">
@@ -11,6 +11,14 @@
                 </div>
             </div>
             <div class="status-box flex flex-align">
+                <div class="status-box_category status-box_category-red flex flex-center flex-align">
+                    <i class="fas fa-ban"></i>
+                </div>
+                <div class="status-box_info">
+                    <h1 class="status-box_h1">{{ bansCount }}</h1>
+                    <p class="status-box_p">Ilość banów</p>
+                </div>
+            </div>            <div class="status-box flex flex-align">
                 <div class="status-box_category status-box_category-blue flex flex-center flex-align">
                     <i class="fas fa-shopping-cart"></i>
                 </div>
