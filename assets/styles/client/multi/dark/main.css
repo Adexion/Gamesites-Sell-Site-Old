@@ -655,8 +655,12 @@ a {
     background: rgba(155, 210, 136, 0.1);
 }
 
+.status-box_category-yellow {
+    background: rgba(229, 193, 102, 0.1);
+}
+
 .status-box_category-red {
-    background: rgba(255, 0, 0, 0.1);
+    background: rgba(229, 102, 102, 0.1);
 }
 
 .status-box_category-blue {
