@@ -32,7 +32,7 @@
                             {% if item.type == 'item' %}
                                 <p>Wybrano <b class="counter">1</b></p>
                             {% else %}
-                                <p>Łączny koszt doładowania wynosi <b class="pricing">{{ item.discountedPrice }}</b></p>
+                                <p>Łączny koszt doładowania wynosi <b class="pricing">{{ item.discountedPrice }}</b> zł</p>
                             {% endif %}
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                     </div>
 
                     <div class="payments-box-checkbox mx-align">
-                        <button id="submit" type="submit" class="btn btn-color-g" style="display: none;">{{ now }} za <b class="pricing">{{ item.discountedPrice }}</b></button>
+                        <button id="submit" type="submit" class="btn btn-color-g" style="display: none;">{{ now }} za <b class="pricing">{{ item.discountedPrice }}</b> zł</button>
                     </div>
                 </div>
             </div>
