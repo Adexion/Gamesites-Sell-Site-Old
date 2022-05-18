@@ -3,6 +3,7 @@
 {% block body %}
     <section class="payments">
         {% form_theme form with ['form_div_layout.html.twig'] %}
+        {% set now = item.type == 'item' ? 'Kup teraz' : 'Doładuj' %}
 
         {{ form_start(form, {method: 'POST'}) }}
         <div class="payments-direction mw-auto flex flex-between">
@@ -51,10 +52,12 @@
                         </ul>
                         <button type="button"
                                 class="btn btn-color-g add-another-collection-widget"
-                                data-list-selector="#code-fields-list">Dodaj Kod</button>
+                                data-list-selector="#code-fields-list">Dodaj Kod
+                        </button>
                         <button type="button"
                                 class="btn btn-color-g rem-another-collection-widget"
-                                data-list-selector="#code-fields-list">Usuń kod</button>
+                                data-list-selector="#code-fields-list">Usuń kod
+                        </button>
                     </div>
 
                     <div class="payments-box-checkbox mx-align">
@@ -74,7 +77,7 @@
                     </div>
 
                     <div class="payments-box-checkbox mx-align">
-                        <button id="submit" type="submit" class="btn btn-color-g" style="display: none;">{{ 'Buy now' | trans }} za <b class="prize">{{ item.discountedPrice }}</b></button>
+                        <button id="submit" type="submit" class="btn btn-color-g" style="display: none;">{{ now }} za <b class="pricing">{{ item.discountedPrice }}</b></button>
                     </div>
                 </div>
             </div>
@@ -89,7 +92,7 @@
                         <p>{{ item.shortDescription | raw }}</p>
                     </div>
                     <p class="mt-25">
-                        Kup <b id="counter" data-price="{{ item.discountedPrice }}">{{ item.multiple ? '1' : '' }}</b> za <b id="prize">{{ item.discountedPrice }}</b> zł
+                        {{now}} za <span class="d-none" id="counter" data-price="{{ item.discountedPrice }}"></span><b id="price">{{ item.discountedPrice }}</b> zł
                     </p>
                 </div>
             </div>

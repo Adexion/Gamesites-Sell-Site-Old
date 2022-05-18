@@ -1,5 +1,5 @@
 Text footer: 'nie jest w żaden sposób powiązany z Mojang, AB. Nie powinien być również uważany za firmę wspieraną przez Mojang, AB. Wszelkie wpłaty i zakupy dokonane w tym sklepie są przeznaczone na rozwój projektu. Aby uzyskać więcej informacji, wsparcie lub historię zakupów, wyślij do nas zapytanie drogą mailową.'
-No informations: 'Nie dodano żadnych produktów dla tego serwera. Proszę, skontaktuj się z administracją serwera.'
+No information: 'Nie dodano żadnych produktów dla tego serwera. Proszę, skontaktuj się z administracją serwera.'
 Home: Strona główna
 Rank: Ranking
 Rules: Regulamin
@@ -122,18 +122,18 @@ I am not set yet: Nie zostałem jeszcze ustalony.
 Thank You Payment: Dziękujemy za skorzystanie z naszych usług
 Your payment id is: Identyfikator twojej płatności to
 Payment realized successfully. Get your voucher.: Płatność została zaakceptowania. Poniżej znajduje się kod vouchera do realizacji zamówienia. Dziękujemy za zakupy!
-This payment is still pending. Pleas not log out from server.: Płatność jest w trakcie przetwarzania nie wychoć z serwera jeżeli wszystko przebiegło poprawnie.
+This payment is still pending. Pleas not log out from server.: Płatność jest w trakcie przetwarzania nie wychodź z serwera jeżeli wszystko przebiegło poprawnie.
 This payment can not checked correctly. Pleas contact with administrator.: Nie można pobrać statusu zamówienia, proszę o kontakt z administracją w celu ustalenia szczegółów.
-You are not connected to serwer! Contact with administration and give him this payment ID: Nie ma cię na serwerze! Zachowaj ID płątności oraz podaj je podczas kontaktu z administracją serwera, by mogli potwierdzić twoją płatność.
-Payment realized successfully.: Platność przebiegła pomyślnie, a wszystkie komendy wykonane poprawnie. Jeszcze raz dziękujemy.
-Given payment does not exist.: Podana płatnośc nie istnieje. Jeżeli uważasz że dana sytuacja to błąd, skontaktuj się z administracją w celu ustalenia szczegółów.
-This payment is still pending. Please wait little bit more ore contact with administration on the server.: Twoja płatnosc jest w dalszym ciągu przetwarzana. Prosze poczekaj jeszcze chwilę, bądź skontaktuj się z administratorem w celu uzyskania Vochera.
+You are not connected to serwer! Contact with administration and give him this payment ID: Nie ma cię na serwerze! Zachowaj ID płatności oraz podaj je podczas kontaktu z administracją serwera, by mogli potwierdzić twoją płatność.
+Payment realized successfully.: Płatność przebiegła pomyślnie, a wszystkie komendy wykonane poprawnie. Jeszcze raz dziękujemy.
+Given payment does not exist.: Podana płatność nie istnieje. Jeżeli uważasz że dana sytuacja to błąd, skontaktuj się z administracją w celu ustalenia szczegółów.
+This payment is still pending. Please wait little bit more ore contact with administration on the server.: Twoja płatność jest w dalszym ciągu przetwarzana. Prosze poczekaj jeszcze chwilę, bądź skontaktuj się z administratorem w celu uzyskania Vochera.
 Date From: Data nadania
 Reason: Powód
 Bans: Lista banów
 Message send: Wiadomość została wysłana. Ktoś z administracji odpisze ci najszybciej jak to możliwe.
 Contact Form: Formularz kontaktowy
-Contact Text 1: Dzięki niemu w łatwy i szybki sposób sosób skontaktujesz się z administracją
+Contact Text 1: Dzięki niemu w łatwy i szybki sposób sposób skontaktujesz się z administracją
 Contact Text 2: Potrzebujesz pomocy? Użyj formularza!
 Contact Text 3: Dzięki!
 Used: Czy użyto?
@@ -141,8 +141,8 @@ Simple Pay Safe Card: Prosta płatność PSC?
 Given wrong data in PSC form: Podano błędne dane w formularzu płatności
 Payment not exist ore removed.: Podana płatność nie istnieje bądź została usunięta z powodu błędnego kodu PaySafeCard
 PaySafeCard is pending. Contact with administrator:
-  Płatność PSC musi zostać zaakceptowana przez administratora. Do tego czasu będzie ona w syatusie oczekującym
-  Przybliżony czas realizacji płatnośći to 24h.
+  Płatność PSC musi zostać zaakceptowana przez administratora. Do tego czasu będzie ona w statusie oczekującym
+  Przybliżony czas realizacji płatności to 24h.
   Aby przyśpieszyć realizację płatności skontaktuj się z administracją w celu otrzymania Vouchera bądź sprawdzaj jej status pod poniższym linkiem.
 This is your voucher: Oto twój voucher
 PaySafeCardVoucher: Powiązanie PSC Voucher
@@ -154,7 +154,7 @@ PaySafeCard status WORKING when active it is allow to generating voucher for use
   Voucher jest generowany automatycznie.
   Status "Błędny" blokuje dalsze działanie na tym kodzie PSC
 Allow removing psc with voucher:
-  Pozwala na usunięcie PSC i wygenerowanych do nich voucherów. Uwaga! nie zalecane przez wzgląd na utrate danych o historii płatności
+  Pozwala na usunięcie PSC i wygenerowanych do nich voucherów. Uwaga! nie zalecane przez wzgląd na utratę danych o historii płatności
 Generate New: Wygeneruj nowy
 Generate: Generuj
 Turn off: Wyłącz 2FA
@@ -164,7 +164,7 @@ Can turn on 2FA authentication:
 Click to generate QR and token:
   Klikając poniższy przycisk zostanie wygenerowany sekret oraz kod QR.
   Użyj jednego z nich w aplikacji Google Authenticator
-Here your token and QR: Poniżej znajdusię się twój sekret oraz kod QR. Zapamiętaj te dane, gdyż nie zostaną ponownie wyświetlone!
+Here your token and QR: Poniżej znajduje się twój sekret oraz kod QR. Zapamiętaj te dane, gdyż nie zostaną ponownie wyświetlone!
 Target: Cel serwera
 Title: Tytuł
 Subtitle: Podtytuł
@@ -188,14 +188,17 @@ Access: Uzyskaj dostęp
 Create: Dodaj
 
 Additional Fields: Dodatkowe pola
-Searched: Kulumna w bazie
+Searched: Kolumna w bazie
 Showed name: Nazwa pola na stronie
 Icon: Obrazek na stronę
 Oci8: Oracle
 PLAYER: Gracze
 File: Plik
 
-CREATED: Utworzo
+ITEM: Przedmiot
+PREPAID: Doładowanie
+
+CREATED: Utworzono
 ACCEPTED: Zaakceptowano
 UNACCEPTED: Odrzucono
 TIME_OUT: Błąd
@@ -213,7 +216,7 @@ NONE: Domyślny
 
 R_CON: rCon + Query
 REDIS: Redis Connection + Query
-PLUGIN: Gamesites System Plugin
+PLUGIN: GameSites System Plugin
 
 PROPERTY: Właściwość (<meta property>)
 NAME: Definicja (<meta name>)

@@ -3,6 +3,7 @@
 namespace App\Service\Payment\Request\Operator;
 
 use App\Entity\Item;
+use App\Form\Payment\Operator\CashBillType;
 use App\Form\Payment\Operator\DirectBillingType;
 use Symfony\Component\Form\FormInterface;
 
@@ -21,7 +22,7 @@ final class CashBillOperator extends AbstractOperator implements OperatorInterfa
             $formData['service'] . '|' . $formData['amount'] . '||' . $formData['desc'] . '||' . $formData['userdata'] . '||||||||||||' . $secret
         );
 
-        $form = $this->formFactory->create(DirectBillingType::class);
+        $form = $this->formFactory->create(CashBillType::class);
         $form->submit($formData);
 
         return $form;

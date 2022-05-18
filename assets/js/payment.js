@@ -25,13 +25,15 @@ $(document).ready(function () {
             : document.getElementById('psc-code').setAttribute('style', 'display: none;')
     })
 
-    document.getElementById('count').addEventListener('change', (e) => {
+    document.getElementById('count').addEventListener('input', (e) => {
         const counter = document.getElementById('counter');
         const c = document.querySelectorAll('.counter');
+        const p = document.querySelectorAll('.pricing');
         const val = e.target.value * counter.getAttribute('data-price');
-        document.getElementById('prize').innerHTML = val.toFixed(2);
+        document.getElementById('price').innerHTML = val.toFixed(2);
         counter.innerHTML = e.target.value;
         c.forEach(f => f.innerHTML =  e.target.value)
+        p.forEach(f => f.innerHTML = val.toFixed(2))
     })
 
     document.getElementById('check').addEventListener('click', () => {

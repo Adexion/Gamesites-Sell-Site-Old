@@ -49,7 +49,7 @@
                         </div>
                         {{ form_row(form.check) }}
 
-                    <button id="submit" type="submit" class="btn btn-primary" style="display: none;">Kup <span id="counter" data-price="{{ item.discountedPrice }}">{{ item.multiple ? '1' : '' }}</span> za <span id="prize">{{ item.discountedPrice }}</span> zł</button>
+                    <button id="submit" type="submit" class="btn btn-primary" style="display: none;">Kup <span id="counter" data-price="{{ item.discountedPrice }}">{{ item.multiple ? '1' : '' }}</span> za <span id="price">{{ item.discountedPrice }}</span> zł</button>
                     {{ form_end(form) }}
                     <br>
                 </div>

@@ -5,6 +5,7 @@ namespace App\Controller\Admin\Crud;
 use App\Entity\Item;
 use App\Entity\Image;
 use App\Entity\Server;
+use App\Enum\ItemTypeEnum;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\Range;
@@ -45,6 +46,9 @@ class ItemCrud extends AbstractCrudController
                 ->setImageRepository($this->getDoctrine()->getRepository(Image::class)),
             TextField::new('name')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            ChoiceField::new('type')
+                ->setChoices(ItemTypeEnum::toArray())
+                ->hideOnIndex(),
             TextareaField::new('shortDescription'),
             TextareaField::new('description')
                 ->setFormTypeOption('attr', ['class' => 'editor'])

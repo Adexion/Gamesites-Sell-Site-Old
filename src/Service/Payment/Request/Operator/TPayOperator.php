@@ -3,6 +3,7 @@
 namespace App\Service\Payment\Request\Operator;
 
 use App\Entity\Item;
+use App\Form\Payment\Operator\TPayType;
 use App\Form\Payment\Operator\DirectBillingType;
 use Symfony\Component\Form\FormInterface;
 
@@ -20,7 +21,7 @@ final class TPayOperator extends AbstractOperator implements OperatorInterface
 
         $formData['md5sum'] = md5(implode('&', [$id, $item->getTotalDiscountedPrice($count), $item->getName() . ' ' . $id, $hash]));
 
-        $form = $this->formFactory->create(DirectBillingType::class);
+        $form = $this->formFactory->create(TPayType::class);
         $form->submit($formData);
 
         return $form;
