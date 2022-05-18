@@ -29,7 +29,11 @@
                         <div class="mx-between">
                             <p class="payments-box-text">Ilość</p>
                             {{ form_widget(form.count, {'attr': {'class': 'w-100'}}) }}
-                            <p>Wybrano <b class="counter">1</b></p>
+                            {% if item.type == 'item' %}
+                                <p>Wybrano <b class="counter">1</b></p>
+                            {% else %}
+                                <p>Łączny koszt doładowania wynosi <b class="pricing">{{ item.discountedPrice }}</b></p>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="mx-between">

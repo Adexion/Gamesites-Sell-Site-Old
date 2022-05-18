@@ -77,7 +77,7 @@ class ItemType extends BaseType
             ->add('count', RangeType::class, [
                 'attr' => [
                     'min' => 1,
-                    'max' => 100,
+                    'max' => 20,
                     'value' => 1,
                 ]
             ])
