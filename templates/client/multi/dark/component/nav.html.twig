@@ -11,9 +11,11 @@
                         <a class="navbar-link" href="{{ path('index') }}#ranking">Rankingi</a>
                     </li>
                 {% endif %}
-                <li>
-                    <a class="navbar-link" href="{{ path('bans') }}">Lista banów</a>
-                </li>
+                {% if areBansSet %}
+                    <li>
+                        <a class="navbar-link" href="{{ path('bans') }}">Lista banów</a>
+                    </li>
+                {% endif %}
                 <li>
                     <a class="navbar-link" href="{{ path('rule') }}">Regulamin</a>
                 </li>
