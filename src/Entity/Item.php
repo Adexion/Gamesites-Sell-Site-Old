@@ -68,6 +68,11 @@ class Item
      */
     private $visible;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default": false})
+     */
+    private $isMainItem;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -210,5 +215,17 @@ class Item
     public function __toString()
     {
         return $this->getName();
+    }
+
+    public function getIsMainItem(): ?bool
+    {
+        return $this->isMainItem;
+    }
+
+    public function setIsMainItem(bool $isMainItem): self
+    {
+        $this->isMainItem = $isMainItem;
+
+        return $this;
     }
 }

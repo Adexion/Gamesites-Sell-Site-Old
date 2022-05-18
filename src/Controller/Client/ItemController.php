@@ -26,6 +26,9 @@ class ItemController extends AbstractRenderController
     public function shop(ItemRepository $repository, ItemHistoryRepository $itemHistoryRepository): Response
     {
         $form = $this->createForm(VoucherType::class);
+        if ($item  =$repository->findOneBy(['isMainItem' => true])) {
+            return $this->redirectToRoute('item', ['id' => $item->getId()]);
+        }
 
         return $this->renderTheme('shop.html.twig', [
             'items' => $repository->findAll(),

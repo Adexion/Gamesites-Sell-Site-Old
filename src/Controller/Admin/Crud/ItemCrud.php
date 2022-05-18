@@ -62,6 +62,8 @@ class ItemCrud extends AbstractCrudController
                 ->setFormTypeOption('constraints', [new All([new Length(['max' => 255])])]),
             BooleanField::new('multiple'),
             BooleanField::new('visible'),
+            BooleanField::new('isMainItem')
+                ->setHelp('Jeżeli zaznaczone, przedmiot ten będzie jedynym dostępnym w sklepie. Automatycznie zostaniesz na niego przekierowany'),
             AssociationField::new('server')
                 ->setCrudController(ServerCrud::class)
                 ->autocomplete()
