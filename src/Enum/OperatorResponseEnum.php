@@ -12,4 +12,5 @@ class OperatorResponseEnum extends Enum
     public const CASH_BILL = '4';
     public const T_PAY = '5';
     public const MICRO_SMS = '6';
+    public const PAY_BY_LINK_PSC = '7';
 }

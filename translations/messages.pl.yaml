@@ -29,6 +29,7 @@ MicroSMS: Płatności Online MicroSMS
 TPay: Płatności Online TPay
 DirectBilling: SMS+ (DirectBilling)
 PaySafeCard: PaySafeCard
+PayByLinkPsc: PaySafeCard (PayByLink)
 
 HOT_PAY: Płatności Online HotPay
 MICRO_SMS: Płatności Online MicroSMS
@@ -36,6 +37,7 @@ CASH_BILL: Płatności Online CashBill
 T_PAY:  Płatności Online TPay
 DIRECT_BILLING: SMS+ (DirectBilling)
 PAY_SAFE_CARD: PaySafeCard (HotPay)
+PAY_BY_LINK_PSC: PaySafeCard (PayByLink)
 
 Username: Nick
 Payment: Forma płatności

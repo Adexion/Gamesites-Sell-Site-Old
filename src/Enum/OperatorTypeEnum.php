@@ -12,4 +12,5 @@ class OperatorTypeEnum extends Enum
     public const CASH_BILL = 'CashBill';
     public const T_PAY = 'TPay';
     public const MICRO_SMS = 'MicroSMS';
+    public const PAY_BY_LINK_PSC = 'PayByLinkPsc';
 }
