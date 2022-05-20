@@ -2,12 +2,11 @@
 
 namespace App\Form\Payment\Operator;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\BaseType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Optional;
 
 class PayByLinkPscType extends BaseType
 {
@@ -19,8 +18,8 @@ class PayByLinkPscType extends BaseType
             ->add('amount', HiddenType::class)
             ->add('return_ok', HiddenType::class)
             ->add('return_fail', HiddenType::class)
-            ->add('url	', HiddenType::class)
-            ->add('control	', HiddenType::class)
+            ->add('url', HiddenType::class)
+            ->add('control', HiddenType::class)
             ->add('hash', HiddenType::class)
             ->add('description', HiddenType::class);
     }
