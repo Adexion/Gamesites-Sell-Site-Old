@@ -19,7 +19,7 @@ final class TPayOperator extends OperatorAbstract implements OperatorInterface
         parent::getResponse($request);
 
         $history = $this->historyRepository->findOneBy(['id' => $request['tr_crc']]);
-        $paymentHash = $this->historyRepository->getPaymentHash($history);
+        $paymentHash = $this->historyRepository->getPaymentHash($history, 'hash');
 
         $paymentStatus = $request['tr_status'];
 

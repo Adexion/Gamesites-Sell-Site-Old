@@ -19,7 +19,7 @@ class PayByLinkPscOperator extends OperatorAbstract implements OperatorInterface
         parent::getResponse($request);
 
         $history = $this->historyRepository->findOneBy(['id' => $request['control']]);
-        $paymentHash = $this->historyRepository->getPaymentHash($history);
+        $paymentHash = $this->historyRepository->getPaymentHash($history, 'other');
         $paymentStatus = $request['status'];
 
         $this->handlePaymentExist($request, $history, $paymentHash);

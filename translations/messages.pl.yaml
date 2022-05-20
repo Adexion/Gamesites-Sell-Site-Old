@@ -23,6 +23,10 @@ Payment form: Formularz płatności
 Repeat password: Powtórz hasło
 Redirect Link: Przekierowania
 
+Secret: Pole 1
+Hash: Pole 2
+Other: Pole 3
+
 CashBill: Płatności Online CashBill
 HotPay: Płatności Online HotPay
 MicroSMS: Płatności Online MicroSMS
@@ -74,7 +78,6 @@ Price: Cena
 User: Użytkownicy PA
 Command: Komenda
 Short Description: Krótki opis
-Secret: Sekret
 Is Active: Czy używany
 Code: Kod
 Times: Ilość użyć

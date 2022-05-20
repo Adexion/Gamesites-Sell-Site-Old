@@ -30,8 +30,13 @@ class PaymentCrud extends AbstractCrudController
             ChoiceField::new('type')
                 ->setChoices(OperatorTypeEnum::toArray()),
             TextField::new('secret')
+                ->setHelp('Pole w zależności od systemu płatności powinno zawierać: CashBill - secret, HotPay - SEKRET, MicroSMS - shop id, PayByLink PSC - user id')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             TextField::new('hash')
+                ->setHelp('Pole w zależności od systemu płatności powinno zawierać: CashBill - service, MicroSMS - hash, PayByLink PSC - shop id, TPay - Merchant Security Code')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            TextField::new('other')
+                ->setHelp('Pole w zależności od systemu płatności powinno zawierać: PayByLink PSC - pin')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             BooleanField::new('isActive'),
         ];

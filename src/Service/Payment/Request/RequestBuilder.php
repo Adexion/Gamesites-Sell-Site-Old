@@ -34,7 +34,7 @@ class RequestBuilder
         $history = $this->createHistory($data, $item, $payment);
 
         $response = $callable([
-            'form' => $this->operatorFactory->getForm($data, $item, $history->getId(), $history->getCount(), $payment->getSecret(), $payment->getHash())->createView(),
+            'form' => $this->operatorFactory->getForm($data, $item, $history->getId(), $history->getCount(), $payment)->createView(),
             'paymentType' => $data['payment'],
         ]);
 

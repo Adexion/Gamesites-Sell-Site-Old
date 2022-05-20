@@ -25,7 +25,7 @@ class Payment
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $secret;
 
@@ -33,6 +33,11 @@ class Payment
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $hash;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $other;
 
     /**
      * @ORM\Column(type="boolean")
@@ -88,6 +93,18 @@ class Payment
     public function setHash(?string $hash): self
     {
         $this->hash = $hash;
+
+        return $this;
+    }
+
+    public function getOther(): ?string
+    {
+        return $this->other;
+    }
+
+    public function setOther($other): self
+    {
+        $this->other = $other;
 
         return $this;
     }

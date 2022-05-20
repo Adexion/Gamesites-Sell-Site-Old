@@ -50,7 +50,7 @@ class ItemHistoryRepository extends ServiceEntityRepository
         return $qb->getQuery()->execute()[0]['count'];
     }
 
-    public function getPaymentHash(ItemHistory $history): ?string
+    public function getPaymentHash(ItemHistory $history, ?string $field = 'hash'): ?string
     {
        $query = $this->getEntityManager()->createQueryBuilder()
             ->from(Payment::class, 'p')
@@ -61,7 +61,7 @@ class ItemHistoryRepository extends ServiceEntityRepository
             )->getQuery();
 
 
-       return $query->execute() ? $query->execute()[0]['hash'] : '';
+       return $query->execute() ? $query->execute()[0][$field] : '';
     }
 
     public function getProgressOfTarget(): float

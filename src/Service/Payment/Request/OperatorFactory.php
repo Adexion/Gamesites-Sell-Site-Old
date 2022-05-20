@@ -4,6 +4,7 @@ namespace App\Service\Payment\Request;
 
 use App\Entity\Item;
 use RuntimeException;
+use App\Entity\Payment;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -19,7 +20,7 @@ class OperatorFactory
         $this->uri = $requestStack->getCurrentRequest()->getSchemeAndHttpHost();
     }
 
-    function getForm(array $data, Item $item, int $id, int $count, string $secret, string $hash): FormInterface
+    function getForm(array $data, Item $item, int $id, int $count, Payment $payment): FormInterface
     {
         $className = 'App\Service\Payment\Request\Operator\\' . $data['payment'] . 'Operator';
 
@@ -27,6 +28,6 @@ class OperatorFactory
             throw new RuntimeException();
         }
 
-        return (new $className($this->formFactory, $this->uri))->getForm($data, $item, $id, $count, $secret, $hash);
+        return (new $className($this->formFactory, $this->uri))->getForm($data, $item, $id, $count, $payment);
     }
 }
