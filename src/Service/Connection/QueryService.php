@@ -3,8 +3,6 @@
 namespace App\Service\Connection;
 
 use App\Entity\Server;
-use xPaw\MinecraftQuery;
-use xPaw\MinecraftQueryException;
 
 class QueryService implements QueryInterface, ConnectionInterface
 {
@@ -17,17 +15,12 @@ class QueryService implements QueryInterface, ConnectionInterface
 
     public function getInfo(): ?array
     {
-        try {
-            return $this->getConnection()->GetInfo() ?: [];
-        } catch (MinecraftQueryException $e) {
-            return [];
-        }
+        return $this->getConnection()->getInfo() ?: [];
     }
 
-    /** @throws MinecraftQueryException */
-    public function getConnection(): MinecraftQuery
+    public function getConnection(): QueryInstance
     {
-        $queryMinecraft = new MinecraftQuery();
+        $queryMinecraft = new QueryInstance();
         $queryMinecraft->connect($this->server->getMinecraftQueryIp(), $this->server->getMinecraftQueryPort());
 
         return $queryMinecraft;
@@ -35,11 +28,7 @@ class QueryService implements QueryInterface, ConnectionInterface
 
     public function getPlayerList(): ?array
     {
-        try {
-            return $this->getConnection()->GetPlayers() ?: [];
-        } catch (MinecraftQueryException $e) {
-            return [];
-        }
+        return $this->getConnection()->getPlayers() ?: [];
     }
 
     public function isPlayerLoggedIn(string $username): bool

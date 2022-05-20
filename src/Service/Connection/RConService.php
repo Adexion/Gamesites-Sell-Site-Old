@@ -2,22 +2,23 @@
 
 namespace App\Service\Connection;
 
+use RuntimeException;
 use App\Entity\Server;
+use xPaw\SourceQuery\SourceQuery;
+use xPaw\SourceQuery\Exception\SocketException;
+use xPaw\SourceQuery\Exception\InvalidPacketException;
 use xPaw\SourceQuery\Exception\AuthenticationException;
 use xPaw\SourceQuery\Exception\InvalidArgumentException;
-use xPaw\SourceQuery\Exception\InvalidPacketException;
-use xPaw\SourceQuery\Exception\SocketException;
-use xPaw\SourceQuery\SourceQuery;
 
 class RConService implements ExecuteInterface, QueryInterface, ConnectionInterface
 {
     private Server $server;
-    private QueryService $queryService;
+    private QueryService $query;
 
     public function __construct(Server $server)
     {
         $this->server = $server;
-        $this->queryService = new QueryService($server);
+        $this->query = new QueryService($server);
     }
 
     /** @throws InvalidPacketException|AuthenticationException|InvalidArgumentException|SocketException */
@@ -41,18 +42,33 @@ class RConService implements ExecuteInterface, QueryInterface, ConnectionInterfa
         return $sourceQuery;
     }
 
+    /** @throws InvalidPacketException|AuthenticationException|InvalidArgumentException|SocketException */
     public function getPlayerList(): ?array
     {
-        return $this->queryService->getPlayerList();
+        try {
+            return $this->query->getPlayerList();
+        } catch (RuntimeException $e) {
+        }
+
+        return explode(
+            ',',
+            trim(explode(':', $this->execute('list'))[1])
+        );
     }
 
     public function getInfo(): ?array
     {
-        return $this->queryService->getInfo();
+        return $this->query->getInfo();
     }
 
+    /** @throws InvalidPacketException|AuthenticationException|InvalidArgumentException|SocketException */
     public function isPlayerLoggedIn(string $username): bool
     {
-        return $this->queryService->isPlayerLoggedIn($username);
+        try {
+            return $this->query->isPlayerLoggedIn($username);
+        } catch (RuntimeException $e) {
+        }
+
+        return str_contains($username, $this->execute('list'));
     }
 }

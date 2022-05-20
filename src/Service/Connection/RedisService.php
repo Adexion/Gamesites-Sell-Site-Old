@@ -2,8 +2,9 @@
 
 namespace App\Service\Connection;
 
-use App\Entity\Server;
 use Redis;
+use RuntimeException;
+use App\Entity\Server;
 
 class RedisService implements ExecuteInterface, QueryInterface, ConnectionInterface
 {
@@ -30,13 +31,21 @@ class RedisService implements ExecuteInterface, QueryInterface, ConnectionInterf
     {
         return $this->getConnection()->publish(
             $this->server->getServerName(),
-            str_replace(['%player%', '%amount%'], [$username,$amount], $command)
+            str_replace(['%player%', '%amount%'], [$username, $amount], $command)
         );
     }
 
     public function getPlayerList(): ?array
     {
-        return $this->query->getPlayerList();
+        try {
+            return $this->query->getPlayerList();
+        } catch (RuntimeException $e) {
+        }
+
+        return explode(
+            ',',
+            trim(explode(':', $this->execute('list'))[1])
+        );
     }
 
     public function getInfo(): ?array
@@ -46,6 +55,11 @@ class RedisService implements ExecuteInterface, QueryInterface, ConnectionInterf
 
     public function isPlayerLoggedIn(string $username): bool
     {
-        return $this->query->isPlayerLoggedIn($username);
+        try {
+            return $this->query->isPlayerLoggedIn($username);
+        } catch (RuntimeException $e) {
+        }
+
+        return str_contains($username, $this->execute('list'));
     }
 }
