@@ -1,0 +1,18 @@
+<footer>
+    <div class="container">
+        <div class="row justify-content-lg-end gap-lg-3">
+            <img class="col-lg-2 col-12 d-lg-block d-none" src="/assets/images/{{ logo }}" alt="Logotype">
+
+            <div class="col-lg-6 col-12 d-flex flex-column justify-content-center">
+                <span>{{ siteName }} {% trans %}Text footer{% endtrans %}</span>
+
+                <p class="col-md-12 col-lg-5 underline mt-5">Powered by <a href="https://www.gamesites.pl/" target="_blank">GameSites.pl</a></p>
+            </div>
+        </div>
+    </div>
+
+    {% include 'client/component/dev.template.html.twig' %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('simple-dark') }}
+    {% endblock %}
+</footer>

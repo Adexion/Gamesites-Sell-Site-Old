@@ -5,6 +5,12 @@
         {% form_theme form with ['form_div_layout.html.twig'] %}
         {% set now = item.type == 'item' ? 'Kup teraz' : 'Doładuj' %}
 
+        {% if item.isMainItem %}
+            <div class="mw-auto flex flex-row-reverse mb-25">
+                <button type="button" class="btn btn btn-primary modal-btn">{{ 'Realize voucher' | trans }}</button>
+            </div>
+        {% endif %}
+
         {{ form_start(form, {method: 'POST'}) }}
         <div class="payments-direction mw-auto flex flex-between">
             <div class="payments-box flex">
@@ -96,11 +102,12 @@
                         <p>{{ item.shortDescription | raw }}</p>
                     </div>
                     <p class="mt-25">
-                        {{now}} za <span class="d-none" id="counter" data-price="{{ item.discountedPrice }}"></span><b id="price">{{ item.discountedPrice }}</b> zł
+                        {{ now }} za <span class="d-none" id="counter" data-price="{{ item.discountedPrice }}"></span><b id="price">{{ item.discountedPrice }}</b> zł
                     </p>
                 </div>
             </div>
         </div>
         {{ form_end(form) }}
     </section>
+    {% include 'client/multi/dark/component/voucher.html.twig' %}
 {% endblock %}

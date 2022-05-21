@@ -8,27 +8,8 @@
     {% endblock %}
 </head>
 <body>
-
-<div id="content">
-    {% include 'client/simple/dark/component/nav.html.twig' %}
-    {% block body %}{% endblock %}
-</div>
-<footer class="d-flex justify-content-end">
-    <div class="col-lg-8 col-md-12 information">
-        <img src="/assets/images/{{ logo }}" alt="Logotype">
-        <div class="col-lg-8 col-md-12 col-12">
-            <span>{{ serverName }} {% trans %}Text footer{% endtrans %}</span>
-
-            <div class="social-wrapper d-flex row">
-                <div class="col-md-12 col-lg-7">{% include 'client/simple/dark/component/social.html.twig' %}</div>
-                <p class="col-md-12 col-lg-5 underline">Powered by <a href="https://gamesites.pl/" target="_blank">gamesites.pl</a></p>
-            </div>
-        </div>
-    </div>
-    {% include 'client/component/dev.template.html.twig' %}
-    {% block javascripts %}
-        {{ encore_entry_script_tags('simple-dark') }}
-    {% endblock %}
-</footer>
+{% include 'client/simple/dark/component/nav.html.twig' %}
+{% block body %}{% endblock %}
+{% include 'client/simple/dark/component/footer.html.twig' %}
 </body>
 </html>

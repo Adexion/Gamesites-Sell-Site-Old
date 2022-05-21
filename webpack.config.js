@@ -15,7 +15,6 @@ Encore
     .addEntry('simple-dark', './assets/js/client/simple/dark/main.js')
 
     .addEntry('multi-dark', './assets/js/client/multi/dark/main.js')
-    .addEntry('multi-white', './assets/js/client/multi/white/main.js')
 
     .addEntry('admin', './assets/js/admin/admin.js')
 

@@ -1,9 +1,17 @@
-<div class="information vh-100 lightning row">
-    <img class="col-lg-6 col-md-12" src="/assets/images/{{ logo }}" alt="Logotype">
-    <div class="text-center col-lg-6 col-md-12">
-        <h1>{{ serverName }}</h1>
-        <h2 class="base">{{ mainText | raw | nl2br }}</h2>
+<section id="information" {% if background %}style="background-image: url('/assets/images/{{ background }}')" {% endif %}>
+    <div class="container">
+        <div class="vh-100 lightning row gap-lg-3 justify-content-around">
+            <div class="col-lg-4 col-6 d-flex justify-content-center align-items-center">
+                <img class="w-100" src="/assets/images/{{ logo }}" alt="Logotype">
+            </div>
+            <div class="col-lg-5 col-md-12 d-flex flex-column justify-content-lg-center align-items-center">
+                <div>
+                    <h1>{{ siteName }}</h1>
+                    <h2 class="base">{{ mainText | raw | nl2br }}</h2>
+                </div>
 
-        {% include 'client/simple/dark/component/social.html.twig' %}
+                {% include 'client/simple/dark/component/social.html.twig' %}
+            </div>
+        </div>
     </div>
-</div>
+</section>

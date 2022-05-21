@@ -3,19 +3,19 @@
 namespace App\Controller\Client;
 
 use App\Entity\Item;
-use App\Enum\PaymentStatusEnum;
 use App\Form\ItemType;
 use App\Form\VoucherType;
-use App\Repository\ItemHistoryRepository;
+use Twig\Error\SyntaxError;
+use Doctrine\ORM\ORMException;
+use App\Enum\PaymentStatusEnum;
 use App\Repository\ItemRepository;
-use App\Service\Payment\Request\RequestBuilder;
+use App\Repository\ItemHistoryRepository;
 use App\Service\PaySafeCardManualService;
 use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Service\Payment\Request\RequestBuilder;
 use Symfony\Component\Routing\Annotation\Route;
-use Twig\Error\SyntaxError;
 
 class ItemController extends AbstractRenderController
 {
@@ -26,7 +26,7 @@ class ItemController extends AbstractRenderController
     public function shop(ItemRepository $repository, ItemHistoryRepository $itemHistoryRepository): Response
     {
         $form = $this->createForm(VoucherType::class);
-        if ($item  =$repository->findOneBy(['isMainItem' => true])) {
+        if ($item = $repository->findOneBy(['isMainItem' => true])) {
             return $this->redirectToRoute('item', ['id' => $item->getId()]);
         }
 
@@ -35,7 +35,7 @@ class ItemController extends AbstractRenderController
             'groupItems' => $repository->groupByServer(),
             'lastBuyers' => $itemHistoryRepository->findBy(['status' => PaymentStatusEnum::REALIZED], null, 10),
             'voucherForm' => $form->createView(),
-            'targetProgress' => $itemHistoryRepository->getProgressOfTarget()
+            'targetProgress' => $itemHistoryRepository->getProgressOfTarget(),
         ]);
     }
 
@@ -46,6 +46,7 @@ class ItemController extends AbstractRenderController
     public function item(Item $item, Request $request, RequestBuilder $builder, PaySafeCardManualService $manualService): Response
     {
         $form = $this->createForm(ItemType::class);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -61,6 +62,7 @@ class ItemController extends AbstractRenderController
         return $this->renderTheme('item.html.twig', [
             'item' => $item,
             'form' => $form->createView(),
+            'voucherForm' =>$this->createForm(VoucherType::class)->createView()
         ]);
     }
 }
