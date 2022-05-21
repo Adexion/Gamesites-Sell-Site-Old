@@ -36,7 +36,9 @@ class QueryInstance
         }
 
         try {
-            $response = $this->ping->Query();
+            if ($this->ping ?? false) {
+                $response = $this->ping->Query();
+            }
         } catch (MinecraftPingException $ignored) {
         }
 
