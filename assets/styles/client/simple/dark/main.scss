@@ -6,7 +6,8 @@
 :root {
   --bg-primary: #181818;
   --bg-secondary: #0c0c0c;
-  --bg-thirds: #151a0d;
+  --bg-thirds: #090a03;
+  --bg-footer: #0D0D0D;
   --primary: white;
   --secondary: #00FF76;
   --opacity: rgba(24, 24, 24, 0.66);
@@ -44,9 +45,22 @@ a {
 }
 
 .box {
-  border-radius: 5px;
+  border-radius: 15px;
   background-color: var(--bg-primary);
   border: 3px solid var(--secondary);
+}
+
+.mt-rep {
+  margin-top: -100px !important;
+}
+
+.progress {
+  background-color: #474747;
+  position: relative;
+
+  .bg-progress {
+    background: linear-gradient(90deg, #00FF76 0%, #214A34 100%);
+  }
 }
 
 //-----NAVBAR----
@@ -57,6 +71,16 @@ a {
   backdrop-filter: blur(5px);
   width: 100%;
   z-index: 1;
+}
+
+.online {
+  color: var(--secondary);
+  text-shadow: 0 0 5px var(--secondary);
+}
+
+.offline {
+  color: #CD4646;
+  text-shadow: 0 0 5px #CD4646;
 }
 
 //-----INFORMATION-----
@@ -85,10 +109,18 @@ a {
 }
 
 .ws-gradient {
-  background: linear-gradient(5deg, #181818 45%, rgba(0,255,118,1) 46%, rgba(255, 255, 255, 0) 47%);
+  background: linear-gradient(5deg, var(--bg-primary) 45%, var(--secondary) 46%, rgba(255, 255, 255, 0) 47%);
   height: 200px;
   width: 100%;
-  margin-top: -200px;
+  margin-top: -185px;
+}
+
+.think-guy {
+  height: 653px;
+  background-image: url("/assets/images/thinking_guy.png");
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
 }
 
 //-----STORY-----
@@ -99,45 +131,45 @@ a {
 }
 
 .st-gradient {
-  background: linear-gradient(-5deg, #0c0c0c 45%, rgba(0,255,118,1) 46%, rgba(255, 255, 255, 0) 47%);
+  background: linear-gradient(-5deg, var(--bg-secondary) 45%, var(--secondary) 46%, rgba(255, 255, 255, 0) 47%);
   height: 200px;
   width: 100%;
-  margin-top: -200px;
+  margin-top: -100px;
+}
+
+.cool-guy {
+  height: 746px;
+  background-image: url("/assets/images/cool_guy.png");
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
 }
 
 //-----ADMINISTRATION-----
 
 #adm {
   height: 100vh;
-  background-color: var(--bg-thirds);
-
-  .container, .container > .row {
-    height: 100%;
-  }
+  background-color: var(--bg-secondary);
 }
 
 .adm-gradient {
-  background: linear-gradient(5deg, var(--bg-thirds) 45%, rgba(0,255,118,1) 46%, rgba(255, 255, 255, 0) 47%);
+  background: linear-gradient(5deg, var(--bg-secondary) 45%, var(--secondary) 46%, rgba(255, 255, 255, 0) 47%);
   height: 200px;
   width: 100%;
-  margin-top: -200px;
+  margin-top: -100px;
 }
 
 //-----GUILD_ITEMS-----
 
 #gd {
   height: 100vh;
-
-  .container, .container > .row {
-    height: 100%;
-  }
 }
 
 .gd-gradient {
-  background: linear-gradient(-5deg, #181818 45%, rgba(0,255,118,1) 46%, rgba(255, 255, 255, 0) 47%);
+  background: linear-gradient(-5deg, var(--bg-primary) 45%, var(--secondary) 46%, rgba(255, 255, 255, 0) 47%);
   height: 200px;
   width: 100%;
-  margin-top: -200px;
+  margin-top: -185px;
 }
 
 .equipment {
@@ -182,48 +214,39 @@ a {
   margin-bottom: 0;
 }
 
-//-----
+//-----ARTICLE-----
 
-.player {
-  height: 400px;
-  width: 100%;
+.container, .container > .row {
+  height: 100%;
 }
 
-.progress {
-  background-color: #474747;
-  position: relative;
-
-  .bg-progress {
-    background: linear-gradient(90deg, #00FF76 0%, #214A34 100%);
-  }
+.card {
+  background: var(--bg-secondary);
 }
 
-.cool-guy {
-  height: 746px;
-  background-image: url("/assets/images/cool_guy.png");
-  background-size: contain;
-  background-position: 50%;
-  background-repeat: no-repeat;
+//-----PAGINATION
+.page-item.disabled .page-link{
+  background-color: var(--bg-primary);
+  border-color: var(--bg-primary);
 }
 
-.think-guy {
-  height: 653px;
-  background-image: url("/assets/images/thinking_guy.png");
-  background-size: contain;
-  background-position: 50%;
-  background-repeat: no-repeat;
-}
-
-.offline {
-  color: #CD4646;
-  text-shadow: 0 0 5px #CD4646;
+.page-item .page-link{
+  background-color: var(--bg-secondary) ;
+  border-color: var(--bg-secondary);
 }
 
 //-----FOOTER-----
 
+.ft-gradient {
+  background: linear-gradient(-5deg, var(--bg-footer) 45%, var(--secondary) 46%, rgba(255, 255, 255, 0) 47%);
+  height: 200px;
+  width: 100%;
+  margin-top: -185px;
+}
+
 footer {
   font-weight: normal;
-  background: #0D0D0D url("/assets/images/footer_map.png") no-repeat;
+  background: var(--bg-footer) url("/assets/images/footer_map.png") no-repeat;
   width: 100%;
 }
 

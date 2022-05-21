@@ -3,15 +3,15 @@
     <section id="adm">
         <div class="container">
             <div class="row justify-content-center align-items-center">
-                <h1 class="text-center">Poznaj administrację naszego serwera!</h1>
-                <div class="col-xxl-6 col-8 d-flex justify-content-center align-items-center text-center flex-wrap gap-3">
-                    {% set minotar = "https://mc-heads.net/body/" %}
+                <div class="col-xxl-8 col-8 d-flex justify-content-center align-items-center text-center flex-wrap gap-3 mt-rep">
+                    <h1 class="text-center pb-5 mb-2">Poznaj administrację naszego serwera!</h1>
+                    {% set minotar = "https://mc-heads.net/head/" %}
                     {% for a in administration %}
-                        <div>
+                        <div class="d-flex gap-5 justify-content-center align-items-center box p-3">
                             <div class="gs-body d-flex align-items-center justify-content-end flex-column">
-                                <img src="{{ minotar }}{{ a.username }}" alt="skin {{ a.username }}" width="125">
+                                <img src="{{ minotar }}{{ a.username }}" alt="skin {{ a.username }}" width="100">
                             </div>
-                            <h2 class="mt-5 mb-4">{{ (a.description ?? ('Next noname' | trans ~ ' ...'))  | raw | nl2br }}</h2>
+                            <h2>{{ (a.description ?? ('Next noname' | trans ~ ' ...'))  | raw | nl2br }}</h2>
                         </div>
                     {% endfor %}
                 </div>

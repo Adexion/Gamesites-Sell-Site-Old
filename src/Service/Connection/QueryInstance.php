@@ -21,8 +21,8 @@ class QueryInstance
         } catch (MinecraftQueryException $exception) {
         }
 
-        $this->ping = new MinecraftPing($serverIp, $serverPort, 5);
         try {
+            $this->ping = new MinecraftPing($serverIp, $serverPort, 5);
             $this->ping->connect();
         } catch (MinecraftPingException $exception) {
         }

@@ -1,9 +1,8 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         {% if serverInfo | length != 0 %}
-            <div class="d-flex justify-content-center align-items-center">
-                <span class="base white-shadow">ONLINE</span><span
-                        class="white-shadow">{{ serverInfo.Players }}/{{ serverInfo.MaxPlayers }}</span>
+            <div class="d-flex justify-content-center align-items-center online">
+                <span class="white-shadow">{{ serverInfo.Players }}/{{ serverInfo.MaxPlayers }}</span>
             </div>
         {% else %}
             <span class="offline">OFFLINE</span>
