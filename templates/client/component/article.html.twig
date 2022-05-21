@@ -1,12 +1,15 @@
 <div class="card mb-5">
     <div class="card-header">
         <div class="d-flex flex-column ">
-            <h1 class="h3">{{ article.title | raw }}</h1>
+            <h1 class="h4">{{ article.title | raw }}</h1>
+            <h2 class="h6">{{ article.subtitle | raw }}</h2>
         </div>
     </div>
     <div class="card-body">
-        {% if article.image is defined %}<img class="float-start" src="{{ article.image }}" alt="icon"/>{% endif %}
-       {{ article.text | raw }}
+        {% if article.image is defined and article.image | imageExist %}
+            <img class="float-start me-3" src="{{ '/assets/images/' ~ article.image }}" alt="icon" height="150"/>
+        {% endif %}
+        {{ article.text | raw }}
     </div>
     <div class="card-footer d-flex flex-row-reverse">
         <p>~{{ article.author }}</p>

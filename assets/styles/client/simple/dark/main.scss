@@ -6,6 +6,7 @@
 :root {
   --bg-primary: #181818;
   --bg-secondary: #0c0c0c;
+  --bg-disabled: rgba(12, 12, 12, 0.84);
   --bg-thirds: #090a03;
   --bg-footer: #0D0D0D;
   --primary: white;
@@ -48,6 +49,7 @@ a {
   border-radius: 15px;
   background-color: var(--bg-primary);
   border: 3px solid var(--secondary);
+  padding: 10px;
 }
 
 .mt-rep {
@@ -67,6 +69,7 @@ a {
 
 .navbar {
   position: fixed;
+  height: 50px;
   background-color: var(--opacity);
   backdrop-filter: blur(5px);
   width: 100%;
@@ -225,14 +228,21 @@ a {
 }
 
 //-----PAGINATION
+
 .page-item.disabled .page-link{
-  background-color: var(--bg-primary);
-  border-color: var(--bg-primary);
+  background-color: var(--bg-disabled);
+  border-color: var(--bg-disabled);
 }
 
 .page-item .page-link{
   background-color: var(--bg-secondary) ;
   border-color: var(--bg-secondary);
+}
+
+//-----SHOP-----
+
+#sh {
+  padding: 150px 0 180px;
 }
 
 //-----FOOTER-----
