@@ -1,73 +1,74 @@
 {% extends 'client/simple/dark/base.html.twig' %}
 
 {% block body %}
-    <div class="container-fluid">
-        <div class="row justify-content-center text-center flex-column m-lg-4 m-md-0 pb-4">
-            <div class="col-12 mb-5 mt-5">
-                <h1>Właśnie kupujesz: {{ item.name }}</h1>
-                <h2 class="base">Wybierz formę płatności której chcesz użyć</h2>
+    <section class="payments py-5 mb-5">
+        {% set now = item.type == 'item' ? 'Kup teraz' : 'Doładuj' %}
+
+        {% if item.isMainItem %}
+            <div class="mw-auto flex flex-row-reverse ">
+                <button type="button" class="btn btn btn-primary modal-btn">{{ 'Realize voucher' | trans }}</button>
             </div>
-            <div class="col-12 font-weight-normal">
-                <div class="row">
-                    {% if app.session.flashbag.peek('error') | length > 0 %}
-                        <div class="col-12 alert-info alert mb-5">
-                            {% for message in app.flashes('error') %}
-                                {{ message | trans }}
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                </div>
-                <div class="row justify-content-center">
-                    <div class="gs-item col-lg-3 col-6 text-center d-flex flex-column justify-content-center">
-                        <img src="{{ asset('/assets/images/' ~ item.image) }}" alt=""/>
-                        <div class="mt-4">
-                            <h4 class="font-weight-bold">{{ item.name | upper }}</h4>
-                            <div class="gs-item-desc">{{ item.description | raw }}</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-7 col-12 p-lg-5 m-4">
-                        <div class="row flex-column">
-                            {{ form_start(form, {method: 'POST'}) }}
-                            {{ form_row(form.email) }}
-                            {{ form_row(form.username) }}
-                            {{ form_row(form.payment) }}
+        {% endif %}
+
+        {{ form_start(form, {method: 'POST'}) }}
+        <div class="container my-5">
+            <div class="row gap-3">
+                <div class="col-lg-6 col-12">
+                    <div class="row gap-3">
+                        <div class="box col-lg-12">
+                            <h1>Dane zamówienia</h1>
+                            {{ form_row(form.username, { 'attr': {'placeholder':'np. Steve'} }) }}
+                            {{ form_row(form.email,{ 'attr': {'placeholder':'np. test@test.pl'}}) }}
+
                             {% set class = not item.multiple ? 'd-none': 'd-block' %}
-                            <div class="mb-3 {{ class }}">
-                                <label for="count" class="form-label required">Ilość</label>
-                                {{ form_widget(form.count) }}
-                                <p class="count">Wybrano <b class="counter">1</b></p>
+                            <div class="{{ class }} mb-2">
+                                {{ form_row(form.count) }}
+                                <span>
+                                    {% if item.type == 'item' %}Wybrano <b class="counter">1</b>{% endif %}
+                                    {% if item.type != 'item' %}Łączny koszt doładowania wynosi <b class="pricing">{{ item.discountedPrice }}</b> zł{% endif %}
+                                </span>
                             </div>
-                            <div id="psc-code" style="display:none">
-                                <ul id="code-fields-list"
-                                    data-prototype="{{ form_widget(form.code.vars.prototype)|e }}"
-                                    data-widget-tags="{{ '<li></li>'|e }}"
-                                    data-widget-counter="{{ form.code|length }}">
+                        </div>
+
+                        <div class="box col-lg-12">
+                            <h1>Płatność</h1>
+
+                            {{ form_row(form.payment) }}
+
+                            <div id="psc-code" class="mb-2" style="display: none;">
+                                <p>Lista kodów PSC</p>
+                                <ul id="code-fields-list" data-prototype="{{ form_widget(form.code.vars.prototype)|e }}" data-widget-tags="{{ '<li></li>'|e }}" data-widget-counter="{{ form.code|length }}">
                                     {% for code in form.code %}
-                                        <li>{{ form_widget(code) }}</li>
+                                        <li>{{ form_widget(code,{ 'attr': {'class': 'payments-box-input', 'placeholder':''}}) }}</li>
+                                        <div class="text-danger">{{ form_errors(code) }}</div>
                                     {% endfor %}
                                 </ul>
-                                <div class="d-flex gap-3">
-                                    <button type="button"
-                                            class="gs-accept add-another-collection-widget mb-3 w-50"
-                                            data-list-selector="#code-fields-list">Dodaj Kod
-                                    </button>
-                                    <button type="button"
-                                            class="gs-accept rem-another-collection-widget mb-3 w-50"
-                                            data-list-selector="#code-fields-list">Usuń kod
-                                    </button>
-                                </div>
+                                <button type="button" class="btn btn-outline-light add-another-collection-widget" data-list-selector="#code-fields-list">Dodaj Kod</button>
+                                <button type="button" class="btn btn-outline-light rem-another-collection-widget" data-list-selector="#code-fields-list">Usuń kod</button>
                             </div>
-                            {{ form_row(form.check) }}
 
-                            <button id="submit" type="submit" class="gs-accept w-100" style="display: none;">Kup <span id="counter"
-                                                                                                                       data-price="{{ item.discountedPrice }}">{{ item.multiple ? '1' : '' }}</span>
-                                za <span id="price">{{ item.discountedPrice }}</span> zł
+                            {{ form_widget(form.check) }}
+
+                            <button id="submit" type="submit" class="mt-2 btn btn-success w-100" style="display: none;">
+                                {{ now }} za <b class="pricing">{{ item.discountedPrice }}</b> zł
                             </button>
-                            {{ form_end(form) }}
                         </div>
+                    </div>
+                </div>
+
+                <div class="box col-lg-5 col-12 d-flex flex-column justify-content-center">
+                    <h1>O produkcie</h1>
+
+                    <img class="w-75 m-auto" src="{{ asset('/assets/images/' ~ item.image) }}" alt="SHOP-IMG">
+                    <div class="d-flex justify-content-center align-items-center flex-column">
+                        <h1>{{ item.name | raw }}</h1>
+                        <p>{{ item.description | raw }}</p>
+                        <p>{{ item.shortDescription | raw }}</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        {{ form_end(form) }}
+    </section>
+    {% include 'client/multi/dark/component/voucher.html.twig' %}
 {% endblock %}

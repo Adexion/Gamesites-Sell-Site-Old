@@ -215,8 +215,7 @@ NOT_ON_SERVER: Nie znaleziono gracza
 GUILD_DARK: Gildyjny (Ciemny)
 GUILD_WHITE: Gildyjny (Jasny)
 MULTI_DARK: Multi Serwer (Ciemny)
-MULTI_WHITE: Multi Serwer (Jasny) (WIP)
-SIMPLE_DARK: Prosty (Ciemny) (WIP)
+SIMPLE_DARK: Prosty (Ciemny)
 NONE: Domyślny
 
 R_CON: rCon + Query
