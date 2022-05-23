@@ -2,10 +2,11 @@
 
 namespace App\Repository;
 
+use Exception;
 use App\Entity\Bans;
 use App\Entity\Rank;
-use App\Repository\Remote\AbstractRemoteRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\Remote\AbstractRemoteRepository;
 
 /**
  * @method Rank|null find($id, $lockMode = null, $lockVersion = null)
@@ -24,6 +25,10 @@ class BansRepository extends AbstractRemoteRepository
 
     public function findRemote(array $criteria = [], array $filters = []): array
     {
-        return $this->con($criteria, null, self::MAX_RESULT);
+        try {
+            return $this->con($criteria, null, self::MAX_RESULT);
+        } catch (Exception $exception) {
+            return [];
+        }
     }
 }

@@ -3,15 +3,17 @@
 namespace App\Extension;
 
 use Exception;
+use App\Entity\Head;
+use App\Entity\Bans;
 use App\Entity\Server;
 use App\Form\DevTemplateType;
 use App\Service\GlobalDataQuery;
 use App\Repository\HeadRepository;
 use App\Repository\BansRepository;
-use App\Repository\ServerRepository;
 use Twig\Extension\GlobalsInterface;
 use Twig\Extension\AbstractExtension;
 use App\Service\Connection\QueryService;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
@@ -24,16 +26,17 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
 
     public function __construct(
         GlobalDataQuery $globalDataQuery,
-        ServerRepository $serverRepository,
-        HeadRepository $headRepository,
         FormFactoryInterface $factory,
-        BansRepository $bansRepository
+        ManagerRegistry $managerRegistry
     ) {
         $this->globalDataQuery = $globalDataQuery;
-        $this->headRepository = $headRepository;
         $this->factory = $factory;
-        $this->bansRepository  = $bansRepository;
-        $this->queryService = new QueryService($serverRepository->findOneBy(['isDefault' => true]) ?? new Server());
+
+        $serverRepository = $managerRegistry->getRepository(Server::class);
+        $this->headRepository = $managerRegistry->getRepository(Head::class);
+        $this->bansRepository = $managerRegistry->getRepository(Bans::class);
+
+        $this->queryService = new QueryService($serverRepository->getDefault());
     }
 
     /** @throws Exception */
@@ -43,16 +46,16 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
 
         return [
             'serverInfo' => $globals['minecraftQueryIp'] ?? null ? $this->queryService->getInfo() : [],
-            'isPlayerRank' => $globals['player'] ?? null,
-            'isGuildRank' => $globals['dark'] ?? null,
+            'isPlayerRank' => (bool)($globals['player'] ?? null),
+            'isGuildRank' => (bool)($globals['guild'] ?? null),
             'serverIp' => $globals['serverIp'] ?? null,
             'logo' => $globals['logo'] ?? null,
             'background' => $globals['background'] ?? null,
             'target' => $globals['target'] ?? null,
             'siteName' => $globals['siteName'] ?? null,
             'serverDescription' => $globals['description'] ?? null,
-            'areBansSet' => $globals['bans'] ?? null,
-            'bansCount' => ($globals['bans'] ?? null) ? count($this->bansRepository->findRemote()) : 0,
+            'areBansSet' => (bool)($this->bansRepository->findRemote() ?? null),
+            'bansCount' => count($this->bansRepository->findRemote()) ?? null,
             'simplePaySafeCard' => $globals['simplePaySafeCard'] ?? null,
             'showBigLogo' => $globals['showBigLogo'] ?? null,
             'siteTitle' => $globals['siteTitle'] ?? null,

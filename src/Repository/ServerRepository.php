@@ -18,4 +18,9 @@ class ServerRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Server::class);
     }
+
+    public function getDefault(): Server
+    {
+        return $this->findOneBy(['isDefault' => true]) ?: new Server();
+    }
 }

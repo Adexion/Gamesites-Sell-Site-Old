@@ -2,15 +2,14 @@
 
 namespace App\Service;
 
-use App\Entity\Additional;
-use App\Entity\Bans;
-use App\Entity\Configuration;
+use Exception;
 use App\Entity\Rank;
-use App\Entity\Server;
 use App\Enum\RankEnum;
+use App\Entity\Server;
+use App\Entity\Additional;
+use App\Entity\Configuration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 
 class GlobalDataQuery
 {
@@ -45,16 +44,14 @@ class GlobalDataQuery
                 'a.instagram',
                 'a.tiktok',
                 'a.trailer',
-                'r1.id AS dark',
-                'r2.id AS player',
-                'b.id AS bans'
+                'r1.id AS guild',
+                'r2.id AS player'
             )
             ->from(Configuration::class, 'c')
             ->leftJoin(Additional::class, 'a', 'WITH', 'a.id IS NOT NULL')
             ->leftJoin(Server::class, 's', 'WITH', 's.isDefault = true')
             ->leftJoin(Rank::class, 'r1', 'WITH', 'r1.type = :dark')
             ->leftJoin(Rank::class, 'r2', 'WITH', 'r2.type = :player')
-            ->leftJoin(Bans::class, 'b', 'WITH', 'b.id IS NOT NULL')
             ->setParameters([
                 ':dark' => RankEnum::GUILD,
                 ':player' => RankEnum::PLAYER,
