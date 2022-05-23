@@ -16,7 +16,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ArticleRepository extends ServiceEntityRepository
 {
-    public const ARTICLE_PER_PAGES = 20;
+    public const ARTICLE_PER_PAGES = 5;
 
     public function __construct(ManagerRegistry $registry)
     {
