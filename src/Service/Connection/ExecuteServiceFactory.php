@@ -7,7 +7,8 @@ use RuntimeException;
 
 class ExecuteServiceFactory
 {
-    public function getExecutionService(Server $server): ExecuteInterface
+    /** @return ExecuteInterface|QueryInterface|ConnectionInterface|ConsoleInterface */
+    public function getExecutionService(Server $server)
     {
         $class = 'App\Service\Connection\\' . ucfirst($server->getConnectionType()) . 'Service';
 

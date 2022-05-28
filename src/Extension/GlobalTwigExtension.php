@@ -12,22 +12,25 @@ use App\Repository\HeadRepository;
 use App\Repository\BansRepository;
 use Twig\Extension\GlobalsInterface;
 use Twig\Extension\AbstractExtension;
-use App\Service\Connection\QueryService;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Service\Connection\QueryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use App\Service\Connection\ExecuteServiceFactory;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
 {
     private GlobalDataQuery $globalDataQuery;
     private HeadRepository $headRepository;
-    private QueryService $queryService;
+    private QueryInterface $queryService;
     private FormFactoryInterface $factory;
     private BansRepository $bansRepository;
 
     public function __construct(
         GlobalDataQuery $globalDataQuery,
         FormFactoryInterface $factory,
-        ManagerRegistry $managerRegistry
+        ManagerRegistry $managerRegistry,
+        ExecuteServiceFactory $executeServiceFactory
     ) {
         $this->globalDataQuery = $globalDataQuery;
         $this->factory = $factory;
@@ -36,16 +39,16 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
         $this->headRepository = $managerRegistry->getRepository(Head::class);
         $this->bansRepository = $managerRegistry->getRepository(Bans::class);
 
-        $this->queryService = new QueryService($serverRepository->getDefault());
+        $this->queryService = $executeServiceFactory->getExecutionService($serverRepository->getDefault());
     }
 
-    /** @throws Exception */
+    /** @throws Exception|TransportExceptionInterface */
     public function getGlobals(): array
     {
         $globals = $this->globalDataQuery->getGlobals();
 
         return [
-            'serverInfo' => $globals['minecraftQueryIp'] ?? null ? $this->queryService->getInfo() : [],
+            'serverInfo' => $this->queryService->getInfo() ?? [],
             'isPlayerRank' => (bool)($globals['player'] ?? null),
             'isGuildRank' => (bool)($globals['guild'] ?? null),
             'serverIp' => $globals['serverIp'] ?? null,

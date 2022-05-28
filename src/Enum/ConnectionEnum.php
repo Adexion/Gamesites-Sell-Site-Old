@@ -8,5 +8,5 @@ class ConnectionEnum extends Enum
 {
     const REDIS = 'redis';
     const R_CON = 'rCon';
-//    const PLUGIN = 'plugin';
+    const PLUGIN = 'plugin';
 }
