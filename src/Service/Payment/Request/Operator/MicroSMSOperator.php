@@ -18,7 +18,7 @@ final class MicroSMSOperator extends AbstractOperator implements OperatorInterfa
             'control' => $id,
             'return_urlc' => sprintf('%s/api/payment/status/6', $this->uri),
             'return_url' => sprintf('%s/payment', $this->uri),
-            'description' => $data['nick'] . ' - ' . $item->getName() . ' x' . $count,
+            'description' => $data['username'] . ' - ' . $item->getName() . ' x' . $count,
             'test' => $payment->getIsTest()
         ];
 

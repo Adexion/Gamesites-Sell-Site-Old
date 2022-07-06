@@ -18,7 +18,8 @@ class MicroSMSType extends BaseType
             ->add('amount', HiddenType::class)
             ->add('control', HiddenType::class)
             ->add('return_urlc', HiddenType::class)
-            ->add('return_url', HiddenType::class);
+            ->add('return_url', HiddenType::class)
+            ->add('test', HiddenType::class);
     }
 
     public function getBlockPrefix(): string

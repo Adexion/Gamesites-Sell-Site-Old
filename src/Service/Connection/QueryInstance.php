@@ -17,12 +17,12 @@ class QueryInstance
     {
         $this->query = new MinecraftQuery();
         try {
-            $this->query->connect($serverIp, $serverPort, 5);
+            $this->query->connect($serverIp, $serverPort, 1);
         } catch (MinecraftQueryException $exception) {
         }
 
         try {
-            $this->ping = new MinecraftPing($serverIp, $serverPort, 5);
+            $this->ping = new MinecraftPing($serverIp, $serverPort, 1);
             $this->ping->connect();
         } catch (MinecraftPingException $exception) {
         }
