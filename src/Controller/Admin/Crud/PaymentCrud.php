@@ -39,6 +39,7 @@ class PaymentCrud extends AbstractCrudController
                 ->setHelp('Pole w zależności od systemu płatności powinno zawierać: PayByLink PSC - pin')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             BooleanField::new('isActive'),
+            BooleanField::new('isTest'),
         ];
     }
 }

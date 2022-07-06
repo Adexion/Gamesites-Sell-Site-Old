@@ -9,6 +9,7 @@
 /var/
 /vendor/
 /migrations/*
+/mysql
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###

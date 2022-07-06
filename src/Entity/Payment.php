@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PaymentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
@@ -38,6 +39,11 @@ class Payment
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $other;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=false, options={"default": 1})
+     */
+    private $isTest;
 
     /**
      * @ORM\Column(type="boolean")
@@ -105,6 +111,17 @@ class Payment
     public function setOther($other): self
     {
         $this->other = $other;
+
+        return $this;
+    }
+    public function getIsTest(): ?bool
+    {
+        return $this->isTest;
+    }
+
+    public function setIsTest($isTest): self
+    {
+        $this->isTest = $isTest;
 
         return $this;
     }
