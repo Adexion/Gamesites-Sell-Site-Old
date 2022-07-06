@@ -32,7 +32,6 @@ class MicroSMSType extends BaseType
         $resolver
             ->setDefaults([
                 'csrf_protection' => false,
-                'action' => 'https://microsms.pl/api/bankTransfer/',
                 'method' => Request::METHOD_GET,
             ]);
     }
