@@ -10,8 +10,8 @@ use RuntimeException;
 
 final class MicroSMSOperator extends OperatorAbstract implements OperatorInterface
 {
-    protected const SUCCESSFULLY_STATUES = ["TRUE"];
-    protected const FAILURE_STATUSES = ["FALSE"];
+    protected const SUCCESSFULLY_STATUES = ['true', true, 'TRUE'];
+    protected const FAILURE_STATUSES = ['false', false, 'FALSE'];
 
     /** @throws OptimisticLockException|ORMException */
     public function getResponse(array $request): ?string

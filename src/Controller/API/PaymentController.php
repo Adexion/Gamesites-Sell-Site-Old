@@ -30,6 +30,6 @@ class PaymentController extends AbstractController
             $response = $factory->execute($type, $request);
         } catch (RuntimeException $e) {}
 
-        return new Response($response ?? '', Response::HTTP_OK);
+        return new Response($response ?? 'Not Found', Response::HTTP_OK);
     }
 }
