@@ -12,6 +12,7 @@ use App\Repository\ItemRepository;
 use App\Repository\ItemHistoryRepository;
 use App\Service\PaySafeCardManualService;
 use Doctrine\ORM\OptimisticLockException;
+use App\Repository\ConfigurationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Service\Payment\Request\RequestBuilder;
@@ -43,8 +44,13 @@ class ItemController extends AbstractRenderController
      * @Route (name="item", path="/shop/{id}")
      * @throws ORMException|OptimisticLockException|SyntaxError
      */
-    public function item(Item $item, Request $request, RequestBuilder $builder, PaySafeCardManualService $manualService): Response
-    {
+    public function item(
+        Item $item,
+        Request $request,
+        RequestBuilder $builder,
+        PaySafeCardManualService $manualService,
+        ConfigurationRepository $configurationRepository
+    ): Response {
         $form = $this->createForm(ItemType::class);
 
         $form->handleRequest($request);
@@ -52,6 +58,12 @@ class ItemController extends AbstractRenderController
         if ($form->isSubmitted() && $form->isValid()) {
             if ($request->request->get('payment') === 'paySafeCard') {
                 return $this->redirectToRoute('pscPending', ['hash' => $manualService->createManualPSC($form, $item)->getHash()]);
+            }
+
+            if ($request->request->get('payment') === 'simplePayPal') {
+                $url = $configurationRepository->findOneBy([])->getSimplePayPal();
+
+                return $this->redirect($url);
             }
 
             return $builder->get($form->getData(), $item, function ($parameters) {
@@ -62,7 +74,7 @@ class ItemController extends AbstractRenderController
         return $this->renderTheme('item.html.twig', [
             'item' => $item,
             'form' => $form->createView(),
-            'voucherForm' =>$this->createForm(VoucherType::class)->createView()
+            'voucherForm' => $this->createForm(VoucherType::class)->createView(),
         ]);
     }
 }

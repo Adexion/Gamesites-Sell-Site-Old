@@ -48,6 +48,7 @@ class ConfigurationCrud extends AbstractCrudController
             ChoiceField::new('template')
                 ->setChoices(TemplateEnum::toArray()),
             BooleanField::new('simplePaySafeCard'),
+            TextField::new('simplePayPal'),
             BooleanField::new('showBigLogo'),
             ImageRepositoryField::new('logo')
                 ->setImageRepository($this->getDoctrine()->getRepository(Image::class)),

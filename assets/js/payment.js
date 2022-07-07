@@ -19,10 +19,18 @@ $(document).ready(function () {
         document.getElementById('psc-code').removeAttribute('style');
     }
 
+    if (document.getElementById('payment').value === 'simplePayPal') {
+        document.getElementById('psc-code').removeAttribute('d-none');
+    }
+
     document.getElementById('payment').addEventListener('change', (e) => {
         e.target.value === 'paySafeCard'
             ? document.getElementById('psc-code').removeAttribute('style')
             : document.getElementById('psc-code').setAttribute('style', 'display: none;')
+
+        e.target.value === 'simplePayPal'
+            ? document.getElementById('paypal').classList.remove('d-none')
+            : document.getElementById('paypal').classList.add('d-none');
     })
 
     document.getElementById('count').addEventListener('input', (e) => {

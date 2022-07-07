@@ -6,6 +6,7 @@ use App\Entity\Rule;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use Symfony\Component\DomCrawler\Field\FileFormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 
 class RuleCrud extends AbstractCrudController

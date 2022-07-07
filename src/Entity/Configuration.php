@@ -44,6 +44,11 @@ class Configuration
     private $simplePaySafeCard;
 
     /**
+     * @ORM\Column(type="text", options={"default": true})
+     */
+    private $simplePayPal;
+
+    /**
      * @ORM\Column(type="decimal", precision=5, scale=2, nullable=true)
      */
     private $target;
@@ -94,6 +99,18 @@ class Configuration
     public function setSimplePaySafeCard(?bool $simplePaySafeCard): self
     {
         $this->simplePaySafeCard = $simplePaySafeCard;
+
+        return $this;
+    }
+
+    public function getSimplePayPal(): ?string
+    {
+        return $this->simplePayPal;
+    }
+
+    public function setSimplePayPal(?string $simplePayPal): self
+    {
+        $this->simplePayPal = $simplePayPal;
 
         return $this;
     }

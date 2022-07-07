@@ -22,6 +22,8 @@ Back to the product list: Powrót na listę produktów
 Payment form: Formularz płatności
 Repeat password: Powtórz hasło
 Redirect Link: Przekierowania
+Simple Pay Pal: Paypal.me
+simplePayPal: Paypal.me
 
 Secret: Pole 1
 Hash: Pole 2
@@ -33,6 +35,7 @@ MicroSMS: Płatności Online MicroSMS
 TPay: Płatności Online TPay
 DirectBilling: SMS+ (DirectBilling)
 PaySafeCard: PaySafeCard
+SimplePayPal: PayPal.me
 PayByLinkPsc: PaySafeCard (PayByLink)
 
 HOT_PAY: Płatności Online HotPay
@@ -41,6 +44,7 @@ CASH_BILL: Płatności Online CashBill
 T_PAY:  Płatności Online TPay
 DIRECT_BILLING: SMS+ (DirectBilling)
 PAY_SAFE_CARD: PaySafeCard (HotPay)
+SIMPLE_PAY_PAL: PayPal.me
 PAY_BY_LINK_PSC: PaySafeCard (PayByLink)
 
 Username: Nick

@@ -860,7 +860,7 @@ a {
 }
 
 .shop-box:hover .shop-box_image {
-    filter: blur(10px);
+    filter: blur(5px);
 }
 
 .text-danger {

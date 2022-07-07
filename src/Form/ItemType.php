@@ -28,6 +28,7 @@ class ItemType extends BaseType
 {
     private ?array $payments;
     private const PSC = 'paySafeCard';
+    private const SIMPLE_PAY_PAL = 'simplePayPal';
 
     public function __construct(PaymentRepository $paymentRepository, ConfigurationRepository $configurationRepository)
     {
@@ -38,6 +39,10 @@ class ItemType extends BaseType
 
         if ($configurationRepository->findOneBy([])->getSimplePaySafeCard()) {
             $this->payments['psc'] = self::PSC;
+        }
+
+        if ($configurationRepository->findOneBy([])->getSimplePayPal()) {
+            $this->payments['simplePayPal'] = self::SIMPLE_PAY_PAL;
         }
     }
 

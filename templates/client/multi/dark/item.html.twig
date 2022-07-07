@@ -47,6 +47,10 @@
                         <p class="payments-box-text">Forma płatności</p>
                     </div>
                     {{ form_widget(form.payment,{ 'attr': {'class': 'payments-box-input', 'placeholder':'np. test@test.pl'}}) }}
+                    <div id="paypal" class="d-none mt-25">
+                        <p>Płatność PayPal nie jest płatnością automatyczną.
+                            W celu zrealizowania płatności skontaktuj się z administracją za pomocą social mediów bądź bezpośrednio na serwerze. </p>
+                    </div>
                     <div id="psc-code" style="display: none;">
                         <div class="mx-between">
                             <p class="payments-box-text">Kod PSC</p>
