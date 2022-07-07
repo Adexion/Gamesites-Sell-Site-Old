@@ -35,7 +35,7 @@ class VoucherExecutionService
     public function execute(array $data): ?string
     {
         $voucher = $this->voucherRepository->findOneBy(['code' => $data['code']]);
-        if (!$voucher || $voucher->getDate()->format('Y-m-d') < date('Y-m-d')) {
+        if (!$voucher || ($voucher->getDate() && $voucher->getDate()->format('Y-m-d') < date('Y-m-d'))) {
             return 'Voucher is not valid or expired';
         }
 
