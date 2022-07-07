@@ -34,12 +34,15 @@ class ServerCrud extends AbstractCrudController
             TextareaField::new('description'),
             ChoiceField::new('connectionType')
                 ->setChoices(ConnectionEnum::toArray()),
-            TextField::new('conIp')
-                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
-            NumberField::new('conPort')
-                ->setFormTypeOption('constraints', [new Length(['max' => 5])]),
-            TextField::new('conPassword')
-                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            TextField::new('conIp', 'IP Połączenia')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])])
+                ->setHelp('dotyczy rCon, Redisa i Pluginu'),
+            TextField::new('conPassword', 'Hasło Połączenia')
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])])
+                ->setHelp('dotyczy rCon, Redisa i Pluginu'),
+            NumberField::new('conPort', 'Port Połączenia')
+                ->setFormTypeOption('constraints', [new Length(['max' => 5])])
+                ->setHelp('dotyczy rCon, Redisa i Pluginu'),
             TextField::new('minecraftQueryIp')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             NumberField::new('minecraftQueryPort')

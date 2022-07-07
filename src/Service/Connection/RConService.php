@@ -24,7 +24,11 @@ class RConService implements ExecuteInterface, QueryInterface, ConnectionInterfa
     /** @throws InvalidPacketException|AuthenticationException|InvalidArgumentException|SocketException */
     public function execute($command, string $username = '', int $amount = 1): ?string
     {
-        return $this->getConnection()->rcon(str_replace(['%player%', '%amount%'], [$username,$amount], $command));
+        try {
+            return $this->getConnection()->rcon(str_replace(['%player%', '%amount%'], [$username, $amount], $command));
+        } catch (\Exception $ex) {
+            return null;
+        }
     }
 
     /** @throws InvalidPacketException|AuthenticationException|InvalidArgumentException */
@@ -69,6 +73,6 @@ class RConService implements ExecuteInterface, QueryInterface, ConnectionInterfa
         } catch (RuntimeException $e) {
         }
 
-        return str_contains($username, $this->execute('list'));
+        return str_contains($this->execute('list'), $username);
     }
 }
