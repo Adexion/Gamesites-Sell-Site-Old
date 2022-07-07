@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\VoucherRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\VoucherRepository;
 
 /**
  * @ORM\Entity(repositoryClass=VoucherRepository::class)
@@ -34,7 +35,7 @@ class Voucher
     private $item;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $date;
 
@@ -79,12 +80,12 @@ class Voucher
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): ?DateTimeInterface
     {
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate(?DateTimeInterface $date): self
     {
         $this->date = $date;
 

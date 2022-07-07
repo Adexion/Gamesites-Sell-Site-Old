@@ -30,7 +30,7 @@ class VoucherAssignService
     {
         if (!$pscVoucher->getVoucher()) {
             $voucher = (new Voucher())
-                ->setDate(new DateTime())
+                ->setDate(new DateTime('+1 month'))
                 ->setTimes(1)
                 ->setItem($pscVoucher->getPaySafeCard()->getItem())
                 ->setCode(uniqid('MG', true));
