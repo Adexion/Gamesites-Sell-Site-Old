@@ -44,7 +44,7 @@ class Configuration
     private $simplePaySafeCard;
 
     /**
-     * @ORM\Column(type="text", options={"default": true})
+     * @ORM\Column(type="text", nullable=true)
      */
     private $simplePayPal;
 

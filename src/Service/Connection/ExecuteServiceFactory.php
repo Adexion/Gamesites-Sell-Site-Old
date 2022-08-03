@@ -13,7 +13,7 @@ class ExecuteServiceFactory
         $class = 'App\Service\Connection\\' . ucfirst($server->getConnectionType()) . 'Service';
 
         if (!class_exists($class)) {
-            throw new RuntimeException('Class ' . ucfirst($server->getConnectionType()) . ' does not exist');
+            return new QueryService($server);
         }
 
         return new $class($server);
