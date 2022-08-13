@@ -6,6 +6,10 @@ import 'aos/dist/aos.css';
 AOS.init();
 
 (() => {
+    document.addEventListener('contextmenu', e => {
+        e.preventDefault();
+    })
+
     const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
