@@ -57,7 +57,7 @@
     "twig/intl-extra": "^3.3",
     "twig/twig": "^2.12|^3.0",
     "xpaw/php-minecraft-query": "^4.0",
-    "xpaw/php-source-query-class": "^2.1",
+    "xpaw/php-source-query-class": "^2.1"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5",
