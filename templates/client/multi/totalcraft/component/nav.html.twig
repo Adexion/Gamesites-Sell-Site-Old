@@ -7,7 +7,7 @@
             <p><span>Offline</span></p>
             {% else %}
                 <span class="navbar-pulse-online mx-pulse" id="status"></span>
-                <p><span>Offline</span> <b id="status-text">{{ serverInfo.Players }}/{{ serverInfo.MaxPlayers }}</b></p>
+                <p><span>Offline</span>&nbsp;<b id="status-text">{{ serverInfo.Players }}/{{ serverInfo.MaxPlayers }}</b></p>
             {% endif %}
         </div>
         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
