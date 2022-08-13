@@ -6,7 +6,7 @@
     text-decoration: none;
     color: var(--white);
 
-    padding: 25px;
+    padding: 30px 50px;
     display: flex;
     flex-direction: column;
     gap: 15px;

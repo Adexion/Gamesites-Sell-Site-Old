@@ -1,7 +1,7 @@
 {% extends 'client/multi/totalcraft/base.html.twig' %}
 
 {% block body %}
-    <section class="shop">
+    <section class="shop px-5">
         {% set now = item.type == 'item' ? 'Kup teraz' : 'Doładuj' %}
 
         {% if item.isMainItem %}

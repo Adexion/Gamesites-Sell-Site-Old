@@ -8,6 +8,7 @@
 @import "trailer.css";
 @import "footer.css";
 @import "shop.css";
+@import "other.css";
 @import "btn.css";
 
 html, body {
@@ -40,6 +41,23 @@ body {
 .fs-5 {
     font-size: 1.5rem !important;
 }
+
+::-webkit-scrollbar-track {
+    background: var(--background);
+}
+
+::-webkit-scrollbar {
+    width: 0.5vw;
+    height: 0.3vw;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-g);
+    border-right-width: 0.3vw;
+    background-clip: padding-box;
+}
+
 
 :root {
     --white: hsl(0, 0%, 100%);

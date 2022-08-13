@@ -1,0 +1,22 @@
+{% extends 'client/multi/totalcraft/base.html.twig' %}
+
+{% block body %}
+    <section class="other-padding">
+        <div class="mx-auto flex flex-center flex-column flex-align">
+            <h1 class="text-pink">{{ 'Please wiat' | trans }} ...</h1>
+            <h4>{{ 'Redirect' | trans }}</h4>
+            <br/><br/>
+            {{ form_start(form, {name: 'payment'}) }}
+            <button class="btn btn-secondary text-dark" type="submit">{{ 'Go to payment now' | trans }}</button>
+            {{ form_end(form) }}
+            <script>
+                window.onload = function () {
+                    window.setTimeout(function () {
+                        document.payment.submit();
+                    }, 3000);
+                };
+            </script>
+        </div>
+    </section>
+{% endblock %}
+
