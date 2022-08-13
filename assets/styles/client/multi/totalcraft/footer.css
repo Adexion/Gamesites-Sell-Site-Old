@@ -8,3 +8,7 @@
     height: 1px;
     background: linear-gradient( to right, hsla(0, 0%, 16%, 0.3), hsl(44, 17%, 47%) 50%, hsla(0, 0%, 16%, 0.3) );
 }
+
+.footer img {
+    max-width: 200px;
+}

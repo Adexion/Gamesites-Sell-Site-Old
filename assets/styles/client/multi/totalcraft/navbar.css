@@ -26,6 +26,10 @@
     margin-top: -20px;
 }
 
+.navbar-brand img {
+    max-width: 110px;
+}
+
 .navbar-collapse {
     padding: 25px;
     display: flex;
