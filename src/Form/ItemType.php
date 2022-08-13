@@ -58,6 +58,7 @@ class ItemType extends BaseType
             ->add('payment', ChoiceType::class, [
                 'choices' => $this->payments,
                 'choice_translation_domain' => 'messages',
+                'expanded' => true
             ])
             ->add('code', CollectionType::class, [
                 'required' => false,

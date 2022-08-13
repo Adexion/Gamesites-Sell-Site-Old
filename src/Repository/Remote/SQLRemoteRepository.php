@@ -55,7 +55,7 @@ class SQLRemoteRepository implements RemoteRepositoryInterface
         $sql = "SELECT {$mapped} FROM {$this->entity->getDirectory()} x";
 
         if ($name) {
-            $sql .= " WHERE `name` = \"{$name}\"";
+            $sql .= " WHERE x.username = \"{$name}\"";
         }
 
         $sql .= ' ORDER BY x.' . $this->entity->getOrderBy() . ' DESC';

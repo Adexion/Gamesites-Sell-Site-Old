@@ -5,7 +5,8 @@
     </div>
     <div class="ranking-direction flex flex-align">
         <div class="ranking-left">
-            {% for player in playerRank %}
+            {% set rank = playerRank | first %}
+            {% for player in rank.result %}
             <div class="ranking-box flex flex-between flex-align">
                 <div class="flex flex-align">
                     <h1 class="ranking-box_number">{{ loop.index }}</h1>

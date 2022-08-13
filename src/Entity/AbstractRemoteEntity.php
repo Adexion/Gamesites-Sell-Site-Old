@@ -44,6 +44,11 @@ abstract class AbstractRemoteEntity
     protected $directory;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $displayName;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     protected $name;
@@ -217,6 +222,18 @@ abstract class AbstractRemoteEntity
     public function setOrderBy(?string $orderBy): self
     {
         $this->orderBy = $orderBy;
+
+        return $this;
+    }
+
+    public function getDisplayName(): ?string
+    {
+        return $this->displayName;
+    }
+
+    public function setDisplayName($displayName): self
+    {
+        $this->displayName = $displayName;
 
         return $this;
     }

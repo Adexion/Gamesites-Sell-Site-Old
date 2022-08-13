@@ -1,0 +1,20 @@
+{% extends 'client/multi/totalcraft/base.html.twig' %}
+
+{% block body %}
+    <section class="other-padding">
+        <div class="mx-auto flex flex-center flex-column flex-align">
+            <h1>{{ "Thank You Payment" | trans ~ " : " }}<span class="">{{ type | trans }}</span></h1>
+            <h2 class="fs-4">{{ "Your payment id is" | trans ~ " : " }}<span class="">{{ paymentId }}</span></h2>
+            <br/>
+            <h3 class="fs-5">{{ message | trans }}</h3>
+            <br/>
+            {% if link is defined %}
+                <a class="btn btn-secondary fs-5" href="{{ link }}">{{ app.request.schemeAndHttpHost }}{{ link }}</a>
+            {% endif %}
+            {% if voucher is defined %}
+                <h4 class="fs-5">{{ "This is your voucher" | trans ~ " : " }}<span class="">{{ voucher }}</span></h4>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}
+

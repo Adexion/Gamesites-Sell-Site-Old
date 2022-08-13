@@ -46,7 +46,7 @@
                         <p>&nbsp;</p>
                         <p class="payments-box-text">Forma płatności</p>
                     </div>
-                    {{ form_widget(form.payment,{ 'attr': {'class': 'payments-box-input', 'placeholder':'np. test@test.pl'}}) }}
+                    {{ form_widget(form.payment,{ attr: {'class': 'payments-box-input', 'placeholder':'np. test@test.pl'}, expanded: false}) }}
                     <div id="paypal" class="d-none mt-25">
                         <p>Płatność PayPal nie jest płatnością automatyczną.
                             W celu zrealizowania płatności skontaktuj się z administracją za pomocą social mediów bądź bezpośrednio na serwerze. </p>

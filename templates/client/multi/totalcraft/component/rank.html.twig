@@ -1,0 +1,54 @@
+<section class="ranking aos-init aos-animate" id="rank">
+    <div class="container-fluid mt-5 pt-5" data-aos="fade-up">
+        <div class="row">
+            <div class="col-lg-6 col-12 d-lg-block d-flex justify-content-lg-start justify-content-center flex-column align-items-center">
+                <div class="d-flex align-items-center">
+                    <h1 class="text-pink d-inline-block me-5 mb-0">Ranking </h1>
+                    <button type="button" class="btn btn-secondary-outline btn-rounded d-inline-block m-1" data-bs-target="#carouselIndicators" data-bs-slide="prev">
+                        <i class="fas fa-arrow-left fs-6"></i>
+                    </button>
+                    <button type="button" class="btn btn-secondary-outline btn-rounded d-inline-block m-1" data-bs-target="#carouselIndicators" data-bs-slide="next">
+                        <i class="fas fa-arrow-right fs-6"></i>
+                    </button>
+                </div>
+                <h1 class="fs-6 text-secondary mt-5">{{ guildText }}</h1>
+            </div>
+
+            <div class="col-lg-6 col-12">
+                <div class="carousel slide" data-bs-ride="carousel" id="carouselIndicators">
+                    <div class="w-100 carousel-inner">
+                        {% for key, rank in playerRank %}
+                            <div class="rank carousel-item {{ loop.index == 1 ? 'active' : '' }}" data-bs-interval="5000">
+                                <span class="text-pink fs-1" id="rank">{{ key }}</span>
+                                {% for player in rank.result %}
+                                    <div class="rank-item d-flex row">
+                                        <p class="rank-id col-1">{{ loop.index }}</p>
+                                        <div class="rank-name col-8"><a href="/guilds/">{{ player.name }}</a></div>
+                                        <div class="rank-star col-3">{{ player.value }} pkt</div>
+                                    </div>
+                                {% endfor %}
+                                {% if  (rank | length) < 8 %}
+                                    {% for i in (rank | length) .. 7 %}
+                                        <div class="rank-item d-flex row">
+                                            <p class="rank-id col-1">{{ loop.index + (rank | length) }}</p>
+                                            <div class="rank-name col-8"><a href="/guilds/">Brak</a></div>
+                                            <div class="rank-star col-3">0 pkt</div>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <form method="get" action="#rank" class="mt-5">
+                    <div class="input-group rank-search">
+                        <label class="input-group-text" for="search"><i class="far fa-user"></i></label>
+                        <input id="search" type="text" class="form-control" placeholder="Wyszukaj ..." name="name"/>
+                        <input type="submit" class="btn btn-secondary btn-lg">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{# </div> #}

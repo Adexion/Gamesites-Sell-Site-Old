@@ -1,0 +1,115 @@
+.navbar-pulse {
+    background-position: top;
+    background-repeat: repeat;
+    margin: 0 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-pulse > p {
+    font-size: 18px;
+    line-height: 1.1;
+    font-weight: 600;
+    margin: 0 15px;
+}
+
+.navbar-pulse > p > span {
+    font-weight: 400;
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 1276px) {
+    .navbar-pulse {
+        display: none;
+    }
+
+    .navbar {
+        padding: 25px 0;
+    }
+}
+
+.navbar-pulse-online {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 7px;
+    height: 7px;
+    background-color: var(--green);
+    box-shadow: 0 0 15px 1px var(--green);
+    border-radius: 20px;
+    position: relative;
+}
+
+.navbar-pulse-offline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 7px;
+    height: 7px;
+    background-color: var(--red);
+    box-shadow: 0 0 15px 1px var(--red);
+    border-radius: 20px;
+    position: relative;
+}
+
+.navbar-pulse-online::before {
+    content: "";
+    position: absolute;
+    width: 19px;
+    height: 19px;
+    border: solid 1px var(--green);
+    opacity: 0.5;
+    border-radius: 20px;
+    animation: animate-pulse-before 1s infinite;
+}
+
+.navbar-pulse-offline::before {
+    content: "";
+    position: absolute;
+    width: 19px;
+    height: 19px;
+    border: solid 1px var(--red);
+    opacity: 0.5;
+    border-radius: 20px;
+    animation: animate-pulse-before 1s infinite;
+}
+
+@keyframes animate-pulse-before {
+    0% {
+        transform: scale(0.4);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(0.4);
+    }
+}
+
+.navbar-pulse-online::after {
+    content: "";
+    position: absolute;
+    width: 33px;
+    height: 33px;
+    border: solid 2px var(--green);
+    opacity: 0.05;
+    border-radius: 20px;
+    animation: animate-pulse-after 1.1s infinite;
+}
+
+@keyframes animate-pulse-after {
+    0% {
+        transform: scale(0.4);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(0.4);
+    }
+}

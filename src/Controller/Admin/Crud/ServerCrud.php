@@ -36,17 +36,22 @@ class ServerCrud extends AbstractCrudController
                 ->setChoices(ConnectionEnum::toArray()),
             TextField::new('conIp', 'IP Połączenia')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])])
-                ->setHelp('dotyczy rCon, Redisa i Pluginu'),
+                ->setHelp('dotyczy rCon, Redisa i Pluginu')
+                ->hideOnIndex(),
             TextField::new('conPassword', 'Hasło Połączenia')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])])
-                ->setHelp('dotyczy rCon, Redisa i Pluginu'),
+                ->setHelp('dotyczy rCon, Redisa i Pluginu')
+                ->hideOnIndex(),
             NumberField::new('conPort', 'Port Połączenia')
                 ->setFormTypeOption('constraints', [new Length(['max' => 5])])
-                ->setHelp('dotyczy rCon, Redisa i Pluginu'),
+                ->setHelp('dotyczy rCon, Redisa i Pluginu')
+                ->hideOnIndex(),
             TextField::new('minecraftQueryIp')
-                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+                ->setFormTypeOption('constraints', [new Length(['max' => 255])])
+                ->hideOnIndex(),
             NumberField::new('minecraftQueryPort')
-                ->setFormTypeOption('constraints', [new Length(['max' => 5])]),
+                ->setFormTypeOption('constraints', [new Length(['max' => 5])])
+                ->hideOnIndex(),
             BooleanField::new('showOnMainPage'),
             BooleanField::new('isDefault')
                 ->setValue(false)

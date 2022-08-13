@@ -1,0 +1,16 @@
+<section class="trailer" id="trailer">
+    <div class="container-fluid aos-init aos-animate my-5 py-5" data-aos="fade-up">
+        <div class="row">
+            <div class="trailer-video col-lg-6 col-12">
+                <iframe loading="lazy" src="{{ trailer }}" title="VIDEO" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+            </div>
+            <div class="col-lg-6 col-12 d-flex text-white justify-content-center align-items-center flex-column">
+                <h1 class="text-pink">Prezentacja Serwera</h1>
+                <div class="fs-3 mb-5">
+                    {{ trailerText | raw | nl2br }}
+                </div>
+                <a href="{{ trailer }}" class="btn btn-lg btn-secondary text-black mt-5" target="_blank" rel="nofollow">Otwórz w nowym oknie</a>
+            </div>
+        </div>
+    </div>
+</section>

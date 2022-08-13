@@ -2,11 +2,11 @@
 
 namespace App\Service\Connection;
 
+use RuntimeException;
 use xPaw\MinecraftPing;
 use xPaw\MinecraftQuery;
 use xPaw\MinecraftPingException;
 use xPaw\MinecraftQueryException;
-use RuntimeException;
 
 class QueryInstance
 {
@@ -16,6 +16,14 @@ class QueryInstance
     public function connect(?string $serverIp, ?string $serverPort)
     {
         $this->query = new MinecraftQuery();
+        if (!$serverIp || !$serverPort) {
+            return;
+        }
+
+        if (!$this->isServerResponding($serverIp, $serverPort)) {
+            return;
+        }
+
         try {
             $this->query->connect($serverIp, $serverPort, 1);
         } catch (MinecraftQueryException $exception) {
@@ -60,5 +68,10 @@ class QueryInstance
         }
 
         throw new RuntimeException('Players can not be getting by this way');
+    }
+
+    private function isServerResponding(string $url = 'localhost', string $port = "25565"): bool
+    {
+        return (bool)@fsockopen($url, $port, $code, $message, 0.5);
     }
 }

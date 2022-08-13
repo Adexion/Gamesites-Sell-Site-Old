@@ -1,0 +1,11 @@
+{% extends 'client/multi/totalcraft/base.html.twig' %}
+
+{% block body %}
+    <section class="other-padding">
+        <div class="mx-auto flex flex-center flex-column flex-align">
+            <h1 class="text-pink">{{ "Opps! Something went wrong" | trans }}</h1>
+            <h2 class="fs-5">{{ message | trans }}.</h2>
+        </div>
+    </section>
+{% endblock %}
+

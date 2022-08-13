@@ -15,7 +15,7 @@ use App\Repository\Remote\AbstractRemoteRepository;
  */
 class RankRepository extends AbstractRemoteRepository
 {
-    private const MAX_RESULT = 10;
+    private const MAX_RESULT = 8;
 
     public function __construct(ManagerRegistry $registry)
     {

@@ -1,0 +1,104 @@
+@import "voucher.css";
+@import "item.css";
+
+.shop {
+    min-height: 100vh;
+    background-image: url("/assets/images/totalcraft/bg3.png");
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    padding-top: 200px;
+    padding-bottom: 100px;
+}
+
+.shop-box {
+    background-image: url("/assets/images/totalcraft/miniaturka.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 1200px;
+    text-decoration: none;
+    color: var(--white);
+
+    padding: 25px;
+    position: relative;
+    display: flex;
+    width: calc(50% - 40px);
+    gap: 15px;
+    border: 1px solid var(--purple);
+    margin-bottom: 20px;
+
+    transition: background-size 200ms ease-in;
+    -moz-transition: background-size 200ms ease-in;
+    -web-kit-transition: background-size 200ms ease-in
+}
+
+.shop-box:hover {
+    background-size: 1300px;
+    color: var(--white);
+    text-decoration: none;
+
+    transition: background-size 200ms ease-in;
+    -moz-transition: background-size 200ms ease-in;
+    -web-kit-transition: background-size 200ms ease-in
+}
+
+.shop-box-image {
+    max-width: 200px;
+    max-height: 200px;
+
+    transition: margin-right 200ms ease-in;
+    -moz-transition: margin-right 200ms ease-in;
+    -web-kit-transition: margin-right 200ms ease-in
+}
+
+.shop-box:hover .shop-box-image {
+    margin-right: 15px;
+
+    transition: margin-right 200ms ease-in;
+    -moz-transition: margin-right 200ms ease-in;
+    -web-kit-transition: margin-right 200ms ease-in
+}
+
+.btn-shop {
+    margin: 0 -40px;
+    color: var(--black) !important;
+    width: 150px;
+}
+
+.shop-real-price {
+    position: absolute;
+    bottom: 15px;
+}
+
+.shop-last {
+    width: 70%;
+    margin: auto;
+    border: 1px solid var(--purple);
+}
+
+.shop-last-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.shop-last-head {
+    width: 4%;
+    margin: 0.5%;
+}
+
+@media (max-width: 1200px) {
+    .shop-box {
+        width: 100%;
+    }
+
+    .shop-last {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 1000px) {
+    .shop-last-head {
+        width: 9% !important;
+    }
+}

@@ -24,6 +24,7 @@ Repeat password: Powtórz hasło
 Redirect Link: Przekierowania
 Simple Pay Pal: Paypal.me
 simplePayPal: Paypal.me
+Display Name: Nazwa wyświetlana
 
 Secret: Pole 1
 Hash: Pole 2
@@ -220,6 +221,7 @@ NOT_ON_SERVER: Nie znaleziono gracza
 GUILD_DARK: Gildyjny (Ciemny)
 GUILD_WHITE: Gildyjny (Jasny)
 MULTI_DARK: Multi Serwer (Ciemny)
+MULTI_TOTAL_CRAFT: Multi Serwer (Różowy) ak. TotalCraft
 SIMPLE_DARK: Prosty (Ciemny)
 NONE: Domyślny
 

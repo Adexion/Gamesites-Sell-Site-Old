@@ -1,0 +1,79 @@
+@import "~bootstrap";
+@import "~@fortawesome/fontawesome-free/css/all.css";
+@import "pulse.css";
+@import "toggler.css";
+@import "navbar.css";
+@import "header.css";
+@import "rank.css";
+@import "trailer.css";
+@import "footer.css";
+@import "shop.css";
+@import "other.css";
+@import "btn.css";
+
+html, body {
+    font-family: "Gilroy", sans-serif !important;
+    background-color: var(--background-g);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    font-family: var(--bs-font-sans-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--white);
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.text-purple {
+    color: var(--purple);
+}
+
+.text-pink {
+    color: var(--color-g);
+}
+
+.fs-5 {
+    font-size: 1.5rem !important;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background);
+}
+
+::-webkit-scrollbar {
+    width: 0.5vw;
+    height: 0.3vw;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-g);
+    border-right-width: 0.3vw;
+    background-clip: padding-box;
+}
+
+
+:root {
+    --white: hsl(0, 0%, 100%);
+    --black: hsl(0, 0%, 0%);
+    --color-g: hsl(296, 100%, 79%);
+    --background-g: hsl(274, 41%, 7%);
+    --background: hsl(20, 19%, 6%);
+    --footer: hsl(276, 21%, 19%);
+    --background-s: hsl(273.8, 18.6%, 16.9%);
+    --purple: #6f42c1;
+    --ranking-box: linear-gradient(
+            to bottom,
+            hsl(272, 16%, 23%),
+            hsl(282, 20%, 17%)
+    );
+    --green: hsl(105, 45%, 68%);
+    --red: hsl(0, 63%, 44%);
+    --loader: hsl(180, 19%, 8%);
+}

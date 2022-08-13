@@ -34,15 +34,13 @@ abstract class AbstractRemoteRepository extends ServiceEntityRepository
     protected function con(array $criteria = [], ?string $name = null, ?int $limit = null): array
     {
         /** @var ?AbstractRemoteEntity $entity */
-        $entity = $this->findOneBy($criteria);
+        $entities = $this->findBy($criteria);
 
-        $con = $this->getConnectionByEntity($entity);
-
-        if (!$con) {
-            return [];
+        foreach ($entities as $entity) {
+            $con[$entity->getDisplayName()]['result'] = $this->getConnectionByEntity($entity)->find($name, $limit);
+            $con[$entity->getDisplayName()]['entity'] = $this->getConnectionByEntity($entity)->find($name, $limit);
         }
 
-        return $con
-            ->find($name, $limit);
+        return array_filter($con ?? []);
     }
 }

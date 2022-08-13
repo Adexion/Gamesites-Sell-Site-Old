@@ -1,0 +1,62 @@
+.ranking {
+    background-image: url("/assets/images/totalcraft/bg2.png");
+    background-position: top;
+    background-repeat: repeat;
+    background-size: cover;
+    padding: 60px 50px;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: var(--black);
+}
+
+.rank .rank-item {
+    color: var(--white);
+    background: #32263A;
+    overflow: hidden;
+    position: relative;
+    margin: 15px 0;
+    opacity: 80%;
+}
+
+.rank .rank-item .rank-name {
+    display: flex;
+    align-items: center;
+}
+
+.rank .rank-item .rank-name a {
+    color: white;
+    font-weight: bold;
+}
+
+.rank .rank-item .rank-id {
+    height: 100%;
+    background: rgba(53, 0, 76, 0.09);
+    display: inline-block;
+    border: rgba(53, 0, 76, 0.09) solid 20px;
+    font-weight: 510;
+    margin: 0;
+}
+
+.rank .rank-item .rank-star {
+    background: #555555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 510;
+}
+
+.rank-search .input-group-text {
+    background-color: #18121d;
+    border-color: #18121d;
+    color: var(--white);
+    padding: 0 20px;
+}
+
+.rank-search input, .rank-search input:focus{
+    border: 0;
+    background: rgba(24, 18, 29, 0.63);
+    font-weight: bold;
+    color: white;
+}

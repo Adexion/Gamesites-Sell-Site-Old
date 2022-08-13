@@ -28,7 +28,7 @@
                             {{ form_widget(form.count) }}
                             <p>Wybrano <b class="counter">1</b></p>
                         </div>
-                        {{ form_row(form.payment) }}
+                        {{ form_row(form.payment, {expanded: false}) }}
                         <div id="psc-code" style="display:none">
                             <ul id="code-fields-list"
                                 data-prototype="{{ form_widget(form.code.vars.prototype)|e }}"

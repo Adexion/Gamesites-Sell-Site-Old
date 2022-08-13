@@ -1,0 +1,94 @@
+{% extends 'client/multi/totalcraft/base.html.twig' %}
+
+{% block body %}
+    <section class="shop px-5">
+        {% set now = item.type == 'item' ? 'Kup teraz' : 'Doładuj' %}
+
+        {% if item.isMainItem %}
+            <div class="mw-auto d-flex flex-row-reverse mb-25">
+                <button type="button" class="btn btn btn-primary modal-btn">{{ 'Realize voucher' | trans }}</button>
+            </div>
+        {% endif %}
+
+        {{ form_start(form, {method: 'POST', expanded: 'true'}) }}
+        <div class="container-fluid px-5">
+            <div class="row">
+                <div class="col-lg-6 col-12">
+                    <div class="payment-box rank-search">
+                        <h1 class="text-pink">Twoje dane</h1>
+                        {{ form_row(form.username) }}
+                        {{ form_row(form.email) }}
+
+                        {{ form_row(form.payment) }}
+                        <div id="paypal" class="d-none mt-25">
+                            <p>Płatność PayPal nie jest płatnością automatyczną. W celu zrealizowania płatności skontaktuj się z administracją za pomocą social mediów bądź
+                                bezpośrednio na serwerze. </p>
+                        </div>
+                        <div id="psc-code" style="display: none;">
+                            <div class="mx-between">
+                                <p class="payments-box-text">Kod PSC</p>
+                            </div>
+                            <ul id="code-fields-list"
+                                data-prototype="{{ form_widget(form.code.vars.prototype)|e }}"
+                                data-widget-tags="{{ '<li></li>'|e }}"
+                                data-widget-counter="{{ form.code|length }}">
+                                {% for code in form.code %}
+                                    <li>{{ form_widget(code,{ 'attr': {'class': 'payments-box-input', 'placeholder':''}}) }}</li>
+                                    <div class="text-danger">{{ form_errors(code) }}</div>
+                                {% endfor %}
+                            </ul>
+                            <button type="button"
+                                    class="btn btn-color-g add-another-collection-widget"
+                                    data-list-selector="#code-fields-list">Dodaj Kod
+                            </button>
+                            <button type="button"
+                                    class="btn btn-color-g rem-another-collection-widget"
+                                    data-list-selector="#code-fields-list">Usuń kod
+                            </button>
+                        </div>
+
+                        <h1 class="text-pink">Zatwierdź płatność</h1>
+                        {% set class = not item.multiple ? 'd-none': 'd-block' %}
+                        <div class="{{ class }}">
+                            <div class="mx-between">
+                                {{ form_row(form.count) }}
+                                {% if item.type == 'item' %}
+                                    <p>Wybrano <b class="counter">1</b></p>
+                                {% else %}
+                                    <p>Łączny koszt doładowania wynosi <b class="pricing">{{ item.discountedPrice }}</b> zł</p>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        {{ form_row(form.check) }}
+
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <div class="payment-box ">
+                        <h1 class="text-pink">Opis</h1>
+                        <span class="fs-2 mb-0">{{ item.name | raw }}</span>
+                        <span class="fs-4 text-secondary mb-5">{{ item.shortDescription | raw | nl2br }}</span>
+                        <span class="fs-5">{{ item.description | raw | nl2br }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="payment-box mb-5">
+                        <h1 class="text-pink">Podsumowanie</h1>
+                        <span class="fs-3">
+                            Razem do zapłaty: <span class="d-none" id="counter" data-price="{{ item.discountedPrice }}"></span><b id="price">{{ item.discountedPrice }}</b> zł
+                        </span>
+                        <button id="submit" type="submit" class="btn btn-secondary text-dark w-100" style="display: none;">
+                            Przejdź do płatności
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{ form_end(form) }}
+    </section>
+    {% include 'client/multi/dark/component/voucher.html.twig' %}
+{% endblock %}

@@ -1,0 +1,20 @@
+<section class="stats">
+    <div class="container">
+        <div class="row justify-content-center text-center m-3">
+            <div class="col-lg-3 col-6">
+                <span class="fs-6">Zalogowanych graczy <br/>{{ serverInfo.Players ?? 0 }} użytkowników</span>
+            </div>
+            {% if areBansSet %}
+                <div class="col-lg-3 col-6">
+                    <span class="fs-5">Ilość banów <br/>{{ bansCount }} użytkowników</span>
+                </div>
+            {% endif %}
+            <div class="col-lg-3 col-6">
+                <span class="fs-6">Zakupionych ogólnie <br/>{{ boughtAll }} przedmiotów</span>
+            </div>
+            <div class="col-lg-3 col-6">
+                <span class="fs-6">Zakupionych dziś <br/>{{ boughtToday }} przedmiotów</span>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,16 @@
+header {
+    background-image: url('/assets/images/totalcraft/bg.png');
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--black);
+    padding: 155px 50px 0;
+}
+
+header .btn {
+    color: var(--black);
+}

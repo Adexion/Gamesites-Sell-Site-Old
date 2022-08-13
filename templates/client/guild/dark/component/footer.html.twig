@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-5 mb-3">
-                <img src="/assets/images/{{ logo }}" width="120" height="120" alt="{{ serverName }}">
+                <img src="/assets/images/{{ logo }}" width="120" height="120" alt="{{ siteName }}">
             </div>
             <div class="col-lg-7 d-flex flex-row flex-wrap justify-content-lg-end justify-content-center mt-2">
                 {% if discord or ts3 or facebook %}
@@ -29,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <div class="mb-3"><small> {{ serverName }} {% trans %}Text footer{% endtrans %}</small>
+        <div class="mb-3"><small> {{ siteName }} {% trans %}Text footer{% endtrans %}</small>
         </div>
         <h1 class=" text-center h6">
             Create by GameSites.pl &copy; Copyright MNGame 2016 - {{ "now" | date('Y') }} </h1>
