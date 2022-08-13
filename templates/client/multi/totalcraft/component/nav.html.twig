@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-xl navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ path('index') }}">{% if logo %}<img src="/assets/images/{{ logo }}" alt="logo">{% else %}<span class="nav-logo"></span>{% endif %}</a>
+        <div class="navbar-pulse mx-align">
+            {% if serverInfo | length == 0 %}
+            <span class="navbar-pulse-offline mx-pulse" id="status"></span>
+            <p><span>Offline</span></p>
+            {% else %}
+                <span class="navbar-pulse-online mx-pulse" id="status"></span>
+                <p><span>Offline</span> <b id="status-text">{{ serverInfo.Players }}/{{ serverInfo.MaxPlayers }}</b></p>
+            {% endif %}
+        </div>
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+                aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="toggler-icon top-bar"></span>
+            <span class="toggler-icon middle-bar"></span>
+            <span class="toggler-icon bottom-bar"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-xl-end justify-content-center" id="navbar">
+            <ul class="navbar-nav mb-2 mb-lg-0 gap-4">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ path('index') }}#">Strona Główna</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('index') }}#rank">Rankingi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('index') }}#trailer">Prezentacja Serwera</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('rule') }}">Regulamin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-secondary btn-lg" href="{{ path('shop') }}"><i class="fas fa-gem text-purple fs-5"></i>Sklep</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ facebook }}"><i class="fab fa-facebook-f fs-5"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ discord }}"><i class="fab fa-discord fs-5"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ yt }}"><i class="fab fa-youtube fs-5"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="nav-line"></div>
+</nav>

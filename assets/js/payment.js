@@ -13,17 +13,19 @@ $(document).ready(function () {
         newElem.appendTo(list);
     });
 
-    document.getElementById('check').checked = false;
+    if (document.getElementById('check')) {
+        document.getElementById('check').checked = false;
+    }
 
-    if (document.getElementById('payment').value === 'paySafeCard') {
+    if (document.getElementById('payment')?.value === 'paySafeCard') {
         document.getElementById('psc-code').removeAttribute('style');
     }
 
-    if (document.getElementById('payment').value === 'simplePayPal') {
+    if (document.getElementById('payment')?.value === 'simplePayPal') {
         document.getElementById('psc-code').removeAttribute('d-none');
     }
 
-    document.getElementById('payment').addEventListener('change', (e) => {
+    document.querySelector('#payment')?.addEventListener('change', (e) => {
         e.target.value === 'paySafeCard'
             ? document.getElementById('psc-code').removeAttribute('style')
             : document.getElementById('psc-code').setAttribute('style', 'display: none;')
@@ -33,7 +35,7 @@ $(document).ready(function () {
             : document.getElementById('paypal').classList.add('d-none');
     })
 
-    document.getElementById('count').addEventListener('input', (e) => {
+    document.getElementById('count')?.addEventListener('input', (e) => {
         const counter = document.getElementById('counter');
         const c = document.querySelectorAll('.counter');
         const p = document.querySelectorAll('.pricing');
@@ -44,14 +46,12 @@ $(document).ready(function () {
         p.forEach(f => f.innerHTML = val.toFixed(2))
     })
 
-    document.getElementById('check').addEventListener('click', () => {
+    document.getElementById('check')?.addEventListener('click', () => {
         const checkbox = document.getElementById('check');
         const submitBtn = document.getElementById('submit');
 
         !checkbox.checked
             ? submitBtn.setAttribute('style', 'display:none')
             : submitBtn.removeAttribute('style');
-
-        console.log(submitBtn)
     })
 });

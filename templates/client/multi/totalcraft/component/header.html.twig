@@ -1,0 +1,20 @@
+<header class="header" {% if background %}style="background-image: url('/assets/images/{{ background }}')" {% endif %}>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-12">
+                <p class="fs-2 text-pink fw-bold">{{ siteName | raw | nl2br | upper }}</p>
+                <h1 class="fw-bold text-white">{{ mainText | raw | nl2br }}</h1>
+                <h1 class="fw-bold text-white">{{ mainDescription | raw | nl2br }}</h1>
+                <span class="fs-4 text-secondary">Czekamy tylko na Ciebie!</span>
+            </div>
+        </div>
+        <div class="row mt-5 pt-5">
+            <div class="col-lg-6 col-12 flex-row">
+                <a href="{{ discord }}" class="btn btn-secondary btn-lg d-inline-block">Więcej informacji</a>
+                <button class="btn btn-secondary btn-lg d-inline-block" id="copyIp">Skopiuj IP</button>
+
+                <input type="hidden" id="ip" value="{{ serverIp }}">
+            </div>
+        </div>
+    </div>
+</header>

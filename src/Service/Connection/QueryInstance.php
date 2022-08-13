@@ -16,13 +16,14 @@ class QueryInstance
     public function connect(?string $serverIp, ?string $serverPort)
     {
         $this->query = new MinecraftQuery();
+        return;
         try {
-            $this->query->connect($serverIp, $serverPort, 1);
+            $this->query->connect($serverIp, $serverPort, 0.1);
         } catch (MinecraftQueryException $exception) {
         }
 
         try {
-            $this->ping = new MinecraftPing($serverIp, $serverPort, 1);
+            $this->ping = new MinecraftPing($serverIp, $serverPort, 0.1);
             $this->ping->connect();
         } catch (MinecraftPingException $exception) {
         }

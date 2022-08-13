@@ -1,0 +1,28 @@
+.trailer {
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 60px 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: var(--black);
+}
+
+.trailer .trailer-video {
+    background-image: url("/assets/images/totalcraft/miniaturka.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:  710px 400px;
+    min-height: 400px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.trailer-video iframe {
+    height: 100%;
+    width: 100%;
+    max-width: 710px;
+    border: 0;
+}

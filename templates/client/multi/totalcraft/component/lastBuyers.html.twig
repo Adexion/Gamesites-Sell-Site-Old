@@ -1,0 +1,19 @@
+{% if lastBuyers %}
+    <section class="my-5 d-flex justify-content-center">
+        <div class="container-fluid">
+            <div class="row px-5">
+                <div class="shop-last mw-auto d-flex justify-content-center flex-column align-items-center">
+                    <h1 class="mb-3 text-pink">Ostatnie zakupy</h1>
+                    <div class="p-4">
+                        <div class="shop-last-container">
+                            {% set crafthead = "https://crafthead.net/avatar/" %}
+                            {% for buyer in lastBuyers %}
+                                <img class="shop-last-head mr-5" src="{{ crafthead }}{{ buyer.username }}/55" alt="{{ buyer.username }}"/>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endif %}

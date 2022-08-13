@@ -1,0 +1,53 @@
+.navbar {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 45px 50px 0;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.2s ease-in-out;
+    background-color: transparent;
+}
+
+.nav-line {
+    margin-top: 45px;
+    width: 100%;
+    height: 1px;
+    background-image: linear-gradient( to right, hsla(0, 0%, 16%, 0.3), hsl(286, 100%, 21%) 50%, hsla(0, 0%, 16%, 0.3) );
+}
+
+.nav-logo {
+    background-image: url("/assets/images/totalcraft/logo.png");
+    background-size: 110px 64px;
+    width: 110px;
+    height: 64px;
+    display: block;
+    margin-top: -20px;
+}
+
+.navbar-collapse {
+    padding: 25px;
+    display: flex;
+    width: 100%;
+    background-color: var(--background-g);
+    margin: 0 -89px;
+}
+
+.nav-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scroll {
+    background-color: var(--background-g);
+}
+
+@media (min-width: 1200px) {
+    .navbar-collapse {
+        background-color: transparent;
+        padding: 0;
+        margin: 0;
+    }
+}

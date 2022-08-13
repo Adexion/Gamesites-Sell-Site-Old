@@ -1,0 +1,28 @@
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row mb-5">
+            <div class="col-lg-4 col-12 d-flex flex-column mb-5">
+                {% if logo %}<img src="/assets/images/{{ logo }}" alt="logo">{% else %}<span class="nav-logo"></span>{% endif %}
+            </div>
+            <div class="col-lg-8 col-12 d-flex justify-content-end mb-5 gap-4">
+                <a href="{{ path('index') }}#rank" class="nav-link text-white fw-bold">RANKINGI</a>
+                <a href="{{ path('index') }}#trailer" class="nav-link text-white fw-bold">PREZENTACJA SERWERA</a>
+                <a href="{{ path('rule') }}" class="nav-link text-white fw-bold">REGULAMIN</a>
+                <a href="{{ path('shop') }}" class="nav-link text-white fw-bold">SKLEP</a>
+                <a href="{{ facebook }}" class="nav-link text-white fw-bold"><i class="fab fa-facebook-f"></i></a>
+                <a href="{{ discord }}" class="nav-link text-white fw-bold"><i class="fab fa-discord"></i></a>
+                <a href="{{ yt }}" class="nav-link text-white fw-bold"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="row">
+            <span class="w-100 text-secondary">{{ siteName }} - {{ 'Text footer' | trans }}</span>
+        </div>
+        <div class="row flex flex-between flex-align mw-auto my-5">
+            <div class="footer-line mb-5"></div>
+            <span class="w-100 text-center text-secondary">
+                <a href="https://www.gamesites.pl/" target="_blank" rel="author" class="link-secondary">GameSites.pl</a>
+                © {{ '2017 - ' ~ 'now' | date('Y') }} | Wszelkie prawa zastrzeżone.
+            </span>
+        </div>
+    </div>
+</footer>

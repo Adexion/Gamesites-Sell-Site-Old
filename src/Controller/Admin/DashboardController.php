@@ -23,7 +23,6 @@ use App\Entity\PaySafeCard;
 use App\Entity\Configuration;
 use App\Entity\Administration;
 use App\Repository\ServerRepository;
-use App\Service\Connection\QueryService;
 use App\Controller\Admin\Action\Console;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,18 +42,24 @@ class DashboardController extends AbstractDashboardController
     use Console;
     use Authentication;
 
+    private array $serverResponse;
+
+    public function __construct()
+    {
+        ini_set('default_socket_timeout', 0.3);
+        $this->serverResponse = json_decode(@file_get_contents(UrlEnum::GAMESITES_URL . 'v1/application/information/' . $_ENV['COUPON']), true) ?: [];
+    }
+
     /**
      * @Route("/admin", name="admin")
      */
     public function index(ServerRepository $serverRepository = null, ExecuteServiceFactory $executeServiceFactory = null): Response
     {
-        ini_set('default_socket_timeout', 1);
-        $response = json_decode(file_get_contents(UrlEnum::GAMESITES_URL . 'v1/application/information/' . $_ENV['COUPON']), true);
         $server = $serverRepository->findOneBy(['isDefault' => true]);
         $service = $server ? $executeServiceFactory->getExecutionService($server) : null;
 
         return $this->render('admin/dashboard.html.twig', [
-            'response' => $response,
+            'response' => $this->serverResponse ?? '',
             'serverInfo' => $service ? $service->getInfo() : [],
         ]);
     }
@@ -85,9 +90,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        $response = json_decode(file_get_contents(UrlEnum::GAMESITES_URL . 'v1/application/information/' . $_ENV['COUPON']), true);
-
-        if ($response['expireDate'] <= date('Y-m-d')) {
+        if ($this->serverResponse && $this->serverResponse['expireDate'] <= date('Y-m-d')) {
             return [];
         }
 

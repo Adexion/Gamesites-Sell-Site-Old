@@ -1,0 +1,40 @@
+<section class="shop">
+    <div class="container-fluid px-5">
+
+        <h1 class="text-pink">Sklep serwera</h1>
+        <p class="shop-text_p">{{ 'Shop information' | trans }}</p>
+
+        {% for serverName, group in groupItems %}
+        <div class="row">
+            <div class="d-flex flex-between mt-5 py-3">
+                <div class="col-lg-6">
+                    <h1>Przedmioty serwera: <b class="text-pink">{{ serverName }}</b></h1>
+                </div>
+                <div class="col-lg-6 d-flex justify-content-end">
+                    <button type="button" class="btn btn btn-secondary modal-btn text-black">{{ 'Realize voucher' | trans }}</button>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mb-5 flex-wrap">
+                {% for item in group %}
+                    <a target="_self" rel="next" href="{{ path('item', {id: item.id}) }}" class="shop-box justify-content-between">
+                        <div class="row w-100">
+                            <div class="d-flex flex-column justify-content-between col-7">
+                                <h1 class="fs-2">{{ item.name }}</h1>
+                                <h2 class="text-secondary fs-5">{{ item.shortDescription }}</h2>
+                                <span class="btn btn-secondary btn-shop">OD <b>{{ item.price | format_currency('PLN') }}</b></span>
+                            </div>
+                            <div class="d-flex flex-column justify-content-between align-items-end col-5">
+                                <h1 class="text-pink fw-bold fst-italic">{% if item.Discount %}-{{ item.discount * 100 }}%{% endif %}</h1>
+                                <img class="shop-box-image" src="{{ asset('/assets/images/minecraft.png') }}" alt="SHOP-IMG">
+                                {% if item.discount %}
+                                    <h3 class="shop-real-price">TERAZ <b class="text-pink">{{ item.discountedPrice | format_currency('PLN') }}</b></h3>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

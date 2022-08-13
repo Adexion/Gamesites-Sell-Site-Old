@@ -8,13 +8,12 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=RankRepository::class)
- * @UniqueEntity("type")
  * @ORM\Table(name="ranking")
  */
 class Rank extends AbstractRemoteEntity
 {
     /**
-     * @ORM\Column(type="smallint", unique=true)
+     * @ORM\Column(type="smallint")
      */
     private $type;
 

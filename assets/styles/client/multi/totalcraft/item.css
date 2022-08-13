@@ -1,0 +1,72 @@
+.payment-box {
+    background-image: url("/assets/images/totalcraft/miniaturka.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-decoration: none;
+    color: var(--white);
+
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border: 1px solid var(--purple);
+    margin-bottom: 20px;
+}
+
+#payment {
+    display: flex;
+    gap: 15px;
+}
+
+#payment div {
+    width: 150px;
+    height: 90px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+#payment label {
+    text-align: center;
+    z-index: 1;
+}
+
+#payment input[type=radio] {
+    background-color: transparent;
+    margin: 0;
+    width: 150px;
+    height: 90px;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    border-radius: 0.3rem;
+    border: 1px solid var(--color-g);
+    transition: background-color 200ms ease-in, color 200ms ease-in;
+}
+
+#payment input[type=radio]:focus {
+    box-shadow: none;
+}
+
+#payment input[type=radio]:checked {
+    background-image: none;
+
+    transition: background-color 200ms ease-in,color 200ms ease-in;
+    background-color: var(--color-g);
+    color: var(--black);
+}
+
+#payment input[type=radio]:before {
+    content: "";
+    width: 150px;
+    height: 90px;
+    border: 0;
+}
+
+input[type=range] {
+    background: none !important;
+}
