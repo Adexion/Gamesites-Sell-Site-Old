@@ -35,7 +35,7 @@ class CatchExpiredOfSubscriber implements EventSubscriberInterface
             return;
         }
 
-        ini_set('default_socket_timeout', 0.3);
+        ini_set('default_socket_timeout', 1);
         $response = json_decode(@file_get_contents(UrlEnum::GAMESITES_URL . 'v1/application/information/' . $_ENV['COUPON']), true);
         if (!empty($response) && $response['turnOffDate'] < date('Y-m-d')) {
             $content = $this->container->get('twig')->render('error402.html.twig');
