@@ -90,14 +90,6 @@ a {
   padding: 0;
 }
 
-.navbar > .container-fluid > .navbar-collapse {
-  padding: 15px;
-  margin-top: 22px;
-  width: 100%;
-  background-color: var(--opacity);
-  backdrop-filter: blur(5px);
-}
-
 .online {
   color: var(--secondary);
   text-shadow: 0 0 5px var(--secondary);
@@ -106,6 +98,16 @@ a {
 .offline {
   color: #CD4646;
   text-shadow: 0 0 5px #CD4646;
+}
+
+@media screen and (max-width: 991px) {
+  .navbar-collapse {
+    background-color: var(--opacity);
+    backdrop-filter: blur(5px);
+    padding: 15px;
+    margin-top: 22px;
+    width: 100%;
+  }
 }
 
 //-----INFORMATION-----
