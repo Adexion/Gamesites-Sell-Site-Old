@@ -86,19 +86,16 @@ a {
   margin-right: 25px;
 }
 
-.navbar-collapse {
-  background-color: var(--opacity);
-  backdrop-filter: blur(5px);
-  margin-top: 22px;
-  width: 100%;
-}
-
 .navbar > .container-fluid {
   padding: 0;
 }
 
 .navbar > .container-fluid > .navbar-collapse {
   padding: 15px;
+  margin-top: 22px;
+  width: 100%;
+  background-color: var(--opacity);
+  backdrop-filter: blur(5px);
 }
 
 .online {
