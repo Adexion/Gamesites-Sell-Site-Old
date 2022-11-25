@@ -2,8 +2,16 @@
 
 {% block body %}
     {% include 'client/simple/dark/component/information.html.twig' %}
-    {% include 'client/simple/dark/component/whatsup.html.twig' %}
-    {% include 'client/simple/dark/component/story.html.twig' %}
+    {% include 'client/multi/dark/component/stats.html.twig' %}
+
+    {% if trailer %}
+        {% include 'client/simple/dark/component/whatsup.html.twig' %}
+    {% endif %}
+    {% if mainText %}
+        {% include 'client/simple/dark/component/story.html.twig' %}
+    {% endif %}
     {% include 'client/simple/dark/component/guildItem.html.twig' %}
-    {% include 'client/simple/dark/component/administration.html.twig' %}
+    {% if guildItem %}
+        {% include 'client/simple/dark/component/administration.html.twig' %}
+    {% endif %}
 {% endblock %}

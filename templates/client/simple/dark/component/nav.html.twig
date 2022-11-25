@@ -1,5 +1,8 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
+        <div class="navbar-logo">
+            <img class="mw-100 mh-100" src="/assets/images/{{ logo }}" alt="Logotype">
+        </div>
         {% if serverInfo | length != 0 %}
             <div class="d-flex justify-content-center align-items-center online">
                 <span class="white-shadow">{{ serverInfo.Players }}/{{ serverInfo.MaxPlayers }}</span>
