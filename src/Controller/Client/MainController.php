@@ -2,6 +2,7 @@
 
 namespace App\Controller\Client;
 
+use App\Repository\ArticleRepository;
 use DateTime;
 use App\Enum\RankEnum;
 use Twig\Error\SyntaxError;
@@ -33,6 +34,7 @@ class MainController extends AbstractRenderController
         ItemHistoryRepository $itemHistoryRepository,
         ServerRepository $serverRepository,
         RankRepository $rankRepository,
+        ArticleRepository $articleRepository,
         Request $request
     ): Response {
         return $this->renderTheme('index.html.twig', [
@@ -43,6 +45,7 @@ class MainController extends AbstractRenderController
             'serverList' => array_slice($serverRepository->findAll(), 0, 3),
             'guildRank' => $rankRepository->findRemote(['type' => RankEnum::GUILD]),
             'playerRank' => $rankRepository->findRemote(['type' => RankEnum::PLAYER], $request->query->all()),
+            'isAnyArticle' => $articleRepository->findOneBy([])
         ]);
     }
 

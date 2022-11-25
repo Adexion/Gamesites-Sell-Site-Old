@@ -3,11 +3,11 @@
     <section id="adm">
         <div class="container">
             <div class="row justify-content-center align-items-center">
-                <div class="col-xxl-8 col-8 d-flex justify-content-center align-items-center text-center flex-wrap gap-3 mt-rep">
-                    <h1 class="text-center pb-5 mb-2">Poznaj administrację naszego serwera!</h1>
-                    {% set minotar = "https://mc-heads.net/body/" %}
+                <div class="col-xxl-12 col-8 d-flex justify-content-center align-items-center text-center flex-wrap gap-4 mt-rep">
+                    <h1 class="text-center pb-5 mb-2 w-100">Poznaj administrację naszego serwera!</h1>
+                    {% set minotar = "https://mc-heads.net/head/" %}
                     {% for a in administration %}
-                        <div class="d-flex gap-3 justify-content-center align-items-center box flex-column">
+                        <div class="d-flex gap-3 justify-content-center align-items-center box flex-column w-33">
                             <div class="gs-body d-flex align-items-center justify-content-end flex-column">
                                 <img src="{{ minotar }}{{ a.username }}" alt="skin {{ a.username }}" width="100">
                             </div>

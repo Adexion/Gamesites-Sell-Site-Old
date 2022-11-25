@@ -19,9 +19,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('index') }}">Strona główna</a>
                 </li>
+                {% if isAnyArticle %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('article-list') }}">Artykuły</a>
                 </li>
+                {% endif %}
                 {% if areBansSet %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('bans') }}">Lista Banów</a>
