@@ -10,8 +10,9 @@
     {% if mainText %}
         {% include 'client/simple/dark/component/story.html.twig' %}
     {% endif %}
-    {% include 'client/simple/dark/component/guildItem.html.twig' %}
     {% if guildItem %}
-        {% include 'client/simple/dark/component/administration.html.twig' %}
+        {% include 'client/simple/dark/component/guildItem.html.twig' %}
     {% endif %}
+
+    {% include 'client/simple/dark/component/administration.html.twig' %}
 {% endblock %}
