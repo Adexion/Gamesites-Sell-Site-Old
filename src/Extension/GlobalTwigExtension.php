@@ -2,6 +2,8 @@
 
 namespace App\Extension;
 
+use App\Entity\Article;
+use App\Repository\ArticleRepository;
 use Exception;
 use App\Entity\Head;
 use App\Entity\Bans;
@@ -25,6 +27,7 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
     private QueryInterface $queryService;
     private FormFactoryInterface $factory;
     private BansRepository $bansRepository;
+    private ArticleRepository $articleRepository;
 
     public function __construct(
         GlobalDataQuery $globalDataQuery,
@@ -38,6 +41,7 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
         $serverRepository = $managerRegistry->getRepository(Server::class);
         $this->headRepository = $managerRegistry->getRepository(Head::class);
         $this->bansRepository = $managerRegistry->getRepository(Bans::class);
+        $this->articleRepository = $managerRegistry->getRepository(Article::class);
 
         $this->queryService = $executeServiceFactory->getExecutionService($serverRepository->getDefault());
     }
@@ -76,6 +80,7 @@ class GlobalTwigExtension extends AbstractExtension implements GlobalsInterface
             'head' => $this->headRepository->findOneBy([]),
             'templates' => $this->factory->create(DevTemplateType::class)->createView(),
             'development' => isset($_ENV['APP_DEV']) && $_ENV['APP_DEV'] == 'development',
+            'isAnyArticle' => $this->articleRepository->findOneBy([])
         ];
     }
 }

@@ -34,7 +34,6 @@ class MainController extends AbstractRenderController
         ItemHistoryRepository $itemHistoryRepository,
         ServerRepository $serverRepository,
         RankRepository $rankRepository,
-        ArticleRepository $articleRepository,
         Request $request
     ): Response {
         return $this->renderTheme('index.html.twig', [
@@ -44,8 +43,7 @@ class MainController extends AbstractRenderController
             'boughtAll' => $itemHistoryRepository->getCountOfBoughtItems(),
             'serverList' => array_slice($serverRepository->findAll(), 0, 3),
             'guildRank' => $rankRepository->findRemote(['type' => RankEnum::GUILD]),
-            'playerRank' => $rankRepository->findRemote(['type' => RankEnum::PLAYER], $request->query->all()),
-            'isAnyArticle' => $articleRepository->findOneBy([])
+            'playerRank' => $rankRepository->findRemote(['type' => RankEnum::PLAYER], $request->query->all())
         ]);
     }
 
