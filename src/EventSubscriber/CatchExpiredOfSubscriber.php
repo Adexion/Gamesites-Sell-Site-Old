@@ -3,7 +3,9 @@
 namespace App\EventSubscriber;
 
 use App\Enum\UrlEnum;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -25,6 +27,7 @@ class CatchExpiredOfSubscriber implements EventSubscriberInterface
         ];
     }
 
+    /** @throws ContainerExceptionInterface|NotFoundExceptionInterface */
     public function forceBlockingApplication(RequestEvent $event): void
     {
         if (!$event->isMainRequest()) {

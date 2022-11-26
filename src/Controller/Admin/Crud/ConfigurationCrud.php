@@ -4,14 +4,14 @@ namespace App\Controller\Admin\Crud;
 
 use App\Controller\Admin\Field\ImageRepositoryField;
 use App\Entity\Configuration;
+use App\Entity\Customer\Template;
 use App\Entity\Image;
-use App\Entity\Template;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Validator\Constraints\Length;
@@ -19,11 +19,11 @@ use Symfony\Component\Validator\Constraints\Range;
 
 class ConfigurationCrud extends AbstractCrudController
 {
-    private ManagerRegistry $managerRegistry;
+    private array $templates;
 
-    public function __construct(ManagerRegistry $managerRegistry)
+    public function __construct(EntityManagerInterface $configurationEntityManager)
     {
-        $this->managerRegistry = $managerRegistry;
+        $this->templates = $configurationEntityManager->getRepository(Template::class)->findAll();
     }
 
     public static function getEntityFqcn(): string
@@ -44,7 +44,9 @@ class ConfigurationCrud extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        $qb = $this->managerRegistry->getRepository(Template::class, 'configuration')->createQueryBuilder('template');
+        foreach ($this->templates as $template) {
+            $list[ $template->getName()] = $template->getId();
+        }
 
         return [
             TextField::new('ip')
@@ -55,8 +57,8 @@ class ConfigurationCrud extends AbstractCrudController
                 ->setNumDecimals(2)
                 ->setStoredAsCents(false)
                 ->setFormTypeOption('constraints', [new Range(['max' => 999.99, 'min' => 0.01])]),
-            AssociationField::new('template')
-                ->setQueryBuilder(fn() => $qb),
+            ChoiceField::new('template')
+                ->setChoices($list ?? []),
             BooleanField::new('simplePaySafeCard'),
             TextField::new('simplePayPal'),
             BooleanField::new('showBigLogo'),

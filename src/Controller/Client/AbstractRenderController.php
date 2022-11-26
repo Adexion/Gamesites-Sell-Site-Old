@@ -2,7 +2,7 @@
 
 namespace App\Controller\Client;
 
-use App\Entity\Template;
+use App\Entity\Customer\Template;
 use App\Kernel;
 use App\Repository\ConfigurationRepository;
 use Exception;

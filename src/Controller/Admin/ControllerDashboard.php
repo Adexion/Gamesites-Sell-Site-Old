@@ -4,14 +4,13 @@ namespace App\Controller\Admin;
 
 use App\Controller\Admin\Action\Authentication;
 use App\Controller\Admin\Action\Console;
-use App\Controller\Admin\Action\DashboardAbstract;
 use App\Controller\Admin\Action\PasswordManager;
 use App\Repository\ServerRepository;
 use App\Service\Connection\ExecuteServiceFactory;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-final class DashboardController extends DashboardAbstract
+final class ControllerDashboard extends AbstractDashboard
 {
     use PasswordManager;
     use Console;

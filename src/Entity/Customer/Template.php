@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Customer;
 
 use App\Repository\TemplateRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -33,6 +33,11 @@ class Template
      * @ORM\ManyToMany(targetEntity=Module::class, inversedBy="templates")
      */
     private $modules;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isActive;
 
     public function __construct()
     {
@@ -89,8 +94,15 @@ class Template
         return $this;
     }
 
-    public function __toString()
+    public function getIsActive(): ?bool
     {
-        return $this->getName();
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
+
+        return $this;
     }
 }

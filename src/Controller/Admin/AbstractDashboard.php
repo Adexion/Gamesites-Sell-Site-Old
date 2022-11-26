@@ -1,16 +1,20 @@
 <?php
 
-namespace App\Controller\Admin\Action;
+namespace App\Controller\Admin;
 
 use App\Entity\Additional;
 use App\Entity\Configuration;
 use App\Entity\Contact;
+use App\Entity\Customer\Module;
+use App\Entity\Customer\Template;
+use App\Entity\Head;
 use App\Entity\Image;
-use App\Entity\Module;
 use App\Entity\Rule;
 use App\Entity\User;
 use App\Enum\UrlEnum;
 use App\Repository\ConfigurationRepository;
+use App\Repository\TemplateRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -18,17 +22,19 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-abstract class DashboardAbstract extends AbstractDashboardController
+abstract class AbstractDashboard extends AbstractDashboardController
 {
     protected array $serverResponse;
     private Configuration $configuration;
+    private TemplateRepository $templateRepository;
 
-    public function __construct(ConfigurationRepository $configurationRepository)
+    public function __construct(ConfigurationRepository $configurationRepository, EntityManagerInterface  $configurationEntityManager)
     {
         ini_set('default_socket_timeout', 1);
         $this->serverResponse = json_decode(@file_get_contents(UrlEnum::GAMESITES_URL . 'v1/application/information/' . $_ENV['COUPON']), true) ?: [];
 
         $this->configuration = $configurationRepository->findOneBy([]);
+        $this->templateRepository = $configurationEntityManager->getRepository(Template::class);
     }
 
     public function configureAssets(): Assets
@@ -42,7 +48,6 @@ abstract class DashboardAbstract extends AbstractDashboardController
     {
         return Dashboard::new()
             ->renderSidebarMinimized(false)
-            ->renderContentMaximized(true)
             ->disableUrlSignatures()
             ->setTitle('GameSites');
     }
@@ -65,8 +70,8 @@ abstract class DashboardAbstract extends AbstractDashboardController
         yield MenuItem::linkToCrud('Additional', 'fa fa-plus', Additional::class);
         yield MenuItem::linkToCrud('Rule', 'fa fa-book', Rule::class);
 
+        $modules = $this->templateRepository->find($this->configuration->getTemplate())->getModules();
 
-        $modules = $this->configuration->getTemplate()->getModules();
         /** @var Module $module */
         foreach ($modules as $module) {
             $activeSections[$module->getSection()->getName()][] = $module;
@@ -75,15 +80,15 @@ abstract class DashboardAbstract extends AbstractDashboardController
         foreach ($activeSections ?? [] as $section => $modules) {
             yield MenuItem::section($section);
             foreach ($modules as $module) {
-                yield MenuItem::linkToCrud($module->getName(), $module->getIcon(), $module->getEntity());
+                yield MenuItem::linkToCrud($module->getName(), $module->getIcon(), 'App\Entity\\' . $module->getEntity());
             }
         }
 
+//        yield MenuItem::section('Content');
 //        yield MenuItem::linkToCrud('Articles', 'fa fa-newspaper', Article::class);
 //        yield MenuItem::linkToCrud('Rank', 'fas fa-users', Rank::class);
 //        yield MenuItem::linkToCrud('Bans', 'fas fa-ban', Bans::class);
 //        yield MenuItem::linkToCrud('Administration', 'fas fa-user-shield', Administration::class);
-
 //
 //        yield MenuItem::section('Item Shop');
 //        yield MenuItem::linkToCrud('Item', 'fas fa-shopping-cart', Item::class);
@@ -97,10 +102,14 @@ abstract class DashboardAbstract extends AbstractDashboardController
 //        yield MenuItem::linkToCrud('Guild Item', 'fas fa-sitemap', GuildItem::class);
 //        yield MenuItem::linkToCrud('Redirect Link', 'fas fa-link', Link::class);
 //        yield MenuItem::linkToCrud('Heading', 'fas fa-heading', Head::class);
-//        yield MenuItem::linkToCrud('Configuration', 'fas fa-cog', \App\Entity\Configuration::class);
 
         yield MenuItem::section('Users');
         yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
+
+        yield MenuItem::section('Advanced');
+        yield MenuItem::linkToCrud('Configuration', 'fas fa-cog', Configuration::class);
+        yield MenuItem::linkToCrud('SEO', 'fas fa-heading', Head::class);
+
     }
 
     public function configureUserMenu(UserInterface $user): UserMenu

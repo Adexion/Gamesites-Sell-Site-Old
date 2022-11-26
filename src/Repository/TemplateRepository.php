@@ -2,29 +2,11 @@
 
 namespace App\Repository;
 
-use App\Entity\Template;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Customer\Template;
+use Doctrine\ORM\EntityRepository;
 
-/**
- * @method Template|null find($id, $lockMode = null, $lockVersion = null)
- * @method Template|null findOneBy(array $criteria, array $orderBy = null)
- * @method Template[]    findAll()
- * @method Template[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
-class TemplateRepository extends ServiceEntityRepository
+class TemplateRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Template::class);
-    }
-
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
     public function add(Template $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
@@ -33,10 +15,6 @@ class TemplateRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
     public function remove(Template $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
@@ -44,33 +22,4 @@ class TemplateRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
-
-    // /**
-    //  * @return Template[] Returns an array of Template objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Template
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

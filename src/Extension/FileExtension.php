@@ -23,7 +23,7 @@ class FileExtension extends AbstractExtension
         ];
     }
 
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('imageExist', [$this, 'remoteFileExists'])

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Customer\Template;
 use App\Repository\ConfigurationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -54,8 +55,7 @@ class Configuration
     private $showBigLogo = true;
 
     /**
-     * @ORM\OneToOne(targetEntity=Template::class, cascade={"persist", "remove"}, mappedBy="name")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="integer")
      */
     private $template;
 
@@ -152,12 +152,12 @@ class Configuration
         return $this;
     }
 
-    public function getTemplate(): ?Template
+    public function getTemplate(): ?int
     {
         return $this->template;
     }
 
-    public function setTemplate(Template $template): self
+    public function setTemplate(int $template): self
     {
         $this->template = $template;
 

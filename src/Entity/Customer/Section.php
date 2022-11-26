@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Customer;
 
 use App\Repository\SectionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
