@@ -2,37 +2,37 @@
 
 namespace App\Controller\Client;
 
-use App\Enum\TemplateEnum;
+use App\Entity\Template;
+use App\Kernel;
 use App\Repository\ConfigurationRepository;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Twig\Error\SyntaxError;
-use UnexpectedValueException;
 
 class AbstractRenderController extends AbstractController
 {
-    private const DEFAULT = TemplateEnum::GUILD_DARK;
-    private TemplateEnum $template;
+    private const DEFAULT = 'client/guild/dark/';
 
-    public function __construct(ConfigurationRepository $configurationRepository)
+    private ?Template $template;
+    private string $env;
+
+    public function __construct(ConfigurationRepository $configurationRepository, Kernel $kernel)
     {
-        try {
-            $this->template = new TemplateEnum($configurationRepository->findOneBy([])->getTemplate());
-        } catch (UnexpectedValueException $e) {
-            $this->template = new TemplateEnum(TemplateEnum::NONE);
-        }
+        $this->template = $configurationRepository->findOneBy([])->getTemplate();
+        $this->env = $kernel->getEnvironment();
     }
 
+    /** @throws Exception */
     protected function renderTheme(string $view, array $parameters = [], Response $response = null): Response
     {
-        if (!$this->template->getValue()) {
+        if ( ! $this->template || ! $this->template->getId()) {
             return $this->render(self::DEFAULT . $view, $parameters, $response);
         }
 
         try {
-            return $this->render($this->template->getValue() . $view, $parameters, $response);
-        } catch (SyntaxError $e) {
-            if ($_ENV['APP_ENV'] === 'dev') {
+            return $this->render($this->template->getPath() . $view, $parameters, $response);
+        } catch (Exception $e) {
+            if ('dev' === $this->env) {
                 throw $e;
             }
         }

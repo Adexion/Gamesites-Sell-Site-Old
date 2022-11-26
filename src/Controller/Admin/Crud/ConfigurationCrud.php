@@ -2,15 +2,16 @@
 
 namespace App\Controller\Admin\Crud;
 
-use App\Entity\Image;
+use App\Controller\Admin\Field\ImageRepositoryField;
 use App\Entity\Configuration;
-use App\Enum\TemplateEnum;
+use App\Entity\Image;
+use App\Entity\Template;
+use Doctrine\Persistence\ManagerRegistry;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use App\Controller\Admin\Field\ImageRepositoryField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Validator\Constraints\Length;
@@ -18,6 +19,13 @@ use Symfony\Component\Validator\Constraints\Range;
 
 class ConfigurationCrud extends AbstractCrudController
 {
+    private ManagerRegistry $managerRegistry;
+
+    public function __construct(ManagerRegistry $managerRegistry)
+    {
+        $this->managerRegistry = $managerRegistry;
+    }
+
     public static function getEntityFqcn(): string
     {
         return Configuration::class;
@@ -36,6 +44,8 @@ class ConfigurationCrud extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        $qb = $this->managerRegistry->getRepository(Template::class, 'configuration')->createQueryBuilder('template');
+
         return [
             TextField::new('ip')
                 ->setLabel('IP do kopiowania dla użytkowników')
@@ -45,8 +55,8 @@ class ConfigurationCrud extends AbstractCrudController
                 ->setNumDecimals(2)
                 ->setStoredAsCents(false)
                 ->setFormTypeOption('constraints', [new Range(['max' => 999.99, 'min' => 0.01])]),
-            ChoiceField::new('template')
-                ->setChoices(TemplateEnum::toArray()),
+            AssociationField::new('template')
+                ->setQueryBuilder(fn() => $qb),
             BooleanField::new('simplePaySafeCard'),
             TextField::new('simplePayPal'),
             BooleanField::new('showBigLogo'),

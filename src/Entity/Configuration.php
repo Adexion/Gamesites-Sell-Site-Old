@@ -34,11 +34,6 @@ class Configuration
     private $ip;
 
     /**
-     * @ORM\Column(type="string", length=25, nullable=true)
-     */
-    private $template;
-
-    /**
      * @ORM\Column(type="boolean", options={"default": true})
      */
     private $simplePaySafeCard;
@@ -57,6 +52,12 @@ class Configuration
      * @ORM\Column(type="boolean", options={"default": true})
      */
     private $showBigLogo = true;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Template::class, cascade={"persist", "remove"}, mappedBy="name")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $template;
 
     public function getId(): ?int
     {
@@ -115,18 +116,6 @@ class Configuration
         return $this;
     }
 
-    public function getTemplate(): ?string
-    {
-        return $this->template;
-    }
-
-    public function setTemplate(?string $template): self
-    {
-        $this->template = $template;
-
-        return $this;
-    }
-
     public function setTarget(?float $target): self
     {
         $this->target = $target;
@@ -159,6 +148,18 @@ class Configuration
     public function setShowBigLogo(bool $showBigLogo): self
     {
         $this->showBigLogo = $showBigLogo;
+
+        return $this;
+    }
+
+    public function getTemplate(): ?Template
+    {
+        return $this->template;
+    }
+
+    public function setTemplate(Template $template): self
+    {
+        $this->template = $template;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 parameters:
-    uploadPath: 'public/assets/images'
-    basePath: '/assets/images'
+    uploadPath: 'public/assets/images/%env(APP_NAME)%'
+    basePath: '/assets/images/%env(APP_NAME)%'
 
 services:
     _defaults:
