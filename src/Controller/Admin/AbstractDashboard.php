@@ -9,6 +9,7 @@ use App\Entity\Customer\Module;
 use App\Entity\Customer\Template;
 use App\Entity\Head;
 use App\Entity\Image;
+use App\Entity\Link;
 use App\Entity\Rule;
 use App\Entity\User;
 use App\Enum\UrlEnum;
@@ -90,18 +91,16 @@ abstract class AbstractDashboard extends AbstractDashboardController
 //        yield MenuItem::linkToCrud('Bans', 'fas fa-ban', Bans::class);
 //        yield MenuItem::linkToCrud('Administration', 'fas fa-user-shield', Administration::class);
 //
+//        yield MenuItem::section('Settings');
+//        yield MenuItem::linkToCrud('Server', 'fas fa-server', Server::class);
+//        yield MenuItem::linkToCrud('Guild Item', 'fas fa-sitemap', GuildItem::class);
+//
 //        yield MenuItem::section('Item Shop');
 //        yield MenuItem::linkToCrud('Item', 'fas fa-shopping-cart', Item::class);
 //        yield MenuItem::linkToCrud('Payment', 'fas fa-money-bill', Payment::class);
 //        yield MenuItem::linkToCrud('Voucher', 'fas fa-receipt', Voucher::class);
 //        yield MenuItem::linkToCrud('PaySafeCard', 'fas fa-lock', PaySafeCard::class);
 //        yield MenuItem::linkToCrud('History', 'fa fa-history', ItemHistory::class);
-//
-//        yield MenuItem::section('Settings');
-//        yield MenuItem::linkToCrud('Server', 'fas fa-server', Server::class);
-//        yield MenuItem::linkToCrud('Guild Item', 'fas fa-sitemap', GuildItem::class);
-//        yield MenuItem::linkToCrud('Redirect Link', 'fas fa-link', Link::class);
-//        yield MenuItem::linkToCrud('Heading', 'fas fa-heading', Head::class);
 
         yield MenuItem::section('Users');
         yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
@@ -109,7 +108,7 @@ abstract class AbstractDashboard extends AbstractDashboardController
         yield MenuItem::section('Advanced');
         yield MenuItem::linkToCrud('Configuration', 'fas fa-cog', Configuration::class);
         yield MenuItem::linkToCrud('SEO', 'fas fa-heading', Head::class);
-
+        yield MenuItem::linkToCrud('Redirect Link', 'fas fa-link', Link::class);
     }
 
     public function configureUserMenu(UserInterface $user): UserMenu
