@@ -115,6 +115,7 @@ a {
 #information {
   background-repeat: no-repeat;
   background-size: cover;
+  padding-bottom: 160px;
 }
 
 .social {
@@ -133,9 +134,12 @@ a {
 //-----WHATS_UP-----
 
 .stats {
-  min-height: 250px;
-  max-height: 500px;
-  margin-top: -220px;
+  background: var(--bg-footer);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding-bottom: 80px;
 }
 
 .status-left {
@@ -184,7 +188,8 @@ a {
 //-----WHATS_UP-----
 
 #ws {
-  height: 100vh;
+  min-height: 100vh;
+  padding: 80px 0;
 }
 
 .ws-gradient {
@@ -232,8 +237,12 @@ a {
 //-----ADMINISTRATION-----
 
 #adm {
-  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   background-color: var(--bg-secondary);
+  padding: 85px 0 105px;
 }
 
 .adm-gradient {
