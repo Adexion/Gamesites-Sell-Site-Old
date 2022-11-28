@@ -61,7 +61,7 @@ class MainController extends AbstractRenderController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $configuration = $configurationRepository->findOneBy([]);
-            $configuration->setTemplate($form->getData()['template']);
+            $configuration->setTemplateId($form->getData()['template']);
 
             $em->persist($configuration);
             $em->flush();

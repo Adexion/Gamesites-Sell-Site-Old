@@ -5,6 +5,7 @@ namespace App\Controller\Client;
 use App\Entity\Customer\Template;
 use App\Kernel;
 use App\Repository\ConfigurationRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,9 +17,11 @@ class AbstractRenderController extends AbstractController
     private ?Template $template;
     private string $env;
 
-    public function __construct(ConfigurationRepository $configurationRepository, Kernel $kernel)
+    public function __construct(ConfigurationRepository $configurationRepository, Kernel $kernel, EntityManagerInterface $configurationEntityManager)
     {
-        $this->template = $configurationRepository->findOneBy([])->getTemplate();
+        $this->template = $configurationEntityManager->getRepository(Template::class)->find(
+            $configurationRepository->findOneBy([])->getTemplateId()
+        );
         $this->env = $kernel->getEnvironment();
     }
 

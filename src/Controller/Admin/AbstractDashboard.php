@@ -71,7 +71,7 @@ abstract class AbstractDashboard extends AbstractDashboardController
         yield MenuItem::linkToCrud('Additional', 'fa fa-plus', Additional::class);
         yield MenuItem::linkToCrud('Rule', 'fa fa-book', Rule::class);
 
-        $modules = $this->templateRepository->find($this->configuration->getTemplate())->getModules();
+        $modules = $this->templateRepository->find($this->configuration->getTemplateId())->getModules();
 
         /** @var Module $module */
         foreach ($modules as $module) {

@@ -6,6 +6,7 @@ use App\Controller\Admin\Field\ImageRepositoryField;
 use App\Entity\Configuration;
 use App\Entity\Customer\Template;
 use App\Entity\Image;
+use App\Repository\ConfigurationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -21,9 +22,14 @@ class ConfigurationCrud extends AbstractCrudController
 {
     private array $templates;
 
-    public function __construct(EntityManagerInterface $configurationEntityManager)
+    public function __construct(EntityManagerInterface $configurationEntityManager, ConfigurationRepository $configurationRepository)
     {
-        $this->templates = $configurationEntityManager->getRepository(Template::class)->findAll();
+        $this->templates = $configurationEntityManager->getRepository(Template::class)->createQueryBuilder('t')
+            ->where('t.isActive = 1')
+            ->orWhere('t.id = :alreadyUsed')
+            ->setParameter('alreadyUsed', $configurationRepository->findOneBy([])->getTemplateId())
+            ->getQuery()->execute();
+
     }
 
     public static function getEntityFqcn(): string
@@ -45,7 +51,7 @@ class ConfigurationCrud extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         foreach ($this->templates as $template) {
-            $list[ $template->getName()] = $template->getId();
+            $list[$template->getName()] = $template->getId();
         }
 
         return [
@@ -57,7 +63,7 @@ class ConfigurationCrud extends AbstractCrudController
                 ->setNumDecimals(2)
                 ->setStoredAsCents(false)
                 ->setFormTypeOption('constraints', [new Range(['max' => 999.99, 'min' => 0.01])]),
-            ChoiceField::new('template')
+            ChoiceField::new('templateId')
                 ->setChoices($list ?? []),
             BooleanField::new('simplePaySafeCard'),
             TextField::new('simplePayPal'),

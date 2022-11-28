@@ -57,7 +57,7 @@ class Configuration
     /**
      * @ORM\Column(type="integer")
      */
-    private $template;
+    private $templateId;
 
     public function getId(): ?int
     {
@@ -152,14 +152,14 @@ class Configuration
         return $this;
     }
 
-    public function getTemplate(): ?int
+    public function getTemplateId(): ?int
     {
-        return $this->template;
+        return $this->templateId;
     }
 
-    public function setTemplate(int $template): self
+    public function setTemplateId(int $template): self
     {
-        $this->template = $template;
+        $this->templateId = $template;
 
         return $this;
     }

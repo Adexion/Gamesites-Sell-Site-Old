@@ -91,6 +91,7 @@ Times: Ilość użyć
 Expired: Data wygaśnięcia
 Discount: Żniżka
 Template: Wygląd strony
+Template Id: Wygląd strony
 Priority: Priorytet
 -1 unlimited, 0 is off, 1+ is specific use number: -1 nielimitowana ilość, 0 wyłączone, 1 lub więcej to dozwolona ilość użyć
 Payment Id: Id Płatności
