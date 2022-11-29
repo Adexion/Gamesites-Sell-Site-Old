@@ -71,7 +71,7 @@ class MainController extends AbstractRenderController
     }
 
     /**
-     * @Route(path="/rule", name="rule")
+     * @Route ({"en": "/rule", "pl": "/regulamin"}, name="rule")
      * @throws SyntaxError
      */
     public function rule(RuleRepository $repository): Response

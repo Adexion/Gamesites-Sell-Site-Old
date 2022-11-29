@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ItemController extends AbstractRenderController
 {
     /**
-     * @Route (name="shop", path="/shop")
+     * @Route ({"en": "/shop", "pl": "/sklep"}, name="shop")
      * @throws SyntaxError
      */
     public function shop(ItemRepository $repository, ItemHistoryRepository $itemHistoryRepository): Response
