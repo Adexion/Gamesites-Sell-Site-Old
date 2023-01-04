@@ -71,19 +71,6 @@ class MainController extends AbstractRenderController
     }
 
     /**
-     * @Route ({"en": "/rule", "pl": "/regulamin"}, name="rule")
-     * @throws SyntaxError
-     */
-    public function rule(RuleRepository $repository): Response
-    {
-        $rule = $repository->findOneBy([]);
-
-        return $this->renderTheme('rule.html.twig', [
-            'rule' => $rule ? $rule->getHtml() : '',
-        ]);
-    }
-
-    /**
      * @Route(path="/{name}", name="app_own_redirect")
      */
     public function ownRedirect(string $name, LinkRepository $linkRepository): RedirectResponse
@@ -94,5 +81,18 @@ class MainController extends AbstractRenderController
         }
 
         return $this->redirect($link->getUri());
+    }
+
+    /**
+     * @Route ({"en": "/rule", "pl": "/regulamin"}, name="rule")
+     * @throws SyntaxError
+     */
+    public function rule(RuleRepository $repository): Response
+    {
+        $rule = $repository->findOneBy([]);
+
+        return $this->renderTheme('rule.html.twig', [
+            'rule' => $rule ? $rule->getHtml() : '',
+        ]);
     }
 }
