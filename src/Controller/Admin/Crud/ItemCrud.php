@@ -55,7 +55,8 @@ class ItemCrud extends AbstractCrudController
             TextareaField::new('description')
                 ->setFormTypeOption('attr', ['class' => 'editor'])
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
-            TextareaField::new('shortDescription'),
+            TextareaField::new('shortDescription')
+                ->setRequired(false),
             MoneyField::new('price')
                 ->setCurrency('PLN')
                 ->setNumDecimals(2)
