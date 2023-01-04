@@ -868,6 +868,10 @@ a {
     margin-bottom: 15px;
 }
 
+.shop-direction {
+    gap: 15px;
+}
+
 @media screen and (max-width: 995px) {
     .shop-direction {
         flex-direction: column;
@@ -962,6 +966,7 @@ a {
     height: fit-content;
     gap: 35px;
     margin-bottom: 35px;
+    flex-direction: column;
 }
 
 .payments-box > .payments-box--bg {
