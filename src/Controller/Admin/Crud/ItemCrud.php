@@ -53,8 +53,7 @@ class ItemCrud extends AbstractCrudController
                 ->setChoices(ItemTypeEnum::toArray())
                 ->hideOnIndex(),
             TextareaField::new('description')
-                ->setFormTypeOption('attr', ['class' => 'editor'])
-                ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+                ->setFormTypeOption('attr', ['class' => 'editor']),
             TextareaField::new('shortDescription')
                 ->setRequired(false),
             MoneyField::new('price')
