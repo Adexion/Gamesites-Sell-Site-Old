@@ -44,15 +44,18 @@ class ItemCrud extends AbstractCrudController
         return [
             ImageRepositoryField::new('image')
                 ->setImageRepository($this->getDoctrine()->getRepository(Image::class)),
+            AssociationField::new('server')
+                ->setCrudController(ServerCrud::class)
+                ->autocomplete(),
             TextField::new('name')
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
             ChoiceField::new('type')
                 ->setChoices(ItemTypeEnum::toArray())
                 ->hideOnIndex(),
-            TextareaField::new('shortDescription'),
             TextareaField::new('description')
                 ->setFormTypeOption('attr', ['class' => 'editor'])
                 ->setFormTypeOption('constraints', [new Length(['max' => 255])]),
+            TextareaField::new('shortDescription'),
             MoneyField::new('price')
                 ->setCurrency('PLN')
                 ->setNumDecimals(2)
@@ -68,9 +71,7 @@ class ItemCrud extends AbstractCrudController
             BooleanField::new('visible'),
             BooleanField::new('isMainItem')
                 ->setHelp('Jeżeli zaznaczone, przedmiot ten będzie jedynym dostępnym w sklepie. Automatycznie zostaniesz na niego przekierowany'),
-            AssociationField::new('server')
-                ->setCrudController(ServerCrud::class)
-                ->autocomplete()
+
         ];
     }
 }
