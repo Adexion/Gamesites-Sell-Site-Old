@@ -72,6 +72,6 @@ class QueryInstance
 
     private function isServerResponding(string $url = 'localhost', string $port = "25565"): bool
     {
-        return (bool)@fsockopen($url, $port, $code, $message, 0.5);
+        return (bool)@fsockopen($url, $port, $code, $message, 1);
     }
 }
