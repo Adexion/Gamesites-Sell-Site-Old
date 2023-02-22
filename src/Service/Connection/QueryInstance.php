@@ -25,7 +25,7 @@ class QueryInstance
         }
 
         try {
-            $this->query->connect($serverIp, $serverPort, 1);
+            $this->query->connect($serverIp, $serverPort, 2);
         } catch (MinecraftQueryException $exception) {
         }
 
