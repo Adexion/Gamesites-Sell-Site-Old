@@ -50,7 +50,7 @@
                             {{ form_widget(form.check) }}
 
                             <button id="submit" type="submit" class="mt-2 btn btn-success w-100" style="display: none;">
-                                {{ now }} za <b class="pricing">{{ item.discountedPrice }}</b> zł
+                                {{ now }} za <span class="d-none" id="counter" data-price="{{ item.discountedPrice }}"></span><b id="price">{{ item.discountedPrice }}</b> zł
                             </button>
                         </div>
                     </div>
@@ -70,5 +70,5 @@
         </div>
         {{ form_end(form) }}
     </section>
-    {% include 'client/multi/dark/component/voucher.html.twig' %}
+    {% include 'client/simple/dark/component/voucher.html.twig' %}
 {% endblock %}

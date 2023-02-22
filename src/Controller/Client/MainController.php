@@ -72,10 +72,15 @@ class MainController extends AbstractRenderController
 
     /**
      * @Route(path="/{name}", name="app_own_redirect")
+     * @throws SyntaxError
      */
-    public function ownRedirect(string $name, LinkRepository $linkRepository): RedirectResponse
+    public function ownRedirect(string $name, LinkRepository $linkRepository, RuleRepository $repository): Response
     {
         $link = $linkRepository->findOneBy(['name' => $name]);
+
+        if (!$link && ($name === 'rule' || $name === 'regulamin')) {
+            return $this->rule($repository);
+        }
         if (!$link) {
             return $this->redirectToRoute('index');
         }

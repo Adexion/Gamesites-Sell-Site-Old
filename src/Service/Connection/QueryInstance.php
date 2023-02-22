@@ -30,7 +30,7 @@ class QueryInstance
         }
 
         try {
-            $this->ping = new MinecraftPing($serverIp, $serverPort, 1);
+            $this->ping = new MinecraftPing($serverIp, $serverPort, 2);
             $this->ping->connect();
         } catch (MinecraftPingException $exception) {
         }
