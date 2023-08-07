@@ -8,5 +8,5 @@ class ItemTypeEnum extends Enum
 {
     const ITEM = 'item';
     const PREPAID = 'prepaid';
-    const USEABLE = 'useabel';
+    const USEABLE = 'useable';
 }
