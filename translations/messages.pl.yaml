@@ -68,6 +68,7 @@ Image: Obrazek
 Dashboard: Strona główna PA
 Content: Zawartość
 Item: Przedmiot
+Item: Przedmiot
 History: Historia płatności
 Settings: Ustawienia
 Additional: Teksty i linki
@@ -208,6 +209,7 @@ File: Plik
 
 ITEM: Przedmiot
 PREPAID: Doładowanie
+USABLE: Użyteczny
 
 CREATED: Utworzono
 ACCEPTED: Zaakceptowano

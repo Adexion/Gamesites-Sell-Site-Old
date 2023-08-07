@@ -3,6 +3,7 @@
 namespace App\Service\Payment\Response\Operator;
 
 use App\Entity\ItemHistory;
+use App\Enum\ItemTypeEnum;
 use App\Enum\PaymentStatusEnum;
 use App\Repository\ItemHistoryRepository;
 use App\Repository\ServerRepository;
@@ -76,7 +77,7 @@ abstract class OperatorAbstract implements OperatorInterface
             $this->serverRepository->findOneBy(['isDefault' => true]) ?: $history->getItem()->getServer()
         );
 
-        if (!$service->isPlayerLoggedIn($history->getUsername())) {
+        if ($history->getItem()->getType() === ItemTypeEnum::ITEM && !$service->isPlayerLoggedIn($history->getUsername())) {
             $history->setStatus(PaymentStatusEnum::NOT_ON_SERVER);
             $this->historyRepository->insertOrUpdate($history);
 
