@@ -3,6 +3,7 @@
 namespace App\Service\Voucher;
 
 use App\Entity\ItemHistory;
+use App\Enum\ItemTypeEnum;
 use App\Enum\PaymentStatusEnum;
 use App\Repository\ItemHistoryRepository;
 use App\Repository\VoucherRepository;
@@ -45,7 +46,7 @@ class VoucherExecutionService
         }
 
         $service = $this->factory->getExecutionService($voucher->getItem()->getServer());
-        if (!$service->isPlayerLoggedIn($data['username'])) {
+        if ($voucher->getItem()->getType() === ItemTypeEnum::ITEM && !$service->isPlayerLoggedIn($data['username'])) {
             return 'You are not connected to the server. If it is not right pleas contact with your administrator.';
         }
 
