@@ -131,7 +131,7 @@ class DashboardController extends AbstractDashboardController
     public function configureUserMenu(UserInterface $user): UserMenu
     {
         return parent::configureUserMenu($user)
-            ->setAvatarUrl('https://crafthead.net/cube/' . ($this->getUser()->getNick() ?: 'steve'))
+            ->setAvatarUrl('https://cravatar.eu/helmhead/' . ($this->getUser()->getNick() ?: 'steve'))
             ->setName($this->getUser()->getNick() ?: $this->getUser()->getUserIdentifier());
     }
 }

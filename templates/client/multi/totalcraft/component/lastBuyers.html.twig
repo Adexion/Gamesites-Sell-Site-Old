@@ -6,7 +6,7 @@
                     <h1 class="mb-3 text-pink">Ostatnie zakupy</h1>
                     <div class="p-4">
                         <div class="shop-last-container">
-                            {% set crafthead = "https://crafthead.net/avatar/" %}
+                            {% set crafthead = "https://cravatar.eu/helmhead/" %}
                             {% for buyer in lastBuyers %}
                                 <img class="shop-last-head mr-5" src="{{ crafthead }}{{ buyer.username }}/55" alt="{{ buyer.username }}"/>
                             {% endfor %}

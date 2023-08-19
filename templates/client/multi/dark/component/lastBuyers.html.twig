@@ -3,7 +3,7 @@
     <div class="mw-auto flex flex-center flex-column flex-align">
         <p class="last-buy_p">Ostatnie zakupy</p>
         <div class="last-buy-box">
-            {% set crafthead = "https://crafthead.net/avatar/" %}
+            {% set crafthead = "https://cravatar.eu/helmhead/" %}
             {% for buyer in lastBuyers %}
                 <div class="flex flex-center">
                     <img class="is-info-head mr-5" src="{{ crafthead }}{{ buyer.username }}/55" alt="{{ buyer.username }}"/>
