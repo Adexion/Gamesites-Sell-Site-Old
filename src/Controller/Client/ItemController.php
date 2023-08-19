@@ -34,7 +34,7 @@ class ItemController extends AbstractRenderController
         return $this->renderTheme('shop.html.twig', [
             'items' => $repository->findAll(),
             'groupItems' => $repository->groupByServer(),
-            'lastBuyers' => $itemHistoryRepository->findBy(['status' => PaymentStatusEnum::REALIZED], null, 10),
+            'lastBuyers' => $itemHistoryRepository->findBy(['status' => PaymentStatusEnum::REALIZED], null, 6),
             'voucherForm' => $form->createView(),
             'targetProgress' => $itemHistoryRepository->getProgressOfTarget(),
         ]);
