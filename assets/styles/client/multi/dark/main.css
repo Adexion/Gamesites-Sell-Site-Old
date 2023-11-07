@@ -998,7 +998,7 @@ a {
     font-weight: 300;
     width: 100%;
     font-family: "Poppins", sans-serif !important;
-    background: var(--background);
+    background: var(--status);
     color: var(--white);
     transition: opacity 0.2s ease-in-out;
 }
