@@ -109,6 +109,9 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
+    "gregwar/captcha-bundle": {
+        "version": "v1.0.0"
+    },
     "jean85/pretty-package-versions": {
         "version": "1.6.0"
     },

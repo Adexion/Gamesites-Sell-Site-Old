@@ -16,11 +16,13 @@ RUN set -eux; \
 		icu-data-full \
 		icu-dev \
 		libzip-dev \
+        libpng-dev \
 		zlib-dev \
 	; \
 	\
 	docker-php-ext-configure zip; \
 	docker-php-ext-install -j$(nproc) \
+        gd \
 		intl \
 		zip \
 	; \

@@ -30,6 +30,7 @@
                         <p class="payments-box-text">Email kontaktowy</p>
                     </div>
                     {{ form_widget(form.email, { 'attr': {'class': 'payments-box-input'} }) }}
+                    {{ form_widget(form.captcha) }}
                     <div class="payments-box-checkbox mx-align">
                         {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-color-g'} }) }}
                     </div>
