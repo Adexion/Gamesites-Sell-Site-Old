@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContactType extends BaseType
@@ -32,7 +33,8 @@ class ContactType extends BaseType
                 'label_attr' => [
                     'style' => 'display: none;'
                 ],
-                'mapped' => false
+                'mapped' => false,
+                'empty_data' => 'debug'
             ])
             ->add('name', TextType::class)
             ->add('email', EmailType::class)
@@ -43,8 +45,8 @@ class ContactType extends BaseType
     public function preSubmit(FormEvent $event)
     {
         $data = $event->getData();
-        if (!empty($data['website'])) {
-            throw new \RuntimeException();
+        if ($data['website'] !== 'debug') {
+            throw new NotFoundHttpException();
         }
 
         unset($data['website']);
