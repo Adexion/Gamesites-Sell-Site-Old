@@ -11,9 +11,11 @@
                         {% endfor %}
                     </div>
                 {% endif %}
-                {{ form_errors(form) }}
                 <div class="col-lg-7">
                     {{ form_start(form) }}
+
+                    {{ form_errors(form) }}
+
                     <h1>Formularz kontaktowy
                     </h1>
                     <div class="mx-between">
